@@ -57,14 +57,15 @@ src/
   lib/            safeStorage, progressCode, sound (Web Audio, synthesised), usePointerDrag, usePrefersReducedMotion,
                   useFocusTrap (dialogs, presenter view)
   ui/             Button, Dialog (focus trap), Icon (inline SVG set), StatusBadge/Badge, labels (verdict/relation wording),
-                  tabKeys (arrow keys for role="tablist")
+                  tabKeys (arrow keys for role="tablist"), SupportLevelPicker
   test/           setup, axe (axe-core helper for a11y tests)
   styles/         tokens.css (ALL colours), global.css, fonts/ (vendored latin woff2 + licences)
   brand/          brand.ts + Logo.tsx (logo slot)
   cases/<id>/     meta.ts (eager, for case list) + case.ts (lazy) + assets/
   missions/<id>/  Training Academy: meta.ts (eager) + mission.ts (lazy) + assets/; index.ts registry
   academy/        AcademyScreen (hub), MissionScreen (step player), StepInputs, MediaView
-docs/writing-a-case.md, docs/writing-a-mission.md, docs/accessibility.md (audit + keyboard map)
+docs/writing-a-case.md, docs/writing-a-mission.md, docs/accessibility.md (audit + keyboard map),
+docs/TODO.md (running list of open items for the end-of-project review)
 scripts/generate-icons.mjs   placeholder PWA icons
 ```
 
@@ -169,6 +170,7 @@ The schema cross-checks references (every evidence/question/device id referenced
 ## Working conventions
 
 - Commit in small, well-described steps.
+- Keep `docs/TODO.md` current: anything left for the teacher, decisions to review, deferred features, and anything unverified. The owner reviews it all at the end.
 - Keep this file updated as decisions are made (append to Decisions).
 - Never add a runtime network dependency. Never add real names/brands/IPs.
 
@@ -245,3 +247,12 @@ Made during the Phase 5 (polish) build (for review):
 - **Performance:** no changes needed. First load is the app shell (about 80 KB gzipped JS, 5 KB CSS) plus two fonts (88 KB); cases, apps, academy, report and Teacher Review load on demand (checked in the build preview). The offline precache is 96 files (about 890 KB uncompressed); with the server stopped, a case, apps and missions never opened before still load.
 - **Small fixes:** Timeline hour headings add the date when a timeline crosses midnight (`hourHeadings`). Notifications pause while focused or pointed at, and are cleared when a case closes. Top-bar labels hide below 1000px so Report and Leave case stay visible at the largest text size on an iPad. Repeated buttons are named by what they act on ("Open case, The Waterfront Alibi").
 - **Class summary table** in Teacher Review is deferred again (one code at a time for now).
+
+Support levels (21 Oct 2026, requested: differentiate for less and more technically confident students):
+
+- **One case, three support levels** rather than separate streams: Guided, Standard (default) and Deep dive, over the same evidence, questions and answer key, so no student misses the core ideas and nobody is labelled. Chosen per case on the briefing and changeable any time from the top bar; every level used is recorded (`CaseProgress.supportLevel`, `supportLevelsUsed`) and shown in the report and Teacher Review.
+- **Guided:** a "What this means" note per evidence item (`guided`, how to read it, never the answer; excluded from the hash) and a "Need a nudge?" per verdict question (`nudge`, falls back to `hints.verdict`; recorded in `nudgesUsed`). Teachers always see Guided notes in teacher mode.
+- **Deep dive:** optional `extensions` per case in their own Judgements tab; answers saved (`extensionAnswers`), shown with model answers in Teacher Review, never marked.
+- **Assessments:** students may choose any level; Guided notes stay on (they explain, not answer); no nudges; extensions chosen so they don't give away answers.
+- Progress codes stay v3 (new fields are optional). Content for all three cases was drafted by one subagent per case and reviewed; open points are in `docs/TODO.md`.
+- Deferred: Deep dive "raw view first", and a class default level via the shared link.

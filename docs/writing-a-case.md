@@ -257,7 +257,52 @@ questionId }` and `{ type: 'manual' }` (released from the Teacher Panel in teach
 `afterQuestionChecked` never fires in an assessment, because nothing is checked.
 If key evidence is in a drop, include at least one automatic trigger (the tests check this).
 
-## 7. Safety checklist (enforced by `npm test` where possible)
+## 7. Support levels (Guided, Standard, Deep dive)
+
+Students choose a level for each case (on the briefing, or from the top bar at any time). Everyone
+gets the **same evidence, questions and answer key**; only the support changes. The tests check
+that every case has some Guided notes and at least one Deep dive challenge.
+
+**Guided** adds a "What this means" box to any evidence item with a `guided` note, and a
+"Need a nudge?" button on verdict questions (`nudge`, falling back to `hints.verdict`; never shown
+in assessments):
+
+```ts
+{ id: 'ip-203-0-113-47', type: 'ipRecord', /* … */
+  guided: 'An ISP is the company that connects a home to the internet. The location is an
+    estimate from a database, not GPS: the device could be anywhere inside the circle.' },
+
+{ id: 'q1-ip-location', kind: 'verdict', /* … */
+  nudge: 'Ask yourself how an IP lookup works out a location, and how precise it is.' },
+```
+
+Write guided notes about **how to read** the item: terms, units, what is approximate, what a row
+means. Never answer a question or point at the trap ("this phone is on AEST" is too much). Keep
+nudges weaker than the hints. Items of the same kind (two emails) can share one note, so the
+fake one doesn't stand out. Guided notes are not part of the evidence, so they don't change its
+hash. Teachers see them in teacher mode.
+
+**Deep dive** adds a tab in Judgements with optional, more technical challenges. Answers are saved
+for the teacher and shown in the report and Teacher Review, but never marked:
+
+```ts
+extensions: [
+  {
+    id: 'ext-accuracy-circle',
+    title: 'Inside the 25 km circle',
+    prompt: 'List which suburbs fall inside the circle, and explain why…',
+    evidenceIds: ['ip-203-0-113-47'], // "Look at" buttons
+    guidance: ['Inside the circle I can see …'], // optional sentence starters
+    modelAnswer: 'For the teacher: …',
+  },
+],
+```
+
+Challenges must not be needed for the case questions, and in an assessment must not give away
+an answer (converting the drive's UTC times would answer Q1 of The Science Fair Switch, for
+example).
+
+## 8. Safety checklist (enforced by `npm test` where possible)
 
 - Everyone and everything is fictional: people, accounts, businesses, devices, platforms.
   Invent names (StreamCloud, TopNet, ChatterBox, Nimbus). Real platforms and brands are rejected.
