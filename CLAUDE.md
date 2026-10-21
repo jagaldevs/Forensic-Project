@@ -50,12 +50,13 @@ src/
                   (+ tamper warning), useHashCheck, LockedNotice, WarrantDialog, hooks; board/strings.ts
   engine/         schema.ts (zod, tests/dev only), types.ts, defineCase.ts, safety.ts, availability.ts,
                   checkJudgement.ts, drops.ts, hash.ts, format.ts, report.ts, progressTypes.ts,
-                  custody.ts (chain of custody), score.ts (auto-scoring for Teacher Review), geo/cityMap.ts
+                  custody.ts (chain of custody), score.ts (auto-scoring for Teacher Review), geo/cityMap.ts,
+                  classSummary.ts (Whole class table + .csv), accessWording.ts (warrant vs permission wording)
   config/         teacher.ts: teacher code + assessment access code (placeholders, NOT secure)
-  review/         TeacherReviewScreen (paste a progress code), CaseReview, AcademyReview
+  review/         TeacherReviewScreen (One student / Whole class tabs), CaseReview, AcademyReview, ClassSummary
   stores/         progressStore, desktopStore, settingsStore, navStore, toastStore
   lib/            safeStorage, progressCode, sound (Web Audio, synthesised), usePointerDrag, usePrefersReducedMotion,
-                  useFocusTrap (dialogs, presenter view)
+                  useFocusTrap (dialogs, presenter view), linkLevel (?level= class default)
   ui/             Button, Dialog (focus trap), Icon (inline SVG set), StatusBadge/Badge, labels (verdict/relation wording),
                   tabKeys (arrow keys for role="tablist"), SupportLevelPicker
   test/           setup, axe (axe-core helper for a11y tests)
@@ -69,7 +70,7 @@ docs/TODO.md (running list of open items for the end-of-project review),
 docs/teacher-brief.md (one page for science teachers), docs/lessons/ (teacher guide: 6 × 60 min
 lessons + rubric; student sheets), docs/word/ (Word copies, built by `npm run docs:word` from
 scripts/build-word-docs.mjs; rebuild after editing those Markdown files)
-scripts/generate-icons.mjs   placeholder PWA icons
+scripts/generate-icons.mjs   app icons cropped from the crest in the logo (npm run icons; dev dep jpeg-js)
 ```
 
 Tests are co-located (`*.test.ts(x)`). `src/cases/cases.test.ts` validates every case. `src/a11y*.test.tsx` run axe over every app and screen; `src/styles/contrast.test.ts` checks the colour tokens for WCAG AA.
@@ -149,7 +150,7 @@ The schema cross-checks references (every evidence/question/device id referenced
 3. **Flagship case "Where was Jamie?"** — missing-person timeline: Messages, Map, CCTV-style stills, Social Feed. Time-zone trap: phone on AEST (UTC+10) vs Darwin ACST (UTC+9:30, no DST) → mysterious 30-minute discrepancy. **Done (21 Oct 2026)**: `src/cases/where-was-jamie/`, plus Messages, Social Feed, CCTV, Map (travel calculator) and Timeline (clock corrections) apps.
 4. **Remaining apps**, final unseen assessment case, polished report export, teacher mode. **Done (21 Oct 2026)**: Browser & Search History, Cloud Drive, Email, Wearables & Smart Home apps; Evidence Locker chain of custody + Verify all hashes; teacher mode + Teacher Panel; Teacher Review; report export polish; assessment case `src/cases/science-fair-switch/`.
 5. **Polish** — sound design, onboarding tutorial, accessibility audit, performance pass. **Done (21 Oct 2026)**: automated + manual accessibility audit (`docs/accessibility.md`), first-run desktop tour, sound redesign, performance and offline check, Timeline date headings.
-6. **Classroom readiness** (next; handoff in `docs/handoff-phase-6.md`) — practice case for Email, Cloud Drive, Wearables and Browser History; class summary table with .csv in Teacher Review; class default support level from the link; app icons and brand colours; Netlify deploy check.
+6. **Classroom readiness** (handoff in `docs/handoff-phase-6.md`). **Mostly done (22 Oct 2026)**: practice case "The Midnight Raid" (`src/cases/midnight-raid/`, phone search history; lesson 6 of 7); Whole class summary table with .csv in Teacher Review; class default support level from `?level=`; app icons from the crest; assessment Q2 no longer needs email headers. Still to do: Netlify deploy check and the live link in the teacher brief; official brand colours (if supplied).
 
 ### Phase 1 definition of done
 
@@ -273,3 +274,16 @@ Familiar names (21 Oct 2026, requested):
 - The school (Haileybury Rendall School / HRS) and the class's science teacher, **Mrs Staggs** (agreed), appear by name: she introduces the Training Academy, each case briefing mentions her class, and she sends The Science Fair Switch briefing. That case now happens at HRS (was the fictional Arafura Park College); fictional Mr Osei keeps the evidence-collection role, so no real person is in the evidence trail of a case whose culprit is deliberately unresolved. Riley (Waterfront) is a former HRS student; Jamie's friends are HRS students. All students in the stories stay fictional.
 - Names come from `src/brand/local.ts` (cases import it), so another class can swap them. Student sheets name Mrs Staggs directly.
 - Curriculum: Victorian Curriculum F–10 Version 2.0 (HRS is a Darwin campus of a Victorian school network).
+
+Made during Phase 6 (classroom readiness, 22 Oct 2026, for review):
+
+- **Science, not computing.** The owner asked to keep cyber depth at or below its current level. The practice case was redesigned around a phone's search history (relatable, rich in observation vs inference) instead of rehearsing email headers and cloud drives. Assessment Q2 (the fake "deadline extended" email) is now answerable from what any reader sees: Reply to (now shown in the normal Email view), the recipients and the fair rules; SPF, DKIM and Received lines are Deep dive material. Deep dive is described as "extra", not "technical", challenges.
+- **The Midnight Raid** (practice, ~35 min, lesson 6 of now 7): Year 8 camp at Litchfield; a possum raided the snack box; the "midnight snack ideas" search came from the family tablet at home on a shared account while Kai's phone was in the locked phone box; the fitness band measures movement, not location. Q2 accepts Not supported or Can't tell; Q3 accepts Strongly supported or Possible. Drafted by a subagent and reviewed.
+- **Permission requests:** `warrants.kind: 'permission'` swaps the warrant/magistrate wording for asking the people the data belongs to (school-scale stories). Same mechanics and scoring.
+- **Case list order:** optional `meta.order` (lesson order), falling back to length.
+- **Overnight incidents:** a window that ends before it starts runs past midnight (Timeline shading, Network Log band).
+- **Browser History** draws a phone or tablet history inside a phone frame.
+- **Whole class review:** paste any number of codes (split on the HRSFL1 prefix, so layout doesn't matter), pick a case, see one row per student: Passed / Not yet / Not answered per verdict question, Written / Blank for open ones, auto-score, nudges, hash checks, disproportionate requests, submitted (assessments) and notes (teacher mode used, duplicate codename, not started). The .csv has a BOM for Excel and guards against formula injection. Nothing is saved; the table stays while you open one student.
+- **Class level link:** `?level=guided|standard|deep|none` is stored on the device (`settingsStore.classLevel`) so an installed app keeps it; the briefing preselects it until the student chooses, with a note saying the teacher suggested it.
+- **Icons:** made from the 300 px logo JPEG (512 px versions are upscaled); a separate maskable icon; white manifest/theme colours; icons are not precached. The favicon keeps the magnifier, now magenta on white.
+- **Jamie Q3:** the 19:34 tower sector now reaches back along the bus route (about 4 km), so the connection fits Jamie being roughly halfway to Parap; times unchanged.

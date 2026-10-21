@@ -30,6 +30,7 @@ export const meta: CaseFile['meta'] = {
   title: 'The Missing Bike',
   tagline: 'One sentence that hooks students in.',
   yearLevel: 8,
+  order: 5, // optional: position on the case list (lowest first)
   estimatedMinutes: 25,
   difficulty: 'introductory', // or 'standard' | 'challenging'
   learningIntentions: ['Explain why…'],
@@ -55,7 +56,8 @@ export default defineCase({
 });
 ```
 
-Your editor will autocomplete every field and underline mistakes in red.
+Your editor will autocomplete every field and underline mistakes in red. An incident window that
+ends before it starts (e.g. `windowStart: '21:00'`, `windowEnd: '06:45'`) runs past midnight.
 
 ### Times
 
@@ -115,20 +117,20 @@ Every item can also have a `timeline` (see above).
 
 Types available now (✓ = has its own app; others show in the Evidence Locker):
 
-| `type`             | `app`       | Extra fields                                                                                                                                                                                   |
-| ------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `photo` ✓          | `photos`    | `src` (imported image), `alt`, `fileName`, `metadata` rows                                                                                                                                     |
-| `ipRecord` ✓       | `iplookup`  | `ip`, `isp`, `network?`, `locationLabel`, `accuracyRadiusKm`, `centre`                                                                                                                         |
-| `networkLog` ✓     | `netlog`    | `routerName`, `household`, `publicIp`, `logDate`, `sessions`                                                                                                                                   |
-| `loginRecord` ✓    | `locker`    | `service`, `account`, `events` (time, event, IP), `note?`                                                                                                                                      |
-| `document` ✓       | `locker`    | `fields` (label/value rows), `body?`                                                                                                                                                           |
-| `messageThread` ✓  | `messages`  | `service`, `deviceId` (whose copy), `participants`, `messages` (`from`, `at`, `body`, `status?`, `readAt?`, `deleted?`)                                                                        |
-| `socialPost` ✓     | `social`    | `platform`, `author`, `handle`, `postedAt`, `body`, `image?`, `originalEvidenceId?` (a photo item: enables "compare with the original"), `checkIn?`, `comments?`                               |
-| `cctvStill` ✓      | `cctv`      | `camera`, `location`, `deviceId`, `src`, `alt`, `overlay` (the burned-in timestamp), `note?`                                                                                                   |
-| `browserHistory` ✓ | `browser`   | `browser`, `profile`, `deviceId`, `entries` (`at`, `kind` search/visit, `title`, `url?`), `cleared?` (`from`, `to`, `note?`: shown as gaps), `note?`                                           |
-| `file` ✓           | `drive`     | `service`, `fileName`, `path`, `fileKind`, `sizeBytes`, `owner`, `sharedWith?`, `createdAt`, `modifiedAt`, `lastModifiedBy`, `displayZone?`, `versions`                                        |
-| `email` ✓          | `email`     | `inbox`, `from`/`replyTo?`/`to` (`{ name, address }`), `subject`, `sentAt`, `body`, `messageId`, `received` (newest first), `auth` (`spf`, `dkim`, `detail?`), `extraHeaders?`, `attachments?` |
-| `wearableLog` ✓    | `wearables` | `deviceId`, `service`, `series?` (`steps`/`heartRate` charts), `events?` (`doorbell`, `motion`, `door`, `charging`, `worn`, `removed`, `other`), `note?`                                       |
+| `type`             | `app`       | Extra fields                                                                                                                                                                                       |
+| ------------------ | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `photo` ✓          | `photos`    | `src` (imported image), `alt`, `fileName`, `metadata` rows                                                                                                                                         |
+| `ipRecord` ✓       | `iplookup`  | `ip`, `isp`, `network?`, `locationLabel`, `accuracyRadiusKm`, `centre`                                                                                                                             |
+| `networkLog` ✓     | `netlog`    | `routerName`, `household`, `publicIp`, `logDate`, `sessions`                                                                                                                                       |
+| `loginRecord` ✓    | `locker`    | `service`, `account`, `events` (time, event, IP), `note?`                                                                                                                                          |
+| `document` ✓       | `locker`    | `fields` (label/value rows), `body?`                                                                                                                                                               |
+| `messageThread` ✓  | `messages`  | `service`, `deviceId` (whose copy), `participants`, `messages` (`from`, `at`, `body`, `status?`, `readAt?`, `deleted?`)                                                                            |
+| `socialPost` ✓     | `social`    | `platform`, `author`, `handle`, `postedAt`, `body`, `image?`, `originalEvidenceId?` (a photo item: enables "compare with the original"), `checkIn?`, `comments?`                                   |
+| `cctvStill` ✓      | `cctv`      | `camera`, `location`, `deviceId`, `src`, `alt`, `overlay` (the burned-in timestamp), `note?`                                                                                                       |
+| `browserHistory` ✓ | `browser`   | `browser`, `profile`, `deviceId`, `entries` (`at`, `kind` search/visit, `title`, `url?`), `cleared?` (`from`, `to`, `note?`: shown as gaps), `note?`. A phone or tablet device is drawn as a phone |
+| `file` ✓           | `drive`     | `service`, `fileName`, `path`, `fileKind`, `sizeBytes`, `owner`, `sharedWith?`, `createdAt`, `modifiedAt`, `lastModifiedBy`, `displayZone?`, `versions`                                            |
+| `email` ✓          | `email`     | `inbox`, `from`/`replyTo?`/`to` (`{ name, address }`), `subject`, `sentAt`, `body`, `messageId`, `received` (newest first), `auth` (`spf`, `dkim`, `detail?`), `extraHeaders?`, `attachments?`     |
+| `wearableLog` ✓    | `wearables` | `deviceId`, `service`, `series?` (`steps`/`heartRate` charts), `events?` (`doorbell`, `motion`, `door`, `charging`, `worn`, `removed`, `other`), `note?`                                           |
 
 Devices need an `ownerId` (a person) or an `ownerLabel` (e.g. "Waterfront venue operator" for
 a security camera).
@@ -234,6 +236,11 @@ warrants: {
 
 A request with `proportionate: false` is always refused, does not use a warrant, and shows the
 `outcome` text explaining why. Use it to teach that broad, intrusive requests are refused.
+
+For school-scale stories, where police and magistrates would feel out of place, set
+`kind: 'permission'`. Students then **ask permission** from the people the data belongs to
+(e.g. a parent) instead of applying for a warrant; everything else works the same. Write each
+`outcome` as that person's reply. See `src/cases/midnight-raid/`.
 
 ## 6. Evidence drops
 
