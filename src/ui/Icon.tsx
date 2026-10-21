@@ -52,6 +52,11 @@ const paths = {
   badge: 'M12 14a5 5 0 1 0 0.01 0z M9 13.5L7 22l5-3 5 3-2-8.5 M12 3a5 5 0 1 0 0.01 0',
   medal:
     'M8 3l4 6 4-6 M12 21a6 6 0 1 0 0.01 0z M12 13l1.2 2.4 2.6.4-1.9 1.8.5 2.6-2.4-1.3-2.4 1.3.5-2.6-1.9-1.8 2.6-.4z',
+  chat: 'M4 5h16v11H9l-5 4z M8 9h8 M8 12.5h5',
+  camera: 'M3 8h4l2-3h6l2 3h4v11H3z M12 9.5a3.5 3.5 0 1 0 0.01 0z',
+  feed: 'M4 4h16v16H4z M4 9h16 M8 13h8 M8 16.5h5',
+  timeline: 'M4 12h16 M7 8v8 M12 6v12 M17 9v6',
+  map: 'M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z M9 4v14 M15 6v14',
   arrowUp: 'M12 19V5 M6 11l6-6 6 6',
   arrowDown: 'M12 5v14 M6 13l6 6 6-6',
   fingerprint:

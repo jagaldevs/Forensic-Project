@@ -10,9 +10,14 @@ export interface AppProps {
 export const appComponents: Record<DesktopAppId, LazyExoticComponent<ComponentType<AppProps>>> = {
   brief: lazy(() => import('./brief/BriefApp')),
   locker: lazy(() => import('./locker/LockerApp')),
+  messages: lazy(() => import('./messages/MessagesApp')),
+  social: lazy(() => import('./social/SocialApp')),
   photos: lazy(() => import('./photos/PhotosApp')),
+  cctv: lazy(() => import('./cctv/CctvApp')),
   iplookup: lazy(() => import('./iplookup/IpLookupApp')),
   netlog: lazy(() => import('./netlog/NetworkLogApp')),
+  map: lazy(() => import('./map/MapApp')),
+  timeline: lazy(() => import('./timeline/TimelineApp')),
   board: lazy(() => import('./board/EvidenceBoardApp')),
   judgements: lazy(() => import('./judgements/JudgementsApp')),
 };

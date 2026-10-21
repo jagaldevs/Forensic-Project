@@ -1,0 +1,53 @@
+.frame {
+  position: relative;
+  margin: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--surface-sunken);
+}
+
+.frame img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.cam,
+.stamp {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--text);
+  text-shadow:
+    0 1px 2px var(--bg-0),
+    0 0 6px var(--bg-0);
+  padding: var(--space-2) var(--space-3);
+}
+
+.cam {
+  top: 0;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.stamp {
+  bottom: 0;
+  right: 0;
+}
+
+.rec {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--status-contradicts);
+  animation: blink 1.2s steps(2) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

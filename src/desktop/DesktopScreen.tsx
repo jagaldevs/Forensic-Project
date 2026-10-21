@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import { useCaseFile } from '../app/CaseContext';
 import { appComponents } from '../apps/registry';
-import { setDesktopSize, topWindowId, useDesktop } from '../stores/desktopStore';
+import { setDesktopSize, topWindowId, useCaseWindows, useDesktop } from '../stores/desktopStore';
 import { TopBar } from './TopBar';
 import { Dock } from './Dock';
 import { Toasts } from './Toasts';
@@ -12,7 +12,7 @@ import s from './desktop.module.css';
 /** The investigator's workstation. */
 export default function DesktopScreen() {
   const c = useCaseFile();
-  const windows = useDesktop((st) => st.windows);
+  const windows = useCaseWindows(c.meta.id);
   const areaRef = useRef<HTMLDivElement>(null);
   const activeId = topWindowId(windows);
 

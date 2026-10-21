@@ -144,6 +144,16 @@ export const useDesktop = create<DesktopState>()(
 
 if (import.meta.env.DEV) Object.assign(window, { __desktop: useDesktop });
 
+const NO_WINDOWS: WindowState[] = [];
+
+/**
+ * Windows for this case only. Saved windows from a different case are never rendered,
+ * even for the one frame before the desktop switches cases.
+ */
+export function useCaseWindows(caseId: string): WindowState[] {
+  return useDesktop((st) => (st.caseId === caseId ? st.windows : NO_WINDOWS));
+}
+
 /** Which window is in front (and not minimised). */
 export function topWindowId(windows: WindowState[]): DesktopAppId | null {
   const visible = windows.filter((w) => !w.minimised);

@@ -6,14 +6,21 @@ import {
   places,
   roads,
   smoothPath,
+  type MapView,
 } from '../../engine/geo/cityMap';
 import type { MapMarker, MapPoint } from '../../engine/types';
 import s from './map.module.css';
+
+const FULL_VIEW: MapView = { x: 0, y: 0, w: MAP_WIDTH_KM, h: MAP_HEIGHT_KM };
 
 interface CityMapProps {
   /** Accuracy circle, drawn to scale. */
   circle?: { centre: MapPoint; radiusKm: number; label: string };
   markers?: MapMarker[];
+  /** A straight dashed line between two points (travel calculator). */
+  route?: { from: MapPoint; to: MapPoint };
+  /** Zoom to part of the map. Labels and pins stay the same size on screen. */
+  view?: MapView;
   /** Accessible description of what the map shows. */
   description: string;
 }
@@ -24,28 +31,59 @@ const LAND = smoothPath(coastline, true);
  * Illustrated map of a Darwin-inspired region, drawn in SVG with kilometre units.
  * Custom-drawn: no map tiles or external requests.
  */
-export function CityMap({ circle, markers = [], description }: CityMapProps) {
+export function CityMap({
+  circle,
+  markers = [],
+  route,
+  view = FULL_VIEW,
+  description,
+}: CityMapProps) {
   const descId = useId();
   const patternId = useId();
+  // k keeps text, pins and lines the same size on screen however far we zoom in.
+  const k = view.w / MAP_WIDTH_KM;
+  const text = (size: number) => ({ fontSize: `${size * k}px`, strokeWidth: `${0.5 * k}px` });
+  const scaleKm = view.w > 30 ? 10 : view.w > 12 ? 2 : 1;
 
   return (
     <figure className={s.figure}>
       <svg
         className={s.map}
-        viewBox={`0 0 ${MAP_WIDTH_KM} ${MAP_HEIGHT_KM}`}
+        viewBox={`${view.x} ${view.y} ${view.w} ${view.h}`}
         role="img"
         aria-labelledby={descId}
       >
         <title id={descId}>{description}</title>
         <defs>
-          <pattern id={patternId} width="2" height="2" patternUnits="userSpaceOnUse">
-            <path d="M0 2L2 0" stroke="var(--map-sea-line)" strokeWidth="0.15" />
+          <pattern id={patternId} width={2 * k} height={2 * k} patternUnits="userSpaceOnUse">
+            <path
+              d={`M0 ${2 * k}L${2 * k} 0`}
+              stroke="var(--map-sea-line)"
+              strokeWidth={0.15 * k}
+            />
           </pattern>
         </defs>
 
-        <rect width={MAP_WIDTH_KM} height={MAP_HEIGHT_KM} fill="var(--map-sea)" />
-        <rect width={MAP_WIDTH_KM} height={MAP_HEIGHT_KM} fill={`url(#${patternId})`} />
-        <path d={LAND} fill="var(--map-land)" stroke="var(--map-land-edge)" strokeWidth="0.35" />
+        <rect
+          x={-10}
+          y={-10}
+          width={MAP_WIDTH_KM + 20}
+          height={MAP_HEIGHT_KM + 20}
+          fill="var(--map-sea)"
+        />
+        <rect
+          x={-10}
+          y={-10}
+          width={MAP_WIDTH_KM + 20}
+          height={MAP_HEIGHT_KM + 20}
+          fill={`url(#${patternId})`}
+        />
+        <path
+          d={LAND}
+          fill="var(--map-land)"
+          stroke="var(--map-land-edge)"
+          strokeWidth={0.35 * k}
+        />
 
         {roads.map((r) => (
           <path
@@ -53,17 +91,21 @@ export function CityMap({ circle, markers = [], description }: CityMapProps) {
             d={smoothPath(r.points, false)}
             fill="none"
             stroke={r.major ? 'var(--map-road-major)' : 'var(--map-road)'}
-            strokeWidth={r.major ? 0.45 : 0.28}
+            strokeWidth={(r.major ? 0.45 : 0.28) * Math.max(k, 0.35)}
             strokeLinecap="round"
           />
         ))}
 
-        <text className={s.seaLabel} x="4" y="12">
-          Beagle Gulf
-        </text>
-        <text className={s.seaLabel} x="5" y="36">
-          Darwin Harbour
-        </text>
+        {view === FULL_VIEW && (
+          <>
+            <text className={s.seaLabel} x="4" y="12">
+              Beagle Gulf
+            </text>
+            <text className={s.seaLabel} x="5" y="36">
+              Darwin Harbour
+            </text>
+          </>
+        )}
 
         {circle && (
           <g className={s.circle}>
@@ -73,8 +115,8 @@ export function CityMap({ circle, markers = [], description }: CityMapProps) {
               r={circle.radiusKm}
               fill="var(--map-radius-fill)"
               stroke="var(--accent)"
-              strokeWidth="0.3"
-              strokeDasharray="1 0.6"
+              strokeWidth={0.3 * k}
+              strokeDasharray={`${k} ${0.6 * k}`}
             />
             <line
               x1={circle.centre.x}
@@ -82,12 +124,13 @@ export function CityMap({ circle, markers = [], description }: CityMapProps) {
               x2={circle.centre.x + circle.radiusKm}
               y2={circle.centre.y}
               stroke="var(--accent)"
-              strokeWidth="0.2"
+              strokeWidth={0.2 * k}
             />
             <text
               className={s.radiusLabel}
+              style={text(1.5)}
               x={circle.centre.x + circle.radiusKm / 2}
-              y={circle.centre.y - 0.8}
+              y={circle.centre.y - 0.8 * k}
               textAnchor="middle"
             >
               {circle.radiusKm} km
@@ -100,13 +143,14 @@ export function CityMap({ circle, markers = [], description }: CityMapProps) {
             <circle
               cx={p.at.x}
               cy={p.at.y}
-              r={p.size === 'major' ? 0.55 : 0.35}
+              r={(p.size === 'major' ? 0.55 : 0.35) * k}
               fill="var(--map-label)"
             />
             <text
               className={p.size === 'major' ? s.placeMajor : s.placeMinor}
-              x={p.at.x + 0.9}
-              y={p.at.y + 0.5}
+              style={text(p.size === 'major' ? 1.7 : 1.3)}
+              x={p.at.x + 0.9 * k}
+              y={p.at.y + 0.5 * k}
             >
               {p.name}
             </text>
@@ -114,14 +158,43 @@ export function CityMap({ circle, markers = [], description }: CityMapProps) {
         ))}
 
         {circle && (
-          <g transform={`translate(${circle.centre.x} ${circle.centre.y})`}>
-            <circle r="0.9" fill="var(--accent)" stroke="var(--bg-0)" strokeWidth="0.25" />
+          <circle
+            cx={circle.centre.x}
+            cy={circle.centre.y}
+            r={0.9 * k}
+            fill="var(--accent)"
+            stroke="var(--bg-0)"
+            strokeWidth={0.25 * k}
+          />
+        )}
+
+        {route && (
+          <g>
+            <line
+              x1={route.from.x}
+              y1={route.from.y}
+              x2={route.to.x}
+              y2={route.to.y}
+              stroke="var(--accent)"
+              strokeWidth={0.45 * k}
+              strokeDasharray={`${1.2 * k} ${0.8 * k}`}
+              strokeLinecap="round"
+            />
+            <circle cx={route.from.x} cy={route.from.y} r={0.8 * k} fill="var(--accent)" />
+            <circle
+              cx={route.to.x}
+              cy={route.to.y}
+              r={0.8 * k}
+              fill="var(--on-brand)"
+              stroke="var(--accent)"
+              strokeWidth={0.3 * k}
+            />
           </g>
         )}
 
         {/* Numbered pins; names are in the legend so labels never pile up. */}
         {markers.map((m, i) => (
-          <g key={m.id} transform={`translate(${m.at.x} ${m.at.y})`}>
+          <g key={m.id} transform={`translate(${m.at.x} ${m.at.y}) scale(${k})`}>
             <path
               d="M0 0 C-1.4 -2 -1.6 -2.6 -1.6 -3.2 A1.6 1.6 0 1 1 1.6 -3.2 C1.6 -2.6 1.4 -2 0 0Z"
               fill={m.kind === 'scene' ? 'var(--status-contradicts)' : 'var(--status-info)'}
@@ -134,12 +207,34 @@ export function CityMap({ circle, markers = [], description }: CityMapProps) {
           </g>
         ))}
 
-        <g transform={`translate(${MAP_WIDTH_KM - 14} ${MAP_HEIGHT_KM - 3})`}>
-          <line x1="0" y1="0" x2="10" y2="0" stroke="var(--map-label)" strokeWidth="0.3" />
-          <line x1="0" y1="-0.6" x2="0" y2="0.6" stroke="var(--map-label)" strokeWidth="0.3" />
-          <line x1="10" y1="-0.6" x2="10" y2="0.6" stroke="var(--map-label)" strokeWidth="0.3" />
-          <text className={s.scaleLabel} x="5" y="-1" textAnchor="middle">
-            10 km
+        <g
+          transform={`translate(${view.x + view.w - (scaleKm + 4 * k)} ${view.y + view.h - 3 * k})`}
+        >
+          <line x1="0" y1="0" x2={scaleKm} y2="0" stroke="var(--map-label)" strokeWidth={0.3 * k} />
+          <line
+            x1="0"
+            y1={-0.6 * k}
+            x2="0"
+            y2={0.6 * k}
+            stroke="var(--map-label)"
+            strokeWidth={0.3 * k}
+          />
+          <line
+            x1={scaleKm}
+            y1={-0.6 * k}
+            x2={scaleKm}
+            y2={0.6 * k}
+            stroke="var(--map-label)"
+            strokeWidth={0.3 * k}
+          />
+          <text
+            className={s.scaleLabel}
+            style={text(1.2)}
+            x={scaleKm / 2}
+            y={-k}
+            textAnchor="middle"
+          >
+            {scaleKm} km
           </text>
         </g>
       </svg>

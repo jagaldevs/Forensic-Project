@@ -2,17 +2,17 @@ import { useCaseFile } from '../app/CaseContext';
 import { collectedEvidence, isLocked } from '../engine/availability';
 import { isQuestionDone } from '../engine/progressTypes';
 import { playSound } from '../lib/sound';
-import { topWindowId, useDesktop } from '../stores/desktopStore';
+import { topWindowId, useCaseWindows, useDesktop } from '../stores/desktopStore';
 import { useNav } from '../stores/navStore';
 import { useCaseProgress } from '../stores/progressStore';
 import { Icon } from '../ui/Icon';
-import { appMeta, desktopAppIds, type DesktopAppId } from './appMeta';
+import { appMeta, appsForCase, type DesktopAppId } from './appMeta';
 import s from './desktop.module.css';
 
 export function Dock() {
   const c = useCaseFile();
   const progress = useCaseProgress(c.meta.id);
-  const windows = useDesktop((st) => st.windows);
+  const windows = useCaseWindows(c.meta.id);
   const go = useNav((st) => st.go);
   const activeId = topWindowId(windows);
 
@@ -53,7 +53,7 @@ export function Dock() {
   return (
     <nav className={s.dock} aria-label="Evidence apps">
       <div className={s.dockInner}>
-        {desktopAppIds.map((id) => {
+        {appsForCase(c).map((id) => {
           const meta = appMeta[id];
           const win = windows.find((w) => w.id === id);
           const badge = badgeFor(id);

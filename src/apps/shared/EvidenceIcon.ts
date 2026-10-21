@@ -6,12 +6,13 @@ const icons: Record<Evidence['type'], IconName> = {
   loginRecord: 'user',
   ipRecord: 'globe',
   networkLog: 'router',
-  message: 'brief',
+  messageThread: 'chat',
+  cctvStill: 'camera',
   searchEntry: 'search',
   file: 'report',
   email: 'brief',
   wearableLog: 'clock',
-  socialPost: 'user',
+  socialPost: 'feed',
   document: 'report',
 };
 
