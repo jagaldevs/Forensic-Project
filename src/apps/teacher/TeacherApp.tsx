@@ -9,6 +9,7 @@ import { Button } from '../../ui/Button';
 import { Dialog } from '../../ui/Dialog';
 import { Icon } from '../../ui/Icon';
 import { Badge } from '../../ui/StatusBadge';
+import { onTabListKeyDown } from '../../ui/tabKeys';
 import type { AppProps } from '../registry';
 import { useCaseState } from '../shared/hooks';
 import { QuestionKey } from './QuestionKey';
@@ -39,7 +40,12 @@ export default function TeacherApp({ params }: AppProps) {
           device to a student.
         </span>
       </p>
-      <div className={t.tabs} role="tablist" aria-label="Teacher tools">
+      <div
+        className={t.tabs}
+        role="tablist"
+        aria-label="Teacher tools"
+        onKeyDown={onTabListKeyDown}
+      >
         {tabs.map((x) => (
           <button
             key={x.id}
@@ -47,6 +53,7 @@ export default function TeacherApp({ params }: AppProps) {
             role="tab"
             id={`teacher-tab-${x.id}`}
             aria-selected={tab === x.id}
+            tabIndex={tab === x.id ? 0 : -1}
             aria-controls="teacher-panel"
             className={t.tab}
             onClick={() => setTab(x.id)}

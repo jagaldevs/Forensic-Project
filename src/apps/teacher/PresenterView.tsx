@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useFocusTrap } from '../../lib/useFocusTrap';
 import { Button } from '../../ui/Button';
 import { useCaseState } from '../shared/hooks';
 import { QuestionKey } from './QuestionKey';
@@ -13,24 +14,22 @@ export function PresenterView({ start, onClose }: { start: number; onClose: () =
   const q = c.questions[index]!;
   const last = c.questions.length - 1;
 
+  useFocusTrap(ref, onClose);
+
+  // Previous/Next become disabled at the ends; keep focus in the view when that happens.
   useEffect(() => {
-    const previous = document.activeElement as HTMLElement | null;
-    ref.current?.focus();
-    return () => previous?.focus?.();
-  }, []);
+    const active = document.activeElement as HTMLButtonElement | null;
+    if (!ref.current?.contains(active) || active?.disabled) ref.current?.focus();
+  }, [index]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.stopPropagation();
-        onClose();
-      }
       if (e.key === 'ArrowRight') setIndex((i) => Math.min(last, i + 1));
       if (e.key === 'ArrowLeft') setIndex((i) => Math.max(0, i - 1));
     };
     document.addEventListener('keydown', onKey, true);
     return () => document.removeEventListener('keydown', onKey, true);
-  }, [last, onClose]);
+  }, [last]);
 
   return createPortal(
     <div
@@ -54,12 +53,12 @@ export function PresenterView({ start, onClose }: { start: number; onClose: () =
         </Button>
         <Button variant="ghost" icon="close" label="Close presenter view" onClick={onClose} />
       </header>
-      <main className={t.presenterBody}>
+      <div className={t.presenterBody}>
         <h2 id="presenter-title" className={t.presenterQuestion}>
           Q{index + 1}. {q.prompt}
         </h2>
         <QuestionKey q={q} large />
-      </main>
+      </div>
     </div>,
     document.body,
   );

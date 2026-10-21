@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDesktop } from '../stores/desktopStore';
 import { useToasts, type Toast } from '../stores/toastStore';
 import { Button } from '../ui/Button';
@@ -9,13 +9,26 @@ const LIFETIME_MS = 12_000;
 
 function ToastItem({ toast }: { toast: Toast }) {
   const dismiss = useToasts((st) => st.dismiss);
+  // Paused while pointed at or focused, so nobody loses a toast while reading or tabbing to it.
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const paused = hovered || focused;
   useEffect(() => {
+    if (paused) return;
     const t = setTimeout(() => dismiss(toast.id), LIFETIME_MS);
     return () => clearTimeout(t);
-  }, [toast.id, dismiss]);
+  }, [toast.id, dismiss, paused]);
 
   return (
-    <div className={s.toast}>
+    <div
+      className={s.toast}
+      onPointerEnter={() => setHovered(true)}
+      onPointerLeave={() => setHovered(false)}
+      onFocus={() => setFocused(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) setFocused(false);
+      }}
+    >
       <Icon name={toast.icon ?? 'bell'} />
       <div>
         <div className={s.toastTitle}>{toast.title}</div>

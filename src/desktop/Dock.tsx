@@ -66,6 +66,7 @@ export function Dock() {
               type="button"
               className={`${s.dockButton} ${win ? s.dockOpen : ''} ${activeId === id ? s.dockActive : ''}`}
               onClick={() => launch(id)}
+              data-dock-app={id}
               aria-label={`${meta.title}${badge ? `, ${badge.label}` : ''}${win ? ', open' : ''}`}
             >
               <Icon name={meta.icon} />

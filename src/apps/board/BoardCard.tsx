@@ -84,6 +84,7 @@ export function BoardCard({ item, pos, dragPos, onDrag, maxX, linking, onLink }:
           icon="link"
           onClick={onLink}
           aria-pressed={linking}
+          data-link-for={item.id}
         >
           Link
         </Button>

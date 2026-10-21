@@ -416,12 +416,13 @@
   color: var(--status-contradicts);
 }
 
-.tamper p + p,
+.tamper p,
 .tamper dl {
   margin-top: var(--space-2);
 }
 
 .tamperTitle {
+  font-size: inherit;
   font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;

@@ -11,6 +11,7 @@ import type { EvidenceOfType } from '../../engine/types';
 import { useDesktop } from '../../stores/desktopStore';
 import { useProgress } from '../../stores/progressStore';
 import { Icon } from '../../ui/Icon';
+import { onTabListKeyDown } from '../../ui/tabKeys';
 import type { AppProps } from '../registry';
 import { EvidenceHeader } from '../shared/EvidenceHeader';
 import { useCaseState } from '../shared/hooks';
@@ -44,13 +45,19 @@ export default function NetworkLogApp({ params }: AppProps) {
   return (
     <div className={s.main}>
       {logs.length > 1 && (
-        <div className={n.tabs} role="tablist" aria-label="Network logs">
+        <div
+          className={n.tabs}
+          role="tablist"
+          aria-label="Network logs"
+          onKeyDown={onTabListKeyDown}
+        >
           {logs.map((l) => (
             <button
               key={l.id}
               type="button"
               role="tab"
               aria-selected={l.id === selected.id}
+              tabIndex={l.id === selected.id ? 0 : -1}
               className={n.tab}
               onClick={() => useDesktop.getState().setParams('netlog', { selected: l.id })}
             >

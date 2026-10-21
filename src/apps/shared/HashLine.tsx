@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import type { HashCheck } from '../../engine/hash';
 import type { Evidence } from '../../engine/types';
 import { Icon } from '../../ui/Icon';
@@ -35,12 +36,16 @@ export function HashLine({ item }: { item: Evidence }) {
   );
 }
 
+/** A labelled region with a heading, so screen-reader users can find it from the headings list. */
 function TamperWarning({ check }: { check: HashCheck }) {
+  const titleId = useId();
   return (
-    <div className={s.tamper}>
+    <section className={s.tamper} aria-labelledby={titleId}>
       <Icon name="alert" size={28} />
       <div>
-        <p className={s.tamperTitle}>Tamper warning</p>
+        <h4 id={titleId} className={s.tamperTitle}>
+          Tamper warning
+        </h4>
         <p>
           This item is <strong>not the same</strong> as when it was collected. Its hash now does not
           match the hash recorded at collection, so something changed it afterwards.
@@ -55,6 +60,6 @@ function TamperWarning({ check }: { check: HashCheck }) {
           Treat it with caution. If you use it, explain the mismatch in your judgement.
         </p>
       </div>
-    </div>
+    </section>
   );
 }

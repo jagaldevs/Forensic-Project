@@ -82,6 +82,6 @@ test('Wearables: draws a chart with an accessible summary and a data table', asy
   expect(chart.getAttribute('aria-label')).toMatch(/Not worn or charging from 18:40/);
   expect(screen.getByText('Not worn / charging')).toBeInTheDocument();
   expect(screen.getByText('Band placed on charger')).toBeInTheDocument();
-  await user.click(screen.getByRole('button', { name: 'Show data table' }));
+  await user.click(screen.getByRole('button', { name: 'Show data table: Heart rate' }));
   expect(screen.getByRole('cell', { name: '82' })).toBeInTheDocument();
 });

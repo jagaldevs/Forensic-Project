@@ -93,7 +93,8 @@ function VersionItem({
               aria-controls={`${id}-panel`}
               onClick={() => toggle('content')}
             >
-              {view === 'content' ? 'Hide' : 'View'}
+              {view === 'content' ? 'Hide' : 'View'}{' '}
+              <span className="visually-hidden">version {number}</span>
             </Button>
             {canCompare && (
               <Button
@@ -103,7 +104,8 @@ function VersionItem({
                 aria-controls={`${id}-panel`}
                 onClick={() => toggle('compare')}
               >
-                Compare with previous version
+                Compare with previous version{' '}
+                <span className="visually-hidden">(version {number})</span>
               </Button>
             )}
           </div>

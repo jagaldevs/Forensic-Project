@@ -176,6 +176,7 @@ export function SeriesChart({
           onClick={() => setShowTable((v) => !v)}
         >
           {showTable ? 'Hide data table' : 'Show data table'}
+          <span className="visually-hidden">: {title}</span>
         </Button>
       </div>
 

@@ -52,6 +52,16 @@ export function Window({ win, active, children }: WindowProps) {
       setRect(win.id, { ...start.current, w: start.current.w + dx, h: start.current.h + dy }),
   });
 
+  // After closing or minimising, the next window takes focus (effect above); if there is
+  // none, focus goes to this app's dock button rather than being lost.
+  const hide = (action: (id: typeof win.id) => void) => {
+    action(win.id);
+    requestAnimationFrame(() => {
+      if (document.activeElement && document.activeElement !== document.body) return;
+      document.querySelector<HTMLElement>(`[data-dock-app="${win.id}"]`)?.focus();
+    });
+  };
+
   const onTitleKey = (e: KeyboardEvent) => {
     const d = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[
       e.key
@@ -101,7 +111,7 @@ export function Window({ win, active, children }: WindowProps) {
             variant="ghost"
             icon="minimise"
             label={`Minimise ${meta.title}`}
-            onClick={() => minimise(win.id)}
+            onClick={() => hide(minimise)}
           />
           <Button
             size="small"
@@ -115,7 +125,7 @@ export function Window({ win, active, children }: WindowProps) {
             variant="ghost"
             icon="close"
             label={`Close ${meta.title}`}
-            onClick={() => close(win.id)}
+            onClick={() => hide(close)}
           />
         </div>
       </header>

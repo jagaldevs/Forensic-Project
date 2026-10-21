@@ -20,6 +20,7 @@ import { Icon } from '../../ui/Icon';
 import { Badge, StatusBadge } from '../../ui/StatusBadge';
 import { statusInfo, verdictInfo, verdictOrder } from '../../ui/labels';
 import ui from '../../ui/ui.module.css';
+import { onTabListKeyDown } from '../../ui/tabKeys';
 import type { AppProps } from '../registry';
 import { openEvidence, useCaseState } from '../shared/hooks';
 import j from './judgements.module.css';
@@ -31,7 +32,12 @@ export default function JudgementsApp({ params }: AppProps) {
 
   return (
     <div className={j.app}>
-      <div className={j.tabs} role="tablist" aria-label="Case questions">
+      <div
+        className={j.tabs}
+        role="tablist"
+        aria-label="Case questions"
+        onKeyDown={onTabListKeyDown}
+      >
         {c.questions.map((q, i) => {
           const done = isQuestionDone(progress, q);
           const tried = !!progress.judgements[q.id]?.lastResult;
@@ -42,6 +48,7 @@ export default function JudgementsApp({ params }: AppProps) {
               role="tab"
               id={`tab-${q.id}`}
               aria-selected={q.id === current.id}
+              tabIndex={q.id === current.id ? 0 : -1}
               aria-controls="judgement-panel"
               className={j.tab}
               onClick={() => useDesktop.getState().setParams('judgements', { q: q.id })}

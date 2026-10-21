@@ -1,5 +1,6 @@
-import { useEffect, useId, useRef, type ReactNode } from 'react';
+import { useId, useRef, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
+import { useFocusTrap } from '../lib/useFocusTrap';
 import { Button } from './Button';
 import s from './ui.module.css';
 
@@ -12,48 +13,11 @@ interface DialogProps {
   wide?: boolean;
 }
 
-const FOCUSABLE =
-  'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
-
 /** Modal dialog with focus trap, Escape to close, and focus returned on close. */
 export function Dialog({ title, onClose, children, actions, wide }: DialogProps) {
   const titleId = useId();
   const ref = useRef<HTMLDivElement>(null);
-  const onCloseRef = useRef(onClose);
-  useEffect(() => {
-    onCloseRef.current = onClose;
-  });
-
-  useEffect(() => {
-    const previouslyFocused = document.activeElement as HTMLElement | null;
-    const node = ref.current;
-    const first = node?.querySelector<HTMLElement>('[data-autofocus]') ?? node;
-    first?.focus();
-
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.stopPropagation();
-        onCloseRef.current();
-      }
-      if (e.key !== 'Tab' || !node) return;
-      const items = Array.from(node.querySelectorAll<HTMLElement>(FOCUSABLE));
-      if (!items.length) return;
-      const firstItem = items[0]!;
-      const lastItem = items.at(-1)!;
-      if (e.shiftKey && document.activeElement === firstItem) {
-        e.preventDefault();
-        lastItem.focus();
-      } else if (!e.shiftKey && document.activeElement === lastItem) {
-        e.preventDefault();
-        firstItem.focus();
-      }
-    };
-    document.addEventListener('keydown', onKey, true);
-    return () => {
-      document.removeEventListener('keydown', onKey, true);
-      previouslyFocused?.focus?.();
-    };
-  }, []);
+  useFocusTrap(ref, onClose);
 
   return createPortal(
     <div

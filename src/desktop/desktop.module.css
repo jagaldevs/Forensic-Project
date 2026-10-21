@@ -69,7 +69,8 @@
   color: var(--text);
 }
 
-@media (max-width: 760px) {
+/* Wide enough for the largest text size on an iPad in portrait. */
+@media (max-width: 1000px) {
   .hideNarrow {
     display: none;
   }

@@ -3,6 +3,7 @@ import { loadCase } from '../cases';
 import type { CaseFile } from '../engine/types';
 import { useNav, type Screen } from '../stores/navStore';
 import { useProgress } from '../stores/progressStore';
+import { useToasts } from '../stores/toastStore';
 import { CaseContext } from './CaseContext';
 import { Loading } from '../screens/Loading';
 import { BriefingScreen } from '../screens/BriefingScreen';
@@ -29,6 +30,8 @@ export default function CaseShell({ caseId, screen }: { caseId: string; screen: 
       });
     return () => {
       cancelled = true;
+      // Notifications belong to this case; their buttons would open apps in the wrong one.
+      useToasts.getState().clear();
     };
   }, [caseId]);
 

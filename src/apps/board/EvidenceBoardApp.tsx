@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { usableEvidence } from '../../engine/availability';
 import type { BoardLink } from '../../engine/progressTypes';
 import type { Evidence, Relation, VerdictQuestion } from '../../engine/types';
@@ -32,6 +32,9 @@ export default function EvidenceBoardApp() {
   const [drag, setDrag] = useState<{ id: string; pos: Pos } | null>(null);
   const [viewWidth, setViewWidth] = useState(1100);
   const scroller = useRef<HTMLDivElement>(null);
+  const wrap = useRef<HTMLDivElement>(null);
+  /** Keyboard flow: the card whose Link button gets focus back when linking ends. */
+  const returnTo = useRef<string | null>(null);
 
   useLayoutEffect(() => {
     const el = scroller.current;
@@ -40,6 +43,18 @@ export default function EvidenceBoardApp() {
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
+
+  // Linking by keyboard: jump to the first claim, then back to the card when it's done.
+  useEffect(() => {
+    if (linkingFrom) {
+      returnTo.current = linkingFrom;
+      wrap.current?.querySelector<HTMLElement>('[data-claim-link]')?.focus();
+    } else if (!pending && returnTo.current) {
+      const id = returnTo.current;
+      returnTo.current = null;
+      wrap.current?.querySelector<HTMLElement>(`[data-link-for="${CSS.escape(id)}"]`)?.focus();
+    }
+  }, [linkingFrom, pending]);
 
   const CLAIM_X = Math.max(MIN_CLAIM_X, viewWidth - CLAIM_W - 24);
   const BOARD_W = CLAIM_X + CLAIM_W + 24;
@@ -81,7 +96,13 @@ export default function EvidenceBoardApp() {
   };
 
   return (
-    <div className={b.wrap}>
+    <div
+      ref={wrap}
+      className={b.wrap}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape' && linkingFrom) setLinkingFrom(null);
+      }}
+    >
       <div className={b.toolbar} role="status" aria-live="polite">
         {progress.locked ? (
           <span className={b.help}>
@@ -167,8 +188,9 @@ export default function EvidenceBoardApp() {
                       variant="primary"
                       icon="link"
                       onClick={() => chooseClaim(q.id)}
+                      data-claim-link
                     >
-                      Link here
+                      Link here <span className="visually-hidden">(claim {i + 1})</span>
                     </Button>
                   )}
                 </div>
