@@ -12,7 +12,8 @@ test('a student can get from boot to the briefing even when localStorage is bloc
   const user = userEvent.setup();
   render(<App />);
 
-  await user.keyboard('{Escape}'); // skip the boot sequence
+  await user.keyboard('{Escape}'); // fast-forward the boot sequence
+  await user.click(screen.getByRole('button', { name: /enter the lab/i }));
   await user.type(await screen.findByLabelText('Codename'), 'Agent Test');
   await user.click(screen.getByRole('button', { name: /continue/i }));
 

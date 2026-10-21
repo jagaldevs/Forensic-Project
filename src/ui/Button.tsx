@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import type { ButtonHTMLAttributes, ReactNode, Ref } from 'react';
 import { Icon, type IconName } from './Icon';
 import s from './ui.module.css';
 
@@ -9,6 +9,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** For icon-only buttons: required accessible name. */
   label?: string;
   children?: ReactNode;
+  ref?: Ref<HTMLButtonElement>;
 }
 
 export function Button({

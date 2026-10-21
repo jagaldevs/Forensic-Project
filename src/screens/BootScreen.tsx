@@ -26,15 +26,16 @@ const lines: Line[] = [
 
 const LINE_MS = 380;
 
-/** A short "secure terminal" start-up. Skippable by click, tap or any key. */
+/**
+ * A short "secure terminal" start-up. Click, tap or a key fast-forwards the animation; the
+ * student then presses "Enter the lab" to go in (it never moves on by itself).
+ */
 export function BootScreen({ onDone }: { onDone: () => void }) {
   const reduced = usePrefersReducedMotion();
   const [shown, setShown] = useState(reduced ? lines.length : 0);
   const finished = shown >= lines.length;
-  const doneRef = useRef(onDone);
-  useEffect(() => {
-    doneRef.current = onDone;
-  });
+  const enterRef = useRef<HTMLButtonElement>(null);
+  const skip = () => setShown(lines.length);
 
   useEffect(() => {
     if (finished) return;
@@ -42,24 +43,25 @@ export function BootScreen({ onDone }: { onDone: () => void }) {
     return () => clearTimeout(t);
   }, [shown, finished]);
 
-  // Auto-continue shortly after the title appears (not with reduced motion: wait for the student).
+  // When the title appears, put keyboard focus on "Enter the lab".
   useEffect(() => {
-    if (!finished || reduced) return;
-    const t = setTimeout(() => doneRef.current(), 1600);
-    return () => clearTimeout(t);
-  }, [finished, reduced]);
+    if (finished) enterRef.current?.focus();
+  }, [finished]);
 
+  // Any key fast-forwards (except Tab and Space: Space would then also press the button).
   useEffect(() => {
-    const skip = (e: KeyboardEvent) => {
-      if (e.key === 'Tab') return;
-      doneRef.current();
+    if (finished) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Tab' || e.key === ' ' || e.repeat) return;
+      e.preventDefault();
+      skip();
     };
-    window.addEventListener('keydown', skip);
-    return () => window.removeEventListener('keydown', skip);
-  }, []);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [finished]);
 
   return (
-    <div className={s.stage} onClick={() => doneRef.current()}>
+    <div className={s.stage} onClick={finished ? undefined : skip}>
       <div className={s.boot} role="log" aria-live="polite" aria-label="Lab start-up">
         {lines.slice(0, shown).map((l, i) => (
           <div key={i} className={s.bootLine}>
@@ -74,14 +76,14 @@ export function BootScreen({ onDone }: { onDone: () => void }) {
             <h1>
               {brand.shortName} <span>{brand.labName}</span>
             </h1>
-            <Button variant="primary" icon="arrowRight" onClick={() => doneRef.current()}>
+            <Button ref={enterRef} variant="primary" icon="arrowRight" onClick={onDone}>
               Enter the lab
             </Button>
           </div>
         )}
       </div>
       {!finished && (
-        <Button className={s.skip} variant="ghost" onClick={() => doneRef.current()}>
+        <Button className={s.skip} variant="ghost" onClick={skip}>
           Skip intro
         </Button>
       )}

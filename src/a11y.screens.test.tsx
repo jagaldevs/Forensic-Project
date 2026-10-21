@@ -20,8 +20,9 @@ const caseId = 'waterfront-alibi';
 
 async function showScreen(screen: Screen) {
   const user = userEvent.setup();
-  const { container } = render(<App />);
-  await user.keyboard('{Escape}'); // skip the boot sequence
+  const { container, getByRole } = render(<App />);
+  await user.keyboard('{Escape}'); // fast-forward the boot sequence
+  await user.click(getByRole('button', { name: /enter the lab/i }));
   act(() => {
     if (screen === 'mission') useNav.getState().openMission(firstMission);
     else useNav.getState().openCase(caseId, screen);
