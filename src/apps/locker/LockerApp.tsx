@@ -14,6 +14,10 @@ import { evidenceIcon } from '../shared/EvidenceIcon';
 import { appFor, openEvidence, useCaseState } from '../shared/hooks';
 import { LockedNotice } from '../shared/LockedNotice';
 import s from '../shared/shared.module.css';
+import { custodyLog } from '../../engine/custody';
+import type { CustodyEvent } from '../../engine/progressTypes';
+import { CustodyPanel, CustodyTable } from './CustodyPanel';
+import l from './locker.module.css';
 
 /**
  * Evidence Locker: everything collected so far, with hashes (chain of custody).
@@ -24,6 +28,7 @@ export default function LockerApp({ params }: AppProps) {
   const items = collectedEvidence(c, progress);
   const selected = items.find((e) => e.id === params.selected) ?? null;
   const select = (id: string) => useDesktop.getState().setParams('locker', { selected: id });
+  const flagged = failedHashChecks(progress.custody ?? []);
 
   const viewHere = selected && appFor(selected) === 'locker' && !isLocked(selected, c, progress);
   useEffect(() => {
@@ -35,8 +40,23 @@ export default function LockerApp({ params }: AppProps) {
       <div className={s.split}>
         <nav className={s.sidebar} aria-label="Collected evidence">
           <ul className={s.list}>
+            <li>
+              <button
+                type="button"
+                className={s.listItem}
+                aria-current={!selected}
+                onClick={() => select('')}
+              >
+                <Icon name="hash" size={18} />
+                <span className={s.listItemText}>
+                  <span>Chain of custody</span>
+                  <span className={s.listItemSub}>Verify hashes · full log</span>
+                </span>
+              </button>
+            </li>
             {items.map((e) => {
               const locked = isLocked(e, c, progress);
+              const mismatch = flagged.has(e.id);
               return (
                 <li key={e.id}>
                   <button
@@ -45,11 +65,15 @@ export default function LockerApp({ params }: AppProps) {
                     aria-current={selected?.id === e.id}
                     onClick={() => select(e.id)}
                   >
-                    <Icon name={locked ? 'lock' : evidenceIcon(e)} size={18} />
+                    <Icon name={locked ? 'lock' : mismatch ? 'alert' : evidenceIcon(e)} size={18} />
                     <span className={s.listItemText}>
                       <span>{e.title}</span>
                       <span className={s.listItemSub}>
-                        {locked ? 'Needs a warrant' : appMeta[appFor(e)].title}
+                        {locked
+                          ? 'Needs a warrant'
+                          : mismatch
+                            ? 'Hash mismatch'
+                            : appMeta[appFor(e)].title}
                       </span>
                     </span>
                     {!locked && !progress.viewed[e.id] && <span className={s.newDot}>NEW</span>}
@@ -61,16 +85,14 @@ export default function LockerApp({ params }: AppProps) {
         </nav>
         <div className={s.main}>
           {!selected ? (
-            <div className={s.empty}>
-              <Icon name="locker" size={40} />
-              <p>
+            <>
+              <p className={l.intro} style={{ marginBottom: 'var(--space-5)' }}>
                 {items.length} item{items.length === 1 ? '' : 's'} in the locker. Select one to
-                examine it.
+                examine it. Some evidence only appears once you find it, for example by running an
+                IP lookup.
               </p>
-              <p className={s.listItemSub}>
-                Some evidence only appears once you find it, for example by running an IP lookup.
-              </p>
-            </div>
+              <CustodyPanel />
+            </>
           ) : isLocked(selected, c, progress) ? (
             <LockedNotice item={selected} />
           ) : (
@@ -82,9 +104,20 @@ export default function LockerApp({ params }: AppProps) {
   );
 }
 
+/** Ids whose most recent hash check did not match. */
+function failedHashChecks(custody: CustodyEvent[]): Set<string> {
+  const latest = new Map<string, boolean>();
+  for (const e of custody) if (e.action === 'verified') latest.set(e.evidenceId, e.ok === true);
+  return new Set([...latest].filter(([, ok]) => !ok).map(([id]) => id));
+}
+
 function LockerDetail({ item, c }: { item: Evidence; c: CaseFile }) {
   const offset = c.timeZone.utcOffset;
   const ownApp = appFor(item);
+  const { progress } = useCaseState();
+  const custody = custodyLog(c, progress)
+    .filter((line) => line.evidenceId === item.id)
+    .reverse();
 
   return (
     <article>
@@ -170,6 +203,13 @@ function LockerDetail({ item, c }: { item: Evidence; c: CaseFile }) {
           )}
         </>
       )}
+
+      <section className={l.itemCustody} aria-labelledby="item-custody">
+        <h4 id="item-custody" className={l.heading}>
+          <Icon name="locker" size={16} /> Chain of custody for this item
+        </h4>
+        <CustodyTable lines={custody} />
+      </section>
     </article>
   );
 }

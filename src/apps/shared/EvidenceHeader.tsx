@@ -1,12 +1,14 @@
 import type { ReactNode } from 'react';
 import type { Evidence } from '../../engine/types';
+import { useSettings } from '../../stores/settingsStore';
 import { Icon } from '../../ui/Icon';
 import { HashLine } from './HashLine';
 import { PinButton } from './PinButton';
 import s from './shared.module.css';
 
-/** Title, source, hash and pin button shared by every evidence view. */
+/** Title, source, hash and pin button shared by every evidence view (plus teacher notes). */
 export function EvidenceHeader({ item, children }: { item: Evidence; children?: ReactNode }) {
+  const teacherMode = useSettings((st) => st.teacherMode);
   return (
     <div className={s.evHeader}>
       <div className={s.evTitleRow}>
@@ -22,6 +24,15 @@ export function EvidenceHeader({ item, children }: { item: Evidence; children?: 
         </div>
       </div>
       <HashLine item={item} />
+      {teacherMode && item.teacherNote && (
+        <aside className={s.teacherNote} aria-label="Teacher note">
+          <Icon name="shield" size={16} />
+          <p>
+            <span className={s.teacherNoteLabel}>Teacher note: </span>
+            {item.teacherNote}
+          </p>
+        </aside>
+      )}
     </div>
   );
 }

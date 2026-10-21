@@ -1,0 +1,128 @@
+.overview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.overview section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.overview section > * {
+  max-width: 100%;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-md);
+}
+
+.heading svg {
+  color: var(--accent);
+}
+
+.intro {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  max-width: 62ch;
+}
+
+.results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: var(--text-sm);
+}
+
+.results li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  animation: tick var(--dur-med) var(--ease-out);
+}
+
+.ok svg {
+  color: var(--status-supports);
+}
+
+.bad {
+  background: var(--status-contradicts-bg);
+  font-weight: 650;
+}
+
+.bad svg {
+  color: var(--status-contradicts);
+}
+
+.resultLabel {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.bad .resultLabel {
+  color: var(--status-contradicts);
+}
+
+.summaryGood {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--status-supports);
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+.mismatchList {
+  margin: var(--space-1) 0 0;
+  padding-left: var(--space-5);
+}
+
+.linkish {
+  min-height: var(--touch-target);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font-weight: 650;
+  text-decoration: underline;
+  text-align: left;
+}
+
+.uiCell {
+  font-family: var(--font-ui) !important;
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  white-space: nowrap;
+}
+
+.itemCustody {
+  margin-top: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+@keyframes tick {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+}

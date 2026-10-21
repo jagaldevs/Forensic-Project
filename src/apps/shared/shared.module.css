@@ -400,3 +400,75 @@
   border-radius: var(--radius-md);
   background: var(--surface);
 }
+
+/* Tamper warning (hash mismatch) */
+.tamper {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 2px solid var(--status-contradicts);
+  border-radius: var(--radius-md);
+  background: var(--status-contradicts-bg);
+  font-size: var(--text-sm);
+}
+
+.tamper > svg {
+  flex: none;
+  color: var(--status-contradicts);
+}
+
+.tamper p + p,
+.tamper dl {
+  margin-top: var(--space-2);
+}
+
+.tamperTitle {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--status-contradicts);
+}
+
+.tamperHashes {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px var(--space-3);
+  font-size: var(--text-xs);
+}
+
+.tamperHashes dt {
+  color: var(--text-muted);
+}
+
+.tamperHashes dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  word-break: break-all;
+}
+
+.tamperAdvice {
+  font-weight: 600;
+}
+
+/* Teacher-only notes (teacher mode) */
+.teacherNote {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border: 1px dashed var(--status-inconclusive);
+  border-radius: var(--radius-md);
+  background: var(--status-inconclusive-bg);
+  font-size: var(--text-sm);
+}
+
+.teacherNote > svg {
+  flex: none;
+  color: var(--status-inconclusive);
+  margin-top: 2px;
+}
+
+.teacherNoteLabel {
+  font-weight: 700;
+  color: var(--status-inconclusive);
+}
