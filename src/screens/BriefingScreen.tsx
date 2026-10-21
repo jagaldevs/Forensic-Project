@@ -2,9 +2,11 @@ import { useCaseFile } from '../app/CaseContext';
 import { clockTo12, formatLongDate } from '../engine/format';
 import { playSound } from '../lib/sound';
 import { useNav } from '../stores/navStore';
-import { useProgress } from '../stores/progressStore';
+import { supportLevelOf } from '../engine/progressTypes';
+import { useCaseProgress, useProgress } from '../stores/progressStore';
 import { Button } from '../ui/Button';
 import { Paragraphs } from '../ui/Paragraphs';
+import { SupportLevelPicker } from '../ui/SupportLevelPicker';
 import s from './screens.module.css';
 
 /** The case briefing: a message from the lead detective with the case questions. */
@@ -12,8 +14,12 @@ export function BriefingScreen() {
   const c = useCaseFile();
   const go = useNav((st) => st.go);
   const exitCase = useNav((st) => st.exitCase);
+  const progress = useCaseProgress(c.meta.id);
+  const level = supportLevelOf(progress);
 
   const accept = () => {
+    // Record the level even if the student kept the default.
+    if (!progress.supportLevel) useProgress.getState().setSupportLevel(c.meta.id, level);
     useProgress.getState().markBriefingRead(c.meta.id);
     playSound('open');
     go('desktop');
@@ -58,6 +64,12 @@ export function BriefingScreen() {
             </p>
           </div>
         </article>
+        <SupportLevelPicker
+          value={level}
+          onChange={(l) => useProgress.getState().setSupportLevel(c.meta.id, l)}
+          assessment={!!c.meta.assessment}
+          disabled={!!progress.locked}
+        />
         <div className={s.spread}>
           <Button variant="ghost" icon="arrowLeft" onClick={exitCase}>
             Back to cases

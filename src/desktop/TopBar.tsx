@@ -3,13 +3,17 @@ import { useCaseFile } from '../app/CaseContext';
 import { Logo } from '../brand/Logo';
 import { brand } from '../brand/brand';
 import { warrantsRemaining } from '../engine/availability';
+import { supportLevelOf } from '../engine/progressTypes';
 import { playSound } from '../lib/sound';
 import { BackupDialog } from '../screens/BackupDialog';
 import { useNav } from '../stores/navStore';
-import { useCaseProgress } from '../stores/progressStore';
+import { useCaseProgress, useProgress } from '../stores/progressStore';
 import { useSettings } from '../stores/settingsStore';
 import { useTour } from '../stores/tourStore';
 import { Button } from '../ui/Button';
+import { Dialog } from '../ui/Dialog';
+import { supportLevelInfo } from '../ui/labels';
+import { SupportLevelPicker } from '../ui/SupportLevelPicker';
 import { Icon } from '../ui/Icon';
 import s from './desktop.module.css';
 
@@ -22,6 +26,9 @@ export function TopBar() {
   const go = useNav((st) => st.go);
   const exitCase = useNav((st) => st.exitCase);
   const [showBackup, setShowBackup] = useState(false);
+  const [showLevel, setShowLevel] = useState(false);
+  const level = supportLevelOf(progress);
+  const levelInfo = supportLevelInfo(level, !!c.meta.assessment);
   const warrants = warrantsRemaining(c, progress);
 
   return (
@@ -52,6 +59,15 @@ export function TopBar() {
           <strong>Submitted</strong>
         </span>
       )}
+      <button
+        type="button"
+        className={`${s.chip} ${s.chipButton}`}
+        onClick={() => setShowLevel(true)}
+        aria-label={`Support level: ${levelInfo.label}. Change`}
+      >
+        <Icon name={levelInfo.icon} size={14} />
+        <strong className={s.hideNarrow}>{levelInfo.label}</strong>
+      </button>
       <span className={s.chip} title="Warrants you can still use in this case">
         <Icon name="warrant" size={14} />
         Warrants: <strong>{warrants}</strong>
@@ -95,6 +111,24 @@ export function TopBar() {
         <Button size="small" variant="ghost" icon="exit" label="Leave case" onClick={exitCase} />
       </div>
       {showBackup && <BackupDialog onClose={() => setShowBackup(false)} />}
+      {showLevel && (
+        <Dialog
+          title="Support level"
+          onClose={() => setShowLevel(false)}
+          actions={
+            <Button variant="primary" onClick={() => setShowLevel(false)} data-autofocus>
+              Done
+            </Button>
+          }
+        >
+          <SupportLevelPicker
+            value={level}
+            onChange={(l) => useProgress.getState().setSupportLevel(c.meta.id, l)}
+            assessment={!!c.meta.assessment}
+            disabled={!!progress.locked}
+          />
+        </Dialog>
+      )}
     </header>
   );
 }

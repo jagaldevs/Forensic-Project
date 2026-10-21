@@ -69,6 +69,17 @@
   color: var(--text);
 }
 
+.chipButton {
+  min-height: var(--touch-target);
+  background: var(--button-bg);
+  color: inherit;
+  cursor: pointer;
+}
+
+.chipButton:hover {
+  background: var(--button-hover);
+}
+
 /* Wide enough for the largest text size on an iPad in portrait. */
 @media (max-width: 1000px) {
   .hideNarrow {

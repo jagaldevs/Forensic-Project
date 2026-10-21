@@ -8,13 +8,21 @@ import {
   attachedEvidenceIds,
   emptyJudgement,
   isQuestionDone,
+  supportLevelOf,
   type Judgement,
 } from '../../engine/progressTypes';
 import { usableEvidence } from '../../engine/availability';
-import type { OpenQuestion, Question, Relation, VerdictQuestion } from '../../engine/types';
+import type {
+  Extension,
+  OpenQuestion,
+  Question,
+  Relation,
+  VerdictQuestion,
+} from '../../engine/types';
 import { playSound } from '../../lib/sound';
 import { useDesktop } from '../../stores/desktopStore';
 import { useProgress } from '../../stores/progressStore';
+import { useSettings } from '../../stores/settingsStore';
 import { Button } from '../../ui/Button';
 import { Icon } from '../../ui/Icon';
 import { Badge, StatusBadge } from '../../ui/StatusBadge';
@@ -25,10 +33,19 @@ import type { AppProps } from '../registry';
 import { openEvidence, useCaseState } from '../shared/hooks';
 import j from './judgements.module.css';
 
+/** Tab id for the Deep dive extension tasks (questions use their own ids). */
+const DEEP_TAB = 'deep-dive';
+
 /** For each case question: verdict, attached evidence, explanation and a limitation. */
 export default function JudgementsApp({ params }: AppProps) {
   const { c, progress } = useCaseState();
+  const teacherMode = useSettings((st) => st.teacherMode);
+  const extensions = c.extensions ?? [];
+  // Deep dive tasks get their own tab (teachers always see it).
+  const showDeep = extensions.length > 0 && (supportLevelOf(progress) === 'deep' || teacherMode);
+  const deep = showDeep && params.q === DEEP_TAB;
   const current = c.questions.find((q) => q.id === params.q) ?? c.questions[0]!;
+  const selectedTab = deep ? DEEP_TAB : current.id;
 
   return (
     <div className={j.app}>
@@ -47,8 +64,8 @@ export default function JudgementsApp({ params }: AppProps) {
               type="button"
               role="tab"
               id={`tab-${q.id}`}
-              aria-selected={q.id === current.id}
-              tabIndex={q.id === current.id ? 0 : -1}
+              aria-selected={q.id === selectedTab}
+              tabIndex={q.id === selectedTab ? 0 : -1}
               aria-controls="judgement-panel"
               className={j.tab}
               onClick={() => useDesktop.getState().setParams('judgements', { q: q.id })}
@@ -61,6 +78,21 @@ export default function JudgementsApp({ params }: AppProps) {
             </button>
           );
         })}
+        {showDeep && (
+          <button
+            type="button"
+            role="tab"
+            id={`tab-${DEEP_TAB}`}
+            aria-selected={deep}
+            tabIndex={deep ? 0 : -1}
+            aria-controls="judgement-panel"
+            className={`${j.tab} ${j.tabDeep}`}
+            onClick={() => useDesktop.getState().setParams('judgements', { q: DEEP_TAB })}
+          >
+            <Icon name="search" size={16} />
+            <span>Deep dive</span>
+          </button>
+        )}
       </div>
       {progress.locked && (
         <p className={j.lockedNote} role="status">
@@ -71,10 +103,12 @@ export default function JudgementsApp({ params }: AppProps) {
       <div
         id="judgement-panel"
         role="tabpanel"
-        aria-labelledby={`tab-${current.id}`}
+        aria-labelledby={`tab-${selectedTab}`}
         className={j.panel}
       >
-        {current.kind === 'verdict' ? (
+        {deep ? (
+          <DeepDive extensions={extensions} />
+        ) : current.kind === 'verdict' ? (
           <VerdictForm key={current.id} q={current} />
         ) : (
           <OpenForm key={current.id} q={current} />
@@ -118,6 +152,7 @@ function VerdictForm({ q }: { q: VerdictQuestion }) {
     <form className={j.form} onSubmit={(e) => e.preventDefault()}>
       <fieldset className={j.plain} disabled={locked}>
         <h3 className={j.prompt}>{q.prompt}</h3>
+        {!assessment && supportLevelOf(progress) === 'guided' && <Nudge q={q} />}
 
         <fieldset className={j.fieldset}>
           <legend className={j.legend}>1. Your verdict on the claim</legend>
@@ -411,5 +446,97 @@ function OpenForm({ q }: { q: OpenQuestion }) {
         {!assessment && <Feedback judgement={judgement} />}
       </fieldset>
     </form>
+  );
+}
+
+/** Guided level: a nudge on what to look at, before the first check. */
+function Nudge({ q }: { q: VerdictQuestion }) {
+  const { caseId, progress } = useCaseState();
+  const text = q.nudge ?? q.hints?.verdict;
+  const [open, setOpen] = useState(() => !!progress.nudgesUsed?.includes(q.id));
+  if (!text) return null;
+  return (
+    <div className={j.nudge}>
+      <Button
+        size="small"
+        icon="info"
+        aria-expanded={open}
+        onClick={() => {
+          setOpen(!open);
+          if (!open) useProgress.getState().recordNudge(caseId, q.id);
+        }}
+      >
+        {open ? 'Hide the nudge' : 'Need a nudge?'}
+      </Button>
+      {open && <p className={j.nudgeText}>{text}</p>}
+    </div>
+  );
+}
+
+/**
+ * Deep dive level: optional, more technical tasks. Answers save as the student types and go to
+ * the teacher; they are never marked and never change the case result.
+ */
+function DeepDive({ extensions }: { extensions: Extension[] }) {
+  const { c, progress, caseId } = useCaseState();
+  const teacherMode = useSettings((st) => st.teacherMode);
+  const usable = new Map(usableEvidence(c, progress).map((e) => [e.id, e]));
+
+  return (
+    <div className={j.form}>
+      <p className={ui.hint}>
+        Optional challenges for investigators who want to go further. Your answers are saved for
+        your teacher. They don&rsquo;t change your case result.
+      </p>
+      {extensions.map((x, i) => (
+        <fieldset key={x.id} className={j.extension} disabled={!!progress.locked}>
+          <legend className={j.extensionTitle}>
+            Challenge {i + 1}: {x.title}
+          </legend>
+          <p>{x.prompt}</p>
+          {x.evidenceIds.length > 0 && (
+            <div className={j.extensionEvidence}>
+              <span className={ui.hint}>Look at:</span>
+              {x.evidenceIds.map((id) => {
+                const item = usable.get(id);
+                return item ? (
+                  <Button key={id} size="small" icon="eye" onClick={() => openEvidence(item)}>
+                    {item.title}
+                  </Button>
+                ) : (
+                  <span key={id} className={ui.hint}>
+                    (an item you haven&rsquo;t collected yet)
+                  </span>
+                );
+              })}
+            </div>
+          )}
+          {x.guidance && (
+            <ul className={j.guidance}>
+              {x.guidance.map((g) => (
+                <li key={g}>{g}</li>
+              ))}
+            </ul>
+          )}
+          <label className={j.legend} htmlFor={`ext-${x.id}`}>
+            Your answer
+          </label>
+          <textarea
+            id={`ext-${x.id}`}
+            className={ui.textarea}
+            value={progress.extensionAnswers?.[x.id] ?? ''}
+            onChange={(e) =>
+              useProgress.getState().setExtensionAnswer(caseId, x.id, e.target.value)
+            }
+            rows={5}
+          />
+          {teacherMode && (
+            <p className={j.teacherNote}>
+              <strong>Teacher: model answer.</strong> {x.modelAnswer}
+            </p>
+          )}
+        </fieldset>
+      ))}
+    </div>
   );
 }

@@ -1,3 +1,4 @@
+import type { SupportLevel } from '../engine/progressTypes';
 import type { Relation, Verdict } from '../engine/types';
 import type { IconName } from './Icon';
 
@@ -42,3 +43,32 @@ export const statusInfo: Record<StatusKind, { label: string; icon: IconName }> =
   inconclusive: { label: 'Inconclusive', icon: 'inconclusive' },
   unassessed: { label: 'Not yet assessed', icon: 'unassessed' },
 };
+
+/** Support levels as students see them. `assessment` drops the nudge (assessments have no hints). */
+export function supportLevelInfo(
+  level: SupportLevel,
+  assessment = false,
+): { label: string; description: string; icon: IconName } {
+  switch (level) {
+    case 'guided':
+      return {
+        label: 'Guided',
+        description: assessment
+          ? 'Plain-English notes on how to read each piece of evidence.'
+          : 'Plain-English notes on how to read each piece of evidence, and a nudge before you check.',
+        icon: 'info',
+      };
+    case 'standard':
+      return {
+        label: 'Standard',
+        description: 'The evidence as investigators see it.',
+        icon: 'eye',
+      };
+    case 'deep':
+      return {
+        label: 'Deep dive',
+        description: 'Everything in Standard, plus optional technical challenges for your teacher.',
+        icon: 'search',
+      };
+  }
+}

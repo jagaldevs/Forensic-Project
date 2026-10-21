@@ -27,6 +27,10 @@
   font-family: var(--font-mono);
 }
 
+.tabDeep {
+  font-family: var(--font-ui);
+}
+
 .tab[aria-selected='true'] {
   border-color: var(--accent);
   background: var(--accent-soft);
@@ -253,6 +257,47 @@
   margin-top: var(--space-3);
   font-size: var(--text-xs);
   color: var(--text-muted);
+}
+
+/* Guided: "Need a nudge?" */
+.nudge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.nudgeText {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--status-info-line);
+  border-radius: var(--radius-md);
+  background: var(--status-info-bg);
+  font-size: var(--text-sm);
+}
+
+/* Deep dive challenges */
+.extension {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  min-width: 0;
+}
+
+.extensionTitle {
+  font-weight: 700;
+  padding: 0 var(--space-1);
+}
+
+.extensionEvidence {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .guidance {

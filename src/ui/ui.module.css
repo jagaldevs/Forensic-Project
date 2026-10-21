@@ -236,3 +236,71 @@
     transform: translateY(12px) scale(0.98);
   }
 }
+
+/* Support level picker (briefing and top bar) */
+.levels {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.levelChoices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+  gap: var(--space-2);
+}
+
+.levelChoice {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  padding: var(--space-3);
+  min-height: var(--touch-target);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-1);
+  cursor: pointer;
+}
+
+.levelChoice input {
+  margin-top: 3px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--brand-magenta);
+  flex: none;
+}
+
+.levelChoice:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.levelChoice:has(input:focus-visible) {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.levelBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.levelLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-weight: 700;
+  font-size: var(--text-sm);
+}
+
+.levelDesc,
+.levelNote {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.levelNote {
+  margin-top: var(--space-2);
+}
