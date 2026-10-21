@@ -61,3 +61,22 @@ test('assessment reports never show auto-check results', async () => {
   expect(report.assessment).toBe(true);
   expect(reportToText(report)).not.toContain('Auto-check');
 });
+
+test('report shows the support level, nudges and answered Deep dive challenges', () => {
+  const p = newCaseProgress('waterfront-alibi', 0);
+  expect(buildReport(waterfront, p, 'Agent K', 0).supportLevel).toBe('Standard');
+
+  p.supportLevelsUsed = { guided: 1, deep: 2 };
+  p.supportLevel = 'deep';
+  p.nudgesUsed = ['q1-ip-location'];
+  const [first, second] = waterfront.extensions!;
+  p.extensionAnswers = { [first!.id]: 'Palmerston is inside the circle.', [second!.id]: '  ' };
+
+  const report = buildReport(waterfront, p, 'Agent K', 0);
+  expect(report.supportLevel).toBe('Deep dive (also used: Guided)');
+  expect(report.nudges).toEqual([1]);
+  expect(report.extensions.map((x) => x.answer)).toEqual(['Palmerston is inside the circle.']);
+  const text = reportToText(report);
+  expect(text).toContain('Support level: Deep dive (also used: Guided), nudges opened on Q1');
+  expect(text).toContain(`${first!.title}: Palmerston is inside the circle.`);
+});

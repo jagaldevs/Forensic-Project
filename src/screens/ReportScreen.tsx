@@ -4,7 +4,7 @@ import { Logo } from '../brand/Logo';
 import { brand } from '../brand/brand';
 import { collectedEvidence, isLocked } from '../engine/availability';
 import { hashCheck, type HashCheck } from '../engine/hash';
-import { buildReport, reportToText, type ReportData } from '../engine/report';
+import { buildReport, nudgeNote, reportToText, type ReportData } from '../engine/report';
 import { playSound } from '../lib/sound';
 import { useNav } from '../stores/navStore';
 import { useCaseProgress, useProgress } from '../stores/progressStore';
@@ -125,6 +125,20 @@ export default function ReportScreen() {
         {report.questions.map((q) => (
           <QuestionSection key={q.number} q={q} report={report} hashes={hashes} />
         ))}
+
+        {report.extensions.length > 0 && (
+          <section className={r.section}>
+            <h2>Deep dive challenges</h2>
+            <p className={r.extensionNote}>Optional extension tasks. Not marked.</p>
+            {report.extensions.map((x) => (
+              <div key={x.title} className={r.extension}>
+                <h3>{x.title}</h3>
+                <p className={r.extensionNote}>{x.prompt}</p>
+                <p>{x.answer}</p>
+              </div>
+            ))}
+          </section>
+        )}
 
         {report.timeline.length > 0 && <TimelineSection report={report} />}
 
@@ -315,6 +329,11 @@ function Cover({ report, badges }: { report: ReportData; badges: string[] }) {
         <dd>{report.generatedAt}</dd>
         <dt>Status</dt>
         <dd>{status}</dd>
+        <dt>Support level</dt>
+        <dd>
+          {report.supportLevel}
+          {nudgeNote(report)}
+        </dd>
         <dt>Training badges</dt>
         <dd>{badges.length ? badges.join(', ') : 'None yet'}</dd>
       </dl>

@@ -415,3 +415,19 @@
     border-color: var(--print-ink);
   }
 }
+
+.extension {
+  display: grid;
+  gap: var(--space-1);
+  margin-top: var(--space-3);
+  break-inside: avoid;
+}
+
+.extension h3 {
+  font-size: var(--text-md);
+}
+
+.extensionNote {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}

@@ -2,6 +2,7 @@ import { usableEvidence } from './availability';
 import { custodyLog } from './custody';
 import {
   attachedEvidenceIds,
+  describeSupportLevels,
   isQuestionDone,
   type CaseProgress,
   type SelfRating,
@@ -74,7 +75,13 @@ export interface ReportData {
   assessment: boolean;
   submittedAt: string | null;
   timeZoneLabel: string;
+  /** e.g. "Guided (also used: Standard)". */
+  supportLevel: string;
+  /** Question numbers where a Guided nudge was opened. */
+  nudges: number[];
   questions: ReportQuestion[];
+  /** Deep dive challenges the student answered. */
+  extensions: { title: string; prompt: string; answer: string }[];
   timeline: ReportTimelineRow[];
   warrants: { title: string; justification: string; granted: boolean }[];
   selfAssessment: { criterion: string; rating: SelfRating | null }[];
@@ -140,7 +147,13 @@ export function buildReport(
     assessment: !!c.meta.assessment,
     submittedAt: progress.submittedAt ? formatLocalDateTime(progress.submittedAt) : null,
     timeZoneLabel: c.timeZone.label,
+    supportLevel: describeSupportLevels(progress),
+    nudges: c.questions.flatMap((q, i) => (progress.nudgesUsed?.includes(q.id) ? [i + 1] : [])),
     questions,
+    extensions: (c.extensions ?? []).flatMap((x) => {
+      const answer = progress.extensionAnswers?.[x.id]?.trim();
+      return answer ? [{ title: x.title, prompt: x.prompt, answer }] : [];
+    }),
     timeline,
     warrants: progress.warrants.map((w) => ({
       title: c.warrants.requests.find((r) => r.id === w.requestId)?.title ?? w.requestId,
@@ -162,6 +175,11 @@ export function buildReport(
   };
 }
 
+/** ", nudges opened on Q1, Q3" (empty when none). */
+export function nudgeNote(r: ReportData): string {
+  return r.nudges.length ? `, nudges opened on ${r.nudges.map((n) => `Q${n}`).join(', ')}` : '';
+}
+
 /** Plain-text version for copying into a learning platform or saving as a .txt file. */
 export function reportToText(r: ReportData, hashes: Record<string, string> = {}): string {
   const lines: string[] = [];
@@ -172,6 +190,7 @@ export function reportToText(r: ReportData, hashes: Record<string, string> = {})
   lines.push(
     `Status: ${r.submittedAt ? `Submitted ${r.submittedAt}` : r.complete ? 'All questions completed' : 'In progress'}`,
   );
+  lines.push(`Support level: ${r.supportLevel}${nudgeNote(r)}`);
   lines.push('', `Incident: ${r.incident}`);
 
   for (const q of r.questions) {
@@ -195,6 +214,11 @@ export function reportToText(r: ReportData, hashes: Record<string, string> = {})
     } else {
       lines.push(`Answer: ${q.explanation || '(not written)'}`);
     }
+  }
+
+  if (r.extensions.length) {
+    lines.push('', rule, 'Deep dive challenges (optional, not marked):');
+    for (const x of r.extensions) lines.push(`  ${x.title}: ${x.answer}`);
   }
 
   if (r.timeline.length) {

@@ -283,3 +283,9 @@
     background: transparent !important;
   }
 }
+
+.extension {
+  display: grid;
+  gap: var(--space-1);
+  margin-bottom: var(--space-3);
+}

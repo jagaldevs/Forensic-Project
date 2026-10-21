@@ -97,6 +97,25 @@ export function supportLevelOf(progress: CaseProgress): SupportLevel {
   return progress.supportLevel ?? 'standard';
 }
 
+export const supportLevelLabels: Record<SupportLevel, string> = {
+  guided: 'Guided',
+  standard: 'Standard',
+  deep: 'Deep dive',
+};
+
+/** "Deep dive (also used: Guided)", for reports and Teacher Review. */
+export function describeSupportLevels(progress: CaseProgress): string {
+  const current = supportLevelOf(progress);
+  const others = Object.entries(progress.supportLevelsUsed ?? {})
+    .sort(([, a], [, b]) => (a ?? 0) - (b ?? 0))
+    .map(([level]) => level as SupportLevel)
+    .filter((level) => level !== current);
+  const label = supportLevelLabels[current];
+  return others.length
+    ? `${label} (also used: ${others.map((l) => supportLevelLabels[l]).join(', ')})`
+    : label;
+}
+
 export function newCaseProgress(caseId: string, now = Date.now()): CaseProgress {
   return {
     caseId,

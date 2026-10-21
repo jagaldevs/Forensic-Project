@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { loadCase } from '../cases';
 import { formatLocalDateTime } from '../engine/format';
-import type { CaseProgress } from '../engine/progressTypes';
+import { describeSupportLevels, type CaseProgress } from '../engine/progressTypes';
 import { scoreCase, type QuestionScore } from '../engine/score';
 import type { CaseFile } from '../engine/types';
 import { Icon } from '../ui/Icon';
@@ -57,6 +57,15 @@ export function CaseReview({ caseId, progress }: { caseId: string; progress: Cas
           </Badge>
         </div>
         <p className={r.muted}>
+          Support level: <strong>{describeSupportLevels(progress)}</strong>
+          {progress.nudgesUsed?.length
+            ? `. Guided nudges opened on ${c.questions
+                .flatMap((q, i) => (progress.nudgesUsed!.includes(q.id) ? [`Q${i + 1}`] : []))
+                .join(', ')}`
+            : ''}
+          .
+        </p>
+        <p className={r.muted}>
           Started {formatLocalDateTime(progress.startedAt)}. Auto-scoring checks the verdict and the
           attached evidence only; read the reasoning yourself.
         </p>
@@ -65,6 +74,24 @@ export function CaseReview({ caseId, progress }: { caseId: string; progress: Cas
       {score.questions.map((qs) => (
         <QuestionReview key={qs.question.id} qs={qs} c={c} progress={progress} />
       ))}
+
+      {(c.extensions ?? []).some((x) => progress.extensionAnswers?.[x.id]?.trim()) && (
+        <div className={r.process}>
+          <h4>Deep dive challenges (optional, not scored)</h4>
+          {c.extensions!.map((x) => {
+            const answer = progress.extensionAnswers?.[x.id]?.trim();
+            return answer ? (
+              <div key={x.id} className={r.extension}>
+                <p>
+                  <strong>{x.title}</strong>
+                </p>
+                <p>{answer}</p>
+                <p className={r.muted}>Model answer: {x.modelAnswer}</p>
+              </div>
+            ) : null;
+          })}
+        </div>
+      )}
 
       <div className={r.process}>
         <h4>Investigation process</h4>

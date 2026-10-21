@@ -1,4 +1,4 @@
-import type { SupportLevel } from '../engine/progressTypes';
+import { supportLevelLabels, type SupportLevel } from '../engine/progressTypes';
 import type { Relation, Verdict } from '../engine/types';
 import type { IconName } from './Icon';
 
@@ -52,7 +52,7 @@ export function supportLevelInfo(
   switch (level) {
     case 'guided':
       return {
-        label: 'Guided',
+        label: supportLevelLabels.guided,
         description: assessment
           ? 'Plain-English notes on how to read each piece of evidence.'
           : 'Plain-English notes on how to read each piece of evidence, and a nudge before you check.',
@@ -60,13 +60,13 @@ export function supportLevelInfo(
       };
     case 'standard':
       return {
-        label: 'Standard',
+        label: supportLevelLabels.standard,
         description: 'The evidence as investigators see it.',
         icon: 'eye',
       };
     case 'deep':
       return {
-        label: 'Deep dive',
+        label: supportLevelLabels.deep,
         description: 'Everything in Standard, plus optional technical challenges for your teacher.',
         icon: 'search',
       };
