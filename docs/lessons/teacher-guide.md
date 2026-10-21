@@ -24,21 +24,23 @@ The science links make this more than a computing unit. Make them explicit in ev
 | A hash that no longer matches                                   | Data integrity; reproducibility                    |
 | Warrants must be necessary and proportionate                    | Ethics in science; privacy                         |
 
-## Curriculum links (Australian Curriculum v9, Year 8 Science)
+## Curriculum links (Victorian Curriculum F–10 Version 2.0, Science Levels 7 and 8)
 
-| Code     | Content description (abridged)                                                                                                                                | Lessons    |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| AC9S8H01 | Explain how new evidence or different perspectives can lead to changes in scientific knowledge                                                                | 4, 5       |
-| AC9S8H03 | Examine how proposed scientific responses to contemporary issues may impact on society and explore ethical, environmental, social and economic considerations | 3          |
-| AC9S8I04 | Select and construct appropriate representations, including tables, graphs, models and mathematical relationships, to organise and process data               | 4, 5       |
-| AC9S8I05 | Analyse data and information to describe patterns, trends and relationships and identify anomalies                                                            | 2, 4       |
-| AC9S8I06 | Analyse methods, conclusions and claims for assumptions, possible sources of error, conflicting evidence and unanswered questions                             | 1–6        |
-| AC9S8I07 | Construct evidence-based arguments to support conclusions or evaluate claims, and consider any ethical issues…                                                | 2, 3, 5, 6 |
-| AC9S8I08 | Write and create texts to communicate ideas, findings and arguments for specific purposes and audiences…                                                      | 5, 6       |
+| Code     | Content description                                                                                                                                                                                                                                   | Lessons    |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| VC2S8H01 | Scientific knowledge, including models and theories, can change because of new evidence                                                                                                                                                               | 4, 5       |
+| VC2S8H03 | Proposed scientific responses to socio-scientific issues impact on society and may involve ethical, environmental, social and economic considerations                                                                                                 | 3          |
+| VC2S8I04 | Data and information can be organised and processed by selecting and constructing representations including tables, graphs, keys, models and mathematical relationships                                                                               | 4, 5       |
+| VC2S8I05 | Information and processed data can be analysed to show patterns, trends and relationships, and to identify anomalies                                                                                                                                  | 2, 4       |
+| VC2S8I06 | Scientific methods, conclusions and claims can be analysed to identify assumptions, possible sources of error, conflicting evidence and unanswered questions                                                                                          | 1–6        |
+| VC2S8I07 | Evidence-based arguments can be constructed to support conclusions or evaluate claims, including consideration of ethical issues and protocols associated with using or citing secondary data or information                                          | 2, 3, 5, 6 |
+| VC2S8I08 | Communicating ideas, findings and arguments for specific purposes and audiences involves the selection and use of appropriate presentation formats, scientific vocabulary, models and other representations, and may include the use of digital tools | 5, 6       |
 
-Codes and wording are from the Australian Curriculum v9 (as used in the NT), taken from a copy of
-the ACARA tables because the ACARA site could not be read when this was written. Confirm them on
-the [Australian Curriculum website](https://www.australiancurriculum.edu.au/) before formal planning.
+The unit also works towards this part of the Level 8 achievement standard: students "explain how
+new evidence can lead to changes in scientific knowledge" and "discuss the relevant ethical …
+considerations associated with a proposed scientific response". Wording from the VCAA's
+[Victorian Curriculum F–10 Version 2.0 Science](https://f10.vcaa.vic.edu.au/learning-areas/science/introduction)
+document.
 
 ## Unit at a glance
 
@@ -95,7 +97,7 @@ and what we conclude from it (an inference).
 - sort statements into observations and inferences
 - name one thing a photo's metadata shows and one thing it does not show.
 
-**Curriculum:** AC9S8I06.
+**Curriculum:** VC2S8I06.
 
 **You need:** the lab link on the board; card sort sets (one per pair); student sheet 1.
 
@@ -124,7 +126,7 @@ and that this limits the conclusions we can draw.
 - explain what an "accuracy radius" means
 - use evidence to judge a claim, and say what the evidence does **not** show.
 
-**Curriculum:** AC9S8I05, AC9S8I06, AC9S8I07.
+**Curriculum:** VC2S8I05, VC2S8I06, VC2S8I07.
 
 **You need:** the lab link; student sheet 2. On your own device: teacher mode on, The Waterfront
 Alibi open, so you can see the Teacher Panel.
@@ -165,7 +167,7 @@ needs a necessary and proportionate reason.
 - explain why a device is not the same as a person
 - decide whether a request for data is proportionate, and justify it.
 
-**Curriculum:** AC9S8H03, AC9S8I07.
+**Curriculum:** VC2S8H03, VC2S8I07.
 
 **You need:** your device with teacher mode on and The Waterfront Alibi open; the projector;
 warrant scenario cards (appendix B); student sheet 3.
@@ -195,7 +197,7 @@ systematic errors, and that we correct for them before comparing data.
 - explain the difference between a systematic error and a random error
 - correct a device's clock on a timeline and explain why.
 
-**Curriculum:** AC9S8H01, AC9S8I04, AC9S8I05, AC9S8I06.
+**Curriculum:** VC2S8H01, VC2S8I04, VC2S8I05, VC2S8I06.
 
 **You need:** the lab link; student sheet 4. Teacher mode on your device, with Where was Jamie?
 open.
@@ -228,7 +230,7 @@ improves reasoning.
 - explain how one piece of evidence changed their thinking
 - give useful feedback on another investigator's evidence board.
 
-**Curriculum:** AC9S8H01, AC9S8I07, AC9S8I08.
+**Curriculum:** VC2S8H01, VC2S8I07, VC2S8I08.
 
 **You need:** sticky notes (two colours); your device with teacher mode on; student sheet 5.
 
@@ -249,7 +251,7 @@ improves reasoning.
 
 **Success criteria:** see the rubric below; share it with students before they start.
 
-**Curriculum:** AC9S8I06, AC9S8I07, AC9S8I08, AC9S8H03.
+**Curriculum:** VC2S8I06, VC2S8I07, VC2S8I08, VC2S8H03.
 
 **You need:** the **assessment access code** on the board (or given out on slips); student sheet
 6 (the reflection task).
@@ -277,11 +279,11 @@ evidence attached and no distractors. Use the rubric for the written reasoning a
 
 | Criterion                                 | Beginning                                        | Developing                                   | Proficient                                                 | Extending                                                                                               |
 | ----------------------------------------- | ------------------------------------------------ | -------------------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| **Judgements and evidence** (AC9S8I07)    | Verdicts given with little or unrelated evidence | Some verdicts supported by relevant evidence | Most verdicts accepted, with the key evidence attached     | All verdicts justified with key evidence; distractors recognised and explained                          |
-| **Shows and does not show** (AC9S8I06)    | Treats evidence as proof                         | Describes what evidence shows                | Explains what evidence shows **and** what it does not show | Identifies assumptions and sources of error (time zones, shared devices, spoofed headers, edited files) |
+| **Judgements and evidence** (VC2S8I07)    | Verdicts given with little or unrelated evidence | Some verdicts supported by relevant evidence | Most verdicts accepted, with the key evidence attached     | All verdicts justified with key evidence; distractors recognised and explained                          |
+| **Shows and does not show** (VC2S8I06)    | Treats evidence as proof                         | Describes what evidence shows                | Explains what evidence shows **and** what it does not show | Identifies assumptions and sources of error (time zones, shared devices, spoofed headers, edited files) |
 | **Limitations and further evidence**      | Limitation missing or vague                      | A general limitation ("it could be wrong")   | A specific limitation for each judgement                   | Proposes specific further evidence that would decide between explanations                               |
-| **Ethics and proportionality** (AC9S8H03) | Not considered                                   | Mentions privacy                             | Explains why a request is or isn't proportionate           | Weighs the need for data against people's privacy, suggesting the least intrusive option                |
-| **Communication** (AC9S8I08)              | Hard to follow                                   | Mostly clear                                 | Clear and uses correct terms                               | Concise, precise and well organised for its audience                                                    |
+| **Ethics and proportionality** (VC2S8H03) | Not considered                                   | Mentions privacy                             | Explains why a request is or isn't proportionate           | Weighs the need for data against people's privacy, suggesting the least intrusive option                |
+| **Communication** (VC2S8I08)              | Hard to follow                                   | Mostly clear                                 | Clear and uses correct terms                               | Concise, precise and well organised for its audience                                                    |
 
 ### Reflection task (10 minutes, about 150 words)
 

@@ -20,8 +20,8 @@ A running list for the end-of-project review. Newest additions at the bottom of 
 - [ ] Listen to the sound effects on classroom speakers (levels were set by reasoning).
 - [ ] Read the Guided notes, nudges and Deep dive challenges in all three cases (drafted for
       review; see the support levels entry in CLAUDE.md).
-- [ ] Review the teacher guide and student sheets (`docs/lessons/`), and check the curriculum
-      codes against the ACARA website (taken from a reproduction of the v9 tables).
+- [ ] Review the teacher guide and student sheets (`docs/lessons/`). Curriculum links use the
+      Victorian Curriculum F–10 Version 2.0 (Science Levels 7 and 8), quoted from the VCAA document.
 - [ ] Add the lab's Netlify link to the teacher brief once it is final.
 - [ ] Check that no fictional student name in the cases matches a real student in the class
       (Morgan Lee, Priya Nair, Tom Baxter, Jamie Ellison, Kit Lam, Elliot Barker, Sasha Morales,

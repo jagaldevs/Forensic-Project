@@ -1,6 +1,6 @@
 # HRS Digital Forensics Lab
 
-Interactive web app for the Year 8 Science "Digital Forensics" unit at Haileybury Rendall School (Darwin, NT, Australia). Owner: Head of Digital Innovation / Head of Computer Science (comfortable with code; reviews decisions).
+Interactive web app for the Year 8 Science "Digital Forensics" unit at Haileybury Rendall School (Darwin, NT, Australia). As a Darwin campus of the Haileybury network, HRS follows the **Victorian Curriculum F–10 Version 2.0** (not the Australian Curriculum v9). Owner: Head of Digital Innovation / Head of Computer Science (comfortable with code; reviews decisions).
 
 Students "log in" to a fictional forensics lab desktop, open evidence apps, explore realistic but **entirely fictional** digital evidence, pin findings to an evidence board, link evidence to claims, and make judgements with a stated confidence level. It should feel atmospheric and polished — closer to a game than a worksheet.
 
@@ -263,7 +263,7 @@ Support levels (21 Oct 2026, requested: differentiate for less and more technica
 Teacher documents (21 Oct 2026):
 
 - One-page brief for science teachers, and a 6 × 60-minute lesson sequence (chosen over 4 or 8–10 lessons): observation vs inference → uncertainty (Waterfront) → ethics and warrants → systematic error (Jamie) → new evidence and peer review → assessment (Science Fair Switch) with a written reflection and a 4-level rubric. Each lesson names the science idea behind the forensics (error bars, calibration, correlation vs causation).
-- Australian Curriculum v9 Year 8 codes cited (AC9S8H01, H03, I04–I08); wording taken from a reproduction of the ACARA tables, flagged in the guide for checking.
+- Victorian Curriculum 2.0 Science Levels 7–8 codes cited (VC2S8H01, H03, I04–I08), wording quoted from the VCAA's Science curriculum document (replaced Australian Curriculum v9 codes once the owner confirmed HRS uses the Victorian Curriculum).
 - Markdown is the source; Word copies are generated (`docx` + `marked`, dev only). The brief must stay on one A4 page (check after edits).
 - Logo: `src/brand/haileybury-logo.jpg` (supplied by the owner); full logo on large slots, a CSS crop of the crest in top bars.
 
@@ -271,4 +271,4 @@ Familiar names (21 Oct 2026, requested):
 
 - The school (Haileybury Rendall School / HRS) and the class's science teacher, **Mrs Staggs** (agreed), appear by name: she introduces the Training Academy, each case briefing mentions her class, and she sends The Science Fair Switch briefing. That case now happens at HRS (was the fictional Arafura Park College); fictional Mr Osei keeps the evidence-collection role, so no real person is in the evidence trail of a case whose culprit is deliberately unresolved. Riley (Waterfront) is a former HRS student; Jamie's friends are HRS students. All students in the stories stay fictional.
 - Names come from `src/brand/local.ts` (cases import it), so another class can swap them. Student sheets name Mrs Staggs directly.
-- Curriculum: Australian Curriculum v9 (NT). Codes were checked against a copy of the ACARA tables because the ACARA site could not be read; the guide says to confirm them.
+- Curriculum: Victorian Curriculum F–10 Version 2.0 (HRS is a Darwin campus of a Victorian school network).
