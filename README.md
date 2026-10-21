@@ -11,6 +11,8 @@ evidence board, link it to claims and make judgements, always asking:
 No logins, no backend, no analytics. Everything stays on the student's device. It works
 offline once loaded and can be installed as an app.
 
+**Teachers:** start with the one-page [teacher brief](docs/teacher-brief.md).
+
 ## Quick start
 
 Requires Node 22 or later.
