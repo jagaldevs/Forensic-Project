@@ -83,7 +83,7 @@ export default function AcademyScreen() {
                 <p>{m.summary}</p>
                 <div className={s.caseFooter}>
                   <Button
-                    variant={done ? 'secondary' : 'primary'}
+                    variant="secondary"
                     icon="arrowRight"
                     onClick={() => {
                       if (done) useAcademy.getState().replay(m.id);

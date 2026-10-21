@@ -48,7 +48,7 @@
 .sender {
   font-size: var(--text-xs);
   font-weight: 650;
-  color: var(--accent);
+  color: var(--text-muted);
   margin: 0 var(--space-2) 2px;
 }
 
@@ -66,8 +66,8 @@
 }
 
 .mine .bubble {
-  background: var(--brand-magenta);
-  color: var(--on-brand);
+  background: var(--bubble-mine);
+  color: var(--on-bubble-mine);
   border-bottom-right-radius: 4px;
 }
 

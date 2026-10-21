@@ -42,7 +42,7 @@
 }
 
 .radius {
-  color: var(--accent);
+  color: var(--text);
 }
 
 .inside {
@@ -52,8 +52,8 @@
 .inside h4 {
   font-size: var(--text-xs);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--accent);
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
   margin-bottom: var(--space-2);
 }
 
@@ -68,7 +68,7 @@
 
 .inside li {
   padding: 0.2rem 0.6rem;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   background: var(--accent-soft);
   border: 1px solid var(--border-strong);
   font-size: var(--text-xs);

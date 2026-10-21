@@ -43,7 +43,7 @@
 
 .publicIp {
   font-family: var(--font-mono);
-  color: var(--accent);
+  color: var(--text);
 }
 
 .timeline {
@@ -104,7 +104,7 @@
   font-size: 0.6rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   color: var(--status-contradicts);
   background: var(--surface-sunken);
   padding: 0 4px;
@@ -141,7 +141,7 @@
   top: 0;
   height: 100%;
   border-radius: 6px;
-  background: linear-gradient(90deg, var(--status-info), var(--accent));
+  background: var(--status-info);
   opacity: 0.85;
 }
 

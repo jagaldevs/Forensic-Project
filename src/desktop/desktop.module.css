@@ -5,8 +5,7 @@
   inset: 0;
   display: grid;
   grid-template-rows: var(--topbar-height) 1fr auto;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 45%, var(--glow-desktop), transparent 70%), var(--bg-0);
+  background: var(--bg-0);
   overflow: clip;
 }
 
@@ -60,7 +59,7 @@
   gap: var(--space-1);
   padding: 0.25rem 0.6rem;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   font-size: var(--text-xs);
   color: var(--text-muted);
   white-space: nowrap;
@@ -99,7 +98,7 @@
   display: block;
   font-family: var(--font-ui);
   font-size: var(--text-2xl);
-  color: var(--bg-3);
+  color: var(--border-strong);
   letter-spacing: 0.04em;
   margin-bottom: var(--space-2);
 }
@@ -123,13 +122,13 @@
 .window.active {
   box-shadow:
     var(--shadow-lift),
-    0 0 0 1px var(--accent);
+    0 0 0 1px var(--border-strong);
 }
 
 .window:focus-visible {
   box-shadow:
     0 0 0 2px var(--focus-ring),
-    0 0 0 5px var(--accent);
+    0 0 0 5px var(--focus-ring-outer);
 }
 
 .maximised {
@@ -150,7 +149,7 @@
   gap: var(--space-2);
   min-height: var(--touch-target);
   padding: 0 var(--space-1) 0 var(--space-3);
-  background: var(--surface-raised);
+  background: var(--surface-sunken);
   border-bottom: 1px solid var(--border);
   cursor: grab;
   touch-action: none;
@@ -160,11 +159,7 @@
 
 .active .titlebar {
   color: var(--text);
-  background: linear-gradient(to bottom, var(--bg-3), var(--surface-raised));
-}
-
-.active .titlebar > svg:first-child {
-  color: var(--accent);
+  background: var(--surface-raised);
 }
 
 .maximised .titlebar {
@@ -284,7 +279,7 @@
   width: 16px;
   height: 3px;
   border-radius: 2px;
-  background: var(--accent);
+  background: var(--text-faint);
 }
 
 .dockActive {
@@ -300,10 +295,10 @@
   height: 20px;
   padding: 0 5px;
   border-radius: 10px;
-  background: var(--brand-magenta);
-  color: var(--on-brand);
+  background: var(--text);
+  color: var(--text-inverse);
   font-size: 0.7rem;
-  font-weight: 800;
+  font-weight: 700;
   display: grid;
   place-items: center;
   line-height: 1;
@@ -321,7 +316,7 @@
 }
 
 .dockReport {
-  color: var(--accent);
+  color: var(--text);
 }
 
 /* ---------- Toasts ---------- */
@@ -344,15 +339,15 @@
   grid-template-columns: auto 1fr auto;
   gap: var(--space-3);
   padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
-  background: var(--bg-2);
-  border: 1px solid var(--accent);
+  background: var(--bg-1);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-window);
   animation: toastIn var(--dur-slow) var(--ease-out);
 }
 
 .toast > svg {
-  color: var(--accent);
+  color: var(--text-muted);
   margin-top: 2px;
 }
 

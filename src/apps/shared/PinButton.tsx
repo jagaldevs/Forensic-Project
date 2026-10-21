@@ -35,7 +35,7 @@ export function PinButton({
   return (
     <Button
       size={size}
-      variant={pinned ? 'secondary' : 'primary'}
+      variant="secondary"
       icon={pinned ? 'check' : 'pin'}
       aria-pressed={pinned}
       disabled={progress.locked}

@@ -24,7 +24,6 @@ function ToastItem({ toast }: { toast: Toast }) {
           <Button
             className={s.toastAction}
             size="small"
-            variant="primary"
             onClick={() => {
               useDesktop.getState().open(toast.action!.appId, toast.action!.params);
               dismiss(toast.id);

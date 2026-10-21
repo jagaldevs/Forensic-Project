@@ -91,23 +91,16 @@ export function CaseSelectScreen() {
             const open = () => openCase(meta.id, progress?.briefingRead ? 'desktop' : 'briefing');
             return (
               <article key={meta.id} className={s.caseCard} aria-labelledby={`case-${meta.id}`}>
-                <div className={s.row}>
-                  {meta.assessment && (
-                    <Badge tone="inconclusive" icon="warrant">
-                      Assessment
-                    </Badge>
-                  )}
-                  <Badge tone="accent" icon="clock">
-                    About {meta.estimatedMinutes} min
-                  </Badge>
-                  <Badge tone="info">Year {meta.yearLevel}</Badge>
-                  <Badge
-                    tone={progress ? 'supports' : 'unassessed'}
-                    icon={progress ? 'check' : 'info'}
-                  >
+                <p className={s.cardMeta}>
+                  {meta.assessment && <Badge>Assessment</Badge>}
+                  <span>
+                    {meta.estimatedMinutes} min · Year {meta.yearLevel}
+                  </span>
+                  <span className={progress ? s.cardStatusOn : undefined}>
+                    {progress && <Icon name="check" size={14} />}
                     {status}
-                  </Badge>
-                </div>
+                  </span>
+                </p>
                 <h2 id={`case-${meta.id}`}>{meta.title}</h2>
                 <p>{meta.tagline}</p>
                 <div>
@@ -140,11 +133,11 @@ export function CaseSelectScreen() {
                 )}
                 <div className={s.caseFooter}>
                   {needsCode ? (
-                    <Button variant="primary" icon="lock" onClick={() => setAskAccessFor(meta.id)}>
+                    <Button icon="lock" onClick={() => setAskAccessFor(meta.id)}>
                       Enter access code
                     </Button>
                   ) : (
-                    <Button variant="primary" icon="arrowRight" onClick={open}>
+                    <Button icon="arrowRight" onClick={open}>
                       {progress ? 'Resume case' : 'Open case'}
                     </Button>
                   )}
@@ -158,21 +151,20 @@ export function CaseSelectScreen() {
             );
           })}
           <article className={`${s.caseCard} ${s.academyCard}`} aria-labelledby="academy-title">
-            <div className={s.row}>
-              <Badge tone="accent" icon="academy">
-                {missionCatalogue.length} short missions
-              </Badge>
-              <Badge tone={earned ? 'supports' : 'unassessed'} icon="medal">
+            <p className={s.cardMeta}>
+              <span>{missionCatalogue.length} short missions</span>
+              <span className={earned ? s.cardStatusOn : undefined}>
+                {earned > 0 && <Icon name="medal" size={14} />}
                 {earned} of {missionCatalogue.length} badges
-              </Badge>
-            </div>
+              </span>
+            </p>
             <h2 id="academy-title">Training Academy</h2>
             <p>
               New to digital forensics? Learn the tools first: metadata, digital footprints, search
               history, IP addresses, time zones, and privacy.
             </p>
             <div className={s.caseFooter}>
-              <Button variant="primary" icon="academy" onClick={() => go('academy')}>
+              <Button icon="academy" onClick={() => go('academy')}>
                 Enter the academy
               </Button>
             </div>

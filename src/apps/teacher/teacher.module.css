@@ -153,11 +153,10 @@
 
 .presenterCase {
   margin-right: auto;
-  font-family: var(--font-mono);
   font-size: var(--text-sm);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--text-muted);
 }
 
 .presenterBody {

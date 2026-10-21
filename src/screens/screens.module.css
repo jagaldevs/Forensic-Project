@@ -7,24 +7,7 @@
   place-items: center;
   padding: var(--space-5) var(--space-4);
   overflow: hidden;
-  background:
-    radial-gradient(ellipse 70% 50% at 50% 0%, var(--glow-stage), transparent 70%),
-    radial-gradient(ellipse 50% 40% at 100% 100%, var(--glow-stage-soft), transparent 70%),
-    var(--bg-0);
-}
-
-/* Faint lab grid behind every stage. */
-.stage::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--bg-2) 1px, transparent 1px),
-    linear-gradient(90deg, var(--bg-2) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-  opacity: 0.6;
-  pointer-events: none;
+  background: var(--bg-0);
 }
 
 .stage > * {
@@ -62,16 +45,13 @@
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-window);
   padding: var(--space-6);
-  backdrop-filter: blur(6px);
   animation: rise var(--dur-slow) var(--ease-out);
 }
 
 .eyebrow {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-muted);
 }
 
 .title {
@@ -140,7 +120,7 @@
   width: 0.6em;
   height: 1.1em;
   vertical-align: text-bottom;
-  background: var(--accent);
+  background: var(--text);
   animation: blink 1s steps(2) infinite;
 }
 
@@ -176,14 +156,6 @@
   bottom: var(--space-4);
 }
 
-/* Faint moving scanline over the boot terminal. */
-.scanline {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(to bottom, transparent 0 3px, var(--scanline) 3px 4px);
-}
-
 /* ---------- Case select ---------- */
 
 .casesWrap {
@@ -214,13 +186,12 @@
   background: var(--bg-1);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  transition:
-    border-color var(--dur-fast),
-    transform var(--dur-fast);
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--dur-fast);
 }
 
 .caseCard:hover {
-  border-color: var(--accent);
+  border-color: var(--border-strong);
 }
 
 .caseCard h2 {
@@ -282,10 +253,9 @@
 
 .messageHead dt {
   color: var(--text-muted);
-  font-family: var(--font-mono);
   font-size: var(--text-xs);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   padding-top: 0.2em;
 }
 
@@ -318,7 +288,6 @@
   padding: var(--space-3) var(--space-4);
   background: var(--surface);
   border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
   border-radius: var(--radius-md);
 }
 
@@ -326,25 +295,22 @@
   content: 'Q' counter(q);
   font-family: var(--font-mono);
   font-weight: 700;
-  color: var(--accent);
+  color: var(--text-muted);
 }
 
 .stamp {
   display: inline-block;
-  padding: 0.2em 0.6em;
-  border: 2px solid var(--status-contradicts);
+  padding: 0.15em 0.5em;
+  border: 1px solid var(--status-contradicts);
+  border-radius: var(--radius-sm);
   color: var(--status-contradicts);
-  font-family: var(--font-mono);
-  font-weight: 800;
-  letter-spacing: 0.15em;
+  font-weight: 650;
+  letter-spacing: 0.04em;
   font-size: var(--text-xs);
-  transform: rotate(-3deg);
 }
 
 .academyCard {
-  border-color: var(--accent);
-  background:
-    radial-gradient(ellipse 80% 60% at 100% 0%, var(--accent-soft), transparent 70%), var(--bg-1);
+  background: var(--surface-raised);
 }
 
 .teacherBar {
@@ -370,4 +336,31 @@
 .teacherBar svg {
   flex: none;
   color: var(--status-inconclusive);
+}
+
+/* A quiet line of facts on each case card: time, year level, status. */
+.cardMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.cardMeta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.cardMeta > span + span::before {
+  content: '·';
+  margin-right: var(--space-2);
+  color: var(--text-faint);
+}
+
+.cardStatusOn {
+  color: var(--status-supports);
+  font-weight: 550;
 }

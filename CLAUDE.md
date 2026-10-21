@@ -78,9 +78,9 @@ Tests are co-located (`*.test.ts(x)`). `src/cases/cases.test.ts` validates every
 
 ## Design system
 
-- Dark near-black "lab" UI; **magenta** is the signature accent (active elements, highlights, primary buttons, evidence-board string).
+- Light "case file" UI (since 21 Oct 2026, replacing the original dark neon look): white windows and documents on a pale grey desk, thin grey borders, small radii, soft shadows, no glows, gradients, grids or scanlines. **Magenta is used sparingly**: the one main (primary) button per view, the thin selected-item outline or bar, NEW markers, links and the evidence-board string. Other buttons are white with a grey border; repeated per-card actions are never primary.
 - **Every colour lives in `src/styles/tokens.css`**, with brand values clearly marked `/* PLACEHOLDER BRAND */`. Placeholders: magenta `#B5006A`, black `#0B0B0F`. Logo slot in boot screen and top bar shows placeholder text until a logo file is supplied (`src/brand/`).
-- Neutral greys for data surfaces.
+- Neutral greys for data surfaces. Facts like time, year level and counts are plain text or grey tags (`Badge` with no tone), never colour-coded. Small labels are sentence case or lightly tracked caps in grey, not letter-spaced pink monospace. Focus rings are blue (`--focus-ring`).
 - Status colours: Supports / Contradicts / Inconclusive / Not yet assessed — **always paired with an icon and a text label, never colour alone**.
 - Fonts (self-hosted, vendored latin subsets in `src/styles/fonts`): UI sans (Inter) + monospace (JetBrains Mono) for logs, hashes, IPs, metadata.
 - Subtle motion; optional sound effects with global mute (default muted? see Decisions). Respect `prefers-reduced-motion`.
@@ -227,3 +227,9 @@ Made during the Phase 4 build (for review):
 - **Chain of custody:** collection is derived (case start, warrant grant, drop, lookup); views (deduplicated within 30 s) and hash checks are logged in `CaseProgress.custody`, capped at 200 events. A hash mismatch shows a prominent tamper warning in every evidence header.
 - **Report:** cover page (own printed page), Timeline with the student's corrections, static SVG board snapshot (line style per relation), success-criteria self-assessment (`CaseProgress.selfAssessment`), chain-of-custody appendix on a new page, Download .txt.
 - The four new apps, and the assessment case data, were built in parallel by subagents and reviewed before committing.
+
+Visual overhaul (21 Oct 2026, requested: "more professional, less vibe-coded colour"):
+
+- Chose direction B (light case file) from three mock-ups (dark graphite, light case file, dark chrome around light panes). All colours changed in `tokens.css` only; `--accent` is now a dark magenta for text on white, `--accent-soft` a neutral grey wash.
+- Badges are square-cornered tags: status tones keep a pale tint + icon + word; `info`/`accent`/`unassessed` and tone-less badges are plain grey. Case and mission cards show a plain line of facts instead of coloured pills.
+- Pin to board, toasts, drop releases, case cards and mission cards use neutral buttons. Chat bubbles for the device owner are blue (`--bubble-mine`). Cork board, string and map keep their character in lighter, realistic colours.

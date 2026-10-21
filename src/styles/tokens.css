@@ -2,93 +2,104 @@
  * HRS Digital Forensics Lab: design tokens.
  * EVERY colour used in the app is defined here. Components only reference these variables.
  *
+ * Look: a light "case file" system. White documents and windows on a pale grey desk, thin
+ * borders, quiet grey tags, and the brand magenta used sparingly (the one main button per
+ * view, selection, the evidence-board string).
+ *
  * To apply official Haileybury branding, edit the values marked PLACEHOLDER BRAND.
- * --brand-magenta is used for filled surfaces with white text (buttons, badges).
- * --accent is a lighter tint of the brand magenta, used for text, outlines and the
- * evidence-board string on the dark background. Keep it at 4.5:1 contrast or better
- * against --bg-0 (check with any WCAG contrast checker).
+ * --brand-magenta is used for filled surfaces with white text (main buttons, the logo mark).
+ * --accent is a darker shade of it for text and outlines on white. Keep both at 4.5:1 contrast
+ * or better against white (check with any WCAG contrast checker).
  */
 
 :root {
   /* ---- PLACEHOLDER BRAND: replace with official hex codes ---- */
-  --brand-magenta: #b5006a; /* PLACEHOLDER BRAND */
+  --brand-magenta: #b5006a; /* PLACEHOLDER BRAND: 6.4:1 with white text */
   --brand-black: #0b0b0f; /* PLACEHOLDER BRAND */
-  --accent: #f0479e; /* PLACEHOLDER BRAND: light tint of magenta, 5.7:1 on --bg-0 */
-  --accent-strong: #ff6fb8; /* PLACEHOLDER BRAND: hover/active tint */
-  --accent-soft: rgb(240 71 158 / 14%); /* PLACEHOLDER BRAND: highlight wash */
+  --accent: #a0005d; /* PLACEHOLDER BRAND: text/outline shade, 7.5:1 on white */
+  --accent-strong: #84004d; /* PLACEHOLDER BRAND: hover/pressed */
+  --accent-soft: #eef0f3; /* selected-item wash: neutral grey, paired with an --accent outline or bar */
   --on-brand: #ffffff;
-  /* Background glows: brand magenta at low opacity (update with the brand colour). */
-  --glow-stage: rgb(181 0 106 / 22%); /* PLACEHOLDER BRAND */
-  --glow-stage-soft: rgb(181 0 106 / 10%); /* PLACEHOLDER BRAND */
-  --glow-desktop: rgb(181 0 106 / 12%); /* PLACEHOLDER BRAND */
   /* ------------------------------------------------------------ */
 
-  /* Backgrounds (near-black lab) */
-  --bg-0: var(--brand-black);
-  --bg-1: #131319;
-  --bg-2: #1b1b23;
-  --bg-3: #24242e;
-  --bg-overlay: rgb(5 5 8 / 72%);
-  --bar-bg: rgb(11 11 15 / 93%);
-  --panel-glass: rgb(19 19 25 / 88%);
-  --scanline: rgb(255 255 255 / 2.5%);
+  /* Backgrounds: the desk and the panels on it */
+  --bg-0: #e9ebee;
+  --bg-1: #ffffff;
+  --bg-2: #f3f4f6;
+  --bg-3: #e8eaed;
+  --bg-overlay: rgb(17 24 39 / 45%);
+  --bar-bg: #ffffff;
+  --panel-glass: #ffffff;
 
   /* Neutral data surfaces */
-  --surface: #17171e;
-  --surface-raised: #20202a;
-  --surface-sunken: #0f0f14;
-  --border: #33333f;
-  --border-strong: #4a4a58;
+  --surface: #ffffff;
+  --surface-raised: #f7f8f9;
+  --surface-sunken: #f3f4f6;
+  --border: #dadde2;
+  --border-strong: #b9bec6;
 
   /* Text */
-  --text: #ececf1;
-  --text-muted: #a6a6b4;
-  --text-faint: #8a8a99;
-  --text-inverse: #0b0b0f;
+  --text: #1d2127;
+  --text-muted: #555c66;
+  --text-faint: #646a74;
+  --text-inverse: #ffffff;
 
-  /* Terminal (boot sequence, logs) */
-  --terminal-text: #d6d6e0;
-  --terminal-ok: #6fdc9a;
+  /* Quiet tags (time, year level, counts): grey, never colour-coded */
+  --tag-bg: #eef0f2;
+  --tag-text: #4a515b;
+
+  /* Buttons */
+  --button-bg: #ffffff;
+  --button-border: #c3c8cf;
+  --button-hover: #f3f4f6;
+
+  /* Terminal-style text (boot sequence, raw email source) */
+  --terminal-text: #1d2127;
+
+  /* Messages: the device owner's own bubbles */
+  --bubble-mine: #2563a8;
+  --on-bubble-mine: #ffffff;
+  --terminal-ok: #1d7a45;
 
   /* Status: always paired with an icon and a text label */
-  --status-supports: #4fd18b;
-  --status-supports-bg: rgb(79 209 139 / 14%);
-  --status-contradicts: #ff7a6b;
-  --status-contradicts-bg: rgb(255 122 107 / 14%);
-  --status-inconclusive: #f2c14e;
-  --status-inconclusive-bg: rgb(242 193 78 / 14%);
-  --status-unassessed: #a6a6b4;
-  --status-unassessed-bg: rgb(166 166 180 / 12%);
-  --status-info: #6cb8ff;
-  --status-info-bg: rgb(108 184 255 / 14%);
-  --status-info-line: rgb(108 184 255 / 35%);
+  --status-supports: #1d7a45;
+  --status-supports-bg: #e7f4ec;
+  --status-contradicts: #b3261e;
+  --status-contradicts-bg: #fdecea;
+  --status-inconclusive: #8a5300;
+  --status-inconclusive-bg: #fdf2dc;
+  --status-unassessed: #555c66;
+  --status-unassessed-bg: #eef0f2;
+  --status-info: #1c5da0;
+  --status-info-bg: #e8f0fa;
+  --status-info-line: #b6cfee;
 
   /* Evidence board */
-  --cork: #3a2c22;
-  --cork-speck: #4a382b;
-  --card-paper: #f3efe6;
+  --cork: #8a6a48;
+  --cork-speck: #7a5c3d;
+  --card-paper: #fffdf7;
   --card-ink: #1a1a1f;
   --card-ink-muted: #4d4d57;
   --card-ink-line: rgb(26 26 31 / 25%);
   --card-ink-wash: rgb(26 26 31 / 8%);
-  --card-paper-faint: rgb(243 239 230 / 30%);
-  --string: var(--accent);
+  --card-paper-faint: rgb(255 253 247 / 55%);
+  --string: var(--brand-magenta);
   --pin: var(--brand-magenta);
 
   /* Map */
-  --map-sea: #0f2232;
-  --map-sea-line: #17344b;
-  --map-land: #1d2620;
-  --map-land-edge: #2c3a2f;
-  --map-road: #4a4f45;
-  --map-road-major: #6d7262;
-  --map-label: #cfd3c7;
-  --map-sea-label: #6f93b4;
-  --map-radius-fill: rgb(240 71 158 / 16%);
+  --map-sea: #cfe0ec;
+  --map-sea-line: #b8cfe0;
+  --map-land: #f2f3ee;
+  --map-land-edge: #c6cabb;
+  --map-road: #d9dbd2;
+  --map-road-major: #b5b9a8;
+  --map-label: #2f343a;
+  --map-sea-label: #355a7a;
+  --map-radius-fill: rgb(181 0 106 / 12%);
 
-  /* Focus */
-  --focus-ring: #ffffff;
-  --focus-ring-outer: var(--accent);
+  /* Focus: a clear blue ring, the convention in professional software */
+  --focus-ring: #0b57d0;
+  --focus-ring-outer: rgb(11 87 208 / 25%);
 
   /* Typography */
   --font-ui: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -111,16 +122,17 @@
   --space-6: 2rem;
   --space-7: 3rem;
 
-  /* Shape and depth */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 14px;
-  --shadow-window: 0 18px 50px rgb(0 0 0 / 55%), 0 0 0 1px var(--border);
-  --shadow-card: 0 6px 16px rgb(0 0 0 / 45%);
-  --glow-accent: 0 0 0 1px var(--accent), 0 0 24px rgb(240 71 158 / 30%);
-  --shadow-lift: 0 18px 44px rgb(0 0 0 / 58%);
-  --shadow-pin: 0 2px 4px rgb(0 0 0 / 40%);
-  --shadow-string: 0 2px 1px rgb(0 0 0 / 45%);
+  /* Shape and depth: small radii, soft shadows */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --shadow-window: 0 10px 30px rgb(16 24 40 / 16%), 0 0 0 1px var(--border-strong);
+  --shadow-card: 0 1px 3px rgb(16 24 40 / 12%);
+  /* Selected / active outline (no glow). */
+  --glow-accent: 0 0 0 2px var(--accent);
+  --shadow-lift: 0 12px 28px rgb(16 24 40 / 20%);
+  --shadow-pin: 0 1px 2px rgb(0 0 0 / 35%);
+  --shadow-string: 0 1px 1px rgb(0 0 0 / 30%);
 
   /* Print (report) */
   --print-paper: #ffffff;
@@ -147,12 +159,12 @@
   --z-modal: 7000;
 
   /* Charts (Wearables app) */
-  --chart-steps: #6cb8ff;
-  --chart-heart: #ff8fb8;
-  --chart-grid: #2b2b36;
-  --chart-axis: #a6a6b4;
-  --chart-off-fill: rgb(242 193 78 / 10%);
-  --chart-off-hatch: rgb(242 193 78 / 55%);
+  --chart-steps: #3b6fb6;
+  --chart-heart: #b5006a;
+  --chart-grid: #e3e6ea;
+  --chart-axis: #555c66;
+  --chart-off-fill: rgb(138 83 0 / 8%);
+  --chart-off-hatch: rgb(138 83 0 / 45%);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -2,9 +2,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
-  border: 1px dashed var(--accent);
+  border: 1px dashed var(--border-strong);
   border-radius: var(--radius-sm);
-  color: var(--accent);
+  color: var(--text-muted);
   font-weight: 800;
   letter-spacing: 0.08em;
   line-height: 1;

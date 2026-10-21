@@ -67,9 +67,8 @@
 }
 
 .coverKind {
-  font-family: var(--font-mono);
   font-size: var(--text-sm);
-  letter-spacing: 0.14em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--text-muted);
 }
@@ -80,11 +79,10 @@
 }
 
 .eyebrow {
-  font-family: var(--font-mono);
   font-size: var(--text-xs);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--text-muted);
 }
 
 .meta {
@@ -124,7 +122,7 @@
 .section h3 {
   font-size: var(--text-xs);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.04em;
   color: var(--text-muted);
   margin: var(--space-3) 0 var(--space-1);
 }
@@ -144,7 +142,7 @@
 
 .verdict {
   font-weight: 700;
-  color: var(--accent);
+  color: var(--text);
 }
 
 .evidence,
@@ -211,7 +209,7 @@
 .table th {
   font-size: var(--text-xs);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   color: var(--text-muted);
 }
 

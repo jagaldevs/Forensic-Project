@@ -60,7 +60,6 @@ export function BootScreen({ onDone }: { onDone: () => void }) {
 
   return (
     <div className={s.stage} onClick={() => doneRef.current()}>
-      <div className={s.scanline} aria-hidden="true" />
       <div className={s.boot} role="log" aria-live="polite" aria-label="Lab start-up">
         {lines.slice(0, shown).map((l, i) => (
           <div key={i} className={s.bootLine}>

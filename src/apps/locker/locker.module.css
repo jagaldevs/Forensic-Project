@@ -23,7 +23,7 @@
 }
 
 .heading svg {
-  color: var(--accent);
+  color: var(--text-muted);
 }
 
 .intro {

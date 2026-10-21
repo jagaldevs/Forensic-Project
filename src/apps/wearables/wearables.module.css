@@ -165,7 +165,7 @@
 }
 
 .eventIcon {
-  color: var(--accent);
+  color: var(--text-muted);
   padding-top: 1px;
 }
 

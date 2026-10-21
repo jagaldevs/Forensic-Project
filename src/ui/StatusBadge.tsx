@@ -18,12 +18,13 @@ export function Badge({
   icon,
   children,
 }: {
-  tone: 'info' | 'accent' | StatusKind;
+  /** Leave out for a plain grey tag. */
+  tone?: 'info' | 'accent' | StatusKind;
   icon?: IconName;
   children: React.ReactNode;
 }) {
   return (
-    <span className={`${s.badge} ${s[`badge-${tone}`]}`}>
+    <span className={tone ? `${s.badge} ${s[`badge-${tone}`]}` : s.badge}>
       {icon && <Icon name={icon} size={14} />}
       {children}
     </span>

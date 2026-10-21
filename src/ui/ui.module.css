@@ -1,5 +1,6 @@
 /* Shared UI primitives: buttons, badges, fields, panels. */
 
+/* Buttons: white with a grey border by default. "primary" is the one main action per view. */
 .button {
   display: inline-flex;
   align-items: center;
@@ -8,31 +9,34 @@
   min-height: var(--touch-target);
   padding: 0 var(--space-4);
   border-radius: var(--radius-md);
-  border: 1px solid var(--border-strong);
-  background: var(--surface-raised);
+  border: 1px solid var(--button-border);
+  background: var(--button-bg);
   color: var(--text);
-  font-weight: 600;
+  font-weight: 550;
   font-size: var(--text-sm);
   line-height: 1.2;
   text-decoration: none;
   transition:
     background var(--dur-fast),
-    border-color var(--dur-fast),
-    transform var(--dur-fast);
+    border-color var(--dur-fast);
   white-space: nowrap;
 }
 
+.button svg {
+  color: var(--text-muted);
+}
+
 .button:hover:not(:disabled) {
-  background: var(--bg-3);
-  border-color: var(--text-faint);
+  background: var(--button-hover);
+  border-color: var(--border-strong);
 }
 
 .button:active:not(:disabled) {
-  transform: translateY(1px);
+  background: var(--bg-3);
 }
 
 .button:disabled {
-  opacity: 0.5;
+  opacity: 0.55;
 }
 
 .primary {
@@ -41,10 +45,14 @@
   color: var(--on-brand);
 }
 
-.primary:hover:not(:disabled) {
-  background: var(--brand-magenta);
+.primary svg {
+  color: inherit;
+}
+
+.primary:hover:not(:disabled),
+.primary:active:not(:disabled) {
+  background: var(--accent-strong);
   border-color: var(--accent-strong);
-  box-shadow: var(--glow-accent);
 }
 
 .ghost {
@@ -53,16 +61,17 @@
 }
 
 .ghost:hover:not(:disabled) {
-  background: var(--bg-3);
+  background: var(--bg-2);
   border-color: transparent;
 }
 
-.danger {
+.danger,
+.danger svg {
   color: var(--status-contradicts);
 }
 
 .small {
-  min-height: 36px;
+  min-height: 34px;
   padding: 0 var(--space-3);
 }
 
@@ -79,7 +88,7 @@
 }
 
 .iconOnly.small {
-  width: 36px;
+  width: 34px;
 }
 
 @media (pointer: coarse) {
@@ -88,18 +97,21 @@
   }
 }
 
-/* Status badge: icon + text, never colour alone. */
+/*
+ * Badges: small square-cornered tags. Neutral ones are plain grey; status ones (supports,
+ * contradicts…) use a pale tint and coloured text, always with an icon and a word.
+ */
 .badge {
   display: inline-flex;
   align-items: center;
   gap: 0.35em;
-  padding: 0.2em 0.6em 0.2em 0.45em;
-  border-radius: 999px;
+  padding: 0.15em 0.5em;
+  border-radius: var(--radius-sm);
   font-size: var(--text-xs);
-  font-weight: 650;
-  letter-spacing: 0.01em;
-  border: 1px solid currentColor;
+  font-weight: 550;
   white-space: nowrap;
+  color: var(--tag-text);
+  background: var(--tag-bg);
 }
 
 .badge-supports {
@@ -114,17 +126,11 @@
   color: var(--status-inconclusive);
   background: var(--status-inconclusive-bg);
 }
-.badge-unassessed {
-  color: var(--status-unassessed);
-  background: var(--status-unassessed-bg);
-}
-.badge-info {
-  color: var(--status-info);
-  background: var(--status-info-bg);
-}
+.badge-unassessed,
+.badge-info,
 .badge-accent {
-  color: var(--accent);
-  background: var(--accent-soft);
+  color: var(--tag-text);
+  background: var(--tag-bg);
 }
 
 .label {
@@ -149,7 +155,7 @@
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-strong);
-  background: var(--surface-sunken);
+  background: var(--surface);
   color: var(--text);
 }
 

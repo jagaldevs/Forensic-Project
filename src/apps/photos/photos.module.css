@@ -171,7 +171,7 @@
 .infoHeading {
   font-size: var(--text-xs);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--accent);
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
   margin-bottom: var(--space-2);
 }

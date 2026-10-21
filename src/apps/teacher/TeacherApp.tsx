@@ -140,12 +140,7 @@ function Drops() {
                   Released {formatLocalDateTime(at)}
                 </Badge>
               ) : (
-                <Button
-                  variant="primary"
-                  icon="bell"
-                  disabled={progress.locked}
-                  onClick={() => releaseDrop(c, d)}
-                >
+                <Button icon="bell" disabled={progress.locked} onClick={() => releaseDrop(c, d)}>
                   Release now
                 </Button>
               )}
