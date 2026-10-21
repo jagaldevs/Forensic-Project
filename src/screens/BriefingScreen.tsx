@@ -2,8 +2,9 @@ import { useCaseFile } from '../app/CaseContext';
 import { clockTo12, formatLongDate } from '../engine/format';
 import { playSound } from '../lib/sound';
 import { useNav } from '../stores/navStore';
-import { supportLevelOf } from '../engine/progressTypes';
+import { supportLevelLabels } from '../engine/progressTypes';
 import { useCaseProgress, useProgress } from '../stores/progressStore';
+import { useSettings } from '../stores/settingsStore';
 import { Button } from '../ui/Button';
 import { Paragraphs } from '../ui/Paragraphs';
 import { SupportLevelPicker } from '../ui/SupportLevelPicker';
@@ -15,10 +16,12 @@ export function BriefingScreen() {
   const go = useNav((st) => st.go);
   const exitCase = useNav((st) => st.exitCase);
   const progress = useCaseProgress(c.meta.id);
-  const level = supportLevelOf(progress);
+  const classLevel = useSettings((st) => st.classLevel);
+  // The class's suggested level (from the shared link) is preselected until the student chooses.
+  const level = progress.supportLevel ?? classLevel ?? 'standard';
 
   const accept = () => {
-    // Record the level even if the student kept the default.
+    // Record the level even if the student kept the default or the class suggestion.
     if (!progress.supportLevel) useProgress.getState().setSupportLevel(c.meta.id, level);
     useProgress.getState().markBriefingRead(c.meta.id);
     playSound('open');
@@ -70,6 +73,12 @@ export function BriefingScreen() {
           assessment={!!c.meta.assessment}
           disabled={!!progress.locked}
         />
+        {classLevel && !progress.supportLevel && (
+          <p className={s.small}>
+            Your teacher suggested <strong>{supportLevelLabels[classLevel]}</strong> for this class.
+            You can choose a different level if it suits you better.
+          </p>
+        )}
         <div className={s.spread}>
           <Button variant="ghost" icon="arrowLeft" onClick={exitCase}>
             Back to cases

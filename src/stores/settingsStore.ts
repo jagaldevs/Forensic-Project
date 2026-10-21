@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import type { SupportLevel } from '../engine/progressTypes';
 import { safeStorage } from '../lib/safeStorage';
 
 export const textScales = [1, 1.125, 1.25] as const;
@@ -19,12 +20,15 @@ interface SettingsState {
   assessmentAccess: boolean;
   /** The desktop tour was finished or skipped on this device. */
   tourDone: boolean;
+  /** The class's suggested support level, from the shared link (?level=guided). Null = none. */
+  classLevel: SupportLevel | null;
   setAgentName: (name: string) => void;
   toggleMuted: () => void;
   cycleTextScale: () => void;
   setTeacherMode: (on: boolean) => void;
   grantAssessmentAccess: () => void;
   setTourDone: (done: boolean) => void;
+  setClassLevel: (level: SupportLevel | null) => void;
 }
 
 export const useSettings = create<SettingsState>()(
@@ -37,6 +41,7 @@ export const useSettings = create<SettingsState>()(
       teacherModeUsedAt: null,
       assessmentAccess: false,
       tourDone: false,
+      classLevel: null,
       setAgentName: (agentName) => set({ agentName: agentName.trim().slice(0, 32) }),
       toggleMuted: () => set({ muted: !get().muted }),
       cycleTextScale: () => {
@@ -52,6 +57,7 @@ export const useSettings = create<SettingsState>()(
         }),
       grantAssessmentAccess: () => set({ assessmentAccess: true }),
       setTourDone: (tourDone) => set({ tourDone }),
+      setClassLevel: (classLevel) => set({ classLevel }),
     }),
     { name: 'hrsfl-settings', version: 1, storage: createJSONStorage(() => safeStorage) },
   ),
