@@ -1,0 +1,127 @@
+.figure {
+  margin: 0;
+}
+
+.map {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--map-sea);
+}
+
+.caption {
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+  margin-top: var(--space-1);
+}
+
+.placeMajor,
+.placeMinor,
+.markerLabel,
+.centreLabel,
+.radiusLabel,
+.scaleLabel,
+.seaLabel {
+  font-family: var(--font-ui);
+  paint-order: stroke;
+  stroke: var(--map-land);
+  stroke-width: 0.5px;
+  stroke-linejoin: round;
+}
+
+.placeMajor {
+  font-size: 1.7px;
+  font-weight: 700;
+  fill: var(--map-label);
+}
+
+.placeMinor {
+  font-size: 1.3px;
+  fill: var(--map-label);
+  opacity: 0.85;
+}
+
+.seaLabel {
+  font-size: 1.5px;
+  font-style: italic;
+  fill: var(--map-sea-label);
+  stroke: var(--map-sea);
+}
+
+.markerNumber {
+  font-family: var(--font-ui);
+  font-size: 1.7px;
+  font-weight: 800;
+  fill: var(--bg-0);
+}
+
+.legend {
+  list-style: none;
+  margin: var(--space-2) 0 var(--space-1);
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.keyCentre,
+.keyScene,
+.keyPlace {
+  display: inline-grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--bg-0);
+}
+
+.keyCentre {
+  width: 10px;
+  height: 10px;
+  margin: 0 3px;
+  background: var(--accent);
+}
+
+.keyScene {
+  background: var(--status-contradicts);
+}
+
+.keyPlace {
+  background: var(--status-info);
+}
+
+.radiusLabel {
+  font-size: 1.5px;
+  font-weight: 700;
+  fill: var(--accent);
+  font-family: var(--font-mono);
+}
+
+.scaleLabel {
+  font-size: 1.2px;
+  fill: var(--map-label);
+}
+
+.circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: grow var(--dur-slow) var(--ease-out);
+}
+
+@keyframes grow {
+  from {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+}
