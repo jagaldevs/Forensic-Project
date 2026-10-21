@@ -10,6 +10,7 @@ import { Loading } from '../screens/Loading';
 const CaseShell = lazy(() => import('./CaseShell'));
 const AcademyScreen = lazy(() => import('../academy/AcademyScreen'));
 const MissionScreen = lazy(() => import('../academy/MissionScreen'));
+const TeacherReviewScreen = lazy(() => import('../review/TeacherReviewScreen'));
 
 export function App() {
   const [booted, setBooted] = useState(false);
@@ -36,6 +37,13 @@ export function App() {
     return (
       <Suspense fallback={<Loading label="Loading mission" />}>
         <MissionScreen missionId={activeMissionId} />
+      </Suspense>
+    );
+
+  if (screen === 'review')
+    return (
+      <Suspense fallback={<Loading label="Opening Teacher Review" />}>
+        <TeacherReviewScreen />
       </Suspense>
     );
 
