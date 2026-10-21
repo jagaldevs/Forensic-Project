@@ -282,7 +282,7 @@ nudges weaker than the hints. Items of the same kind (two emails) can share one 
 fake one doesn't stand out. Guided notes are not part of the evidence, so they don't change its
 hash. Teachers see them in teacher mode.
 
-**Deep dive** adds a tab in Judgements with optional, more technical challenges. Answers are saved
+**Deep dive** adds a tab in Judgements with optional, harder challenges. Answers are saved
 for the teacher and shown in the report and Teacher Review, but never marked:
 
 ```ts

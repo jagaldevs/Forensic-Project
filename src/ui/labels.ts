@@ -67,7 +67,7 @@ export function supportLevelInfo(
     case 'deep':
       return {
         label: supportLevelLabels.deep,
-        description: 'Everything in Standard, plus optional technical challenges for your teacher.',
+        description: 'Everything in Standard, plus optional extra challenges for your teacher.',
         icon: 'search',
       };
   }

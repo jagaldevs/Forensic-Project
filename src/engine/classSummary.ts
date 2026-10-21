@@ -149,5 +149,7 @@ export function summaryCsv(
     ...(c.meta.assessment ? [row.submittedAt ? formatTime(row.submittedAt) : 'No'] : []),
     rowNotes(row).join('; '),
   ]);
-  return '\uFEFF' + [header, ...lines].map((line) => line.map(cell).join(',')).join('\r\n') + '\r\n';
+  return (
+    '\uFEFF' + [header, ...lines].map((line) => line.map(cell).join(',')).join('\r\n') + '\r\n'
+  );
 }

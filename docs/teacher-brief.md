@@ -29,7 +29,7 @@ supported, Can't tell), attach the evidence, explain their reasoning, and name a
 
 A first-run tour shows students the desktop. In each case, students choose a **support level**:
 **Guided** (plain-English notes on reading each item, plus a nudge), **Standard**, or **Deep dive**
-(optional, harder technical challenges). Everyone gets the same questions and answer key.
+(optional, harder extra challenges). Everyone gets the same questions and answer key.
 
 **Teacher tools**
 
