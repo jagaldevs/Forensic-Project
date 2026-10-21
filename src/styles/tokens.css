@@ -1,0 +1,136 @@
+/*
+ * HRS Digital Forensics Lab: design tokens.
+ * EVERY colour used in the app is defined here. Components only reference these variables.
+ *
+ * To apply official Haileybury branding, edit the values marked PLACEHOLDER BRAND.
+ * --brand-magenta is used for filled surfaces with white text (buttons, badges).
+ * --accent is a lighter tint of the brand magenta, used for text, outlines and the
+ * evidence-board string on the dark background. Keep it at 4.5:1 contrast or better
+ * against --bg-0 (check with any WCAG contrast checker).
+ */
+
+:root {
+  /* ---- PLACEHOLDER BRAND: replace with official hex codes ---- */
+  --brand-magenta: #b5006a; /* PLACEHOLDER BRAND */
+  --brand-black: #0b0b0f; /* PLACEHOLDER BRAND */
+  --accent: #f0479e; /* PLACEHOLDER BRAND: light tint of magenta, 5.7:1 on --bg-0 */
+  --accent-strong: #ff6fb8; /* PLACEHOLDER BRAND: hover/active tint */
+  --accent-soft: rgb(240 71 158 / 14%); /* PLACEHOLDER BRAND: highlight wash */
+  --on-brand: #ffffff;
+  /* ------------------------------------------------------------ */
+
+  /* Backgrounds (near-black lab) */
+  --bg-0: var(--brand-black);
+  --bg-1: #131319;
+  --bg-2: #1b1b23;
+  --bg-3: #24242e;
+  --bg-overlay: rgb(5 5 8 / 72%);
+
+  /* Neutral data surfaces */
+  --surface: #17171e;
+  --surface-raised: #20202a;
+  --surface-sunken: #0f0f14;
+  --border: #33333f;
+  --border-strong: #4a4a58;
+
+  /* Text */
+  --text: #ececf1;
+  --text-muted: #a6a6b4;
+  --text-faint: #8a8a99;
+  --text-inverse: #0b0b0f;
+
+  /* Terminal (boot sequence, logs) */
+  --terminal-text: #d6d6e0;
+  --terminal-ok: #6fdc9a;
+
+  /* Status: always paired with an icon and a text label */
+  --status-supports: #4fd18b;
+  --status-supports-bg: rgb(79 209 139 / 14%);
+  --status-contradicts: #ff7a6b;
+  --status-contradicts-bg: rgb(255 122 107 / 14%);
+  --status-inconclusive: #f2c14e;
+  --status-inconclusive-bg: rgb(242 193 78 / 14%);
+  --status-unassessed: #a6a6b4;
+  --status-unassessed-bg: rgb(166 166 180 / 12%);
+  --status-info: #6cb8ff;
+  --status-info-bg: rgb(108 184 255 / 14%);
+
+  /* Evidence board */
+  --cork: #3a2c22;
+  --cork-speck: #4a382b;
+  --card-paper: #f3efe6;
+  --card-ink: #1a1a1f;
+  --card-ink-muted: #4d4d57;
+  --string: var(--accent);
+  --pin: var(--brand-magenta);
+
+  /* Map */
+  --map-sea: #0f2232;
+  --map-sea-line: #17344b;
+  --map-land: #1d2620;
+  --map-land-edge: #2c3a2f;
+  --map-road: #4a4f45;
+  --map-road-major: #6d7262;
+  --map-label: #cfd3c7;
+  --map-radius-fill: rgb(240 71 158 / 16%);
+
+  /* Focus */
+  --focus-ring: #ffffff;
+  --focus-ring-outer: var(--accent);
+
+  /* Typography */
+  --font-ui: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:
+    'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+
+  /* Shape and depth */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --shadow-window: 0 18px 50px rgb(0 0 0 / 55%), 0 0 0 1px var(--border);
+  --shadow-card: 0 6px 16px rgb(0 0 0 / 45%);
+  --glow-accent: 0 0 0 1px var(--accent), 0 0 24px rgb(240 71 158 / 30%);
+
+  /* Sizing */
+  --touch-target: 44px;
+  --topbar-height: 52px;
+  --dock-height: 76px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast: 120ms;
+  --dur-med: 220ms;
+  --dur-slow: 420ms;
+
+  /* Layers */
+  --z-desktop: 0;
+  --z-windows: 10;
+  --z-dock: 5000;
+  --z-topbar: 5001;
+  --z-toast: 6000;
+  --z-modal: 7000;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-med: 0ms;
+    --dur-slow: 0ms;
+  }
+}
