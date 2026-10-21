@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect, test, vi } from 'vitest';
 
@@ -17,7 +17,8 @@ test('a student can get from boot to the briefing even when localStorage is bloc
   await user.click(screen.getByRole('button', { name: /continue/i }));
 
   expect(await screen.findByText(/Welcome, Agent Test/)).toBeInTheDocument();
-  await user.click(screen.getByRole('button', { name: /open case/i }));
+  const card = screen.getByRole('article', { name: 'The Waterfront Alibi' });
+  await user.click(within(card).getByRole('button', { name: /open case/i }));
 
   expect(
     await screen.findByRole(

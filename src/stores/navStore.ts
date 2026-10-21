@@ -30,3 +30,5 @@ export const useNav = create<NavState>()(
     { name: 'hrsfl-nav', version: 1, storage: createJSONStorage(() => safeStorage) },
   ),
 );
+
+if (import.meta.env.DEV) Object.assign(window, { __nav: useNav });

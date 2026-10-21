@@ -51,3 +51,5 @@ export const useSettings = create<SettingsState>()(
     { name: 'hrsfl-settings', version: 1, storage: createJSONStorage(() => safeStorage) },
   ),
 );
+
+if (import.meta.env.DEV) Object.assign(window, { __settings: useSettings });

@@ -133,16 +133,25 @@ export function CaseSelectScreen() {
                 )}
                 <div className={s.caseFooter}>
                   {needsCode ? (
-                    <Button icon="lock" onClick={() => setAskAccessFor(meta.id)}>
+                    <Button
+                      icon="lock"
+                      onClick={() => setAskAccessFor(meta.id)}
+                      aria-describedby={`case-${meta.id}`}
+                    >
                       Enter access code
                     </Button>
                   ) : (
-                    <Button icon="arrowRight" onClick={open}>
+                    <Button icon="arrowRight" onClick={open} aria-describedby={`case-${meta.id}`}>
                       {progress ? 'Resume case' : 'Open case'}
                     </Button>
                   )}
                   {progress && (!meta.assessment || teacherMode) && (
-                    <Button variant="ghost" icon="trash" onClick={() => setConfirmReset(meta.id)}>
+                    <Button
+                      variant="ghost"
+                      icon="trash"
+                      onClick={() => setConfirmReset(meta.id)}
+                      aria-describedby={`case-${meta.id}`}
+                    >
                       Start again
                     </Button>
                   )}

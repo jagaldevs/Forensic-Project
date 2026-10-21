@@ -232,6 +232,8 @@ export const useProgress = create<ProgressState>()(
   ),
 );
 
+if (import.meta.env.DEV) Object.assign(window, { __progress: useProgress });
+
 /** Progress for one case (a fresh, unsaved object if the case has not been started). */
 export function useCaseProgress(caseId: string): CaseProgress {
   const progress = useProgress((s) => s.cases[caseId]);

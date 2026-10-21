@@ -37,6 +37,7 @@
   --surface-sunken: #f3f4f6;
   --border: #dadde2;
   --border-strong: #b9bec6;
+  --field-border: #848a93; /* text fields, selects, checkboxes: 3:1 on white (WCAG 1.4.11) */
 
   /* Text */
   --text: #1d2127;
@@ -84,6 +85,7 @@
   --card-ink-wash: rgb(26 26 31 / 8%);
   --card-paper-faint: rgb(255 253 247 / 55%);
   --string: var(--brand-magenta);
+  --string-halo: #fffdf7; /* pale edge so the string stands out on the cork */
   --pin: var(--brand-magenta);
 
   /* Map */

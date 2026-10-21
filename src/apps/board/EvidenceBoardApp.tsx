@@ -112,12 +112,14 @@ export default function EvidenceBoardApp() {
             {links.map((l) => {
               const a = anchorOfCard(l.evidenceId);
               const z = anchorOfClaim(l.questionId);
+              const d = stringPath(a, z);
+              const style = b[`string-${l.relation}`];
+              // A pale halo under the string keeps it visible on the dark cork (3:1).
               return (
-                <path
-                  key={l.id}
-                  d={stringPath(a, z)}
-                  className={`${b.string} ${b[`string-${l.relation}`]}`}
-                />
+                <g key={l.id}>
+                  <path d={d} className={`${b.stringHalo} ${style}`} />
+                  <path d={d} className={`${b.string} ${style}`} />
+                </g>
               );
             })}
           </svg>
