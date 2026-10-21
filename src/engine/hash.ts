@@ -1,7 +1,7 @@
 import type { Evidence } from './types';
 
-/** Fields that are not part of the evidence content itself. */
-const EXCLUDED = new Set(['hashAtCollection', 'teacherNote', 'src']);
+/** Fields that are not part of the evidence content itself (including notes about it). */
+const EXCLUDED = new Set(['hashAtCollection', 'teacherNote', 'guided', 'src']);
 
 /** Stable JSON with sorted keys, so the same content always gives the same hash. */
 export function canonicalJson(value: unknown): string {

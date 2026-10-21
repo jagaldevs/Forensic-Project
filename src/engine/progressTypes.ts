@@ -50,6 +50,14 @@ export interface WarrantApplication {
   at: number;
 }
 
+/**
+ * How much support the student chose for a case. Everyone gets the same evidence, questions
+ * and answer key: Guided adds plain-English notes and a nudge before checking; Deep dive adds
+ * optional extension tasks. Standard is the default.
+ */
+export type SupportLevel = 'guided' | 'standard' | 'deep';
+export const supportLevels: SupportLevel[] = ['guided', 'standard', 'deep'];
+
 /** A success-criterion self-assessment. */
 export type SelfRating = 'yes' | 'partly' | 'not-yet';
 
@@ -75,6 +83,18 @@ export interface CaseProgress {
   locked?: boolean;
   /** Report: the student's rating against each success criterion (keyed by its index). */
   selfAssessment?: Record<string, SelfRating>;
+  /** Current support level (missing = standard). */
+  supportLevel?: SupportLevel;
+  /** Every level used in this case → when it was first chosen, so teachers see any switching. */
+  supportLevelsUsed?: Partial<Record<SupportLevel, number>>;
+  /** Guided: questions where the student opened the nudge before checking. */
+  nudgesUsed?: string[];
+  /** Deep dive: extension task id → the student's answer. Never marked. */
+  extensionAnswers?: Record<string, string>;
+}
+
+export function supportLevelOf(progress: CaseProgress): SupportLevel {
+  return progress.supportLevel ?? 'standard';
 }
 
 export function newCaseProgress(caseId: string, now = Date.now()): CaseProgress {

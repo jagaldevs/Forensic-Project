@@ -146,4 +146,11 @@ describe('Phase 4 evidence types', () => {
       }).filter((p) => !p.startsWith('(root)')),
     ).toEqual([]);
   });
+
+  test('Deep dive extensions must point at real evidence and have unique ids', () => {
+    const x = { id: 'x1', title: 'T', prompt: 'P', evidenceIds: ['nope'], modelAnswer: 'M' };
+    const problems = validateCase({ ...waterfront, extensions: [x, { ...x, evidenceIds: [] }] });
+    expect(problems.join('\n')).toMatch(/Unknown evidence "nope"/);
+    expect(problems.join('\n')).toMatch(/Duplicate id "x1"/);
+  });
 });

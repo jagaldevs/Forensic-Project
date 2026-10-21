@@ -57,4 +57,23 @@ describe('progressStore', () => {
     expect(applyWarrant(waterfront, 'warrant-router', 'again')).toBeNull();
     expect(useProgress.getState().cases[ID]!.warrants).toHaveLength(2);
   });
+
+  test('support levels: every level used is recorded, and a submitted assessment is frozen', () => {
+    const { setSupportLevel, recordNudge, setExtensionAnswer, submit } = useProgress.getState();
+    setSupportLevel(ID, 'guided');
+    setSupportLevel(ID, 'deep');
+    recordNudge(ID, 'q1-ip-location');
+    recordNudge(ID, 'q1-ip-location');
+    setExtensionAnswer(ID, 'x-utc', '08:55 UTC is 6:25 pm ACST');
+    let p = useProgress.getState().cases[ID]!;
+    expect(p.supportLevel).toBe('deep');
+    expect(Object.keys(p.supportLevelsUsed!)).toEqual(['guided', 'deep']);
+    expect(p.nudgesUsed).toEqual(['q1-ip-location']);
+    expect(p.extensionAnswers).toEqual({ 'x-utc': '08:55 UTC is 6:25 pm ACST' });
+
+    submit(ID, { lock: true });
+    setSupportLevel(ID, 'standard');
+    p = useProgress.getState().cases[ID]!;
+    expect(p.supportLevel).toBe('deep');
+  });
 });

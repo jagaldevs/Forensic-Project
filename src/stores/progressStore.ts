@@ -9,6 +9,7 @@ import {
   type CheckResult,
   type Judgement,
   type SelfRating,
+  type SupportLevel,
   type WarrantApplication,
 } from '../engine/progressTypes';
 import { warrantsRemaining } from '../engine/availability';
@@ -51,6 +52,10 @@ interface ProgressState {
   setSelfAssessment: (caseId: string, index: number, rating: SelfRating | null) => void;
   /** null removes the correction (the device is assumed to be on case time). */
   setClockCorrection: (caseId: string, deviceId: string, utcOffset: string | null) => void;
+  setSupportLevel: (caseId: string, level: SupportLevel) => void;
+  /** Guided: the student opened a question's nudge. */
+  recordNudge: (caseId: string, questionId: string) => void;
+  setExtensionAnswer: (caseId: string, extensionId: string, text: string) => void;
 
   /** Replace everything (used by progress-code import). */
   replaceAll: (cases: Record<string, CaseProgress>) => void;
@@ -223,6 +228,21 @@ export const useProgress = create<ProgressState>()(
             if (utcOffset) next[deviceId] = utcOffset;
             else delete next[deviceId];
             p.clockCorrections = next;
+          }),
+        setSupportLevel: (caseId, level) =>
+          update(caseId, (p) => {
+            p.supportLevel = level;
+            p.supportLevelsUsed = { ...(p.supportLevelsUsed ?? {}) };
+            p.supportLevelsUsed[level] ??= Date.now();
+          }),
+        recordNudge: (caseId, questionId) =>
+          update(caseId, (p) => {
+            if (!p.nudgesUsed?.includes(questionId))
+              p.nudgesUsed = [...(p.nudgesUsed ?? []), questionId];
+          }),
+        setExtensionAnswer: (caseId, extensionId, text) =>
+          update(caseId, (p) => {
+            p.extensionAnswers = { ...(p.extensionAnswers ?? {}), [extensionId]: text };
           }),
 
         replaceAll: (cases) => set({ cases }),

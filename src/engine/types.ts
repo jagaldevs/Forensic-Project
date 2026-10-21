@@ -20,4 +20,5 @@ export type {
   Person,
   Device,
   MapMarker,
+  Extension,
 } from './schema';

@@ -56,6 +56,11 @@ const caseProgress = z.object({
     .optional(),
   locked: z.boolean().optional(),
   selfAssessment: z.record(z.string(), z.enum(['yes', 'partly', 'not-yet'])).optional(),
+  // Support levels (added after v3; optional, so older codes still import).
+  supportLevel: z.enum(['guided', 'standard', 'deep']).optional(),
+  supportLevelsUsed: z.partialRecord(z.enum(['guided', 'standard', 'deep']), z.number()).optional(),
+  nudgesUsed: z.array(z.string()).optional(),
+  extensionAnswers: z.record(z.string(), z.string()).optional(),
 });
 
 const stepAnswer = z.discriminatedUnion('type', [

@@ -12,6 +12,10 @@ const backup: ProgressBackup = {
       briefingRead: true,
       custody: [{ at: 5, evidenceId: 'photo-a', action: 'verified', ok: false }],
       locked: true,
+      supportLevel: 'guided',
+      supportLevelsUsed: { standard: 1, guided: 2 },
+      nudgesUsed: ['q1-ip-location'],
+      extensionAnswers: { 'x-utc': 'six twenty-five' },
     },
   },
   academy: {

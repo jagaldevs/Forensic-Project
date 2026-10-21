@@ -102,6 +102,11 @@ const evidenceBase = {
   hashAtCollection: sha256.optional(),
   /** Shown only in teacher mode. */
   teacherNote: z.string().optional(),
+  /**
+   * Guided level: a plain-English "What this means" note on how to read the item (terms,
+   * units, what is approximate). Explains the evidence; never answers a case question.
+   */
+  guided: z.string().optional(),
   /** Moments this item adds to the Timeline app. */
   timeline: z.array(timelineEntry).optional(),
 };
@@ -410,6 +415,11 @@ const verdictQuestion = z.object({
   keyEvidenceIds: z.array(idSchema).min(1),
   distractorEvidenceIds: z.array(idSchema),
   /** Required, except in assessment cases (which never show hints). */
+  /**
+   * Guided level: "Need a nudge?" before the first check. What to look at, not the answer.
+   * Falls back to hints.verdict.
+   */
+  nudge: z.string().optional(),
   hints: z
     .object({
       /** Shown when the verdict is right and all key evidence is attached. */
@@ -439,6 +449,23 @@ const openQuestion = z.object({
 });
 
 export const questionSchema = z.discriminatedUnion('kind', [verdictQuestion, openQuestion]);
+
+/**
+ * Deep dive level: an optional, more technical task (e.g. convert UTC times yourself). Saved
+ * for the teacher, never marked, and never needed to answer the case questions.
+ */
+export const extensionSchema = z.object({
+  id: idSchema,
+  title: z.string().min(1),
+  prompt: z.string().min(1),
+  /** Evidence worth opening for this task. */
+  evidenceIds: z.array(idSchema),
+  /** Sentence starters or steps shown under the task. */
+  guidance: z.array(z.string()).optional(),
+  /** For the teacher (teacher mode, Teacher Review). */
+  modelAnswer: z.string().min(1),
+});
+export type Extension = z.infer<typeof extensionSchema>;
 export type Question = z.infer<typeof questionSchema>;
 export type VerdictQuestion = z.infer<typeof verdictQuestion>;
 export type OpenQuestion = z.infer<typeof openQuestion>;
@@ -569,6 +596,8 @@ export const caseSchema = z
     evidence: z.array(evidenceSchema).min(1),
     questions: z.array(questionSchema).min(1),
     drops: z.array(dropSchema),
+    /** Deep dive extension tasks (optional). */
+    extensions: z.array(extensionSchema).optional(),
     warrants: z.object({
       available: z.number().int().nonnegative(),
       requests: z.array(warrantRequestSchema),
@@ -698,6 +727,17 @@ export const caseSchema = z
         ['warrants', 'available'],
         'Fewer warrants than proportionate requests: the case may be impossible',
       );
+
+    checkUnique(
+      (c.extensions ?? []).map((x) => x.id),
+      'extensions',
+    );
+    c.extensions?.forEach((x, i) =>
+      x.evidenceIds.forEach((id, j) => {
+        if (!evidenceIds.has(id))
+          issue(['extensions', i, 'evidenceIds', j], `Unknown evidence "${id}"`);
+      }),
+    );
 
     c.questions.forEach((q, i) => {
       if (q.kind !== 'verdict') return;
