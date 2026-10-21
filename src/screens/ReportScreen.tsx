@@ -7,6 +7,8 @@ import { buildReport, reportToText } from '../engine/report';
 import { useNav } from '../stores/navStore';
 import { useCaseProgress, useProgress } from '../stores/progressStore';
 import { useSettings } from '../stores/settingsStore';
+import { useAcademy } from '../stores/academyStore';
+import { missionCatalogue } from '../missions';
 import { Button } from '../ui/Button';
 import { Icon } from '../ui/Icon';
 import { Badge, StatusBadge } from '../ui/StatusBadge';
@@ -18,6 +20,10 @@ export default function ReportScreen() {
   const progress = useCaseProgress(c.meta.id);
   const agentName = useSettings((s) => s.agentName);
   const go = useNav((s) => s.go);
+  const academy = useAcademy((s) => s.missions);
+  const badges = missionCatalogue
+    .filter((m) => academy[m.id]?.completedAt)
+    .map((m) => m.badge.name);
   const report = useMemo(() => buildReport(c, progress, agentName), [c, progress, agentName]);
   const [hashes, setHashes] = useState<Record<string, string>>({});
   const [copied, setCopied] = useState<'idle' | 'done' | 'failed'>('idle');
@@ -34,7 +40,8 @@ export default function ReportScreen() {
 
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(reportToText(report, hashes));
+      const training = `\nTraining badges: ${badges.length ? badges.join(', ') : 'none yet'}`;
+      await navigator.clipboard.writeText(reportToText(report, hashes) + training);
       setCopied('done');
     } catch {
       setCopied('failed');
@@ -84,6 +91,8 @@ export default function ReportScreen() {
               <dd>{report.generatedAt}</dd>
               <dt>Status</dt>
               <dd>{report.complete ? 'All questions completed' : 'In progress'}</dd>
+              <dt>Training badges</dt>
+              <dd>{badges.length ? badges.join(', ') : 'None yet'}</dd>
             </dl>
           </div>
           <Logo size="large" />

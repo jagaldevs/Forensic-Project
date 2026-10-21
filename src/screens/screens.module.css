@@ -340,3 +340,9 @@
   font-size: var(--text-xs);
   transform: rotate(-3deg);
 }
+
+.academyCard {
+  border-color: var(--accent);
+  background:
+    radial-gradient(ellipse 80% 60% at 100% 0%, var(--accent-soft), transparent 70%), var(--bg-1);
+}

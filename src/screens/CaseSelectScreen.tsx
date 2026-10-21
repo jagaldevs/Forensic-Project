@@ -4,6 +4,8 @@ import { caseCatalogue } from '../cases';
 import { useNav } from '../stores/navStore';
 import { useProgress } from '../stores/progressStore';
 import { useDesktop } from '../stores/desktopStore';
+import { useAcademy } from '../stores/academyStore';
+import { findMissionMeta, missionCatalogue } from '../missions';
 import { useSettings } from '../stores/settingsStore';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/StatusBadge';
@@ -18,6 +20,8 @@ export function CaseSelectScreen() {
   const cases = useProgress((st) => st.cases);
   const [showBackup, setShowBackup] = useState(false);
   const [confirmReset, setConfirmReset] = useState<string | null>(null);
+  const academy = useAcademy((st) => st.missions);
+  const earned = missionCatalogue.filter((m) => academy[m.id]?.completedAt).length;
 
   return (
     <main className={s.stage}>
@@ -78,6 +82,16 @@ export function CaseSelectScreen() {
                     ))}
                   </ul>
                 </div>
+                {meta.recommendedMissions?.length ? (
+                  <p className={s.small}>
+                    <strong>Recommended training:</strong>{' '}
+                    {meta.recommendedMissions
+                      .map((id) => findMissionMeta(id))
+                      .filter((m) => m !== undefined)
+                      .map((m) => `${m.title}${academy[m.id]?.completedAt ? ' ✓' : ''}`)
+                      .join(', ')}
+                  </p>
+                ) : null}
                 <div className={s.caseFooter}>
                   <Button
                     variant="primary"
@@ -97,14 +111,25 @@ export function CaseSelectScreen() {
               </article>
             );
           })}
-          <article className={`${s.caseCard} ${s.caseCardDisabled}`} aria-disabled="true">
-            <Badge tone="unassessed" icon="lock">
-              Coming soon
-            </Badge>
-            <h2>Training Academy</h2>
-            <p className={s.small}>
-              Short missions on metadata, digital footprints, IP addresses, time zones, and privacy.
+          <article className={`${s.caseCard} ${s.academyCard}`} aria-labelledby="academy-title">
+            <div className={s.row}>
+              <Badge tone="accent" icon="academy">
+                {missionCatalogue.length} short missions
+              </Badge>
+              <Badge tone={earned ? 'supports' : 'unassessed'} icon="medal">
+                {earned} of {missionCatalogue.length} badges
+              </Badge>
+            </div>
+            <h2 id="academy-title">Training Academy</h2>
+            <p>
+              New to digital forensics? Learn the tools first: metadata, digital footprints, search
+              history, IP addresses, time zones, and privacy.
             </p>
+            <div className={s.caseFooter}>
+              <Button variant="primary" icon="academy" onClick={() => go('academy')}>
+                Enter the academy
+              </Button>
+            </div>
           </article>
         </div>
       </div>

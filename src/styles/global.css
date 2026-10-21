@@ -97,9 +97,21 @@ samp,
   box-shadow: 0 0 0 5px var(--focus-ring-outer);
 }
 
+/* Headings focused programmatically (to announce a new step) don't need a ring. */
+[tabindex='-1']:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 ::selection {
   background: var(--brand-magenta);
   color: var(--on-brand);
+}
+
+/* Icons that sit inside a line of text. */
+.inline-icon {
+  display: inline-block;
+  vertical-align: -3px;
 }
 
 .visually-hidden {

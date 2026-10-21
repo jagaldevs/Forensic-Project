@@ -14,6 +14,7 @@ export const meta: CaseFile['meta'] = {
     'Judge how strongly evidence supports a claim, and state a limitation.',
     'Explain why warrants must be necessary and proportionate.',
   ],
+  recommendedMissions: ['metadata-matters', 'ip-networks', 'ethics-privacy'],
   successCriteria: [
     'I can say what a piece of evidence shows and what it does not show.',
     'I can attach evidence to a judgement and justify my verdict.',
