@@ -46,6 +46,12 @@ const changedRows = [
   ['7', '7.1', '2.5'],
 ];
 
+/** Guided notes shared by items of the same kind, so no single item stands out. */
+const emailGuide =
+  'The From line is what the email says about its sender. Reply-To, if there is one, is where replies will go, and it can be different from From. Each Received line is added by a mail server as it passes the email on: read them from the bottom up to follow its route. SPF checks whether the sending server is on the domain’s list of approved servers, and DKIM checks for the domain’s digital signature (pass, fail or none).';
+const historyGuide =
+  'A “visit” is a page that was opened and a “search” is something typed into a search box, each with the time on that device’s clock. The profile line shows which browser account was in use. If a period is marked as cleared, someone used a clear-history option and the entries from that time are gone: you can see when they were removed, but not what they were.';
+
 const schoolNet = '203.0.113.60';
 const team4 = [
   { name: 'Morgan Lee', address: 'morgan.lee@arafurapark.example' },
@@ -310,6 +316,8 @@ Check every clock and every hash. Morgan deserves a fair investigation.`,
           label: 'Results changed from LAB-LAPTOP-07 (growth +255%)',
         },
       ],
+      guided:
+        '“Created” is when the file was first made; “modified” is when it was last saved. The version history keeps a copy of each save, with the account, device and time, so you can open older versions and compare them. A service may show times in its own time zone rather than Darwin time, so check the zone label next to each time before comparing it with other evidence.',
       teacherNote:
         'Key for Q1 and Q5. The drive shows UTC: 08:55 UTC = 18:25 ACST (before the deadline, Morgan’s Chromebook) and 13:52 UTC = 23:22 ACST (after the deadline, the shared lab laptop). “Morgan Lee” is the signed-in account, not proof of the person. The genuine results survive in version 4.',
     },
@@ -357,6 +365,7 @@ Head Judge, NT Junior Science Fair`,
       timeline: [
         { recorded: rec('08:30'), label: 'Head judge emails all teams: deadline 9:00 pm' },
       ],
+      guided: emailGuide,
       teacherNote:
         'Key for Q2: the comparison email. Same From address, but the Received chain stays inside ntsciencefair.example, there is no Reply-To, and SPF and DKIM pass.',
     },
@@ -405,6 +414,7 @@ Head Judge`,
       },
       extraHeaders: [{ name: 'X-Mailer', value: 'QuickPost Webmail 4.2' }],
       timeline: [{ recorded: rec('19:48'), label: 'Fake “head judge” email: deadline “extended”' }],
+      guided: emailGuide,
       teacherNote:
         'Key for Q2. Spoofed: the From line is copied, but Reply-To and Message-ID are QuickPost, it was sent through QuickPost’s servers, SPF fails and there is no DKIM. Sent to Team 4 only, against the fair rules.',
     },
@@ -468,6 +478,8 @@ Head Judge`,
         { recorded: rec('21:04'), deviceId: 'morgan-band', label: 'Morgan’s band starts charging' },
         { recorded: recNext('06:40'), deviceId: 'morgan-band', label: 'Morgan’s band worn again' },
       ],
+      guided:
+        'Heart rate is in beats per minute (bpm) and steps are counted for each hour. A band only records while it is on a wrist; the events list shows when it was taken off, charged or put back on. It measures the wearer’s movement and heart rate, but it cannot tell you who the wearer is.',
       teacherNote:
         'Key for Q3. The band was charging (and syncing over the home Wi-Fi) from 21:04 to 06:40. That places the band at home, not Morgan, and shows nothing at all about 23:22.',
     },
@@ -507,6 +519,8 @@ Head Judge`,
           label: 'Doorbell: front door opened (next morning)',
         },
       ],
+      guided:
+        'A smart doorbell logs an event when its camera sees movement or its sensor feels the door open or close. “Person detected” means the camera’s software thinks the shape is a person, not who it is. Each sensor only covers the area it can see.',
       teacherNote:
         'Key for Q3. Nobody left by the front door overnight, but the doorbell can’t see other doors and doesn’t identify anyone. It fits Morgan’s account; it doesn’t prove it.',
     },
@@ -538,6 +552,8 @@ Head Judge`,
         { recorded: rec('23:07'), deviceId: 'lab2-sensor', label: 'Lab 2 door opened' },
         { recorded: rec('23:31'), deviceId: 'lab2-sensor', label: 'Last motion in Lab 2' },
       ],
+      guided:
+        'A door sensor logs when a door opens or closes. A motion sensor logs movement in a room, often only every few minutes while movement continues, so a gap between entries doesn’t always mean the room was empty. Neither kind of sensor records who was there.',
       teacherNote:
         'Someone was in Lab 2 when the file changed. It shows a person was there, not who. Good for Q5.',
     },
@@ -606,6 +622,7 @@ Head Judge`,
           label: 'Lab laptop: history from 11:10 pm cleared',
         },
       ],
+      guided: historyGuide,
       teacherNote:
         'Shows Morgan’s StreamCloud was open on the lab laptop from class, and someone hid what they did late at night. A cleared gap shows something was hidden, not who hid it or what it was.',
     },
@@ -649,6 +666,7 @@ Head Judge`,
           label: 'Morgan’s Chromebook: last search of the night',
         },
       ],
+      guided: historyGuide,
       teacherNote:
         'Distractor for Q1: it says nothing about when the results file changed. Also only shows the Chromebook was used, not by whom, and an absence of history after 9 pm is not proof of anything.',
     },
@@ -675,6 +693,8 @@ Head Judge`,
         { label: 'Make', value: 'Lumo' },
         { label: 'Model', value: 'Lumo 9' },
       ],
+      guided:
+        'Metadata is information saved inside the photo file. DateTimeOriginal is when the photo was taken, ModifyDate is when the file was last saved, and Software is the program that saved it. The hash is a fingerprint of the file’s exact contents: change even one pixel and the hash changes completely.',
       teacherNote:
         'Key for Q4. The hash no longer matches the one recorded at collection (07:40), and ModifyDate (07:52) is after collection, with editing software. The photo was altered, so it can’t be trusted as a record.',
     },
@@ -699,6 +719,8 @@ Head Judge`,
           note: 'The shared folder was not locked after collection.',
         },
       ],
+      guided:
+        'An intake record notes when each item was collected and its hash at that moment. SHA-256 turns a file’s contents into a 64-character code, and the same contents always give the same code. Investigators compare hashes to check whether a file is exactly the same as when it was collected.',
       teacherNote:
         'Key for Q4. Compare its hash with the poster photo’s current hash: they differ, so the photo changed after collection. The open folder explains how.',
     },
@@ -744,6 +766,8 @@ Head Judge`,
         { recorded: rec('23:08'), label: 'Lab laptop woken, still signed in as Morgan' },
         { recorded: rec('23:22'), label: 'Lab laptop saves team4-algae-results' },
       ],
+      guided:
+        'A device log records what happened on one computer, such as sign-ins, the lid closing, waking from sleep and files being saved. Each line shows the time and the IP address of the network the computer was using. An IP address identifies a network connection, which many people and devices can share.',
       teacherNote:
         'Explains “modified from Morgan’s account”: Morgan never signed out in class, so anyone who opened the laptop could edit as Morgan. The shared account can’t name the person.',
     },
@@ -776,6 +800,8 @@ Head Judge`,
       timeline: [
         { recorded: rec('19:41'), label: 'Fake judge account signs in from the college network' },
       ],
+      guided:
+        'A sign-in record from an email service lists what happened on one account: when it was created, signed in, sent mail and signed out. Each line shows the IP address of the network it was used from. That tells you which network connection was used, not which person or device.',
       teacherNote:
         'Links the fake email and the late edit to the same network (203.0.113.60), not to a person: many boarders and staff share it.',
     },
@@ -875,6 +901,37 @@ Head Judge`,
         'Team 4 should be cleared; the person responsible is not identified',
         'Narrow, time-limited next requests; the whole-year request is disproportionate',
       ],
+    },
+  ],
+
+  extensions: [
+    {
+      id: 'reminder-email-route',
+      title: 'Follow an email’s route',
+      prompt:
+        'Open the head judge’s Thursday morning reminder email and choose “Show original”. Using its Received lines, describe the email’s journey step by step, from the first computer to the college’s mail server. For each step, say which server passed it on, which server received it, the IP address and the time. Then explain one thing these headers cannot tell you.',
+      evidenceIds: ['email-genuine'],
+      guidance: [
+        'Start with the bottom Received line: it is the first step of the journey.',
+        'For each line: “from” is the server that sent it on, “by” is the server that received it.',
+        'Work out how long the whole journey took, from the Date line to the top Received line.',
+      ],
+      modelAnswer:
+        'Read bottom up. Step 1: office-pc-12.ntsciencefair.example (192.0.2.140) passed it to mail.ntsciencefair.example at 8:30:01 am ACST, so it left a computer in the fair’s office through the fair’s own mail server. Step 2: mail.ntsciencefair.example (192.0.2.25) passed it to mx1.arafurapark.example, the college’s incoming mail server, at 8:30:04 am. Sent at 8:30:00 am, it took about 4 seconds. The headers show which servers and networks handled it and when, but not who was typing at the office computer.',
+    },
+    {
+      id: 'intake-procedure',
+      title: 'Design an evidence intake procedure',
+      prompt:
+        'Read Mr Osei’s evidence intake record. Write a step-by-step procedure (4 to 6 steps) the college could use the next time it collects digital evidence. For each step, explain how it protects the chain of custody, and explain the part hashing plays.',
+      evidenceIds: ['intake-record'],
+      guidance: [
+        'Think about where a collected file should be kept, and who can change it there.',
+        'Say when a hash should be calculated, where it is written down and when it is checked again.',
+        'A chain-of-custody log records who handled an item, when and why.',
+      ],
+      modelAnswer:
+        'A good answer includes: copy each item into locked, read-only storage as soon as it is collected, instead of leaving it in a folder anyone with the link can edit; calculate the SHA-256 hash at collection and record it with the time and the collector’s name; log every access or transfer (who, when, why) in a chain-of-custody record; work only from copies and re-check the hash before the item is used. A matching hash shows the file is unchanged since collection; a different hash shows it changed, but not what changed or who changed it.',
     },
   ],
 

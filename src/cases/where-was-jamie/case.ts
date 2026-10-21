@@ -225,6 +225,8 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
           label: 'Jamie: “on the bus to Sasha’s”, phone about to die',
         },
       ],
+      guided:
+        'This is the chat as it was saved on Jamie’s phone. Each time is when the phone sent or received the message, shown on the phone’s own clock. “Delivered” means a message reached the other phones, and “Read” means someone opened it. A deleted message leaves a gap: you can see that something was sent, but not what it said.',
       teacherNote:
         'Says Cullen Bay, not Mindil, at 18:02. The last message is delivered but never read: everyone else had stopped looking. The deleted message is a deliberate red herring (it was a typo).',
     },
@@ -257,6 +259,8 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
         },
         { recorded: rec('19:15'), deviceId: 'jamie-phone', label: 'Sasha: “yeh mum says ok”' },
       ],
+      guided:
+        'These messages come from Jamie’s phone backup, so the times are on Jamie’s phone clock. “Read 19:14” shows when the other person opened Jamie’s message. A message about a plan tells you what someone intended at that moment.',
       teacherNote:
         'Shows intention to go to Parap, not that Jamie arrived. Combine with the bus tap and the tower record.',
     },
@@ -295,6 +299,8 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
           label: 'Casey’s message is sent but never delivered',
         },
       ],
+      guided:
+        'This thread was shown to police on Casey’s phone, so the times and ticks are from Casey’s side. “Sent” means the message left Casey’s phone. “Delivered” would mean it reached the other phone, and “Read” that it was opened. A message can stay on “Sent” when the other phone is switched off, flat or has no signal.',
       teacherNote:
         '“Sent” but not “Delivered” means the phone was off or offline. It fits the battery dying around 19:34.',
     },
@@ -320,6 +326,8 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
           label: 'Person with a green backpack leaves the lagoon gate',
         },
       ],
+      guided:
+        'A CCTV still is one frame from a security video. The date and time printed on the picture (the overlay) come from the camera’s own clock, so they are only as accurate as that clock. The operator’s note tells you how well the clock is kept. Grainy footage can show clothes and bags, but often not faces.',
       teacherNote:
         'Reliable clock. Casey identified the backpack. On its own it looks like it contradicts Ari’s photo (stamped 18:30) until Ari’s phone settings arrive.',
     },
@@ -352,6 +360,8 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
           label: 'Ari photographs Jamie with friends at the lagoon',
         },
       ],
+      guided:
+        'Metadata is information the camera saves inside the photo file. DateTimeOriginal is the time on the camera’s clock when the photo was taken. OffsetTimeOriginal would say which time zone that clock was set to; not every phone saves it. GPS is the position the phone recorded, and Make and Model name the phone that took the photo.',
       teacherNote:
         'The trap. Ari’s phone is still on Brisbane time (AEST), 30 minutes ahead. 18:30 AEST = 18:00 ACST, five minutes before the CCTV.',
     },
@@ -370,6 +380,8 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
         { label: '24-hour time', value: 'On' },
       ],
       body: '“I haven’t changed anything on my phone since we flew up from Brisbane on Wednesday.” Ari',
+      guided:
+        'This is a screenshot of a phone’s Date & Time settings. “Set automatically” means the phone takes its time zone from the mobile network wherever it is; when it is Off, the phone keeps whichever zone was chosen. GMT+10:00 means the clock shows a time 10 hours ahead of UTC (also called GMT), the world’s reference time.',
       teacherNote:
         'The key to Q1. Students should apply an AEST correction for Ari’s phone on the Timeline.',
     },
@@ -400,6 +412,8 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
           label: 'Jamie takes the sunset photo at Cullen Bay (original file)',
         },
       ],
+      guided:
+        'This is the original file saved by the phone’s camera, before any app changed it. Copies shared in apps are often cropped or resized and can lose their metadata, but the original keeps it. OffsetTimeOriginal +09:30 means the camera’s clock was 9 hours 30 minutes ahead of UTC. GPS gives the latitude and longitude the phone recorded when the photo was taken.',
       teacherNote:
         'Original file: GPS and the sign both say Cullen Bay. Taken 28 minutes before it was posted.',
     },
@@ -425,6 +439,8 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
       timeline: [
         { recorded: rec('19:20'), label: 'Jamie posts the cropped sunset photo on PicPost' },
       ],
+      guided:
+        'The posted time is when the post was uploaded; a photo can be taken some time before it is posted. Social apps often crop photos (cut them down), which hides whatever was outside the frame, and they usually remove the photo’s metadata. Comments are written by other people and are not part of the photo.',
       teacherNote:
         'Posted time is not taken time. The crop removes the marina sign, and Kit’s comment is a guess that nobody corrected.',
     },
@@ -442,6 +458,8 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
       body: 'lagoon day with the crew 🌊',
       checkIn: 'Wave Lagoon, Darwin Waterfront',
       timeline: [{ recorded: rec('16:40'), label: 'Kit checks in at the Wave Lagoon' }],
+      guided:
+        'A check-in is a place the person chose to tag on their post, not a location measured by the phone. The posted time is when the post went up.',
     },
     {
       id: 'cctv-cullen',
@@ -466,6 +484,8 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
             'Person with a green backpack on the Cullen Bay boardwalk (clock about 2 min fast)',
         },
       ],
+      guided:
+        'The overlay time comes from this camera’s own clock. A clock that runs fast shows a later time than the real time, so adjust for it before comparing with other records. The person is recognisable only by what they wear and carry.',
       teacherNote:
         'Places someone matching Jamie at Cullen Bay after sunset. Also a reminder that clocks drift, not just time zones.',
     },
@@ -507,6 +527,8 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
           label: 'Jamie’s bus card taps on at Cullen Bay, Route 4 towards Parap',
         },
       ],
+      guided:
+        '“Tap on” means a transport card was touched on the reader when someone boarded, which records the card, the time, the stop and the route. “Towards Parap” is the direction the bus was heading, not necessarily where the passenger got off. When tapping off is not required, there is often no record of where a trip ended.',
       teacherNote:
         'Shows the card was used, not who used it, and not where they got off. Strong when combined with the messages.',
     },
@@ -532,6 +554,8 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
       timeline: [
         { recorded: rec('19:34'), label: 'Jamie’s phone last connects to the network, near Parap' },
       ],
+      guided:
+        'Phones connect to nearby mobile towers, and each tower’s coverage is split into sectors (slices pointing in different directions). The record shows which sector the phone used and when, which places the phone somewhere in that area, not at an exact address. A phone that is switched off or flat stops connecting.',
       teacherNote:
         'Puts the phone near Parap at 19:34, consistent with the bus. The search should have started in Parap.',
     },
@@ -559,6 +583,8 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
       acceptedVerdicts: ['not-supported'],
       keyEvidenceIds: ['photo-ari', 'cctv-lagoon', 'ari-settings'],
       distractorEvidenceIds: ['lost-property'],
+      nudge:
+        'Two records seem to disagree about when Jamie left the lagoon. Before deciding that one of them is wrong, ask yourself whether both could be honest.',
       hints: {
         correct:
           'Exactly. Ari’s phone was still on Brisbane time (AEST), 30 minutes ahead of Darwin. Its 18:30 is 18:00 in Darwin, five minutes before the CCTV shows Jamie leaving. No contradiction at all.',
@@ -596,6 +622,8 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
       acceptedVerdicts: ['not-supported'],
       keyEvidenceIds: ['post-jamie', 'photo-jamie-original'],
       distractorEvidenceIds: ['lost-property'],
+      nudge:
+        'Look closely at the posted image itself. What can you actually see in it that tells you where it was taken?',
       hints: {
         correct:
           'Well done. The post was cropped, so it hid the Cullen Bay Marina sign, and the original file’s GPS says Cullen Bay. Kit’s “mindil??” was just a guess. And the post went up at 7:20 pm, 28 minutes after the photo was taken.',
@@ -630,6 +658,8 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
       acceptedVerdicts: ['possible', 'strongly-supported'],
       keyEvidenceIds: ['bus-log', 'thread-sasha'],
       distractorEvidenceIds: ['lost-property'],
+      nudge:
+        'Start from the last place and time you can put Jamie. Then think about how Jamie could travel to Parap and roughly how long it might take.',
       hints: {
         correct:
           'Good reasoning. Jamie’s card tapped onto a bus towards Parap at 7:24 pm, and the Map’s estimate for that bus trip is roughly 20 to 40 minutes, so arriving by about 8 pm fits. Jamie had also arranged it with Sasha. Remember the tap shows the card was used, not who used it.',
@@ -702,6 +732,43 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
         { type: 'afterMinutes', minutes: 10 },
       ],
       delaySeconds: 5,
+    },
+  ],
+
+  extensions: [
+    {
+      id: 'ext-utc-timeline',
+      title: 'Everything in UTC',
+      prompt:
+        'Investigators often convert every record to UTC, the world’s reference time, so that clocks in different time zones can be compared fairly. Convert the times on these four records to UTC: Ari’s photo, the lagoon gate CCTV, Jamie’s original sunset photo and the Cullen Bay boardwalk CCTV. For each one, say which clock setting you used and which evidence told you. Then put them in order: do any of them still contradict each other?',
+      evidenceIds: [
+        'photo-ari',
+        'ari-settings',
+        'cctv-lagoon',
+        'photo-jamie-original',
+        'cctv-cullen',
+      ],
+      guidance: [
+        'For each record, find the time as recorded and the clock it was recorded on (look for an offset, a settings screenshot or an operator’s note).',
+        'UTC = recorded time minus the clock’s offset. For example, a clock on UTC+8:00 showing 14:00 means 06:00 UTC.',
+        'If a clock is known to be fast or slow, correct for that as well before converting.',
+      ],
+      modelAnswer:
+        'Ari’s photo: 18:30:12 on a UTC+10:00 clock (settings screenshot) = 08:30:12 UTC. Lagoon CCTV: 18:05:41 Darwin time, UTC+9:30, accurate clock (operator’s note) = 08:35:41 UTC. Jamie’s original photo: 18:52:30 with offset +09:30 in its metadata = 09:22:30 UTC. Cullen Bay CCTV: shows 19:04:10 but runs about 2 minutes fast, so about 19:02 Darwin time = about 09:32 UTC. In UTC, Ari’s photo comes 5 min 29 s before Jamie leaves the gate, and everything is in a sensible order: no contradiction remains.',
+    },
+    {
+      id: 'ext-travel-check',
+      title: 'Is the route physically possible?',
+      prompt:
+        'Use the Map’s travel-time calculator to test the records of Jamie’s evening, from leaving the lagoon gate to the bus tap-on. Was there enough time to get from each place to the next? Then test another idea: could Jamie have walked to Mindil Beach and back between any two of those records?',
+      evidenceIds: ['cctv-lagoon', 'photo-jamie-original', 'cctv-cullen', 'bus-log'],
+      guidance: [
+        'List the records in order with their corrected Darwin times and the place each one shows.',
+        'For each pair, work out how many minutes passed, then use the Map to get a travel-time range between the two places.',
+        'A step is possible if the time available is at least the fastest estimate. Remember the estimates are rough.',
+      ],
+      modelAnswer:
+        'Lagoon gate to the Cullen Bay boardwalk is about 3.3 km by road, an estimated 36 to 44 minutes on foot; Jamie left the gate at 18:05 and took the sunset photo at Cullen Bay at 18:52 (47 minutes), so it fits. The boardwalk CCTV (about 19:02 once corrected) and the bus tap-on at Cullen Bay (19:24) are in the same area. Cullen Bay to Mindil Beach is an estimated 56 to 68 minutes each way on foot, but only 32 minutes passed between the photo and the tap-on, so a walk to Mindil and back was not possible (and Mindil is even further from the lagoon, about 91 minutes or more on foot).The estimates are approximate and only test whether a route is possible, not that it happened.',
     },
   ],
 

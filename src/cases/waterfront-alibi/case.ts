@@ -142,6 +142,8 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
       note: 'This summary does not include session or device details. StreamCloud keeps those separately.',
       teacherNote:
         'The record shows the account was used from 203.0.113.47. It says nothing about who was using it or where they physically were. The "saved password" detail hints that anyone on that computer could log in.',
+      guided:
+        'A login record is a list of what happened on an account, supplied by the company that runs the service. Each row has a time, an event and the IP address it came from. An IP address is the number the internet uses to send data back to a connection, a bit like a return address on a letter. "Saved password" means the device remembered the password, so it was not typed in.',
     },
     {
       id: 'ip-203-0-113-47',
@@ -160,6 +162,8 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
       note: 'Geolocation databases estimate a location from where an internet provider registers or routes a block of addresses, often a regional hub. They do not know where a device actually is. TopNet routes home connections across the Top End through its Darwin City hub.',
       teacherNote:
         'The pin lands in Darwin City, which is why it looks damning. The 25 km radius covers the Waterfront AND Palmerston (and most of the region), so the lookup cannot separate the two.',
+      guided:
+        'An ISP (internet service provider) is the company that connects a home or business to the internet. The location here is an estimate from a database, based on where the ISP registers or routes its addresses. It is not a GPS reading of the device. The accuracy radius means the real connection could be anywhere inside a circle that size around the pin.',
     },
     {
       id: 'router-log-okafor',
@@ -200,6 +204,8 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
       note: "A router logs devices, not people. Riley's phone does not appear in this log.",
       teacherNote:
         "Key evidence. The IP in the login record is the Okafor home connection, which explains the 7:52 pm login without Riley being at the Waterfront. But SAM-PHONE was online all evening: Sam was home and could have used the laptop or the account. Riley's phone is absent, which could mean mobile data, wi-fi off, or not being home. Good discussion point.",
+      guided:
+        'A home router connects every device in the house to the internet. Its public IP is the one address the rest of the internet sees for the whole household, shared by every device inside. Each row is one device on the home network: its name, its MAC address (a hardware ID for its network chip) and when it connected and disconnected. Connected means the device was joined to the network, not that someone was using it the whole time.',
     },
     {
       id: 'photo-gaming-setup',
@@ -227,6 +233,8 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
       ],
       teacherNote:
         'Fits the alibi but does not prove it. Time comes from the phone clock. No GPS. No person in frame. It shows that the phone was pointed at a gaming setup at 8:01 pm, not who held it or which room it was.',
+      guided:
+        'EXIF metadata is information a camera or phone saves inside a photo file. DateTimeOriginal is when the photo was taken, by the phone\'s own clock, and OffsetTimeOriginal is the time zone (+09:30 is Darwin time). "GPS data removed" means the location was stripped out when the photo was sent, and "re-compressed on send" means the messaging app saved a new copy of the image.',
     },
     {
       id: 'photo-foyer-witness',
@@ -255,6 +263,8 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
       ],
       teacherNote:
         'Places someone at the scene at 8:06 pm, inside the incident window. Identity cannot be established: back to camera, common clothing. A classic case of a "match" (dark hoodie, similar build) not being proof.',
+      guided:
+        "This is the original file from the camera, so no messaging app has changed its metadata. The GPS line is latitude and longitude, and ±8 m means the phone estimated its position to within about 8 metres. DateTimeOriginal comes from the phone's clock, which is usually set automatically by the phone network.",
     },
     {
       id: 'weather-record',
@@ -296,6 +306,8 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
       acceptedVerdicts: ['not-supported'],
       keyEvidenceIds: ['login-streamcloud', 'ip-203-0-113-47', 'router-log-okafor'],
       distractorEvidenceIds: ['weather-record', 'photo-foyer-witness'],
+      nudge:
+        'Ask yourself how an IP lookup works out a location, and how precise that location is.',
       hints: {
         correct:
           'Spot on. IP geolocation is only an estimate (here, a 25 km radius), and the router log shows that 203.0.113.47 is the Okafor home connection. The login came through the home internet, not from the Waterfront.',
@@ -335,6 +347,8 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
       acceptedVerdicts: ['possible'],
       keyEvidenceIds: ['router-log-okafor', 'photo-gaming-setup'],
       distractorEvidenceIds: ['weather-record'],
+      nudge:
+        'For each piece of evidence, ask what it shows and what it does not show about where Riley was.',
       hints: {
         correct:
           "Well reasoned. Riley's laptop was online at home and Photo A was taken at 8:01 pm, which fits his alibi but doesn't prove it. A device is not a person: Sam was home too, and Photo A has no GPS.",
@@ -372,6 +386,7 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
       acceptedVerdicts: ['cant-tell'],
       keyEvidenceIds: ['photo-foyer-witness'],
       distractorEvidenceIds: ['weather-record'],
+      nudge: 'Look carefully at what you can actually see in Photo B, not just at its metadata.',
       hints: {
         correct:
           "Exactly. Photo B's metadata places someone at the Waterfront at 8:06 pm, but their face isn't visible. A dark hoodie is not enough to identify anyone.",
@@ -429,6 +444,38 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
         { type: 'afterMinutes', minutes: 6 },
       ],
       delaySeconds: 5,
+    },
+  ],
+
+  // Deep dive: optional, saved for the teacher, never marked.
+  extensions: [
+    {
+      id: 'ext-accuracy-circle',
+      title: 'Inside the 25 km circle',
+      prompt:
+        'The IP lookup has an accuracy radius of about 25 km. Using the map in IP Lookup (or the Map app), list which suburbs and places fall inside the circle. Then explain why an IP lookup cannot tell the Waterfront apart from Palmerston.',
+      evidenceIds: ['ip-203-0-113-47', 'login-streamcloud'],
+      guidance: [
+        'Inside the circle I can see …',
+        'The convention centre and the Okafor home are about … km apart, and the radius is 25 km, so …',
+        'An IP lookup cannot pinpoint a device because …',
+      ],
+      modelAnswer:
+        'The circle is centred on Darwin City and takes in the Waterfront, Cullen Bay, Mindil Beach, Parap, Fannie Bay, Nightcliff, Casuarina, the Airport, Winnellie, Berrimah, East Arm and Palmerston (Howard Springs sits right on the edge). The scene and the Okafor home are only about 17 km apart in a straight line, so both sit well inside the same circle. The lookup estimates where TopNet registers or routes the address (its Darwin City hub), not where the device is, so it cannot separate any two places inside the circle.',
+    },
+    {
+      id: 'ext-router-sessions',
+      title: 'Lining up the router sessions',
+      prompt:
+        "Compare the times in the StreamCloud login record with the device sessions in the Okafor router log. Which devices were connected at 7:52 pm, and which were still connected when the game stream ended at 11:16 pm? Explain why the login record's IP address alone cannot tell you which device was used.",
+      evidenceIds: ['login-streamcloud', 'router-log-okafor'],
+      guidance: [
+        'Write each device with its connected and disconnected times, then mark 7:52 pm and 11:16 pm on the list.',
+        'At 7:52 pm, the devices connected were …',
+        'Every device in the house shares one public IP, so …',
+      ],
+      modelAnswer:
+        "At 7:52 pm SAM-PHONE, OKAFOR-TV and RILEY-LAPTOP were all connected. At 11:16 pm only SAM-PHONE and RILEY-LAPTOP were still connected (the TV left at 10:10 pm), so if one device ran the whole stream it was probably one of those two. All devices on the home network share the public IP 203.0.113.47, so the login record shows which connection was used, not which device. StreamCloud's session and device details would be needed, and even then they would show a device, not who was using it.",
     },
   ],
 
