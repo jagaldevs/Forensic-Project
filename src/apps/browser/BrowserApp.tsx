@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { usableEvidence } from '../../engine/availability';
-import type { EvidenceOfType } from '../../engine/types';
+import type { CaseFile, EvidenceOfType } from '../../engine/types';
 import { useDesktop } from '../../stores/desktopStore';
 import { useProgress } from '../../stores/progressStore';
 import { Icon } from '../../ui/Icon';
@@ -13,6 +13,12 @@ import { historyRows, type KindFilter } from './historyRows';
 import b from './browser.module.css';
 
 type History = EvidenceOfType<'browserHistory'>;
+
+/** Histories from a phone or tablet are drawn inside a phone frame. */
+function isHandheld(c: CaseFile, item: History): boolean {
+  const type = c.devices.find((d) => d.id === item.deviceId)?.type;
+  return type === 'phone' || type === 'tablet';
+}
 
 const kindFilters: { id: KindFilter; label: string }[] = [
   { id: 'all', label: 'All' },
@@ -53,7 +59,7 @@ export default function BrowserApp({ params }: AppProps) {
                   aria-current={p.id === selected.id}
                   onClick={() => useDesktop.getState().setParams('browser', { selected: p.id })}
                 >
-                  <Icon name="search" size={18} />
+                  <Icon name={isHandheld(c, p) ? 'phone' : 'search'} size={18} />
                   <span className={s.listItemText}>
                     <span>{p.title}</span>
                     <span className={s.listItemSub}>
@@ -81,6 +87,7 @@ function HistoryView({ item }: { item: History }) {
   const [kind, setKind] = useState<KindFilter>('all');
   const device = c.devices.find((d) => d.id === item.deviceId);
   const { rows, shown, total } = historyRows(item, query, kind);
+  const handheld = isHandheld(c, item);
 
   return (
     <article>
@@ -90,79 +97,87 @@ function HistoryView({ item }: { item: History }) {
         by {device?.name ?? 'the device'} ({item.browser}).
       </p>
 
-      <div className={b.filters}>
-        <div className={b.searchBox}>
-          <label className="visually-hidden" htmlFor={`history-filter-${item.id}`}>
-            Filter history
-          </label>
-          <input
-            id={`history-filter-${item.id}`}
-            type="search"
-            className={ui.input}
-            placeholder="Filter by words or address…"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
+      <div className={handheld ? b.phone : undefined}>
+        {handheld && (
+          <div className={b.phoneTop} aria-hidden="true">
+            <span>{device?.name}</span>
+            <span>History</span>
+          </div>
+        )}
+        <div className={b.filters}>
+          <div className={b.searchBox}>
+            <label className="visually-hidden" htmlFor={`history-filter-${item.id}`}>
+              Filter history
+            </label>
+            <input
+              id={`history-filter-${item.id}`}
+              type="search"
+              className={ui.input}
+              placeholder="Filter by words or address…"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
+          <div className={b.kinds} role="group" aria-label="Show">
+            {kindFilters.map((f) => (
+              <button
+                key={f.id}
+                type="button"
+                className={b.kind}
+                aria-pressed={kind === f.id}
+                onClick={() => setKind(f.id)}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
         </div>
-        <div className={b.kinds} role="group" aria-label="Show">
-          {kindFilters.map((f) => (
-            <button
-              key={f.id}
-              type="button"
-              className={b.kind}
-              aria-pressed={kind === f.id}
-              onClick={() => setKind(f.id)}
-            >
-              {f.label}
-            </button>
-          ))}
-        </div>
-      </div>
-      <p className={b.count} role="status">
-        Showing {shown} of {total} entries
-      </p>
+        <p className={b.count} role="status">
+          Showing {shown} of {total} entries
+        </p>
 
-      <ol className={b.list} aria-label={`History for ${item.profile}`}>
-        {rows.map((row, i) => {
-          const date = row.at.slice(0, 10);
-          const heading = date !== rows[i - 1]?.at.slice(0, 10);
-          return (
-            <li key={`${row.type}-${row.at}-${i}`}>
-              {heading && <h4 className={b.date}>{date}</h4>}
-              {row.type === 'cleared' ? (
-                <div className={b.gap}>
-                  <Icon name="trash" size={18} />
-                  <div>
-                    <strong>
-                      History cleared: {row.at.slice(11, 16)} to {row.to.slice(11, 16)}.
-                    </strong>{' '}
-                    Anything visited in this period was deleted from this profile.
-                    {row.note && <span className={b.gapNote}>{row.note}</span>}
+        <ol className={b.list} aria-label={`History for ${item.profile}`}>
+          {rows.map((row, i) => {
+            const date = row.at.slice(0, 10);
+            const heading = date !== rows[i - 1]?.at.slice(0, 10);
+            return (
+              <li key={`${row.type}-${row.at}-${i}`}>
+                {heading && <h4 className={b.date}>{date}</h4>}
+                {row.type === 'cleared' ? (
+                  <div className={b.gap}>
+                    <Icon name="trash" size={18} />
+                    <div>
+                      <strong>
+                        History cleared: {row.at.slice(11, 16)} to {row.to.slice(11, 16)}.
+                      </strong>{' '}
+                      Anything visited in this period was deleted from this profile.
+                      {row.note && <span className={b.gapNote}>{row.note}</span>}
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <div className={b.entry}>
-                  <span className={b.time}>{row.at.slice(11, 16)}</span>
-                  <Icon name={row.entry.kind === 'search' ? 'search' : 'globe'} size={18} />
-                  <span className={b.entryText}>
-                    {row.entry.kind === 'search' ? (
-                      <span>
-                        Searched for <strong>“{row.entry.title}”</strong>
-                      </span>
-                    ) : (
-                      <span>{row.entry.title}</span>
-                    )}
-                    {row.entry.url && <span className={b.url}>{row.entry.url}</span>}
-                  </span>
-                </div>
-              )}
-            </li>
-          );
-        })}
-      </ol>
-      {shown === 0 && (
-        <p className={b.none}>No entries match that filter. Try fewer words, or choose All.</p>
-      )}
+                ) : (
+                  <div className={b.entry}>
+                    <span className={b.time}>{row.at.slice(11, 16)}</span>
+                    <Icon name={row.entry.kind === 'search' ? 'search' : 'globe'} size={18} />
+                    <span className={b.entryText}>
+                      {row.entry.kind === 'search' ? (
+                        <span>
+                          Searched for <strong>“{row.entry.title}”</strong>
+                        </span>
+                      ) : (
+                        <span>{row.entry.title}</span>
+                      )}
+                      {row.entry.url && <span className={b.url}>{row.entry.url}</span>}
+                    </span>
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+        {shown === 0 && (
+          <p className={b.none}>No entries match that filter. Try fewer words, or choose All.</p>
+        )}
+      </div>
 
       {item.note && (
         <p className={s.callout}>
@@ -171,9 +186,10 @@ function HistoryView({ item }: { item: History }) {
         </p>
       )}
       <p className={s.prompt}>
-        <strong>Think:</strong> a cleared period shows that someone deleted history. It does not
-        show what was visited, or who cleared it. Whose profile is this, and who else could use that
-        device?
+        <strong>Think:</strong>{' '}
+        {item.cleared?.length
+          ? 'a cleared period shows that someone deleted history. It does not show what was visited, or who cleared it. Whose profile is this, and who else could use that device?'
+          : 'a history shows what was searched and visited on this profile. It does not show who was typing, or why. Who else could use this device or account?'}
       </p>
     </article>
   );

@@ -60,6 +60,8 @@
   /* Messages: the device owner's own bubbles */
   --bubble-mine: #2563a8;
   --on-bubble-mine: #ffffff;
+  /* Browser History: the frame drawn round a phone's history (decorative) */
+  --phone-bezel: #2b2f36;
   --terminal-ok: #1d7a45;
 
   /* Status: always paired with an icon and a text label */

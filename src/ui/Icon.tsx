@@ -71,6 +71,7 @@ const paths = {
   table: 'M3 5h18v14H3z M3 10h18 M3 15h18 M9 5v14',
   door: 'M6 3h12v18H6z M14 12h0.01',
   battery: 'M3 8h15v8H3z M21 11v2 M6 11h6',
+  phone: 'M7 2h10v20H7z M11 18.5h2',
 } as const;
 
 export type IconName = keyof typeof paths;
