@@ -88,5 +88,6 @@ structure, broken references, real brand names and non-documentation IP addresse
   restore later.
 - The app never asks for real names, never uses the camera, location or files, and makes no
   network requests to anything except its own files.
-- All people, businesses, accounts and records are fictional. IP addresses come only from the
+- All people, businesses, accounts and records are fictional, except the school's name and the
+  science teacher's (see `src/brand/local.ts`). IP addresses come only from the
   documentation ranges `192.0.2.0/24`, `198.51.100.0/24` and `203.0.113.0/24`.

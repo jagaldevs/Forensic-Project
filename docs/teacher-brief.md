@@ -44,11 +44,11 @@ A first-run tour shows students the desktop. In each case, students choose a **s
 
 **Privacy and safety**
 
-- No logins, no accounts, no analytics. Nothing is sent anywhere: progress stays in the
-  browser on that device. Students enter only a made-up codename.
-- Every person, business, account, IP address and record is fictional. Incidents are
-  age-appropriate (a missing trophy, a missing person found safe, a switched project).
-- Works offline once it has loaded, and on laptops, Chromebooks and iPads.
+- No logins, accounts or analytics; nothing is sent anywhere. Progress stays in the browser on
+  that device, and students enter only a made-up codename. Works offline once loaded, on
+  laptops, Chromebooks and iPads.
+- Everything is fictional except the school's name and Mrs Staggs (with permission), who only
+  narrates, never appears in the evidence. Incidents are age-appropriate.
 - The teacher and assessment codes are **not secure**: a determined student could find them.
   Treat the assessment as a classroom task, not an exam.
 

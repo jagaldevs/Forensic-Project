@@ -23,6 +23,9 @@ A running list for the end-of-project review. Newest additions at the bottom of 
 - [ ] Review the teacher guide and student sheets (`docs/lessons/`), and check the curriculum
       codes against the ACARA website (taken from a reproduction of the v9 tables).
 - [ ] Add the lab's Netlify link to the teacher brief once it is final.
+- [ ] Check that no fictional student name in the cases matches a real student in the class
+      (Morgan Lee, Priya Nair, Tom Baxter, Jamie Ellison, Kit Lam, Elliot Barker, Sasha Morales,
+      Riley and Sam Okafor). The school and Mrs Staggs now appear by name (she has agreed).
 
 ## Decisions to review
 

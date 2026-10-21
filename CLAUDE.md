@@ -118,7 +118,7 @@ Photos (Get Info metadata), IP Lookup (ISP, approx location, accuracy radius on 
 
 ## Safety and ethics rules (non-negotiable)
 
-- All people, accounts, devices, businesses and records are fictional. No real people, platforms or brands (invent e.g. "StreamCloud", "TopNet").
+- All people, accounts, devices, businesses and records are fictional. No real people, platforms or brands (invent e.g. "StreamCloud", "TopNet"). **Only exception:** the school's name and the class's science teacher (Mrs Staggs, with her permission), kept in `src/brand/local.ts`. Staff appear only as narrators or helpers, never in the evidence trail or as suspects; students in the stories are always fictional; school email addresses use `haileybury.example`, never the real domain.
 - **IPs only from documentation ranges**: `192.0.2.0/24`, `198.51.100.0/24`, `203.0.113.0/24`. Enforced by the schema.
 - MAC addresses clearly fictional (use locally administered prefix, e.g. `02:00:5E:…`, or `00:00:5E:00:53:xx` documentation range). Enforced by the schema.
 - Real Darwin place names OK; private addresses fictional.
@@ -175,7 +175,7 @@ The schema cross-checks references (every evidence/question/device id referenced
 - Commit in small, well-described steps.
 - Keep `docs/TODO.md` current: anything left for the teacher, decisions to review, deferred features, and anything unverified. The owner reviews it all at the end.
 - Keep this file updated as decisions are made (append to Decisions).
-- Never add a runtime network dependency. Never add real names/brands/IPs.
+- Never add a runtime network dependency. Never add real names/brands/IPs (beyond `src/brand/local.ts`).
 
 ## Decisions log
 
@@ -266,3 +266,9 @@ Teacher documents (21 Oct 2026):
 - Australian Curriculum v9 Year 8 codes cited (AC9S8H01, H03, I04–I08); wording taken from a reproduction of the ACARA tables, flagged in the guide for checking.
 - Markdown is the source; Word copies are generated (`docx` + `marked`, dev only). The brief must stay on one A4 page (check after edits).
 - Logo: `src/brand/haileybury-logo.jpg` (supplied by the owner); full logo on large slots, a CSS crop of the crest in top bars.
+
+Familiar names (21 Oct 2026, requested):
+
+- The school (Haileybury Rendall School / HRS) and the class's science teacher, **Mrs Staggs** (agreed), appear by name: she introduces the Training Academy, each case briefing mentions her class, and she sends The Science Fair Switch briefing. That case now happens at HRS (was the fictional Arafura Park College); fictional Mr Osei keeps the evidence-collection role, so no real person is in the evidence trail of a case whose culprit is deliberately unresolved. Riley (Waterfront) is a former HRS student; Jamie's friends are HRS students. All students in the stories stay fictional.
+- Names come from `src/brand/local.ts` (cases import it), so another class can swap them. Student sheets name Mrs Staggs directly.
+- Curriculum: Australian Curriculum v9 (NT). Codes were checked against a copy of the ACARA tables because the ACARA site could not be read; the guide says to confirm them.

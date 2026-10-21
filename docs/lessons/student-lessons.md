@@ -8,7 +8,7 @@ Year 8 Science · HRS Digital Forensics Lab · one sheet per lesson.
 2. What does it **not** show?
 3. What **further evidence** would help me decide?
 
-Your progress is saved on the device you use. If your teacher asks, copy your **progress code**
+Your progress is saved on the device you use. If Mrs Staggs asks, copy your **progress code**
 (top bar → Back up progress) into your notes at the end of each lesson.
 
 ## Lesson 1: Is this proof?
@@ -176,7 +176,7 @@ How it changed my thinking: ____________________________________________________
 **What to do**
 
 1. On the case list, choose **Enter access code** on The Science Fair Switch and type the code
-   from your teacher.
+   from Mrs Staggs.
 2. Choose your support level. There are **no hints** in this case.
 3. Investigate. For every piece of evidence, ask what it shows, what it does not show, and
    what further evidence would help.

@@ -36,8 +36,9 @@ The science links make this more than a computing unit. Make them explicit in ev
 | AC9S8I07 | Construct evidence-based arguments to support conclusions or evaluate claims, and consider any ethical issues…                                                | 2, 3, 5, 6 |
 | AC9S8I08 | Write and create texts to communicate ideas, findings and arguments for specific purposes and audiences…                                                      | 5, 6       |
 
-Wording checked against a reproduction of the ACARA v9 tables; confirm against the
-[Australian Curriculum website](https://www.australiancurriculum.edu.au/) before formal planning.
+Codes and wording are from the Australian Curriculum v9 (as used in the NT), taken from a copy of
+the ACARA tables because the ACARA site could not be read when this was written. Confirm them on
+the [Australian Curriculum website](https://www.australiancurriculum.edu.au/) before formal planning.
 
 ## Unit at a glance
 
@@ -66,6 +67,15 @@ assessment uses a browser history, and this mission is the only practice for rea
 - [ ] Print the student sheets (one per lesson) and, for lesson 1, the card sort; for lesson 3,
       the warrant scenarios (both at the end of this guide).
 - [ ] Turn teacher mode **off** on any device students will use. It stays on until turned off.
+- [ ] Check that no fictional student in the cases shares a name with a real student in the class
+      (e.g. Morgan Lee, Priya Nair, Tom Baxter, Jamie Ellison, Kit Lam, Elliot Barker, Sasha
+      Morales). Rename them in the case files if needed.
+
+**Familiar names.** The lab uses the school's name and Mrs Staggs's name (with her permission) to
+feel familiar: she introduces the Training Academy, is mentioned in each case briefing, and sends
+the assessment briefing herself. Staff appear only as narrators, never in the evidence or as
+suspects; every student in the stories is fictional. The names live in one file,
+`src/brand/local.ts`, so another teacher can swap in their own.
 
 **Support levels.** In every case students choose Guided, Standard or Deep dive (they can switch
 at any time). Everyone gets the same questions and answer key. Suggest: "Choose the level that
@@ -244,11 +254,11 @@ improves reasoning.
 **You need:** the **assessment access code** on the board (or given out on slips); student sheet
 6 (the reflection task).
 
-| Time  | What happens                                                                                                                                                                                                                                                                                                                                                                                                       |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 0–5   | Students open the lab and, on the case list, choose _Enter access code_ on The Science Fair Switch, and type the code. Remind them: **no hints** in this case, they choose a support level as usual, and they **submit once** from the report.                                                                                                                                                                     |
-| 5–50  | **The Science Fair Switch** (about 45 min). A Year 9 team's results file was changed the night before judging. Evidence includes a cloud drive with version history (times shown in **UTC**), two emails (one spoofed), browser histories, a fitness band, a smart doorbell and lab sensors. Students answer five questions (four verdicts, one open) and press **Save** on each, then **Submit** from the Report. |
-| 50–60 | **Reflection** (student sheet 6), handwritten or typed.                                                                                                                                                                                                                                                                                                                                                            |
+| Time  | What happens                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0–5   | Students open the lab and, on the case list, choose _Enter access code_ on The Science Fair Switch, and type the code. Remind them: **no hints** in this case, they choose a support level as usual, and they **submit once** from the report.                                                                                                                                                                                                  |
+| 5–50  | **The Science Fair Switch** (about 45 min). A Year 9 team's results file was changed the night before judging at the school's science fair. Evidence includes a cloud drive with version history (times shown in **UTC**), two emails (one spoofed), browser histories, a fitness band, a smart doorbell and lab sensors. Students answer five questions (four verdicts, one open) and press **Save** on each, then **Submit** from the Report. |
+| 50–60 | **Reflection** (student sheet 6), handwritten or typed.                                                                                                                                                                                                                                                                                                                                                                                         |
 
 **After the lesson:** each student copies their **progress code** (top bar → Back up progress)
 and submits it (e.g. in a learning platform assignment) along with their report PDF and
