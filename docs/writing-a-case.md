@@ -59,13 +59,37 @@ Your editor will autocomplete every field and underline mistakes in red.
 
 ### Times
 
-Write evidence times as ISO timestamps **with an offset**, e.g. `2026-08-14T19:52:07+09:30`.
-The lab shows them in the case's `timeZone`. To build a time-zone puzzle (e.g. a phone set to
-AEST, `+10:00`), record that device's times with its own offset; the lab converts them, and the
-30-minute difference appears naturally.
+Record-keeping systems (login records, posts, router logs) use ISO timestamps **with an
+offset**, e.g. `2026-08-14T19:52:07+09:30`, and the lab shows them in the case's `timeZone`.
 
-Photo metadata is different: it is shown **exactly as you write it**, so use EXIF style
-(`2026:08:14 20:01:37`).
+Anything a **device** displayed (message times, CCTV overlays, photo metadata) is written
+exactly as the device showed it. Photo metadata is EXIF style (`2026:08:14 20:01:37`); message
+and timeline times are `2026-08-22T19:12` with no offset.
+
+### The Timeline and time-zone puzzles
+
+Any evidence item can add moments to the **Timeline** app with an optional `timeline` list:
+
+```ts
+timeline: [{ recorded: '2026-08-22T18:30:12', deviceId: 'ari-phone', label: 'Ari photographs Jamie' }],
+```
+
+The Timeline plots `recorded` **as the device showed it**. To build a time-zone puzzle, give the
+device a `clock` that differs from the case (teacher knowledge only):
+
+```ts
+{ id: 'ari-phone', ownerId: 'ari-ellison', type: 'phone', name: "Ari's phone",
+  clock: { label: 'AEST (Brisbane)', utcOffset: '+10:00' } }
+```
+
+…and write its times in that zone. Students see an impossible-looking order until they find
+evidence of the setting (e.g. a settings screenshot) and choose "Set to AEST" for that device on
+the Timeline, which moves its events into place. The lab never corrects anything on its own.
+Leave out `deviceId` for records already in the case's zone (bus logs, posts).
+
+The Timeline and Map appear in the dock automatically: the Timeline if any evidence has a
+`timeline`, the Map if the case has `mapMarkers`. Other apps appear only if the case has
+evidence for them.
 
 ### Briefing message
 
@@ -87,21 +111,30 @@ Every item has these fields:
 | `hashAtCollection` | Optional. Leave it out (the lab computes it). Set a different 64-character hex value to simulate tampering after collection |
 | `teacherNote`      | Optional. For teacher mode: what this clue is for                                                                           |
 
-Types available now (✓ = has its own app in Phase 1; others show in the Evidence Locker):
+Every item can also have a `timeline` (see above).
 
-| `type`          | `app`       | Extra fields                                                                       |
-| --------------- | ----------- | ---------------------------------------------------------------------------------- |
-| `photo` ✓       | `photos`    | `src` (imported image), `alt`, `fileName`, `metadata` rows                         |
-| `ipRecord` ✓    | `iplookup`  | `ip`, `isp`, `network?`, `locationLabel`, `accuracyRadiusKm`, `centre`             |
-| `networkLog` ✓  | `netlog`    | `routerName`, `household`, `publicIp`, `logDate`, `sessions`                       |
-| `loginRecord` ✓ | `locker`    | `service`, `account`, `events` (time, event, IP), `note?`                          |
-| `document` ✓    | `locker`    | `fields` (label/value rows), `body?`                                               |
-| `message`       | `messages`  | `thread`, `from`, `to`, `sentAt`, `body`, `readAt?`, `deleted?`                    |
-| `searchEntry`   | `browser`   | `kind` (search/visit/cleared), `at`, `query?`, `url?`, `pageTitle?`                |
-| `file`          | `drive`     | `fileName`, `path`, `sizeBytes`, `owner`, `createdAt`, `modifiedAt`, `versions`    |
-| `email`         | `email`     | `from`, `to`, `subject`, `sentAt`, `body`, `headers`                               |
-| `wearableLog`   | `wearables` | `device`, `measure`, `samples`                                                     |
-| `socialPost`    | `social`    | `platform`, `author`, `handle`, `postedAt`, `body`, `imageEvidenceId?`, `checkIn?` |
+Types available now (✓ = has its own app; others show in the Evidence Locker):
+
+| `type`            | `app`       | Extra fields                                                                                                                                                     |
+| ----------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `photo` ✓         | `photos`    | `src` (imported image), `alt`, `fileName`, `metadata` rows                                                                                                       |
+| `ipRecord` ✓      | `iplookup`  | `ip`, `isp`, `network?`, `locationLabel`, `accuracyRadiusKm`, `centre`                                                                                           |
+| `networkLog` ✓    | `netlog`    | `routerName`, `household`, `publicIp`, `logDate`, `sessions`                                                                                                     |
+| `loginRecord` ✓   | `locker`    | `service`, `account`, `events` (time, event, IP), `note?`                                                                                                        |
+| `document` ✓      | `locker`    | `fields` (label/value rows), `body?`                                                                                                                             |
+| `messageThread` ✓ | `messages`  | `service`, `deviceId` (whose copy), `participants`, `messages` (`from`, `at`, `body`, `status?`, `readAt?`, `deleted?`)                                          |
+| `socialPost` ✓    | `social`    | `platform`, `author`, `handle`, `postedAt`, `body`, `image?`, `originalEvidenceId?` (a photo item: enables "compare with the original"), `checkIn?`, `comments?` |
+| `cctvStill` ✓     | `cctv`      | `camera`, `location`, `deviceId`, `src`, `alt`, `overlay` (the burned-in timestamp), `note?`                                                                     |
+| `searchEntry`     | `browser`   | `kind` (search/visit/cleared), `at`, `query?`, `url?`, `pageTitle?`                                                                                              |
+| `file`            | `drive`     | `fileName`, `path`, `sizeBytes`, `owner`, `createdAt`, `modifiedAt`, `versions`                                                                                  |
+| `email`           | `email`     | `from`, `to`, `subject`, `sentAt`, `body`, `headers`                                                                                                             |
+| `wearableLog`     | `wearables` | `device`, `measure`, `samples`                                                                                                                                   |
+
+Devices need an `ownerId` (a person) or an `ownerLabel` (e.g. "Waterfront venue operator" for
+a security camera).
+
+**Cropped images:** to make a cropped post, copy the SVG and change its `viewBox` to the part you
+want to show (see `src/cases/where-was-jamie/assets/`).
 
 **IP lookups** only appear in the locker once a student looks the address up, which rewards
 using the tool. `centre` is a point on the shared map in kilometres (Darwin City is about

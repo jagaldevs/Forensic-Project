@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" role="img" aria-label="Sunset over the water at a marina, with a Cullen Bay Marina sign and moored boats on the left">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f2a63"/><stop offset="0.55" stop-color="#e46a70"/><stop offset="1" stop-color="#ffbf6b"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f09a6f"/><stop offset="1" stop-color="#2d3f7a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="750" fill="url(#sky)"/>
+  <circle cx="640" cy="430" r="70" fill="#ffd47a"/>
+  <rect y="430" width="1000" height="320" fill="url(#sea)"/>
+  <g stroke="#ffe0a8" stroke-width="5" opacity="0.6">
+    <line x1="590" y1="455" x2="690" y2="455"/><line x1="605" y1="480" x2="675" y2="480"/><line x1="620" y1="505" x2="660" y2="505"/>
+  </g>
+  <!-- marina on the left: boats, masts, pontoon -->
+  <g fill="#1d1a33">
+    <path d="M20 470 h190 l-26 34 h-140z"/><path d="M60 520 h150 l-20 28 h-112z"/>
+    <rect x="110" y="250" width="5" height="222"/><rect x="150" y="300" width="4" height="222"/>
+    <path d="M115 260 l70 200 h-70z" opacity="0.6"/>
+    <rect x="0" y="560" width="330" height="18"/>
+    <rect x="40" y="560" width="10" height="190"/><rect x="200" y="560" width="10" height="190"/>
+  </g>
+  <!-- marina sign -->
+  <g transform="translate(220 360)">
+    <rect x="0" y="0" width="200" height="66" rx="6" fill="#f4f1e8"/>
+    <rect x="96" y="66" width="8" height="140" fill="#1d1a33"/>
+    <text x="100" y="28" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#1d3f6e">CULLEN BAY</text>
+    <text x="100" y="52" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="16" fill="#1d3f6e">MARINA</text>
+  </g>
+  <!-- far shore -->
+  <path d="M430 432 q120 -10 240 -4 q160 -8 330 -2 v8 h-570z" fill="#3a2747" opacity="0.8"/>
+</svg>

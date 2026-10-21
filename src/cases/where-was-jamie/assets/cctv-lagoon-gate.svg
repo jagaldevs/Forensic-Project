@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="CCTV still of a lagoon entry gate">
+  <defs>
+    <filter id="mono">
+      <feColorMatrix type="saturate" values="0.45"/>
+    </filter>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="11"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <filter id="blur"><feGaussianBlur stdDeviation="1.6"/></filter>
+    <radialGradient id="vig" cx="0.5" cy="0.5" r="0.75">
+      <stop offset="0.6" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.65"/>
+    </radialGradient>
+  </defs>
+  <g filter="url(#mono)">
+    <rect width="800" height="500" fill="#8aa0a8"/>
+    <!-- paved forecourt in perspective -->
+    <polygon points="0,180 800,140 800,500 0,500" fill="#b9b3a6"/>
+    <g stroke="#9c968a" stroke-width="2">
+      <line x1="0" y1="260" x2="800" y2="230"/><line x1="0" y1="350" x2="800" y2="330"/><line x1="0" y1="440" x2="800" y2="430"/>
+      <line x1="200" y1="170" x2="60" y2="500"/><line x1="420" y1="160" x2="380" y2="500"/><line x1="640" y1="150" x2="720" y2="500"/>
+    </g>
+    <!-- lagoon water and fence -->
+    <rect x="0" y="40" width="800" height="120" fill="#5f8fa3"/>
+    <g stroke="#2d3438" stroke-width="5">
+      <line x1="0" y1="150" x2="330" y2="140"/><line x1="470" y1="136" x2="800" y2="126"/>
+      <line x1="0" y1="120" x2="330" y2="112"/><line x1="470" y1="108" x2="800" y2="100"/>
+    </g>
+    <g fill="#2d3438">
+      <rect x="40" y="100" width="6" height="56"/><rect x="140" y="98" width="6" height="56"/><rect x="240" y="96" width="6" height="54"/>
+      <rect x="520" y="92" width="6" height="52"/><rect x="620" y="90" width="6" height="52"/><rect x="720" y="88" width="6" height="52"/>
+    </g>
+    <!-- gate posts and sign -->
+    <rect x="320" y="60" width="16" height="110" fill="#3a4246"/>
+    <rect x="466" y="56" width="16" height="110" fill="#3a4246"/>
+    <rect x="336" y="60" width="130" height="26" fill="#e9e6dd"/>
+    <text x="401" y="79" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="15" fill="#2d3438">LAGOON ENTRY</text>
+    <!-- benches, bins -->
+    <rect x="80" y="230" width="120" height="14" fill="#6b5f50"/><rect x="88" y="244" width="8" height="22" fill="#6b5f50"/><rect x="184" y="244" width="8" height="22" fill="#6b5f50"/>
+    <rect x="640" y="200" width="30" height="44" rx="4" fill="#4c5a52"/>
+    <!-- figure walking out with a backpack (blurred, back to camera) -->
+    <g filter="url(#blur)">
+      <ellipse cx="420" cy="372" rx="34" ry="8" fill="#000" opacity="0.25"/>
+      <circle cx="420" cy="252" r="17" fill="#3a2e28"/>
+      <path d="M396 272 q24 -10 48 0 l6 62 q-30 8 -60 0z" fill="#d8d3c8"/>
+      <rect x="403" y="270" width="34" height="44" rx="8" fill="#4f7d4c"/>
+      <rect x="400" y="332" width="16" height="38" fill="#26262a"/>
+      <rect x="424" y="332" width="16" height="38" fill="#26262a"/>
+    </g>
+    <!-- two other people near the gate, very small -->
+    <g filter="url(#blur)" opacity="0.8">
+      <circle cx="560" cy="170" r="9" fill="#3a2e28"/><rect x="551" y="178" width="18" height="34" rx="5" fill="#7d6b5c"/>
+      <circle cx="590" cy="172" r="9" fill="#3a2e28"/><rect x="581" y="180" width="18" height="32" rx="5" fill="#5c6b7d"/>
+    </g>
+  </g>
+  <rect width="800" height="500" fill="url(#vig)"/>
+  <rect width="800" height="500" filter="url(#grain)" opacity="0.28" style="mix-blend-mode:overlay"/>
+  <g stroke="#ffffff" stroke-opacity="0.05"><line x1="0" y1="100" x2="800" y2="100"/><line x1="0" y1="300" x2="800" y2="300"/></g>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Three teenagers with towels beside a wave lagoon in late afternoon">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7fb5e0"/><stop offset="1" stop-color="#f3c99a"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3fb7c9"/><stop offset="1" stop-color="#1f7f9a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <g fill="#c9d8e3" opacity="0.8">
+    <rect x="560" y="80" width="70" height="170"/><rect x="640" y="120" width="60" height="130"/><rect x="500" y="140" width="50" height="110"/>
+  </g>
+  <rect y="250" width="800" height="150" fill="url(#water)"/>
+  <g stroke="#bff0f7" stroke-width="5" fill="none" opacity="0.8">
+    <path d="M0 290 q50 -14 100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0"/>
+    <path d="M0 330 q50 -12 100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0"/>
+  </g>
+  <rect y="400" width="800" height="200" fill="#e6dccb"/>
+  <!-- three friends -->
+  <g>
+    <g transform="translate(250 330)">
+      <circle cx="0" cy="0" r="34" fill="#8a5a3c"/><path d="M-34 -6 q34 -40 68 0 q-10 -30 -34 -32 q-24 2 -34 32z" fill="#2b1e18"/>
+      <rect x="-42" y="34" width="84" height="120" rx="20" fill="#f08a5d"/>
+      <rect x="-50" y="100" width="100" height="24" rx="10" fill="#ffffff" transform="rotate(-8)"/>
+    </g>
+    <g transform="translate(400 320)">
+      <circle cx="0" cy="0" r="36" fill="#c99a76"/><path d="M-36 -4 q36 -46 72 0 q-6 -34 -36 -36 q-30 2 -36 36z" fill="#3a2a1e"/>
+      <rect x="-44" y="36" width="88" height="128" rx="20" fill="#e9e3d6"/>
+      <rect x="-30" y="44" width="60" height="70" rx="14" fill="#4f7d4c"/>
+      <path d="M-12 18 q12 10 24 0" stroke="#3a2a1e" stroke-width="4" fill="none"/>
+    </g>
+    <g transform="translate(550 334)">
+      <circle cx="0" cy="0" r="32" fill="#f0c8a0"/><path d="M-32 -2 q32 -40 64 0 q-6 -30 -32 -32 q-26 2 -32 32z" fill="#d6a35a"/>
+      <rect x="-40" y="32" width="80" height="118" rx="20" fill="#5d8bf0"/>
+    </g>
+  </g>
+  <!-- a raised hand making a peace sign -->
+  <path d="M452 270 l6 -40 l8 2 l-2 30 l6 -28 l8 2 l-6 40z" fill="#c99a76"/>
+</svg>

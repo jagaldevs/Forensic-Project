@@ -132,7 +132,7 @@ The schema cross-checks references (every evidence/question/device id referenced
 
 1. **Foundations + vertical slice** — infra, design tokens, PWA, schema + validation test; boot → agent → case select → briefing → desktop; Photos, IP Lookup, Network Log (warrant-locked), Evidence Board, Judgements, basic Report; mini case "The Waterfront Alibi" (~25 min). **Done (21 Oct 2026).**
 2. **Training Academy** — short interactive modules: metadata, digital footprints, search history & cookies, IP addresses & networks, timestamps & time zones, ethics & privacy. **MVP done (21 Oct 2026)**: six missions, data-driven like cases (`engine/missionSchema.ts`, `engine/checkStep.ts`, `stores/academyStore.ts`).
-3. **Flagship case "Where was Jamie?"** — missing-person timeline: Messages, Map, CCTV-style stills, Social Feed. Time-zone trap: phone on AEST (UTC+10) vs Darwin ACST (UTC+9:30, no DST) → mysterious 30-minute discrepancy.
+3. **Flagship case "Where was Jamie?"** — missing-person timeline: Messages, Map, CCTV-style stills, Social Feed. Time-zone trap: phone on AEST (UTC+10) vs Darwin ACST (UTC+9:30, no DST) → mysterious 30-minute discrepancy. **Done (21 Oct 2026)**: `src/cases/where-was-jamie/`, plus Messages, Social Feed, CCTV, Map (travel calculator) and Timeline (clock corrections) apps.
 4. **Remaining apps**, final unseen assessment case, polished report export, teacher mode.
 5. **Polish** — sound design, onboarding tutorial, accessibility audit, performance pass.
 
@@ -196,3 +196,15 @@ Made during the Phase 2 (Training Academy MVP) build:
 - Progress code is now **v2** (adds `academy`); v1 codes still import.
 - Reflection prompts ask about a fictional character, never the student's own life (privacy rule).
 - Replaying a completed mission keeps its badge.
+
+Made during the Phase 3 ("Where was Jamie?") build:
+
+- **Jamie is safe from the first line of the briefing.** The case is framed as a review: why did the search go to the wrong beach?
+- **Consent vs warrants:** Jamie's own data comes via a parent's consent; other people's data (bus card, phone network) needs narrow warrants; "all friends' messages" is refused.
+- **Timeline never auto-corrects.** Evidence carries `timeline` entries with times _as recorded_; devices may have a hidden `clock`. Students apply per-device zone corrections (stored in `CaseProgress.clockCorrections`). Times truncate seconds like real clocks.
+- **Dock is per case** (`appsForCase`): core four + apps that have evidence + Map (if map pins) + Timeline (if timed evidence).
+- `message` evidence was replaced by `messageThread` (one pinnable thread, as seen on one device). `socialPost` gained `image`, `originalEvidenceId`, `comments`; new `cctvStill` type. Devices can have `ownerLabel` instead of a person.
+- Map places added (Mindil Beach, Parap) and Waterfront/Cullen Bay moved so travel times between them are realistic. The map can zoom (`viewAround`) with labels kept the same size.
+- Travel times = straight line × 1.3 road factor at a speed range (+ waiting for buses). Shown as a range, labelled as an estimate.
+- Saved windows from another case are never rendered (`useCaseWindows`); this previously marked evidence as viewed in the wrong case.
+- Q1's time-zone nudge is in its hints (no separate Timeline hint for the MVP).
