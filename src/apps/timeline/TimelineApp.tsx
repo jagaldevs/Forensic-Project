@@ -7,6 +7,7 @@ import {
   timelineDeviceIds,
 } from '../../engine/timeline';
 import { useProgress } from '../../stores/progressStore';
+import { useSettings } from '../../stores/settingsStore';
 import { Icon } from '../../ui/Icon';
 import { Badge } from '../../ui/StatusBadge';
 import ui from '../../ui/ui.module.css';
@@ -28,6 +29,7 @@ export default function TimelineApp() {
   const deviceIds = timelineDeviceIds(evidence);
   const winStart = clockToMinutes(c.incident.windowStart);
   const winEnd = clockToMinutes(c.incident.windowEnd);
+  const teacherMode = useSettings((st) => st.teacherMode);
 
   if (!points.length)
     return (
@@ -77,6 +79,12 @@ export default function TimelineApp() {
                       </option>
                     ))}
                 </select>
+                {teacherMode && (
+                  <p className={t.trueClock}>
+                    <Icon name="shield" size={14} /> Teacher: really set to{' '}
+                    <strong>{device?.clock?.label ?? `case time (${c.timeZone.label})`}</strong>
+                  </p>
+                )}
               </div>
             );
           })}
@@ -97,7 +105,11 @@ export default function TimelineApp() {
                   {clockTo12(`${minutesToClock(p.minutes).slice(0, 2)}:00`)}
                 </div>
               )}
-              <div className={t.time}>{minutesToClock(p.minutes)}</div>
+              <div className={t.time}>
+                {minutesToClock(p.minutes)}
+                {p.minutes >= 1440 && <span className={t.nextDay}>next day</span>}
+                {p.minutes < 0 && <span className={t.nextDay}>day before</span>}
+              </div>
               <div className={t.dot} aria-hidden="true" />
               <div className={t.card}>
                 <div className={t.label}>{p.label}</div>

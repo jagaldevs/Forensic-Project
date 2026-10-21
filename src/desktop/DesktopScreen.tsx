@@ -7,12 +7,15 @@ import { Dock } from './Dock';
 import { Toasts } from './Toasts';
 import { DropWatcher } from './DropWatcher';
 import { Window } from './Window';
+import { useSettings } from '../stores/settingsStore';
 import s from './desktop.module.css';
 
 /** The investigator's workstation. */
 export default function DesktopScreen() {
   const c = useCaseFile();
-  const windows = useCaseWindows(c.meta.id);
+  const teacherMode = useSettings((st) => st.teacherMode);
+  // The Teacher Panel stays hidden (but remembered) when teacher mode is off.
+  const windows = useCaseWindows(c.meta.id).filter((w) => teacherMode || w.id !== 'teacher');
   const areaRef = useRef<HTMLDivElement>(null);
   const activeId = topWindowId(windows);
 

@@ -5,6 +5,7 @@ import { playSound } from '../lib/sound';
 import { topWindowId, useCaseWindows, useDesktop } from '../stores/desktopStore';
 import { useNav } from '../stores/navStore';
 import { useCaseProgress } from '../stores/progressStore';
+import { useSettings } from '../stores/settingsStore';
 import { Icon } from '../ui/Icon';
 import { appMeta, appsForCase, type DesktopAppId } from './appMeta';
 import s from './desktop.module.css';
@@ -15,6 +16,8 @@ export function Dock() {
   const windows = useCaseWindows(c.meta.id);
   const go = useNav((st) => st.go);
   const activeId = topWindowId(windows);
+  const teacherMode = useSettings((st) => st.teacherMode);
+  const apps: DesktopAppId[] = [...appsForCase(c), ...(teacherMode ? ['teacher' as const] : [])];
 
   const visible = collectedEvidence(c, progress);
   const badgeFor = (
@@ -53,7 +56,7 @@ export function Dock() {
   return (
     <nav className={s.dock} aria-label="Evidence apps">
       <div className={s.dockInner}>
-        {appsForCase(c).map((id) => {
+        {apps.map((id) => {
           const meta = appMeta[id];
           const win = windows.find((w) => w.id === id);
           const badge = badgeFor(id);

@@ -3,7 +3,8 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import { safeStorage } from '../lib/safeStorage';
 
 /** Screens after the boot sequence (which always plays first, and is skippable). */
-export type Screen = 'agent' | 'cases' | 'academy' | 'mission' | 'briefing' | 'desktop' | 'report';
+export type Screen =
+  'agent' | 'cases' | 'academy' | 'mission' | 'review' | 'briefing' | 'desktop' | 'report';
 
 interface NavState {
   screen: Screen;

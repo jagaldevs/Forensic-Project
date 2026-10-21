@@ -6,8 +6,12 @@ export const desktopAppIds = [
   'brief',
   'locker',
   'messages',
+  'email',
   'social',
+  'browser',
+  'drive',
   'photos',
+  'wearables',
   'cctv',
   'iplookup',
   'netlog',
@@ -15,6 +19,7 @@ export const desktopAppIds = [
   'timeline',
   'board',
   'judgements',
+  'teacher',
 ] as const;
 export type DesktopAppId = (typeof desktopAppIds)[number];
 
@@ -37,6 +42,22 @@ export const appMeta: Record<DesktopAppId, DesktopAppMeta> = {
     height: 560,
   },
   messages: { title: 'Messages', dockLabel: 'Messages', icon: 'chat', width: 760, height: 600 },
+  email: { title: 'Email', dockLabel: 'Email', icon: 'mail', width: 900, height: 620 },
+  browser: {
+    title: 'Browser & Search History',
+    dockLabel: 'History',
+    icon: 'search',
+    width: 860,
+    height: 600,
+  },
+  drive: { title: 'Cloud Drive', dockLabel: 'Drive', icon: 'folder', width: 940, height: 640 },
+  wearables: {
+    title: 'Wearables & Smart Home',
+    dockLabel: 'Devices',
+    icon: 'pulse',
+    width: 940,
+    height: 640,
+  },
   social: { title: 'Social Feed', dockLabel: 'Social', icon: 'feed', width: 820, height: 640 },
   photos: { title: 'Photos', dockLabel: 'Photos', icon: 'photos', width: 900, height: 600 },
   cctv: { title: 'CCTV Viewer', dockLabel: 'CCTV', icon: 'camera', width: 860, height: 600 },
@@ -58,6 +79,13 @@ export const appMeta: Record<DesktopAppId, DesktopAppMeta> = {
     width: 760,
     height: 640,
   },
+  teacher: {
+    title: 'Teacher Panel',
+    dockLabel: 'Teacher',
+    icon: 'shield',
+    width: 820,
+    height: 640,
+  },
 };
 
 const alwaysShown: DesktopAppId[] = ['brief', 'locker', 'board', 'judgements'];
@@ -70,6 +98,7 @@ const alwaysShown: DesktopAppId[] = ['brief', 'locker', 'board', 'judgements'];
 export function appsForCase(c: CaseFile): DesktopAppId[] {
   const needed = new Set<DesktopAppId>(alwaysShown);
   for (const e of c.evidence) {
+    // The Teacher Panel is added by the dock in teacher mode, never by a case.
     if ((desktopAppIds as readonly string[]).includes(e.app)) needed.add(e.app as DesktopAppId);
     if (e.timeline?.length) needed.add('timeline');
   }

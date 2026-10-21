@@ -16,7 +16,7 @@ const scaleLabels: Record<number, string> = { 1: 'normal', 1.125: 'large', 1.25:
 export function TopBar() {
   const c = useCaseFile();
   const progress = useCaseProgress(c.meta.id);
-  const { agentName, muted, textScale, toggleMuted, cycleTextScale } = useSettings();
+  const { agentName, muted, textScale, toggleMuted, cycleTextScale, teacherMode } = useSettings();
   const go = useNav((st) => st.go);
   const exitCase = useNav((st) => st.exitCase);
   const [showBackup, setShowBackup] = useState(false);
@@ -34,6 +34,16 @@ export function TopBar() {
         <Icon name="user" size={14} />
         <strong>{agentName}</strong>
       </span>
+      {teacherMode && (
+        <span
+          className={`${s.chip} ${s.teacherChip}`}
+          title="Teacher mode is on. It is not secure."
+        >
+          <Icon name="shield" size={14} />
+          <strong>Teacher mode</strong>
+          <span className={s.hideNarrow}>· not secure</span>
+        </span>
+      )}
       <span className={s.chip} title="Warrants you can still use in this case">
         <Icon name="warrant" size={14} />
         Warrants: <strong>{warrants}</strong>

@@ -375,3 +375,8 @@
     transform: translateX(24px);
   }
 }
+
+.teacherChip {
+  border-color: var(--status-inconclusive);
+  color: var(--status-inconclusive);
+}

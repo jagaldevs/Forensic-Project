@@ -44,6 +44,8 @@ interface ProgressState {
   logVerification: (caseId: string, results: { evidenceId: string; ok: boolean }[]) => void;
   /** Teacher mode: give back every warrant (applications are cleared). */
   resetWarrants: (caseId: string) => void;
+  /** Teacher mode: re-open a submitted assessment (e.g. submitted by mistake). */
+  unlock: (caseId: string) => void;
   /** null removes the correction (the device is assumed to be on case time). */
   setClockCorrection: (caseId: string, deviceId: string, utcOffset: string | null) => void;
 
@@ -196,6 +198,15 @@ export const useProgress = create<ProgressState>()(
             true,
           ),
         resetWarrants: (caseId) => update(caseId, (p) => void (p.warrants = []), true),
+        unlock: (caseId) =>
+          update(
+            caseId,
+            (p) => {
+              p.locked = false;
+              p.submittedAt = null;
+            },
+            true,
+          ),
         setClockCorrection: (caseId, deviceId, utcOffset) =>
           update(caseId, (p) => {
             const next = { ...(p.clockCorrections ?? {}) };

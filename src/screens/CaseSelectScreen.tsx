@@ -11,6 +11,9 @@ import { Button } from '../ui/Button';
 import { Badge } from '../ui/StatusBadge';
 import { Dialog } from '../ui/Dialog';
 import { BackupDialog } from './BackupDialog';
+import { CodeDialog } from './CodeDialog';
+import { codeMatches, teacherConfig } from '../config/teacher';
+import { Icon } from '../ui/Icon';
 import s from './screens.module.css';
 
 export function CaseSelectScreen() {
@@ -22,6 +25,10 @@ export function CaseSelectScreen() {
   const [confirmReset, setConfirmReset] = useState<string | null>(null);
   const academy = useAcademy((st) => st.missions);
   const earned = missionCatalogue.filter((m) => academy[m.id]?.completedAt).length;
+  const teacherMode = useSettings((st) => st.teacherMode);
+  const assessmentAccess = useSettings((st) => st.assessmentAccess);
+  const [askTeacherCode, setAskTeacherCode] = useState(false);
+  const [askAccessFor, setAskAccessFor] = useState<string | null>(null);
 
   return (
     <main className={s.stage}>
@@ -42,20 +49,54 @@ export function CaseSelectScreen() {
             <Button icon="download" onClick={() => setShowBackup(true)}>
               Back up progress
             </Button>
+            {!teacherMode && (
+              <Button variant="ghost" icon="shield" onClick={() => setAskTeacherCode(true)}>
+                Teacher
+              </Button>
+            )}
           </div>
         </header>
+
+        {teacherMode && (
+          <section className={s.teacherBar} aria-label="Teacher tools">
+            <p>
+              <Icon name="shield" size={18} />
+              <span>
+                <strong>Teacher mode is on.</strong> It is not secure: turn it off before a student
+                uses this device.
+              </span>
+            </p>
+            <div className={s.row}>
+              <Button variant="primary" icon="report" onClick={() => go('review')}>
+                Teacher Review
+              </Button>
+              <Button icon="close" onClick={() => useSettings.getState().setTeacherMode(false)}>
+                Turn off teacher mode
+              </Button>
+            </div>
+          </section>
+        )}
 
         <div className={s.caseGrid}>
           {caseCatalogue.map((meta) => {
             const progress = cases[meta.id];
             const status = progress?.submittedAt
-              ? 'Report submitted'
+              ? meta.assessment
+                ? 'Submitted'
+                : 'Report submitted'
               : progress
                 ? 'In progress'
                 : 'New case';
+            const needsCode = meta.assessment && !assessmentAccess && !teacherMode;
+            const open = () => openCase(meta.id, progress?.briefingRead ? 'desktop' : 'briefing');
             return (
               <article key={meta.id} className={s.caseCard} aria-labelledby={`case-${meta.id}`}>
                 <div className={s.row}>
+                  {meta.assessment && (
+                    <Badge tone="inconclusive" icon="warrant">
+                      Assessment
+                    </Badge>
+                  )}
                   <Badge tone="accent" icon="clock">
                     About {meta.estimatedMinutes} min
                   </Badge>
@@ -92,17 +133,22 @@ export function CaseSelectScreen() {
                       .join(', ')}
                   </p>
                 ) : null}
+                {meta.assessment && (
+                  <p className={s.small}>
+                    Work on your own. There are no hints, and you submit your report once.
+                  </p>
+                )}
                 <div className={s.caseFooter}>
-                  <Button
-                    variant="primary"
-                    icon="arrowRight"
-                    onClick={() =>
-                      openCase(meta.id, progress?.briefingRead ? 'desktop' : 'briefing')
-                    }
-                  >
-                    {progress ? 'Resume case' : 'Open case'}
-                  </Button>
-                  {progress && (
+                  {needsCode ? (
+                    <Button variant="primary" icon="lock" onClick={() => setAskAccessFor(meta.id)}>
+                      Enter access code
+                    </Button>
+                  ) : (
+                    <Button variant="primary" icon="arrowRight" onClick={open}>
+                      {progress ? 'Resume case' : 'Open case'}
+                    </Button>
+                  )}
+                  {progress && (!meta.assessment || teacherMode) && (
                     <Button variant="ghost" icon="trash" onClick={() => setConfirmReset(meta.id)}>
                       Start again
                     </Button>
@@ -135,6 +181,40 @@ export function CaseSelectScreen() {
       </div>
 
       {showBackup && <BackupDialog onClose={() => setShowBackup(false)} />}
+      {askTeacherCode && (
+        <CodeDialog
+          title="Teacher mode"
+          label="Teacher code"
+          submitLabel="Turn on teacher mode"
+          onClose={() => setAskTeacherCode(false)}
+          onSubmit={(code) => {
+            if (!codeMatches(code, teacherConfig.teacherCode)) return false;
+            useSettings.getState().setTeacherMode(true);
+            return true;
+          }}
+        >
+          <p className={s.small} style={{ marginBottom: 'var(--space-4)' }}>
+            Teacher mode shows answer keys, teacher notes and drop controls, and opens Teacher
+            Review. It is <strong>not secure</strong>, and this device&rsquo;s progress code will
+            record that it was used.
+          </p>
+        </CodeDialog>
+      )}
+      {askAccessFor && (
+        <CodeDialog
+          title="Assessment access"
+          label="Access code (from your teacher)"
+          submitLabel="Unlock assessment"
+          onClose={() => setAskAccessFor(null)}
+          onSubmit={(code) => {
+            if (!codeMatches(code, teacherConfig.assessmentCode)) return false;
+            useSettings.getState().grantAssessmentAccess();
+            const progress = cases[askAccessFor];
+            openCase(askAccessFor, progress?.briefingRead ? 'desktop' : 'briefing');
+            return true;
+          }}
+        />
+      )}
       {confirmReset && (
         <Dialog
           title="Start this case again?"

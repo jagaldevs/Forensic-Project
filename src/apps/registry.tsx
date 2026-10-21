@@ -11,6 +11,10 @@ export const appComponents: Record<DesktopAppId, LazyExoticComponent<ComponentTy
   brief: lazy(() => import('./brief/BriefApp')),
   locker: lazy(() => import('./locker/LockerApp')),
   messages: lazy(() => import('./messages/MessagesApp')),
+  email: lazy(() => import('./email/EmailApp')),
+  browser: lazy(() => import('./browser/BrowserApp')),
+  drive: lazy(() => import('./drive/DriveApp')),
+  wearables: lazy(() => import('./wearables/WearablesApp')),
   social: lazy(() => import('./social/SocialApp')),
   photos: lazy(() => import('./photos/PhotosApp')),
   cctv: lazy(() => import('./cctv/CctvApp')),
@@ -20,4 +24,5 @@ export const appComponents: Record<DesktopAppId, LazyExoticComponent<ComponentTy
   timeline: lazy(() => import('./timeline/TimelineApp')),
   board: lazy(() => import('./board/EvidenceBoardApp')),
   judgements: lazy(() => import('./judgements/JudgementsApp')),
+  teacher: lazy(() => import('./teacher/TeacherApp')),
 };
