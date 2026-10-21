@@ -19,8 +19,10 @@ export interface MapPlace {
 
 export const places: MapPlace[] = [
   { id: 'darwin-city', name: 'Darwin City', at: { x: 18.4, y: 27.2 }, size: 'major' },
-  { id: 'waterfront', name: 'Waterfront', at: { x: 19.8, y: 29.4 }, size: 'minor' },
-  { id: 'cullen-bay', name: 'Cullen Bay', at: { x: 15.6, y: 24.6 }, size: 'minor' },
+  { id: 'waterfront', name: 'Waterfront', at: { x: 19.2, y: 29.2 }, size: 'minor' },
+  { id: 'cullen-bay', name: 'Cullen Bay', at: { x: 16.6, y: 26.4 }, size: 'minor' },
+  { id: 'mindil-beach', name: 'Mindil Beach', at: { x: 15.4, y: 23.6 }, size: 'minor' },
+  { id: 'parap', name: 'Parap', at: { x: 17.8, y: 21.8 }, size: 'minor' },
   { id: 'fannie-bay', name: 'Fannie Bay', at: { x: 14.4, y: 19.4 }, size: 'minor' },
   { id: 'nightcliff', name: 'Nightcliff', at: { x: 15.4, y: 13.2 }, size: 'minor' },
   { id: 'casuarina', name: 'Casuarina', at: { x: 18.6, y: 8.8 }, size: 'major' },
@@ -130,6 +132,29 @@ export const roads: MapRoad[] = [
     ],
   },
 ];
+
+/** A window onto the map, in kilometres. */
+export interface MapView {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
+/** The smallest view (keeping the map's shape) that shows every point with some margin. */
+export function viewAround(points: MapPoint[], marginKm = 2.5, minWidthKm = 14): MapView {
+  if (!points.length) return { x: 0, y: 0, w: MAP_WIDTH_KM, h: MAP_HEIGHT_KM };
+  const xs = points.map((p) => p.x);
+  const ys = points.map((p) => p.y);
+  const aspect = MAP_HEIGHT_KM / MAP_WIDTH_KM;
+  let w = Math.max(minWidthKm, Math.max(...xs) - Math.min(...xs) + marginKm * 2);
+  const h0 = Math.max(...ys) - Math.min(...ys) + marginKm * 2;
+  if (h0 > w * aspect) w = h0 / aspect;
+  const h = w * aspect;
+  const cx = (Math.max(...xs) + Math.min(...xs)) / 2;
+  const cy = (Math.max(...ys) + Math.min(...ys)) / 2;
+  return { x: cx - w / 2, y: cy - h / 2, w, h };
+}
 
 export function distanceKm(a: MapPoint, b: MapPoint): number {
   return Math.hypot(a.x - b.x, a.y - b.y);

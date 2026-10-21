@@ -50,6 +50,8 @@ export interface CaseProgress {
   releasedDrops: Record<string, number>;
   judgements: Record<string, Judgement>;
   submittedAt: number | null;
+  /** Timeline: deviceId → the UTC offset the student believes its clock was set to. */
+  clockCorrections?: Record<string, string>;
 }
 
 export function newCaseProgress(caseId: string, now = Date.now()): CaseProgress {

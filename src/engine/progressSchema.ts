@@ -42,6 +42,7 @@ const caseProgress = z.object({
     }),
   ),
   submittedAt: z.number().nullable(),
+  clockCorrections: z.record(z.string(), z.string()).optional(),
 });
 
 const stepAnswer = z.discriminatedUnion('type', [

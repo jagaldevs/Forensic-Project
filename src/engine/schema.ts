@@ -58,11 +58,31 @@ export const appIds = [
   'email',
   'wearables',
   'social',
+  'cctv',
 ] as const;
 export const evidenceAppSchema = z.enum(appIds);
 export type EvidenceAppId = z.infer<typeof evidenceAppSchema>;
 
 // ---------- Evidence ----------
+
+/** Wall-clock time exactly as a device displayed it, with no offset: "2026-08-22T19:12" or with seconds. */
+const recordedTime = z
+  .string()
+  .regex(
+    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?$/,
+    'Use YYYY-MM-DDTHH:MM (as shown on the device)',
+  );
+
+/**
+ * A moment this evidence puts on the Timeline. `recorded` is what the device showed. If the
+ * device's clock was set to another time zone, students can correct it on the Timeline.
+ */
+const timelineEntry = z.object({
+  recorded: recordedTime,
+  /** The device whose clock made this time. Leave out for records already in the case's zone. */
+  deviceId: idSchema.optional(),
+  label: z.string().min(1),
+});
 
 const evidenceBase = {
   id: idSchema,
@@ -82,6 +102,8 @@ const evidenceBase = {
   hashAtCollection: sha256.optional(),
   /** Shown only in teacher mode. */
   teacherNote: z.string().optional(),
+  /** Moments this item adds to the Timeline app. */
+  timeline: z.array(timelineEntry).optional(),
 };
 
 const photoEvidence = z.object({
@@ -145,17 +167,30 @@ const networkLogEvidence = z.object({
   note: z.string().optional(),
 });
 
-const messageEvidence = z.object({
+/** A whole conversation, as it appears on one device. Times are as that device displayed them. */
+const messageThreadEvidence = z.object({
   ...evidenceBase,
-  type: z.literal('message'),
+  type: z.literal('messageThread'),
   app: z.literal('messages'),
-  thread: z.string(),
-  from: z.string(),
-  to: z.string(),
-  sentAt: timestamp,
-  body: z.string(),
-  readAt: timestamp.nullable().optional(),
-  deleted: z.boolean().optional(),
+  service: z.string(),
+  /** Whose device this copy of the thread came from. */
+  deviceId: idSchema,
+  participants: z.array(z.string()).min(2),
+  messages: z
+    .array(
+      z.object({
+        from: z.string(),
+        at: recordedTime,
+        body: z.string(),
+        /** Delivery status shown under the sender's own messages. */
+        status: z.enum(['sent', 'delivered', 'read']).optional(),
+        /** "Read 7:41 pm" receipts, as recorded. */
+        readAt: recordedTime.optional(),
+        /** Shows a "This message was deleted" placeholder instead of the body. */
+        deleted: z.boolean().optional(),
+      }),
+    )
+    .min(1),
 });
 
 const searchEntryEvidence = z.object({
@@ -214,8 +249,28 @@ const socialPostEvidence = z.object({
   handle: z.string(),
   postedAt: timestamp,
   body: z.string(),
-  imageEvidenceId: idSchema.optional(),
+  /** The image as posted (often cropped or filtered). */
+  image: z.object({ src: z.string().min(1), alt: z.string().min(1) }).optional(),
+  /** A photo item holding the original, uncropped file. Enables a side-by-side compare. */
+  originalEvidenceId: idSchema.optional(),
   checkIn: z.string().optional(),
+  comments: z.array(z.object({ author: z.string(), at: timestamp, body: z.string() })).optional(),
+});
+
+/** A still frame from a fixed security camera. */
+const cctvStillEvidence = z.object({
+  ...evidenceBase,
+  type: z.literal('cctvStill'),
+  app: z.literal('cctv'),
+  camera: z.string(),
+  location: z.string(),
+  deviceId: idSchema,
+  src: z.string().min(1),
+  alt: z.string().min(1),
+  /** The timestamp burned into the frame, exactly as the camera showed it. */
+  overlay: z.string(),
+  /** Operator's notes, e.g. about clock accuracy. */
+  note: z.string().optional(),
 });
 
 /** Anything else: a report, record or statement shown as labelled fields in the Evidence Locker. */
@@ -232,7 +287,8 @@ export const evidenceSchema = z.discriminatedUnion('type', [
   loginRecordEvidence,
   ipRecordEvidence,
   networkLogEvidence,
-  messageEvidence,
+  messageThreadEvidence,
+  cctvStillEvidence,
   searchEntryEvidence,
   fileEvidence,
   emailEvidence,
@@ -367,7 +423,17 @@ export const caseSchema = z
     devices: z.array(
       z.object({
         id: idSchema,
-        ownerId: idSchema,
+        /** A person in the case. Leave out for e.g. a venue's security camera. */
+        ownerId: idSchema.optional(),
+        /** Who owns it, when not a person in the case (e.g. "Waterfront venue operator"). */
+        ownerLabel: z.string().optional(),
+        /**
+         * The time zone the device's clock was ACTUALLY set to (teacher knowledge). Students only
+         * learn this from evidence, then correct it on the Timeline. Omit if it matches the case.
+         */
+        clock: z
+          .object({ label: z.string(), utcOffset: z.string().regex(/^[+-]\d{2}:\d{2}$/) })
+          .optional(),
         type: z.enum([
           'laptop',
           'desktop',
@@ -444,8 +510,10 @@ export const caseSchema = z
     );
 
     c.devices.forEach((d, i) => {
-      if (!peopleIds.has(d.ownerId))
+      if (d.ownerId && !peopleIds.has(d.ownerId))
         issue(['devices', i, 'ownerId'], `Unknown person "${d.ownerId}"`);
+      if (!d.ownerId && !d.ownerLabel)
+        issue(['devices', i], 'A device needs an ownerId (a person) or an ownerLabel');
     });
 
     c.briefing.questionIds.forEach((id, i) => {
@@ -466,8 +534,20 @@ export const caseSchema = z
           if (s.deviceId && !deviceIds.has(s.deviceId))
             issue(['evidence', i, 'sessions', j, 'deviceId'], `Unknown device "${s.deviceId}"`);
         });
-      if (e.type === 'socialPost' && e.imageEvidenceId && !evidenceIds.has(e.imageEvidenceId))
-        issue(['evidence', i, 'imageEvidenceId'], `Unknown evidence "${e.imageEvidenceId}"`);
+      if (e.type === 'socialPost' && e.originalEvidenceId) {
+        const original = c.evidence.find((o) => o.id === e.originalEvidenceId);
+        if (original?.type !== 'photo')
+          issue(
+            ['evidence', i, 'originalEvidenceId'],
+            `"${e.originalEvidenceId}" must be a photo item`,
+          );
+      }
+      if ((e.type === 'messageThread' || e.type === 'cctvStill') && !deviceIds.has(e.deviceId))
+        issue(['evidence', i, 'deviceId'], `Unknown device "${e.deviceId}"`);
+      e.timeline?.forEach((t, j) => {
+        if (t.deviceId && !deviceIds.has(t.deviceId))
+          issue(['evidence', i, 'timeline', j, 'deviceId'], `Unknown device "${t.deviceId}"`);
+      });
     });
 
     c.warrants.requests.forEach((r, i) => {

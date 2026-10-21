@@ -36,6 +36,8 @@ interface ProgressState {
   ) => WarrantApplication | null;
   releaseDrop: (caseId: string, dropId: string) => void;
   submit: (caseId: string) => void;
+  /** null removes the correction (the device is assumed to be on case time). */
+  setClockCorrection: (caseId: string, deviceId: string, utcOffset: string | null) => void;
 
   /** Replace everything (used by progress-code import). */
   replaceAll: (cases: Record<string, CaseProgress>) => void;
@@ -142,6 +144,13 @@ export const useProgress = create<ProgressState>()(
             if (!(dropId in p.releasedDrops)) p.releasedDrops[dropId] = Date.now();
           }),
         submit: (caseId) => update(caseId, (p) => void (p.submittedAt = Date.now())),
+        setClockCorrection: (caseId, deviceId, utcOffset) =>
+          update(caseId, (p) => {
+            const next = { ...(p.clockCorrections ?? {}) };
+            if (utcOffset) next[deviceId] = utcOffset;
+            else delete next[deviceId];
+            p.clockCorrections = next;
+          }),
 
         replaceAll: (cases) => set({ cases }),
       };
