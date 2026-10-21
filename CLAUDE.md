@@ -26,9 +26,9 @@ Signature idea: an IP that "geolocates near the crime scene" is approximate, a d
 
 ## Stack
 
-- React + Vite + TypeScript (`strict`). Use current versions (check `npm view <pkg> version`), not versions from memory.
-- Zustand, two stores: `desktopStore` (window manager, not persisted or lightly persisted) and `progressStore` (case progress, persisted via safe storage wrapper).
-- zod schemas for case files; validated in tests (and at dev load time).
+- React 19 + Vite 8 + TypeScript 6.0 (`strict`, `noUncheckedIndexedAccess`). Use current versions (check `npm view <pkg> version`), not versions from memory. TypeScript is pinned `~6.0` because typescript-eslint does not support TS 7 yet.
+- Zustand stores, all persisted through `lib/safeStorage`: `progressStore` (case progress), `desktopStore` (window layout), `settingsStore` (codename, mute, text size), `navStore` (current screen). `toastStore` is not persisted.
+- zod schemas for case files; validated in tests and when a case loads in dev. **Never import `engine/schema.ts` from runtime code** (it would bundle zod): runtime code imports types from `engine/types.ts` and `defineCase` from `engine/defineCase.ts`. zod is only bundled in the lazily loaded progress-code validator.
 - Vitest for unit tests, especially case validation and answer checking. A test loads **every** case file and validates it.
 - Window manager: hand-rolled with Pointer Events (see Decisions).
 - Evidence board: custom SVG strings + shared pointer-drag hook (see Decisions).
@@ -37,23 +37,35 @@ Signature idea: an IP that "geolocates near the crime scene" is approximate, a d
 - **Australian spelling in all UI text** (colour, analyse, organisation, judgement, licence (n.), centre, behaviour).
 - Small readable components — science teachers may author cases later.
 
-## Repo layout (Phase 1)
+## Repo layout
 
 ```
 src/
-  app/            App shell, screen router (boot → agent → cases → briefing → desktop → report)
-  screens/        Boot, AgentId, CaseSelect, Briefing, Desktop, Report
-  desktop/        Window manager: Window, Dock, TopBar, Notifications, useDrag
-  apps/           One folder per evidence app (Photos, IpLookup, NetworkLog, EvidenceBoard, Judgements, ...)
-  engine/         Case loading, schema (zod), answer checking, warrant logic, drop triggers
-  stores/         desktopStore, progressStore, settingsStore
-  lib/            safeStorage, progressCode (export/import), sound, format helpers
-  styles/         tokens.css (ALL colours/fonts/radii), global.css
-  brand/          brand.ts + logo slot (swap official logo/hex here)
-  cases/<id>/     case.ts (data) + assets/ (images)
+  app/            App.tsx (boot → codename → cases), CaseShell (loads a case: briefing/desktop/report), CaseContext
+  screens/        Boot, Agent (codename), CaseSelect, Briefing, Report, BackupDialog, Loading
+  desktop/        DesktopScreen, Window (hand-rolled), Dock, TopBar, Toasts, DropWatcher, appMeta (app ids/titles/sizes)
+  apps/           registry.tsx (lazy app components) + one folder per app; shared/ = EvidenceHeader, PinButton,
+                  HashLine, LockedNotice, WarrantDialog, hooks (useCaseState, openEvidence); map/CityMap.tsx
+  engine/         schema.ts (zod, tests/dev only), types.ts, defineCase.ts, safety.ts, availability.ts,
+                  checkJudgement.ts, drops.ts, hash.ts, format.ts, report.ts, progressTypes.ts, geo/cityMap.ts
+  stores/         progressStore, desktopStore, settingsStore, navStore, toastStore
+  lib/            safeStorage, progressCode, sound (Web Audio, synthesised), usePointerDrag, usePrefersReducedMotion
+  ui/             Button, Dialog (focus trap), Icon (inline SVG set), StatusBadge/Badge, labels (verdict/relation wording)
+  styles/         tokens.css (ALL colours), global.css, fonts/ (vendored latin woff2 + licences)
+  brand/          brand.ts + Logo.tsx (logo slot)
+  cases/<id>/     meta.ts (eager, for case list) + case.ts (lazy) + assets/
 docs/writing-a-case.md
-tests/            or co-located *.test.ts
+scripts/generate-icons.mjs   placeholder PWA icons
 ```
+
+Tests are co-located (`*.test.ts(x)`). `src/cases/cases.test.ts` validates every case.
+
+## Dev notes
+
+- In Claude Code desktop, the preview tool reads `claudecode/.claude/launch.json` (the session's original folder). It has `forensics-lab` (dev, :5173) and `forensics-lab-build` (preview of `dist`, :4173) entries pointing at this project.
+- After editing a Zustand store module, do a full page reload; HMR can keep the old store instance.
+- In dev, `window.__desktop` exposes the desktop store for debugging.
+- Avoid shell heredocs for files containing backslashes (they get mangled); use the editor/Write tool.
 
 ## Design system
 
@@ -61,7 +73,7 @@ tests/            or co-located *.test.ts
 - **Every colour lives in `src/styles/tokens.css`**, with brand values clearly marked `/* PLACEHOLDER BRAND */`. Placeholders: magenta `#B5006A`, black `#0B0B0F`. Logo slot in boot screen and top bar shows placeholder text until a logo file is supplied (`src/brand/`).
 - Neutral greys for data surfaces.
 - Status colours: Supports / Contradicts / Inconclusive / Not yet assessed — **always paired with an icon and a text label, never colour alone**.
-- Fonts (self-hosted via `@fontsource-variable`): UI sans (Inter) + monospace (JetBrains Mono) for logs, hashes, IPs, metadata.
+- Fonts (self-hosted, vendored latin subsets in `src/styles/fonts`): UI sans (Inter) + monospace (JetBrains Mono) for logs, hashes, IPs, metadata.
 - Subtle motion; optional sound effects with global mute (default muted? see Decisions). Respect `prefers-reduced-motion`.
 - Accessibility: WCAG AA contrast, visible focus rings, full keyboard operability (windows movable/resizable by keyboard), ARIA on windows (`role="dialog"`, labelled) and dialogs, text-size toggle (scales root font size).
 
@@ -116,7 +128,7 @@ The schema cross-checks references (every evidence/question/device id referenced
 
 ## Phase plan
 
-1. **Foundations + vertical slice** — infra, design tokens, PWA, schema + validation test; boot → agent → case select → briefing → desktop; Photos, IP Lookup, Network Log (warrant-locked), Evidence Board, Judgements, basic Report; mini case "The Waterfront Alibi" (~25 min). ← current
+1. **Foundations + vertical slice** — infra, design tokens, PWA, schema + validation test; boot → agent → case select → briefing → desktop; Photos, IP Lookup, Network Log (warrant-locked), Evidence Board, Judgements, basic Report; mini case "The Waterfront Alibi" (~25 min). **Done (21 Oct 2026).**
 2. **Training Academy** — short interactive modules: metadata, digital footprints, search history & cookies, IP addresses & networks, timestamps & time zones, ethics & privacy.
 3. **Flagship case "Where was Jamie?"** — missing-person timeline: Messages, Map, CCTV-style stills, Social Feed. Time-zone trap: phone on AEST (UTC+10) vs Darwin ACST (UTC+9:30, no DST) → mysterious 30-minute discrepancy.
 4. **Remaining apps**, final unseen assessment case, polished report export, teacher mode.
@@ -150,7 +162,24 @@ The schema cross-checks references (every evidence/question/device id referenced
 
 ## Decisions log
 
-- (proposed, awaiting review) Hand-rolled window manager with Pointer Events instead of `react-rnd`: no dependency, works with React 19 (react-draggable relies on legacy patterns), unified mouse/touch/pen, and lets us add keyboard move/resize for accessibility.
-- (proposed) Evidence board: custom SVG for string + the same drag hook for cards; tap-to-link as the primary linking interaction. `@dnd-kit` not needed for free-form positioning.
-- (proposed) Cases as TypeScript modules (typed, lazy-loaded via `import()`), validated by zod in tests and in dev.
-- (proposed) Sound default: muted until the student turns it on (classroom-friendly).
+Approved with the Phase 1 plan:
+
+- Hand-rolled window manager with Pointer Events instead of `react-rnd` (no dependency, React 19-safe, mouse/touch/pen, keyboard move/resize). Windows persist, re-fit on resize, and open maximised below 900px.
+- Evidence board: custom SVG string + shared `usePointerDrag`; tap-to-link (card → claim → relation) is the primary interaction. No `@dnd-kit`. Relations also differ by line style (solid/dashed/dotted), not just label.
+- Cases are TypeScript modules discovered with `import.meta.glob`, lazy-loaded, validated by zod in tests and dev.
+- Sound starts muted.
+- Fictional MACs: RFC 7042 block `00:00:5E:00:53:xx` or locally administered addresses.
+
+Made during the Phase 1 build (for review):
+
+- **Board links = judgement attachments.** One source of truth: linking a card to a claim attaches it to that question, and attaching in Judgements links it on the board.
+- **Auto-check rule:** pass = accepted verdict + all key evidence + no distractors; other evidence is allowed. Relation labels (supports/contradicts) are not marked; the teacher sees them in the report.
+- **Hashes are computed, not authored.** SHA-256 of the item's canonical content (minus `src`, `teacherNote`, `hashAtCollection`). Authors set `hashAtCollection` only to simulate tampering.
+- **Refused warrants don't use a token**, and a request can only be applied for once.
+- **IP lookup results are "discovered":** they appear in the locker/board only after the student runs the lookup.
+- **Evidence Locker** shipped in basic form in Phase 1 (needed somewhere to show the login and weather records).
+- **Model answers are not shown to students** in Phase 1 (only hints). Open questions are saved, not marked.
+- **Map pins are numbered with a legend** so labels never overlap.
+- **Drop in the mini case:** Photo B arrives 5 s after the IP lookup, or after 6 minutes, whichever comes first.
+- Fonts are vendored latin subsets (Inter, JetBrains Mono) rather than the fontsource packages, to avoid precaching unused subsets.
+- Placeholder PWA icons generated by `scripts/generate-icons.mjs`.
