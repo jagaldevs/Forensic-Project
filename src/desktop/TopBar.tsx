@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useCaseFile } from '../app/CaseContext';
 import { Logo } from '../brand/Logo';
 import { brand } from '../brand/brand';
+import { accessWording } from '../engine/accessWording';
 import { warrantsRemaining } from '../engine/availability';
 import { supportLevelOf } from '../engine/progressTypes';
 import { playSound } from '../lib/sound';
@@ -30,6 +31,7 @@ export function TopBar() {
   const level = supportLevelOf(progress);
   const levelInfo = supportLevelInfo(level, !!c.meta.assessment);
   const warrants = warrantsRemaining(c, progress);
+  const access = accessWording(c);
 
   return (
     <header className={s.topbar}>
@@ -68,9 +70,9 @@ export function TopBar() {
         <Icon name={levelInfo.icon} size={14} />
         <strong className={s.hideNarrow}>{levelInfo.label}</strong>
       </button>
-      <span className={s.chip} title="Warrants you can still use in this case">
+      <span className={s.chip} title={access.chipTitle}>
         <Icon name="warrant" size={14} />
-        Warrants: <strong>{warrants}</strong>
+        {access.chip}: <strong>{warrants}</strong>
       </span>
       <div className={s.topbarTools}>
         <Button

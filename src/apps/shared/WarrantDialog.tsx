@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { accessWording } from '../../engine/accessWording';
 import { warrantsRemaining } from '../../engine/availability';
 import type { WarrantApplication } from '../../engine/progressTypes';
 import type { WarrantRequest } from '../../engine/types';
@@ -31,6 +32,7 @@ export function WarrantDialog({
   const [result, setResult] = useState<WarrantApplication | null>(previous ?? null);
   const [text, setText] = useState('');
   const remaining = warrantsRemaining(c, progress);
+  const w = accessWording(c);
   const tooShort = text.trim().length < MIN_JUSTIFICATION;
 
   const apply = () => {
@@ -40,7 +42,7 @@ export function WarrantDialog({
     playSound(outcome.granted ? 'granted' : 'refused');
     if (outcome.granted)
       useToasts.getState().push({
-        title: 'Warrant granted',
+        title: w.granted,
         body: request.outcome,
         icon: 'warrant',
       });
@@ -48,7 +50,7 @@ export function WarrantDialog({
 
   return (
     <Dialog
-      title="Warrant application"
+      title={w.dialogTitle}
       onClose={onClose}
       actions={
         result ? (
@@ -64,7 +66,7 @@ export function WarrantDialog({
               onClick={apply}
               disabled={tooShort || remaining <= 0}
             >
-              Submit to magistrate
+              {w.submit}
             </Button>
           </>
         )
@@ -92,10 +94,10 @@ export function WarrantDialog({
       ) : (
         <>
           <p className={s.warrantNote}>
-            <Icon name="warrant" size={16} /> Warrants left: <strong>{remaining}</strong>. A
-            magistrate only grants a request that is <strong>necessary</strong> (it would help
-            answer a real question) and <strong>proportionate</strong> (it doesn&rsquo;t intrude on
-            more privacy than it needs to). A refused application does not use a warrant.
+            <Icon name="warrant" size={16} /> {w.left}: <strong>{remaining}</strong>. {w.decider} a
+            request that is <strong>necessary</strong> (it would help answer a real question) and{' '}
+            <strong>proportionate</strong> (it doesn&rsquo;t intrude on more privacy than it needs
+            to). {w.refusedFree}
           </p>
           <label className={ui.label} htmlFor="justification">
             Why do you need this? (one sentence)
@@ -117,7 +119,7 @@ export function WarrantDialog({
               role="alert"
               style={{ color: 'var(--status-inconclusive)', marginTop: 'var(--space-2)' }}
             >
-              You have no warrants left for this case.
+              {w.noneLeft}
             </p>
           )}
         </>

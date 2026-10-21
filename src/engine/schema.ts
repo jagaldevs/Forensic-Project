@@ -599,6 +599,12 @@ export const caseSchema = z
     /** Deep dive extension tasks (optional). */
     extensions: z.array(extensionSchema).optional(),
     warrants: z.object({
+      /**
+       * How locked data is unlocked: a warrant from a magistrate (default), or a permission
+       * request to the people responsible for the data (for school-scale stories). Same
+       * mechanics; only the wording changes.
+       */
+      kind: z.enum(['warrant', 'permission']).optional(),
       available: z.number().int().nonnegative(),
       requests: z.array(warrantRequestSchema),
     }),

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { collectedEvidence, isLocked } from '../../engine/availability';
+import { accessWording } from '../../engine/accessWording';
 import { formatShortDate, formatTime24 } from '../../engine/format';
 import type { CaseFile, Evidence } from '../../engine/types';
 import { appMeta } from '../../desktop/appMeta';
@@ -70,7 +71,7 @@ export default function LockerApp({ params }: AppProps) {
                       <span>{e.title}</span>
                       <span className={s.listItemSub}>
                         {locked
-                          ? 'Needs a warrant'
+                          ? accessWording(c).locked
                           : mismatch
                             ? 'Hash mismatch'
                             : appMeta[appFor(e)].title}

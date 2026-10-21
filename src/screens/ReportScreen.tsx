@@ -3,6 +3,7 @@ import { useCaseFile } from '../app/CaseContext';
 import { Logo } from '../brand/Logo';
 import { brand } from '../brand/brand';
 import { collectedEvidence, isLocked } from '../engine/availability';
+import { accessWording } from '../engine/accessWording';
 import { hashCheck, type HashCheck } from '../engine/hash';
 import { buildReport, nudgeNote, reportToText, type ReportData } from '../engine/report';
 import { playSound } from '../lib/sound';
@@ -150,7 +151,7 @@ export default function ReportScreen() {
         )}
 
         <section className={r.section}>
-          <h2>Warrant applications</h2>
+          <h2>{accessWording(c).heading}</h2>
           {report.warrants.length ? (
             <ul className={r.warrants}>
               {report.warrants.map((w) => (
@@ -170,7 +171,7 @@ export default function ReportScreen() {
               ))}
             </ul>
           ) : (
-            <p className={r.empty}>No warrants requested.</p>
+            <p className={r.empty}>{accessWording(c).noneRequested}</p>
           )}
         </section>
 

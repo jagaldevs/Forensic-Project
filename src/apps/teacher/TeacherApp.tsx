@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { warrantsRemaining } from '../../engine/availability';
+import { accessWording } from '../../engine/accessWording';
 import { formatLocalDateTime } from '../../engine/format';
 import type { DropTrigger } from '../../engine/types';
 import { releaseDrop } from '../../desktop/releaseDrop';
@@ -192,7 +193,7 @@ function Controls() {
             disabled={!progress.warrants.length}
             onClick={() => useProgress.getState().resetWarrants(caseId)}
           >
-            Give back all warrants
+            {accessWording(c).giveBack}
           </Button>
         </div>
       </article>

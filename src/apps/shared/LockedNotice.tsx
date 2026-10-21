@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { accessWording } from '../../engine/accessWording';
 import { requestsFor } from '../../engine/availability';
 import type { Evidence } from '../../engine/types';
 import { Button } from '../../ui/Button';
@@ -11,6 +12,7 @@ import s from './shared.module.css';
 export function LockedNotice({ item }: { item: Evidence }) {
   const { c, progress } = useCaseState();
   const [open, setOpen] = useState(false);
+  const w = accessWording(c);
   const request = requestsFor(c, item.id)[0];
   const refused =
     request && progress.warrants.find((w) => w.requestId === request.id && !w.granted);
@@ -20,8 +22,7 @@ export function LockedNotice({ item }: { item: Evidence }) {
       <Icon name="lock" size={40} />
       <h3>{item.title}</h3>
       <p>
-        This data is private. Investigators need a <strong>warrant</strong> from a magistrate to
-        access it.
+        This data is private. Investigators need <strong>{w.need}</strong> to access it.
       </p>
       {request && (
         <>
@@ -34,12 +35,12 @@ export function LockedNotice({ item }: { item: Evidence }) {
                 <Icon name="contradicts" size={16} /> Your application was refused.
               </p>
               <Button icon="info" onClick={() => setOpen(true)}>
-                Read the magistrate&rsquo;s reasons
+                {w.readReasons}
               </Button>
             </>
           ) : (
             <Button variant="primary" icon="warrant" onClick={() => setOpen(true)}>
-              Apply for a warrant
+              {w.apply}
             </Button>
           )}
         </>

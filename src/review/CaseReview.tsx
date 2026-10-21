@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { loadCase } from '../cases';
 import { formatLocalDateTime } from '../engine/format';
+import { accessWording } from '../engine/accessWording';
 import { describeSupportLevels, type CaseProgress } from '../engine/progressTypes';
 import { scoreCase, type QuestionScore } from '../engine/score';
 import type { CaseFile } from '../engine/types';
@@ -116,7 +117,7 @@ export function CaseReview({ caseId, progress }: { caseId: string; progress: Cas
             </li>
           )}
         </ul>
-        <h4>Warrant applications</h4>
+        <h4>{accessWording(c).heading}</h4>
         {progress.warrants.length ? (
           <ul className={r.warrants}>
             {progress.warrants.map((w) => {

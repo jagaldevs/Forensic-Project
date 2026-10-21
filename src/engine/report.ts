@@ -1,4 +1,5 @@
 import { usableEvidence } from './availability';
+import { accessWording } from './accessWording';
 import { custodyLog } from './custody';
 import {
   attachedEvidenceIds,
@@ -75,6 +76,8 @@ export interface ReportData {
   assessment: boolean;
   submittedAt: string | null;
   timeZoneLabel: string;
+  /** "Warrant applications" or "Permission requests". */
+  accessHeading: string;
   /** e.g. "Guided (also used: Standard)". */
   supportLevel: string;
   /** Question numbers where a Guided nudge was opened. */
@@ -147,6 +150,7 @@ export function buildReport(
     assessment: !!c.meta.assessment,
     submittedAt: progress.submittedAt ? formatLocalDateTime(progress.submittedAt) : null,
     timeZoneLabel: c.timeZone.label,
+    accessHeading: accessWording(c).heading,
     supportLevel: describeSupportLevels(progress),
     nudges: c.questions.flatMap((q, i) => (progress.nudgesUsed?.includes(q.id) ? [i + 1] : [])),
     questions,
@@ -229,7 +233,7 @@ export function reportToText(r: ReportData, hashes: Record<string, string> = {})
       );
   }
 
-  lines.push('', rule, 'Warrant applications:');
+  lines.push('', rule, `${r.accessHeading}:`);
   if (!r.warrants.length) lines.push('  (none)');
   for (const w of r.warrants)
     lines.push(
