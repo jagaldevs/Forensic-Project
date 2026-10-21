@@ -115,20 +115,20 @@ Every item can also have a `timeline` (see above).
 
 Types available now (✓ = has its own app; others show in the Evidence Locker):
 
-| `type`            | `app`       | Extra fields                                                                                                                                                     |
-| ----------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `photo` ✓         | `photos`    | `src` (imported image), `alt`, `fileName`, `metadata` rows                                                                                                       |
-| `ipRecord` ✓      | `iplookup`  | `ip`, `isp`, `network?`, `locationLabel`, `accuracyRadiusKm`, `centre`                                                                                           |
-| `networkLog` ✓    | `netlog`    | `routerName`, `household`, `publicIp`, `logDate`, `sessions`                                                                                                     |
-| `loginRecord` ✓   | `locker`    | `service`, `account`, `events` (time, event, IP), `note?`                                                                                                        |
-| `document` ✓      | `locker`    | `fields` (label/value rows), `body?`                                                                                                                             |
-| `messageThread` ✓ | `messages`  | `service`, `deviceId` (whose copy), `participants`, `messages` (`from`, `at`, `body`, `status?`, `readAt?`, `deleted?`)                                          |
-| `socialPost` ✓    | `social`    | `platform`, `author`, `handle`, `postedAt`, `body`, `image?`, `originalEvidenceId?` (a photo item: enables "compare with the original"), `checkIn?`, `comments?` |
-| `cctvStill` ✓     | `cctv`      | `camera`, `location`, `deviceId`, `src`, `alt`, `overlay` (the burned-in timestamp), `note?`                                                                     |
-| `searchEntry`     | `browser`   | `kind` (search/visit/cleared), `at`, `query?`, `url?`, `pageTitle?`                                                                                              |
-| `file`            | `drive`     | `fileName`, `path`, `sizeBytes`, `owner`, `createdAt`, `modifiedAt`, `versions`                                                                                  |
-| `email`           | `email`     | `from`, `to`, `subject`, `sentAt`, `body`, `headers`                                                                                                             |
-| `wearableLog`     | `wearables` | `device`, `measure`, `samples`                                                                                                                                   |
+| `type`             | `app`       | Extra fields                                                                                                                                                                                   |
+| ------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `photo` ✓          | `photos`    | `src` (imported image), `alt`, `fileName`, `metadata` rows                                                                                                                                     |
+| `ipRecord` ✓       | `iplookup`  | `ip`, `isp`, `network?`, `locationLabel`, `accuracyRadiusKm`, `centre`                                                                                                                         |
+| `networkLog` ✓     | `netlog`    | `routerName`, `household`, `publicIp`, `logDate`, `sessions`                                                                                                                                   |
+| `loginRecord` ✓    | `locker`    | `service`, `account`, `events` (time, event, IP), `note?`                                                                                                                                      |
+| `document` ✓       | `locker`    | `fields` (label/value rows), `body?`                                                                                                                                                           |
+| `messageThread` ✓  | `messages`  | `service`, `deviceId` (whose copy), `participants`, `messages` (`from`, `at`, `body`, `status?`, `readAt?`, `deleted?`)                                                                        |
+| `socialPost` ✓     | `social`    | `platform`, `author`, `handle`, `postedAt`, `body`, `image?`, `originalEvidenceId?` (a photo item: enables "compare with the original"), `checkIn?`, `comments?`                               |
+| `cctvStill` ✓      | `cctv`      | `camera`, `location`, `deviceId`, `src`, `alt`, `overlay` (the burned-in timestamp), `note?`                                                                                                   |
+| `browserHistory` ✓ | `browser`   | `browser`, `profile`, `deviceId`, `entries` (`at`, `kind` search/visit, `title`, `url?`), `cleared?` (`from`, `to`, `note?`: shown as gaps), `note?`                                           |
+| `file` ✓           | `drive`     | `service`, `fileName`, `path`, `fileKind`, `sizeBytes`, `owner`, `sharedWith?`, `createdAt`, `modifiedAt`, `lastModifiedBy`, `displayZone?`, `versions`                                        |
+| `email` ✓          | `email`     | `inbox`, `from`/`replyTo?`/`to` (`{ name, address }`), `subject`, `sentAt`, `body`, `messageId`, `received` (newest first), `auth` (`spf`, `dkim`, `detail?`), `extraHeaders?`, `attachments?` |
+| `wearableLog` ✓    | `wearables` | `deviceId`, `service`, `series?` (`steps`/`heartRate` charts), `events?` (`doorbell`, `motion`, `door`, `charging`, `worn`, `removed`, `other`), `note?`                                       |
 
 Devices need an `ownerId` (a person) or an `ownerLabel` (e.g. "Waterfront venue operator" for
 a security camera).
@@ -143,6 +143,26 @@ using the tool. `centre` is a point on the shared map in kilometres (Darwin City
 
 **Photos:** import the image at the top of `case.ts` (`import photoA from './assets/photo-a.svg'`)
 and use it as `src`. Always write a good `alt` description.
+
+**Cloud Drive files:** `versions` are oldest first, and the last one must match `modifiedAt`
+and `lastModifiedBy` (the tests check). Give versions `content` (a small `table` or some `text`)
+so students can view old versions and compare them; keep table rows in the same order between
+versions so the comparison lines up. `displayZone: { label: 'UTC', utcOffset: '+00:00' }` makes
+the drive show every time in UTC, clearly labelled but never converted: converting is the
+student's job.
+
+**Times from files, emails and wearables** reach the Timeline only through the item's
+`timeline` list, so you decide what students see. To make the drive's UTC times a Timeline
+puzzle too, record them in UTC against a `server` device whose `clock` is UTC.
+
+**Emails:** write `received` newest first, as in a real original. The bottom line is where the
+email entered the mail system. A spoof usually has a `replyTo` on another domain, `spf: 'fail'`,
+`dkim: 'none'`, and a `messageId` from the real sending service. Include a genuine email from
+the same sender to compare.
+
+**Tampered evidence:** set `hashAtCollection` to any other 64-character hex value. The item then
+shows a tamper warning everywhere, and "Verify all hashes" in the Evidence Locker flags it. Add a
+`document` (e.g. an evidence intake record) quoting the collection hash.
 
 ## 4. Questions
 
@@ -181,6 +201,18 @@ students look again, never "wrong".
 ```ts
 { id: 'q4-next-steps', kind: 'open', prompt, guidance: ['Sentence starters…'], modelAnswer, keyPoints: [...] }
 ```
+
+### Assessment cases
+
+Add `assessment: true` to `meta`. The case then:
+
+- is hidden behind the assessment access code (in `src/config/teacher.ts`) or teacher mode;
+- shows no hints and no feedback: "Check" becomes "Save", so `hints` can be left out;
+- is submitted once from the report, which locks the case on that device;
+- is auto-scored only in Teacher Review (same rule as above).
+
+The case data still ships with the app, so an assessment is **not exam-secure**. See
+`src/cases/science-fair-switch/` for an example.
 
 ## 5. Warrants
 
@@ -221,7 +253,8 @@ drops: [
 ```
 
 The drop is released when **any** trigger fires. Other triggers: `{ type: 'afterQuestionChecked',
-questionId }` and `{ type: 'manual' }` (teacher releases it; teacher mode arrives in Phase 4).
+questionId }` and `{ type: 'manual' }` (released from the Teacher Panel in teacher mode).
+`afterQuestionChecked` never fires in an assessment, because nothing is checked.
 If key evidence is in a drop, include at least one automatic trigger (the tests check this).
 
 ## 7. Safety checklist (enforced by `npm test` where possible)
@@ -229,6 +262,8 @@ If key evidence is in a drop, include at least one automatic trigger (the tests 
 - Everyone and everything is fictional: people, accounts, businesses, devices, platforms.
   Invent names (StreamCloud, TopNet, ChatterBox, Nimbus). Real platforms and brands are rejected.
 - IPs only from `192.0.2.x`, `198.51.100.x`, `203.0.113.x`.
+- Web and email addresses only on reserved domains: anything ending in `.example`, `.test` or
+  `.invalid` (e.g. `morgan.lee@arafurapark.example`, `https://lumen.example/search`).
 - MAC addresses: `00:00:5E:00:53:xx`, or locally administered (second character 2, 6, A or E,
   e.g. `02:5A:31:7C:11:04`).
 - Real Darwin places are fine; private addresses must be fictional.

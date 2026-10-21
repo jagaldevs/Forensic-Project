@@ -43,11 +43,16 @@ Signature idea: an IP that "geolocates near the crime scene" is approximate, a d
 src/
   app/            App.tsx (boot → codename → cases), CaseShell (loads a case: briefing/desktop/report), CaseContext
   screens/        Boot, Agent (codename), CaseSelect, Briefing, Report, BackupDialog, Loading
-  desktop/        DesktopScreen, Window (hand-rolled), Dock, TopBar, Toasts, DropWatcher, appMeta (app ids/titles/sizes)
-  apps/           registry.tsx (lazy app components) + one folder per app; shared/ = EvidenceHeader, PinButton,
-                  HashLine, LockedNotice, WarrantDialog, hooks (useCaseState, openEvidence); map/CityMap.tsx
+  desktop/        DesktopScreen, Window (hand-rolled), Dock, TopBar, Toasts, DropWatcher, releaseDrop,
+                  appMeta (app ids/titles/sizes)
+  apps/           registry.tsx (lazy app components) + one folder per app (incl. browser, drive, email,
+                  wearables, teacher); shared/ = EvidenceHeader (+ teacher notes), PinButton, HashLine
+                  (+ tamper warning), useHashCheck, LockedNotice, WarrantDialog, hooks; board/strings.ts
   engine/         schema.ts (zod, tests/dev only), types.ts, defineCase.ts, safety.ts, availability.ts,
-                  checkJudgement.ts, drops.ts, hash.ts, format.ts, report.ts, progressTypes.ts, geo/cityMap.ts
+                  checkJudgement.ts, drops.ts, hash.ts, format.ts, report.ts, progressTypes.ts,
+                  custody.ts (chain of custody), score.ts (auto-scoring for Teacher Review), geo/cityMap.ts
+  config/         teacher.ts: teacher code + assessment access code (placeholders, NOT secure)
+  review/         TeacherReviewScreen (paste a progress code), CaseReview, AcademyReview
   stores/         progressStore, desktopStore, settingsStore, navStore, toastStore
   lib/            safeStorage, progressCode, sound (Web Audio, synthesised), usePointerDrag, usePrefersReducedMotion
   ui/             Button, Dialog (focus trap), Icon (inline SVG set), StatusBadge/Badge, labels (verdict/relation wording)
@@ -65,6 +70,8 @@ Tests are co-located (`*.test.ts(x)`). `src/cases/cases.test.ts` validates every
 ## Dev notes
 
 - In Claude Code desktop, the preview tool reads `claudecode/.claude/launch.json` (the session's original folder). It has `forensics-lab` (dev, :5173) and `forensics-lab-build` (preview of `dist`, :4173) entries pointing at this project.
+- A session started in this folder reads this project's own `.claude/launch.json` instead: `dev` (:5173) and `preview-build` (:4173).
+- This folder is on OneDrive and Vite sometimes misses a file change; if the dev page shows stale code after a reload, `touch` the file.
 - After editing a Zustand store module, do a full page reload; HMR can keep the old store instance.
 - In dev, `window.__desktop` exposes the desktop store for debugging.
 - Avoid shell heredocs for files containing backslashes (they get mangled); use the editor/Write tool.
@@ -133,7 +140,7 @@ The schema cross-checks references (every evidence/question/device id referenced
 1. **Foundations + vertical slice** — infra, design tokens, PWA, schema + validation test; boot → agent → case select → briefing → desktop; Photos, IP Lookup, Network Log (warrant-locked), Evidence Board, Judgements, basic Report; mini case "The Waterfront Alibi" (~25 min). **Done (21 Oct 2026).**
 2. **Training Academy** — short interactive modules: metadata, digital footprints, search history & cookies, IP addresses & networks, timestamps & time zones, ethics & privacy. **MVP done (21 Oct 2026)**: six missions, data-driven like cases (`engine/missionSchema.ts`, `engine/checkStep.ts`, `stores/academyStore.ts`).
 3. **Flagship case "Where was Jamie?"** — missing-person timeline: Messages, Map, CCTV-style stills, Social Feed. Time-zone trap: phone on AEST (UTC+10) vs Darwin ACST (UTC+9:30, no DST) → mysterious 30-minute discrepancy. **Done (21 Oct 2026)**: `src/cases/where-was-jamie/`, plus Messages, Social Feed, CCTV, Map (travel calculator) and Timeline (clock corrections) apps.
-4. **Remaining apps**, final unseen assessment case, polished report export, teacher mode.
+4. **Remaining apps**, final unseen assessment case, polished report export, teacher mode. **Done (21 Oct 2026)**: Browser & Search History, Cloud Drive, Email, Wearables & Smart Home apps; Evidence Locker chain of custody + Verify all hashes; teacher mode + Teacher Panel; Teacher Review; report export polish; assessment case `src/cases/science-fair-switch/`.
 5. **Polish** — sound design, onboarding tutorial, accessibility audit, performance pass.
 
 ### Phase 1 definition of done
@@ -208,3 +215,15 @@ Made during the Phase 3 ("Where was Jamie?") build:
 - Travel times = straight line × 1.3 road factor at a speed range (+ waiting for buses). Shown as a range, labelled as an estimate.
 - Saved windows from another case are never rendered (`useCaseWindows`); this previously marked evidence as viewed in the wrong case.
 - Q1's time-zone nudge is in its hints (no separate Timeline hint for the MVP).
+
+Made during the Phase 4 build (for review):
+
+- **Codes:** separate teacher code and assessment access code in `src/config/teacher.ts` (placeholders `CHANGE-ME-TEACHER-2026` / `CHANGE-ME-ASSESS-2026`; compared ignoring case, spaces and dashes). Both are NOT secure. Teacher mode stays on after a reload until turned off, and progress codes (now **v3**) record when it was first used on a device, so Teacher Review can warn about it. v1/v2 codes still import.
+- **Assessment mode** (`meta.assessment: true`): hidden behind the access code (or teacher mode); no hints or feedback ("Save" instead of "Check"; `hints` optional only here); one Submit from the report that sets `locked` and freezes the case in the store (views and hash checks are still logged); scores only in Teacher Review. Students can't restart an assessment; the Teacher Panel can re-open or reset it. Warrant refusal reasons are still shown in assessments (part of the case, not a hint). Not exam-secure: the data ships in the bundle.
+- **Teacher Review:** one student's code at a time; uses the same pass rule as the student check (`engine/score.ts`), shows clock corrections (right or not), hash checks and disproportionate warrant requests. Nothing is saved or uploaded.
+- `searchEntry` replaced by **`browserHistory`** (one profile: entries plus cleared periods). `file`, `email` and `wearableLog` were redesigned (see the authoring guide). These feed the Timeline only through the authored `timeline` field, never derived, so the author controls what is "as recorded" (e.g. drive times in UTC on a `server` device with a UTC clock). New device types `smart-home` and `server`.
+- **Cloud Drive shows times in the service's `displayZone`** with a visible zone label and never converts them (the Q1 trap).
+- **Safety:** web and email addresses must use reserved domains (`.example`, `.test`, `.invalid`); `data:` URIs are skipped by the safety walker.
+- **Chain of custody:** collection is derived (case start, warrant grant, drop, lookup); views (deduplicated within 30 s) and hash checks are logged in `CaseProgress.custody`, capped at 200 events. A hash mismatch shows a prominent tamper warning in every evidence header.
+- **Report:** cover page (own printed page), Timeline with the student's corrections, static SVG board snapshot (line style per relation), success-criteria self-assessment (`CaseProgress.selfAssessment`), chain-of-custody appendix on a new page, Download .txt.
+- The four new apps, and the assessment case data, were built in parallel by subagents and reviewed before committing.
