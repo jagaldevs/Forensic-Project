@@ -9,7 +9,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: 'auto',
-      includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
+      includeAssets: ['favicon.svg'],
       manifest: {
         name: 'HRS Digital Forensics Lab',
         short_name: 'Forensics Lab',
@@ -19,17 +19,20 @@ export default defineConfig({
         scope: '/',
         display: 'standalone',
         orientation: 'any',
-        background_color: '#0B0B0F',
-        theme_color: '#0B0B0F',
+        // Light "case file" look; the splash screen shows the crest on white.
+        background_color: '#FFFFFF',
+        theme_color: '#FFFFFF',
         icons: [
           { src: 'pwa-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'pwa-512.png', sizes: '512x512', type: 'image/png' },
-          { src: 'pwa-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          { src: 'pwa-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
       },
       workbox: {
         // Precache everything, including lazy-loaded cases and apps, so the lab works offline.
         globPatterns: ['**/*.{js,css,html,svg,png,jpg,webp,woff2}'],
+        // App icons are fetched by the device when the lab is installed; no need to precache them.
+        globIgnores: ['pwa-*.png', 'apple-touch-icon.png'],
         navigateFallback: '/index.html',
       },
     }),
