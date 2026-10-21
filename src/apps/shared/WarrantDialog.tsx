@@ -37,7 +37,7 @@ export function WarrantDialog({
     const outcome = useProgress.getState().applyWarrant(c, request.id, text);
     if (!outcome) return;
     setResult(outcome);
-    playSound(outcome.granted ? 'stamp' : 'hint');
+    playSound(outcome.granted ? 'granted' : 'refused');
     if (outcome.granted)
       useToasts.getState().push({
         title: 'Warrant granted',

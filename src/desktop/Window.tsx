@@ -2,6 +2,7 @@ import { Suspense, useEffect, useId, useRef, type KeyboardEvent, type ReactNode 
 import { appMeta } from './appMeta';
 import { useDesktop, type Rect, type WindowState } from '../stores/desktopStore';
 import { usePointerDrag } from '../lib/usePointerDrag';
+import { playSound } from '../lib/sound';
 import { Icon } from '../ui/Icon';
 import { Button } from '../ui/Button';
 import s from './desktop.module.css';
@@ -56,6 +57,7 @@ export function Window({ win, active, children }: WindowProps) {
   // none, focus goes to this app's dock button rather than being lost.
   const hide = (action: (id: typeof win.id) => void) => {
     action(win.id);
+    playSound('close');
     requestAnimationFrame(() => {
       if (document.activeElement && document.activeElement !== document.body) return;
       document.querySelector<HTMLElement>(`[data-dock-app="${win.id}"]`)?.focus();

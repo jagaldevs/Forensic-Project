@@ -21,7 +21,7 @@ export function PinButton({
       useProgress.getState().unpin(caseId, evidenceId);
     } else {
       useProgress.getState().pin(caseId, evidenceId);
-      playSound('click');
+      playSound('pin');
       useToasts.getState().push({
         key: 'pinned',
         title: 'Pinned to the evidence board',

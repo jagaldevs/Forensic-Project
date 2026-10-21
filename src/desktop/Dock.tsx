@@ -46,8 +46,10 @@ export function Dock() {
     const st = useDesktop.getState();
     const win = st.windows.find((w) => w.id === id);
     // Clicking the front window's icon minimises it, like a real dock.
-    if (win && !win.minimised && activeId === id) st.minimise(id);
-    else {
+    if (win && !win.minimised && activeId === id) {
+      st.minimise(id);
+      playSound('close');
+    } else {
       st.open(id);
       playSound('open');
     }

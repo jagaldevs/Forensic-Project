@@ -96,7 +96,7 @@ function useJudgement(q: Question) {
       .updateJudgement(caseId, q.id, assessment ? { ...patch, savedAt: null } : patch);
   const saveAnswer = () => {
     useProgress.getState().saveJudgement(caseId, q.id);
-    playSound('click');
+    playSound('pin');
   };
   return { c, progress, caseId, judgement, update, assessment, locked, saveAnswer };
 }

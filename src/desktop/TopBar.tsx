@@ -3,6 +3,7 @@ import { useCaseFile } from '../app/CaseContext';
 import { Logo } from '../brand/Logo';
 import { brand } from '../brand/brand';
 import { warrantsRemaining } from '../engine/availability';
+import { playSound } from '../lib/sound';
 import { BackupDialog } from '../screens/BackupDialog';
 import { useNav } from '../stores/navStore';
 import { useCaseProgress } from '../stores/progressStore';
@@ -68,7 +69,10 @@ export function TopBar() {
           icon={muted ? 'mute' : 'volume'}
           label={muted ? 'Sound is off. Turn sound on' : 'Sound is on. Turn sound off'}
           aria-pressed={!muted}
-          onClick={toggleMuted}
+          onClick={() => {
+            toggleMuted();
+            playSound('pin'); // a quiet click to confirm sound is on (silent when muting)
+          }}
         />
         <Button
           size="small"

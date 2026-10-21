@@ -2,7 +2,6 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { releasedEvidence, usableEvidence } from '../../engine/availability';
 import { distanceKm, placesWithin } from '../../engine/geo/cityMap';
 import type { EvidenceOfType } from '../../engine/types';
-import { playSound } from '../../lib/sound';
 import { useDesktop } from '../../stores/desktopStore';
 import { useProgress } from '../../stores/progressStore';
 import { Button } from '../../ui/Button';
@@ -48,7 +47,6 @@ export default function IpLookupApp({ params }: AppProps) {
     const v = value.trim();
     setQuery(v);
     useDesktop.getState().setParams('iplookup', { query: v });
-    playSound('click');
   };
 
   const submit = (e: FormEvent) => {

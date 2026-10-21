@@ -17,5 +17,5 @@ export function releaseDrop(c: CaseFile, drop: Drop) {
       ? { label: 'Take a look', appId: appId ?? 'locker', params: { selected: first.id } }
       : undefined,
   });
-  playSound('notify');
+  playSound('drop');
 }

@@ -91,7 +91,7 @@ export default function EvidenceBoardApp() {
   const makeLink = (relation: Relation) => {
     if (!pending) return;
     useProgress.getState().link(caseId, pending.evidenceId, pending.questionId, relation);
-    playSound('click');
+    playSound('link');
     setPending(null);
   };
 

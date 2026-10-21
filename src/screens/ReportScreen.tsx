@@ -5,6 +5,7 @@ import { brand } from '../brand/brand';
 import { collectedEvidence, isLocked } from '../engine/availability';
 import { hashCheck, type HashCheck } from '../engine/hash';
 import { buildReport, reportToText, type ReportData } from '../engine/report';
+import { playSound } from '../lib/sound';
 import { useNav } from '../stores/navStore';
 import { useCaseProgress, useProgress } from '../stores/progressStore';
 import { useSettings } from '../stores/settingsStore';
@@ -246,7 +247,10 @@ export default function ReportScreen() {
       <Finalise
         report={report}
         doneCount={doneCount}
-        onComplete={() => useProgress.getState().submit(c.meta.id)}
+        onComplete={() => {
+          useProgress.getState().submit(c.meta.id);
+          playSound('submit');
+        }}
         onSubmit={() => setConfirmSubmit(true)}
       />
 
@@ -262,6 +266,7 @@ export default function ReportScreen() {
                 icon="check"
                 onClick={() => {
                   useProgress.getState().submit(c.meta.id, { lock: true });
+                  playSound('submit');
                   setConfirmSubmit(false);
                 }}
               >
