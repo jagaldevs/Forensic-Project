@@ -49,7 +49,7 @@ const changedRows = [
 
 /** Guided notes shared by items of the same kind, so no single item stands out. */
 const emailGuide =
-  'The From line is what the email says about its sender. Reply-To, if there is one, is where replies will go, and it can be different from From. Each Received line is added by a mail server as it passes the email on: read them from the bottom up to follow its route. SPF checks whether the sending server is on the domain’s list of approved servers, and DKIM checks for the domain’s digital signature (pass, fail or none).';
+  'The From line is what the email says about its sender, and whoever writes an email can type anything there. “Reply to”, if it is shown, is where replies will go, and it can be different from From. Compare the email with others from the same sender: who it went to, where replies go, and whether it fits the rules. “Show original” has the full technical record of the email’s journey if you want to dig deeper, but you don’t need it.';
 const historyGuide =
   'A “visit” is a page that was opened and a “search” is something typed into a search box, each with the time on that device’s clock. The profile line shows which browser account was in use. If a period is marked as cleared, someone used a clear-history option and the entries from that time are gone: you can see when they were removed, but not what they were.';
 
@@ -318,7 +318,7 @@ Check every clock and every hash. Morgan deserves a fair investigation.`,
         },
       ],
       guided:
-        '“Created” is when the file was first made; “modified” is when it was last saved. The version history keeps a copy of each save, with the account, device and time, so you can open older versions and compare them. A service may show times in its own time zone rather than Darwin time, so check the zone label next to each time before comparing it with other evidence.',
+        '“Created” is when the file was first made; “modified” is when it was last saved. The version history keeps a copy of each save, with the account, device and time, so you can open older versions and compare them. The label next to each time says which time zone the service uses.',
       teacherNote:
         'Key for Q1 and Q5. The drive shows UTC: 08:55 UTC = 18:25 ACST (before the deadline, Morgan’s Chromebook) and 13:52 UTC = 23:22 ACST (after the deadline, the shared lab laptop). “Morgan Lee” is the signed-in account, not proof of the person. The genuine results survive in version 4.',
     },
@@ -419,7 +419,7 @@ Head Judge`,
       timeline: [{ recorded: rec('19:48'), label: 'Fake “head judge” email: deadline “extended”' }],
       guided: emailGuide,
       teacherNote:
-        'Key for Q2. Spoofed: the From line is copied, but Reply-To and Message-ID are QuickPost, it was sent through QuickPost’s servers, SPF fails and there is no DKIM. Sent to Team 4 only, against the fair rules.',
+        'Key for Q2. Spoofed. Visible without “Show original”: Reply to is a QuickPost address, and it went to Team 4 only, against the fair rules. In the original: the From line is copied, but Reply-To and Message-ID are QuickPost, it was sent through QuickPost’s servers, SPF fails and there is no DKIM. Sent to Team 4 only, against the fair rules.',
     },
     {
       id: 'band-morgan',
@@ -847,10 +847,10 @@ Head Judge`,
       keyEvidenceIds: ['email-spoofed', 'email-genuine'],
       distractorEvidenceIds: ['cleaning-roster'],
       modelAnswer:
-        'Not supported. The From line looks right, but anyone can type a From address. The headers show it was sent through QuickPost’s servers (198.51.100.73), the Reply-To and Message-ID are QuickPost addresses, SPF failed and there is no DKIM signature. The genuine reminder from the same address went through ntsciencefair.example’s own server and passed SPF and DKIM. The fair rules also say extensions go to all teams at once, but this went to Team 4 only.',
+        'Not supported. The From line looks right, but whoever writes an email can type any From address. Compared with the genuine reminder from the same address, this one is unusual in several ways: replies go to a free QuickPost address, not the fair’s; it asks Team 4 to reply to the “judge” directly rather than their coordinator; and it went to Team 4 only, although the fair rules say extensions are announced to all teams at once. (Deep dive: “Show original” confirms it. It was sent through QuickPost’s servers, SPF failed and there is no DKIM signature, while the genuine reminder came through the fair’s own mail server.)',
       limitationExamples: [
-        'Headers show which servers handled the email, not who typed it.',
-        'SPF can fail for honest reasons (like forwarding), so it is strongest alongside the other clues.',
+        'The email shows where it came from and where replies go, not who typed it.',
+        'One odd detail could have an innocent explanation, so the case is strongest when several clues agree.',
       ],
     },
     {
@@ -899,7 +899,7 @@ Head Judge`,
       keyPoints: [
         'The shared laptop was still signed in to Morgan’s account; account ≠ person',
         'The change was at 23:22 ACST (13:52 UTC), after the deadline',
-        'The extension email was spoofed (QuickPost, Reply-To, SPF fail)',
+        'The extension email was fake (replies go to QuickPost; sent to Team 4 only, against the rules)',
         'The genuine results survive in the version history (6:25 pm)',
         'Team 4 should be cleared; the person responsible is not identified',
         'Narrow, time-limited next requests; the whole-year request is disproportionate',

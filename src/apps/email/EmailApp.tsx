@@ -103,6 +103,12 @@ function EmailView({ email, offset, zone }: { email: Email; offset: string; zone
         <dl className={m.fields}>
           <dt>From</dt>
           <dd className={m.address}>{formatMailbox(email.from)}</dd>
+          {email.replyTo && (
+            <>
+              <dt>Reply to</dt>
+              <dd className={m.address}>{formatMailbox(email.replyTo)}</dd>
+            </>
+          )}
           <dt>To</dt>
           <dd className={m.address}>{email.to.map(formatMailbox).join(', ')}</dd>
           <dt>Date</dt>
@@ -138,9 +144,9 @@ function EmailView({ email, offset, zone }: { email: Email; offset: string; zone
       )}
 
       <p className={s.prompt}>
-        <strong>Think:</strong> the From line is typed by the sender and can say anything. What do
-        the headers show about where this email really came from? What do they <em>not</em> show
-        (who was typing)?
+        <strong>Think:</strong> the From line is typed by the sender and can say anything. Compare
+        this email with others from the same sender: who it went to, where replies go, and whether
+        it fits the rules. What does it <em>not</em> show (who was typing)?
       </p>
     </article>
   );
