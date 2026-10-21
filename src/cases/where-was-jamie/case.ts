@@ -11,7 +11,8 @@
  *  19:12 Jamie asks Sasha to come over; phone on 3%.
  *  19:20 Jamie posts a CROPPED sunset photo; a friend comments "mindil??".
  *  19:24 Bus card taps on at Cullen Bay, Route 4 towards Parap.
- *  19:34 Phone's last network connection, near Parap. Battery dies.
+ *  19:34 Phone's last network connection, to a tower sector that reaches from Parap back along
+ *        the bus route (Jamie is roughly halfway there). Battery dies.
  *  20:05 Parent's messages stop being delivered. Search goes to Mindil Beach.
  *  21:40 Jamie found safe at Sasha's home in Parap.
  */
@@ -541,7 +542,7 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
       app: 'locker',
       title: 'Phone network records',
       summary:
-        'Jamie’s phone last connected at 7:34 pm to a tower sector covering about 1.5 km around Parap. Nothing after that.',
+        'Jamie’s phone last connected at 7:34 pm to a tower sector that covers Parap and several kilometres of the main road towards the city. Nothing after that.',
       source: 'Mobile network provider (obtained under warrant)',
       lockedBy: 'warrant',
       fields: [
@@ -549,18 +550,21 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
         { label: 'Last connection', value: '7:34 pm, sector PARAP-N2' },
         {
           label: 'Sector coverage',
-          value: 'Roughly 1.5 km around Parap shops',
+          value: 'Parap shops and about 4 km of the main road back towards the city',
           note: 'Like IP geolocation, a tower sector is an area, not an exact spot.',
         },
         { label: 'After 7:34 pm', value: 'No further connections (phone switched off or flat)' },
       ],
       timeline: [
-        { recorded: rec('19:34'), label: 'Jamie’s phone last connects to the network, near Parap' },
+        {
+          recorded: rec('19:34'),
+          label: 'Jamie’s phone last connects to the network (Parap sector)',
+        },
       ],
       guided:
         'Phones connect to nearby mobile towers, and each tower’s coverage is split into sectors (slices pointing in different directions). The record shows which sector the phone used and when, which places the phone somewhere in that area, not at an exact address. A phone that is switched off or flat stops connecting.',
       teacherNote:
-        'Puts the phone near Parap at 19:34, consistent with the bus. The search should have started in Parap.',
+        'Puts the phone somewhere in the Parap sector at 19:34. Ten minutes after the 19:24 tap-on, a bus has covered roughly half of the 7 km trip, which is inside the sector (it reaches back along the main road). Consistent with the bus; the search should have started in Parap.',
     },
     {
       id: 'friends-messages',
@@ -684,7 +688,7 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
         },
       },
       modelAnswer:
-        'Possible, even likely. Jamie asked Sasha at 7:12 pm and Sasha agreed. Jamie’s bus card tapped on at Cullen Bay at 7:24 pm on a route towards Parap, and a bus trip of roughly 20 to 40 minutes would arrive around 7:45 to 8:05 pm. The phone’s last connection near Parap at 7:34 pm fits. But the card and phone show devices, not Jamie, and there is no record of where Jamie got off.',
+        'Possible, even likely. Jamie asked Sasha at 7:12 pm and Sasha agreed. Jamie’s bus card tapped on at Cullen Bay at 7:24 pm on a route towards Parap, and a bus trip of roughly 20 to 40 minutes would arrive around 7:45 to 8:05 pm. At 7:34 pm the phone last connected to a tower sector that covers Parap and the main road leading to it, which fits Jamie being on the bus, roughly halfway there. But the card and phone show devices, not Jamie, and there is no record of where Jamie got off.',
       limitationExamples: [
         'The bus tap shows the card was used, not who used it.',
         'There is no tap-off, so we don’t know where the passenger got off.',
@@ -702,7 +706,7 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
         'Say which data helped most, and whether it needed consent or a warrant, and why.',
       ],
       modelAnswer:
-        'Jamie left the lagoon at 6:05 pm, watched the sunset at Cullen Bay (photo 6:52 pm), arranged to go to Sasha’s at 7:12 pm, caught a bus towards Parap at 7:24 pm, and the phone died near Parap at about 7:34 pm. The search should have started in Parap. People were misled by a cropped photo plus a friend’s guess (“mindil??”), and by Ari’s photo appearing to put Jamie at the lagoon later than they really were. Jamie’s own messages and photos could be checked with a parent’s consent; the bus and phone network records needed narrow, time-limited warrants. Reading all of Jamie’s friends’ messages would have been disproportionate.',
+        'Jamie left the lagoon at 6:05 pm, watched the sunset at Cullen Bay (photo 6:52 pm), arranged to go to Sasha’s at 7:12 pm, caught a bus towards Parap at 7:24 pm, and the phone last connected at about 7:34 pm, in the Parap sector on the way there. The search should have started in Parap. People were misled by a cropped photo plus a friend’s guess (“mindil??”), and by Ari’s photo appearing to put Jamie at the lagoon later than they really were. Jamie’s own messages and photos could be checked with a parent’s consent; the bus and phone network records needed narrow, time-limited warrants. Reading all of Jamie’s friends’ messages would have been disproportionate.',
       keyPoints: [
         'An accurate timeline ending near Parap around 7:30 to 8 pm',
         'The cropped post and Kit’s comment led to Mindil',
