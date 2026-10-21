@@ -1,0 +1,45 @@
+.placeholder {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  border: 1px dashed var(--accent);
+  border-radius: var(--radius-sm);
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.mark {
+  background: var(--brand-magenta);
+  color: var(--on-brand);
+  padding: 0.25em 0.4em;
+  border-radius: 2px;
+}
+
+.text {
+  font-size: 0.7em;
+  font-weight: 600;
+  opacity: 0.8;
+  padding-right: 0.3em;
+}
+
+.small {
+  font-size: 0.8rem;
+  padding: 3px;
+}
+
+.large {
+  font-size: 1.4rem;
+  padding: 6px;
+}
+
+.img.small {
+  height: 32px;
+  width: auto;
+}
+
+.img.large {
+  height: 72px;
+  width: auto;
+}
