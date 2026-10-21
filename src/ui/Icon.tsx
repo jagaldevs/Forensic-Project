@@ -61,6 +61,16 @@ const paths = {
   arrowDown: 'M12 5v14 M6 13l6 6 6-6',
   fingerprint:
     'M12 4a8 8 0 0 1 8 8 M4 12a8 8 0 0 1 4-6.9 M8 12a4 4 0 0 1 8 0v2 M12 12v4 M6 16c.5 2 1.5 3.5 3 5 M16 17c-.3 1.5-.8 2.8-1.5 4',
+  folder: 'M3 6h6l2 2h10v11H3z M3 10h18',
+  mail: 'M3 6h18v12H3z M3 7l9 6 9-6',
+  pulse: 'M3 12h4l2-5 4 10 2-5h6',
+  shield: 'M12 3l8 3v6c0 4.5-3.5 8-8 9-4.5-1-8-4.5-8-9V6z M9 12l2 2 4-4',
+  present: 'M3 4h18v12H3z M12 16v4 M8 20h8 M7 8h6 M7 11h10',
+  refresh: 'M20 11a8 8 0 1 0-2.3 5.7 M20 4v7h-7',
+  file: 'M6 3h8l4 4v14H6z M14 3v4h4',
+  table: 'M3 5h18v14H3z M3 10h18 M3 15h18 M9 5v14',
+  door: 'M6 3h12v18H6z M14 12h0.01',
+  battery: 'M3 8h15v8H3z M21 11v2 M6 11h6',
 } as const;
 
 export type IconName = keyof typeof paths;

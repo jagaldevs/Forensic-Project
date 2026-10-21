@@ -16,10 +16,10 @@ export function BackupDialog({ onClose }: { onClose: () => void }) {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    const { agentName } = useSettings.getState();
+    const { agentName, teacherModeUsedAt } = useSettings.getState();
     const { cases } = useProgress.getState();
     const { missions: academy } = useAcademy.getState();
-    encodeProgress({ v: 2, agentName, cases, academy }).then(setCode);
+    encodeProgress({ v: 3, agentName, cases, academy, teacherModeUsedAt }).then(setCode);
   }, []);
 
   const copy = async () => {

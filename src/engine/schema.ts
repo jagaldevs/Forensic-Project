@@ -193,51 +193,149 @@ const messageThreadEvidence = z.object({
     .min(1),
 });
 
-const searchEntryEvidence = z.object({
+/** One browser profile's history, exported from one device. Times are as the device showed them. */
+const browserHistoryEvidence = z.object({
   ...evidenceBase,
-  type: z.literal('searchEntry'),
+  type: z.literal('browserHistory'),
   app: z.literal('browser'),
-  kind: z.enum(['search', 'visit', 'cleared']),
-  at: timestamp,
-  query: z.string().optional(),
-  url: z.string().optional(),
-  pageTitle: z.string().optional(),
+  /** The (fictional) browser, e.g. "Lumen Browser". */
+  browser: z.string().min(1),
+  /** Whose profile this is, e.g. "Morgan (school account)". */
+  profile: z.string().min(1),
+  deviceId: idSchema,
+  /** Oldest first. */
+  entries: z
+    .array(
+      z.object({
+        at: recordedTime,
+        kind: z.enum(['search', 'visit']),
+        /** The search terms, or the page title. */
+        title: z.string().min(1),
+        /** Fictional addresses only, ending in .example (e.g. https://lumen.example/search). */
+        url: z.string().optional(),
+      }),
+    )
+    .min(1),
+  /** Periods when the history was cleared. Shown as visible gaps. */
+  cleared: z
+    .array(z.object({ from: recordedTime, to: recordedTime, note: z.string().optional() }))
+    .optional(),
+  note: z.string().optional(),
 });
 
+const utcOffset = z.string().regex(/^[+-]\d{2}:\d{2}$/, 'Use an offset like +09:30');
+const zoneSchema = z.object({ label: z.string().min(1), utcOffset });
+
+/** What a file looked like at one version: a small table or some text. */
+const fileContent = z.discriminatedUnion('kind', [
+  z.object({
+    kind: z.literal('table'),
+    columns: z.array(z.string()).min(1),
+    rows: z.array(z.array(z.string())),
+  }),
+  z.object({ kind: z.literal('text'), text: z.string() }),
+]);
+
+/** A file in a cloud drive, with its properties and version history. */
 const fileEvidence = z.object({
   ...evidenceBase,
   type: z.literal('file'),
   app: z.literal('drive'),
-  fileName: z.string(),
+  /** The (fictional) cloud service, e.g. "StreamCloud Drive". */
+  service: z.string().min(1),
+  fileName: z.string().min(1),
+  /** Folder path shown in Properties, e.g. "Science Fair / Team 4". */
   path: z.string(),
+  fileKind: z.enum(['spreadsheet', 'document', 'image', 'other']),
   sizeBytes: z.number().int().nonnegative(),
   owner: z.string(),
+  sharedWith: z.array(z.string()).optional(),
   createdAt: timestamp,
   modifiedAt: timestamp,
-  versions: z.array(z.object({ at: timestamp, by: z.string(), note: z.string() })),
+  lastModifiedBy: z.string(),
+  /**
+   * The zone this service SHOWS times in (e.g. UTC). Leave out to show case time. Students must
+   * notice the label and convert.
+   */
+  displayZone: zoneSchema.optional(),
+  /** Oldest first. The last version must match modifiedAt and lastModifiedBy. */
+  versions: z
+    .array(
+      z.object({
+        at: timestamp,
+        by: z.string(),
+        /** The device or session it was saved from, as the service recorded it. */
+        device: z.string().optional(),
+        note: z.string().optional(),
+        content: fileContent.optional(),
+      }),
+    )
+    .min(1),
 });
 
+const mailbox = z.object({ name: z.string(), address: z.string().min(3) });
+
+/** An email, with the headers students see under "Show original". */
 const emailEvidence = z.object({
   ...evidenceBase,
   type: z.literal('email'),
   app: z.literal('email'),
-  from: z.string(),
-  to: z.array(z.string()).min(1),
+  /** Whose inbox it came from, e.g. "Morgan Lee (school email)". */
+  inbox: z.string().min(1),
+  from: mailbox,
+  /** Where replies go. In a spoofed email this is often not the sender. */
+  replyTo: mailbox.optional(),
+  to: z.array(mailbox).min(1),
   subject: z.string(),
   sentAt: timestamp,
   body: z.string(),
-  headers: z.array(z.object({ name: z.string(), value: z.string() })),
+  messageId: z.string().min(1),
+  /** Received headers, newest first (the order they appear in a real original). */
+  received: z
+    .array(z.object({ from: z.string(), fromIp: ip, by: z.string(), at: timestamp }))
+    .min(1),
+  auth: z.object({
+    spf: z.enum(['pass', 'fail', 'softfail', 'none']),
+    dkim: z.enum(['pass', 'fail', 'none']),
+    /** Plain-English summary, shown under the results. */
+    detail: z.string().optional(),
+  }),
+  /** Any other header lines to show in the original. */
+  extraHeaders: z.array(z.object({ name: z.string(), value: z.string() })).optional(),
+  attachments: z.array(z.string()).optional(),
 });
 
+/** A wearable or smart-home device's log. Times are as the device recorded them. */
 const wearableLogEvidence = z.object({
   ...evidenceBase,
   type: z.literal('wearableLog'),
   app: z.literal('wearables'),
-  device: z.string(),
-  measure: z.enum(['steps', 'heartRate', 'motion', 'doorbell', 'other']),
-  samples: z
-    .array(z.object({ at: timestamp, value: z.string(), note: z.string().optional() }))
-    .min(1),
+  deviceId: idSchema,
+  /** The (fictional) companion app, e.g. "PulseBand". */
+  service: z.string().min(1),
+  /** Regular readings, drawn as charts. */
+  series: z
+    .array(
+      z.object({
+        measure: z.enum(['steps', 'heartRate']),
+        /** e.g. "steps per 15 min", "bpm". */
+        unit: z.string(),
+        points: z.array(z.object({ at: recordedTime, value: z.number().nonnegative() })).min(2),
+      }),
+    )
+    .optional(),
+  /** Doorbell presses, motion, charging, band taken off… Oldest first. */
+  events: z
+    .array(
+      z.object({
+        at: recordedTime,
+        kind: z.enum(['doorbell', 'motion', 'door', 'charging', 'worn', 'removed', 'other']),
+        event: z.string().min(1),
+        detail: z.string().optional(),
+      }),
+    )
+    .optional(),
+  note: z.string().optional(),
 });
 
 const socialPostEvidence = z.object({
@@ -289,7 +387,7 @@ export const evidenceSchema = z.discriminatedUnion('type', [
   networkLogEvidence,
   messageThreadEvidence,
   cctvStillEvidence,
-  searchEntryEvidence,
+  browserHistoryEvidence,
   fileEvidence,
   emailEvidence,
   wearableLogEvidence,
@@ -311,18 +409,21 @@ const verdictQuestion = z.object({
   acceptedVerdicts: z.array(verdictSchema).min(1),
   keyEvidenceIds: z.array(idSchema).min(1),
   distractorEvidenceIds: z.array(idSchema),
-  hints: z.object({
-    /** Shown when the verdict is right and all key evidence is attached. */
-    correct: z.string(),
-    /** Shown when the verdict is not accepted. A nudge, never the answer. */
-    verdict: z.string(),
-    /** Optional nudges for specific wrong verdicts (overrides `verdict`). */
-    byVerdict: z.partialRecord(verdictSchema, z.string()).optional(),
-    /** Per missing key item. Falls back to a generic hint. */
-    missingEvidence: z.record(z.string(), z.string()),
-    /** Per distractor attached. */
-    distractors: z.record(z.string(), z.string()),
-  }),
+  /** Required, except in assessment cases (which never show hints). */
+  hints: z
+    .object({
+      /** Shown when the verdict is right and all key evidence is attached. */
+      correct: z.string(),
+      /** Shown when the verdict is not accepted. A nudge, never the answer. */
+      verdict: z.string(),
+      /** Optional nudges for specific wrong verdicts (overrides `verdict`). */
+      byVerdict: z.partialRecord(verdictSchema, z.string()).optional(),
+      /** Per missing key item. Falls back to a generic hint. */
+      missingEvidence: z.record(z.string(), z.string()),
+      /** Per distractor attached. */
+      distractors: z.record(z.string(), z.string()),
+    })
+    .optional(),
   modelAnswer: z.string(),
   limitationExamples: z.array(z.string()).min(1),
 });
@@ -391,6 +492,12 @@ export const caseSchema = z
       successCriteria: z.array(z.string()),
       /** Training Academy mission ids worth doing first (shown on the case card, never locked). */
       recommendedMissions: z.array(idSchema).optional(),
+      /**
+       * An assessment case: hidden behind the assessment access code, no hints, one submission
+       * that locks the report, scores visible only in Teacher Review. NOT exam-secure: the case
+       * data still ships with the app.
+       */
+      assessment: z.boolean().optional(),
     }),
     /** How times are displayed to students, e.g. ACST (UTC+09:30). */
     timeZone: z.object({
@@ -431,9 +538,7 @@ export const caseSchema = z
          * The time zone the device's clock was ACTUALLY set to (teacher knowledge). Students only
          * learn this from evidence, then correct it on the Timeline. Omit if it matches the case.
          */
-        clock: z
-          .object({ label: z.string(), utcOffset: z.string().regex(/^[+-]\d{2}:\d{2}$/) })
-          .optional(),
+        clock: zoneSchema.optional(),
         type: z.enum([
           'laptop',
           'desktop',
@@ -443,6 +548,8 @@ export const caseSchema = z
           'router',
           'camera',
           'wearable',
+          'smart-home',
+          'server',
           'other',
         ]),
         name: z.string(),
@@ -542,8 +649,35 @@ export const caseSchema = z
             `"${e.originalEvidenceId}" must be a photo item`,
           );
       }
-      if ((e.type === 'messageThread' || e.type === 'cctvStill') && !deviceIds.has(e.deviceId))
+      if (
+        (e.type === 'messageThread' ||
+          e.type === 'cctvStill' ||
+          e.type === 'browserHistory' ||
+          e.type === 'wearableLog') &&
+        !deviceIds.has(e.deviceId)
+      )
         issue(['evidence', i, 'deviceId'], `Unknown device "${e.deviceId}"`);
+      if (e.type === 'file') {
+        const last = e.versions.at(-1)!;
+        if (Date.parse(last.at) !== Date.parse(e.modifiedAt))
+          issue(['evidence', i, 'modifiedAt'], 'modifiedAt must match the latest version');
+        if (last.by !== e.lastModifiedBy)
+          issue(['evidence', i, 'lastModifiedBy'], 'lastModifiedBy must match the latest version');
+        if (Date.parse(e.versions[0]!.at) < Date.parse(e.createdAt))
+          issue(['evidence', i, 'versions'], 'A version is older than the file itself');
+        e.versions.forEach((v, j) => {
+          const prev = e.versions[j - 1];
+          if (prev && Date.parse(prev.at) > Date.parse(v.at))
+            issue(['evidence', i, 'versions', j], 'Versions must be oldest first');
+        });
+      }
+      if (e.type === 'wearableLog' && !e.series?.length && !e.events?.length)
+        issue(['evidence', i], 'A wearable log needs some series or events');
+      if (e.type === 'browserHistory')
+        e.cleared?.forEach((g, j) => {
+          if (g.from > g.to)
+            issue(['evidence', i, 'cleared', j], 'A cleared period must end after it starts');
+        });
       e.timeline?.forEach((t, j) => {
         if (t.deviceId && !deviceIds.has(t.deviceId))
           issue(['evidence', i, 'timeline', j, 'deviceId'], `Unknown device "${t.deviceId}"`);
@@ -567,11 +701,13 @@ export const caseSchema = z
 
     c.questions.forEach((q, i) => {
       if (q.kind !== 'verdict') return;
+      if (!q.hints && !c.meta.assessment)
+        issue(['questions', i, 'hints'], 'Practice cases need hints (only assessments skip them)');
       const refs: [string, string[]][] = [
         ['keyEvidenceIds', q.keyEvidenceIds],
         ['distractorEvidenceIds', q.distractorEvidenceIds],
-        ['hints.missingEvidence', Object.keys(q.hints.missingEvidence)],
-        ['hints.distractors', Object.keys(q.hints.distractors)],
+        ['hints.missingEvidence', Object.keys(q.hints?.missingEvidence ?? {})],
+        ['hints.distractors', Object.keys(q.hints?.distractors ?? {})],
       ];
       for (const [field, ids] of refs)
         ids.forEach((id) => {

@@ -72,11 +72,28 @@ export const BLOCKED_TERMS = [
 ];
 
 const IPV4 = /\b(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})\b/g;
+const URL_HOST = /\bhttps?:\/\/([a-z0-9.-]+)/gi;
+const EMAIL_HOST = /\b[a-z0-9._%+-]+@([a-z0-9-]+(?:\.[a-z0-9-]+)+)/gi;
+
+/**
+ * Web and email addresses must use reserved names that can never belong to anyone (RFC 2606):
+ * anything ending in .example, .test or .invalid, or example.com / .net / .org.
+ */
+export function isFictionalHost(host: string): boolean {
+  const h = host.toLowerCase().replace(/\.$/, '');
+  return (
+    /\.(example|test|invalid)$/.test(h) ||
+    /(^|\.)example\.(com|net|org)$/.test(h) ||
+    ['example', 'test', 'invalid'].includes(h)
+  );
+}
 
 /** Walks every string in a value, returning human-readable problems. */
 export function findSafetyIssues(value: unknown, path = 'case'): string[] {
   const issues: string[] = [];
   const visit = (v: unknown, p: string) => {
+    // Inlined image assets (data: URIs) are not case text.
+    if (typeof v === 'string' && v.startsWith('data:')) return;
     if (typeof v === 'string') {
       const lower = v.toLowerCase();
       for (const term of BLOCKED_TERMS) {
@@ -86,6 +103,10 @@ export function findSafetyIssues(value: unknown, path = 'case'): string[] {
       for (const match of v.matchAll(IPV4)) {
         if (!isDocumentationIp(match[0]))
           issues.push(`${p}: IP ${match[0]} is outside the documentation ranges`);
+      }
+      for (const match of [...v.matchAll(URL_HOST), ...v.matchAll(EMAIL_HOST)]) {
+        if (!isFictionalHost(match[1]!))
+          issues.push(`${p}: "${match[1]}" is a real-looking domain; use one ending in .example`);
       }
     } else if (Array.isArray(v)) {
       v.forEach((item, i) => visit(item, `${p}[${i}]`));

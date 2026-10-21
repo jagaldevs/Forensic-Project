@@ -27,7 +27,21 @@ export interface Judgement {
   limitation: string;
   attempts: number;
   lastResult: CheckResult | null;
+  /** Assessment cases: when the student last pressed Save (cleared by any later edit). */
+  savedAt?: number | null;
 }
+
+/** One line of the chain-of-custody log, beyond collection (which is derived). */
+export interface CustodyEvent {
+  at: number;
+  evidenceId: string;
+  action: 'viewed' | 'verified';
+  /** For "verified": whether the hash matched the collection record. */
+  ok?: boolean;
+}
+
+/** The custody log keeps the most recent events only, so progress codes stay short. */
+export const MAX_CUSTODY_EVENTS = 200;
 
 export interface WarrantApplication {
   requestId: string;
@@ -52,6 +66,10 @@ export interface CaseProgress {
   submittedAt: number | null;
   /** Timeline: deviceId → the UTC offset the student believes its clock was set to. */
   clockCorrections?: Record<string, string>;
+  /** Views and hash checks, oldest first (capped at MAX_CUSTODY_EVENTS). */
+  custody?: CustodyEvent[];
+  /** Set when an assessment is submitted: nothing the student does changes it after that. */
+  locked?: boolean;
 }
 
 export function newCaseProgress(caseId: string, now = Date.now()): CaseProgress {
@@ -73,9 +91,13 @@ export function emptyJudgement(): Judgement {
   return { verdict: null, explanation: '', limitation: '', attempts: 0, lastResult: null };
 }
 
-/** A verdict question is done when its check passed; an open question when it was submitted. */
+/**
+ * A verdict question is done when its check passed; an open question when it was submitted.
+ * In an assessment (no checking), a question is done once its answer is saved.
+ */
 export function isQuestionDone(progress: CaseProgress, question: { id: string }): boolean {
-  return progress.judgements[question.id]?.lastResult?.correct === true;
+  const j = progress.judgements[question.id];
+  return j?.lastResult?.correct === true || !!j?.savedAt;
 }
 
 /** Evidence attached to a question = the board links to it. */

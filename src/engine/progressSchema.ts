@@ -39,10 +39,22 @@ const caseProgress = z.object({
       limitation: z.string(),
       attempts: z.number(),
       lastResult: checkResult.nullable(),
+      savedAt: z.number().nullable().optional(),
     }),
   ),
   submittedAt: z.number().nullable(),
   clockCorrections: z.record(z.string(), z.string()).optional(),
+  custody: z
+    .array(
+      z.object({
+        at: z.number(),
+        evidenceId: z.string(),
+        action: z.enum(['viewed', 'verified']),
+        ok: z.boolean().optional(),
+      }),
+    )
+    .optional(),
+  locked: z.boolean().optional(),
 });
 
 const stepAnswer = z.discriminatedUnion('type', [
@@ -75,4 +87,10 @@ const base = { agentName: z.string().max(64), cases: z.record(z.string(), casePr
 export const progressBackupSchema = z.discriminatedUnion('v', [
   z.object({ v: z.literal(1), ...base }),
   z.object({ v: z.literal(2), ...base, academy: z.record(z.string(), missionProgress) }),
+  z.object({
+    v: z.literal(3),
+    ...base,
+    academy: z.record(z.string(), missionProgress),
+    teacherModeUsedAt: z.number().nullable(),
+  }),
 ]);

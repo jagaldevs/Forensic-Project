@@ -3,6 +3,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import { safeStorage } from '../lib/safeStorage';
 import {
   emptyJudgement,
+  MAX_CUSTODY_EVENTS,
   newCaseProgress,
   type CaseProgress,
   type CheckResult,
@@ -35,7 +36,14 @@ interface ProgressState {
     justification: string,
   ) => WarrantApplication | null;
   releaseDrop: (caseId: string, dropId: string) => void;
-  submit: (caseId: string) => void;
+  /** Marks the case complete. Assessments pass lock: true, which freezes it. */
+  submit: (caseId: string, opts?: { lock?: boolean }) => void;
+  /** Assessment cases: record that the student saved an answer (no checking). */
+  saveJudgement: (caseId: string, questionId: string) => void;
+  /** Chain of custody: the result of checking hashes. */
+  logVerification: (caseId: string, results: { evidenceId: string; ok: boolean }[]) => void;
+  /** Teacher mode: give back every warrant (applications are cleared). */
+  resetWarrants: (caseId: string) => void;
   /** null removes the correction (the device is assumed to be on case time). */
   setClockCorrection: (caseId: string, deviceId: string, utcOffset: string | null) => void;
 
@@ -55,8 +63,10 @@ export const useProgress = create<ProgressState>()(
   persist(
     (set, get) => {
       /** Apply a change to one case's progress (creating it if needed). */
-      const update = (caseId: string, fn: (p: CaseProgress) => void) => {
+      const update = (caseId: string, fn: (p: CaseProgress) => void, force = false) => {
         const current = get().cases[caseId] ?? newCaseProgress(caseId);
+        // A submitted assessment is frozen. Only views and hash checks are still logged.
+        if (current.locked && !force) return;
         const next = structuredClone(current);
         fn(next);
         set({ cases: { ...get().cases, [caseId]: next } });
@@ -72,8 +82,21 @@ export const useProgress = create<ProgressState>()(
           set({ cases: { ...get().cases, [caseId]: newCaseProgress(caseId) } }),
         markBriefingRead: (caseId) => update(caseId, (p) => void (p.briefingRead = true)),
         markViewed: (caseId, evidenceId) => {
-          if (get().cases[caseId]?.viewed[evidenceId]) return;
-          update(caseId, (p) => void (p.viewed[evidenceId] = Date.now()));
+          const now = Date.now();
+          const last = get().cases[caseId]?.custody?.findLast((e) => e.evidenceId === evidenceId);
+          // Re-renders and quick re-selections count as one view.
+          if (last?.action === 'viewed' && now - last.at < 30_000) return;
+          update(
+            caseId,
+            (p) => {
+              p.viewed[evidenceId] ??= now;
+              p.custody = [
+                ...(p.custody ?? []),
+                { at: now, evidenceId, action: 'viewed' as const },
+              ].slice(-MAX_CUSTODY_EVENTS);
+            },
+            true,
+          );
         },
 
         pin: (caseId, evidenceId) =>
@@ -143,7 +166,36 @@ export const useProgress = create<ProgressState>()(
           update(caseId, (p) => {
             if (!(dropId in p.releasedDrops)) p.releasedDrops[dropId] = Date.now();
           }),
-        submit: (caseId) => update(caseId, (p) => void (p.submittedAt = Date.now())),
+        submit: (caseId, opts) =>
+          update(caseId, (p) => {
+            p.submittedAt ??= Date.now();
+            if (opts?.lock) p.locked = true;
+          }),
+        saveJudgement: (caseId, questionId) =>
+          update(caseId, (p) => {
+            p.judgements[questionId] = {
+              ...(p.judgements[questionId] ?? emptyJudgement()),
+              savedAt: Date.now(),
+            };
+          }),
+        logVerification: (caseId, results) =>
+          update(
+            caseId,
+            (p) => {
+              const at = Date.now();
+              p.custody = [
+                ...(p.custody ?? []),
+                ...results.map((r) => ({
+                  at,
+                  evidenceId: r.evidenceId,
+                  action: 'verified' as const,
+                  ok: r.ok,
+                })),
+              ].slice(-MAX_CUSTODY_EVENTS);
+            },
+            true,
+          ),
+        resetWarrants: (caseId) => update(caseId, (p) => void (p.warrants = []), true),
         setClockCorrection: (caseId, deviceId, utcOffset) =>
           update(caseId, (p) => {
             const next = { ...(p.clockCorrections ?? {}) };

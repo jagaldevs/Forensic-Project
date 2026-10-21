@@ -43,8 +43,14 @@ export function checkVerdictJudgement(
   const verdictOk =
     judgement.verdict !== null && question.acceptedVerdicts.includes(judgement.verdict);
   if (!verdictOk) {
-    const specific = judgement.verdict ? question.hints.byVerdict?.[judgement.verdict] : undefined;
-    messages.push({ tone: 'hint', text: specific ?? question.hints.verdict });
+    const specific = judgement.verdict ? question.hints?.byVerdict?.[judgement.verdict] : undefined;
+    messages.push({
+      tone: 'hint',
+      text:
+        specific ??
+        question.hints?.verdict ??
+        'Look again at what the evidence can and cannot show.',
+    });
   }
 
   const missing = question.keyEvidenceIds.filter((id) => !attached.has(id));
@@ -53,7 +59,7 @@ export function checkVerdictJudgement(
     messages.push({
       tone: 'hint',
       text:
-        question.hints.missingEvidence[id] ??
+        question.hints?.missingEvidence[id] ??
         `There's another piece of evidence that matters here. Have you looked at "${title}"?`,
     });
   }
@@ -63,13 +69,14 @@ export function checkVerdictJudgement(
     messages.push({
       tone: 'hint',
       text:
-        question.hints.distractors[id] ??
+        question.hints?.distractors[id] ??
         "One of your attached items doesn't really help answer this question. Which one is it?",
     });
   }
 
   const correct = verdictOk && missing.length === 0 && distractors.length === 0;
-  if (correct) messages.unshift({ tone: 'good', text: question.hints.correct });
+  if (correct)
+    messages.unshift({ tone: 'good', text: question.hints?.correct ?? 'Well reasoned.' });
   else if (verdictOk)
     messages.unshift({
       tone: 'good',

@@ -33,6 +33,17 @@ describe('findSafetyIssues', () => {
   test('passes fictional content', () => {
     expect(findSafetyIssues({ a: 'StreamCloud login from 203.0.113.47 via TopNet' })).toEqual([]);
   });
+  test('flags real-looking web and email domains, allows reserved ones', () => {
+    expect(
+      findSafetyIssues([
+        'https://lumen.example/search?q=volcano',
+        'morgan.lee@hrs-students.example',
+        '<a1b2@mail.hrs.example>',
+        'see http://example.org',
+      ]),
+    ).toEqual([]);
+    expect(findSafetyIssues(['https://news.com.au/x', 'judge@sciencefair.org'])).toHaveLength(2);
+  });
   test('does not flag words that merely contain a brand', () => {
     expect(findSafetyIssues('a pineapple and some steamed buns')).toEqual([]);
   });

@@ -20,7 +20,7 @@ describe('checkVerdictJudgement', () => {
       waterfront,
     );
     expect(r.correct).toBe(false);
-    expect(r.messages.map((m) => m.text)).toContain(q1.hints.verdict);
+    expect(r.messages.map((m) => m.text)).toContain(q1.hints!.verdict);
     expect(r.messages.every((m) => !/not supported/i.test(m.text))).toBe(true);
   });
 
@@ -31,7 +31,7 @@ describe('checkVerdictJudgement', () => {
       [],
       waterfront,
     );
-    expect(r.messages[0]!.text).toBe(q1.hints.byVerdict!['cant-tell']);
+    expect(r.messages[0]!.text).toBe(q1.hints!.byVerdict!['cant-tell']);
   });
 
   test('flags missing key evidence and attached distractors with hints', () => {
@@ -43,8 +43,8 @@ describe('checkVerdictJudgement', () => {
     );
     expect(r.correct).toBe(false);
     const texts = r.messages.map((m) => m.text);
-    expect(texts).toContain(q1.hints.missingEvidence['router-log-okafor']);
-    expect(texts).toContain(q1.hints.distractors['weather-record']);
+    expect(texts).toContain(q1.hints!.missingEvidence['router-log-okafor']);
+    expect(texts).toContain(q1.hints!.distractors['weather-record']);
     expect(r.messages[0]!.tone).toBe('good');
   });
 

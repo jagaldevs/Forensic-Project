@@ -7,12 +7,17 @@
 import type { CaseProgress } from '../engine/progressTypes';
 import type { MissionProgress } from '../stores/academyStore';
 
-/** v2 added Training Academy progress. v1 codes still import (with no academy progress). */
+/**
+ * v2 added Training Academy progress; v3 records whether teacher mode was ever turned on on the
+ * device (shown in Teacher Review). Older codes still import.
+ */
 export interface ProgressBackup {
-  v: 2;
+  v: 3;
   agentName: string;
   cases: Record<string, CaseProgress>;
   academy: Record<string, MissionProgress>;
+  /** When teacher mode was first turned on on this device, or null. */
+  teacherModeUsedAt: number | null;
 }
 
 const PREFIX = 'HRSFL1.';
@@ -70,9 +75,10 @@ export async function decodeProgress(code: string): Promise<ProgressBackup> {
   if (!parsed.success) throw new Error('That progress code is damaged or from a different app.');
   const data = parsed.data;
   return {
-    v: 2,
+    v: 3,
     agentName: data.agentName,
     cases: data.cases as Record<string, CaseProgress>,
-    academy: (data.v === 2 ? data.academy : {}) as Record<string, MissionProgress>,
+    academy: (data.v === 1 ? {} : data.academy) as Record<string, MissionProgress>,
+    teacherModeUsedAt: data.v === 3 ? data.teacherModeUsedAt : null,
   };
 }
