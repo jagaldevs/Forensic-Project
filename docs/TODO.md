@@ -48,8 +48,8 @@ A running list for the end-of-project review. Newest additions at the bottom of 
       supported or Can't tell; Q3 (an animal, not a person?) accepts Strongly supported or
       Possible. One permission request (an hour of the family tablet's history) is granted; a
       year of Kai's searches and messages is refused.
-- [ ] **Permission requests instead of warrants** in The Midnight Raid (`warrants.kind:
-'permission'`): students ask Kai's parent rather than a magistrate. Same mechanics.
+- [ ] **Permission requests instead of warrants** in The Midnight Raid
+      (`kind: 'permission'`): students ask Kai's parent rather than a magistrate. Same mechanics.
 - [ ] **Seven lessons.** The practice case is a new lesson 6, so the assessment is lesson 7. The
       guide says what to do with only six lessons (homework, or instead of the gallery walk).
 - [ ] **The Midnight Raid doesn't practise Email or Cloud Drive.** Students still meet those
