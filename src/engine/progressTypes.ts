@@ -50,6 +50,9 @@ export interface WarrantApplication {
   at: number;
 }
 
+/** A success-criterion self-assessment. */
+export type SelfRating = 'yes' | 'partly' | 'not-yet';
+
 export interface CaseProgress {
   caseId: string;
   startedAt: number;
@@ -70,6 +73,8 @@ export interface CaseProgress {
   custody?: CustodyEvent[];
   /** Set when an assessment is submitted: nothing the student does changes it after that. */
   locked?: boolean;
+  /** Report: the student's rating against each success criterion (keyed by its index). */
+  selfAssessment?: Record<string, SelfRating>;
 }
 
 export function newCaseProgress(caseId: string, now = Date.now()): CaseProgress {

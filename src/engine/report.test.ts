@@ -36,3 +36,28 @@ test('report includes verdicts, evidence, reasoning and warrants', () => {
   expect(text).toContain('Okafor home router logs: GRANTED');
   expect(text).toContain('Evidence examined: StreamCloud login record');
 });
+
+test('report includes the corrected timeline, self-assessment and custody appendix', async () => {
+  const { default: jamie } = await import('../cases/where-was-jamie/case');
+  const p = newCaseProgress('where-was-jamie', 0);
+  p.selfAssessment = { 0: 'partly' };
+  p.custody = [{ at: 5, evidenceId: jamie.evidence[0]!.id, action: 'viewed' }];
+  const report = buildReport(jamie, p, 'Agent Kestrel', 0);
+  expect(report.timeline.length).toBeGreaterThan(0);
+  expect(report.selfAssessment[0]).toEqual({
+    criterion: jamie.meta.successCriteria[0],
+    rating: 'partly',
+  });
+  const text = reportToText(report);
+  expect(text).toContain('Timeline (ACST');
+  expect(text).toContain(`[Partly] ${jamie.meta.successCriteria[0]}`);
+  expect(text).toContain('Appendix: chain of custody');
+  expect(text).toContain(`Viewed: ${jamie.evidence[0]!.title}`);
+});
+
+test('assessment reports never show auto-check results', async () => {
+  const { default: fair } = await import('../cases/science-fair-switch/case');
+  const report = buildReport(fair, newCaseProgress('science-fair-switch', 0), 'Agent K', 0);
+  expect(report.assessment).toBe(true);
+  expect(reportToText(report)).not.toContain('Auto-check');
+});

@@ -8,6 +8,7 @@ import {
   type CaseProgress,
   type CheckResult,
   type Judgement,
+  type SelfRating,
   type WarrantApplication,
 } from '../engine/progressTypes';
 import { warrantsRemaining } from '../engine/availability';
@@ -46,6 +47,8 @@ interface ProgressState {
   resetWarrants: (caseId: string) => void;
   /** Teacher mode: re-open a submitted assessment (e.g. submitted by mistake). */
   unlock: (caseId: string) => void;
+  /** Report: rate yourself against a success criterion (null clears it). */
+  setSelfAssessment: (caseId: string, index: number, rating: SelfRating | null) => void;
   /** null removes the correction (the device is assumed to be on case time). */
   setClockCorrection: (caseId: string, deviceId: string, utcOffset: string | null) => void;
 
@@ -198,6 +201,13 @@ export const useProgress = create<ProgressState>()(
             true,
           ),
         resetWarrants: (caseId) => update(caseId, (p) => void (p.warrants = []), true),
+        setSelfAssessment: (caseId, index, rating) =>
+          update(caseId, (p) => {
+            const next = { ...(p.selfAssessment ?? {}) };
+            if (rating) next[index] = rating;
+            else delete next[index];
+            p.selfAssessment = next;
+          }),
         unlock: (caseId) =>
           update(
             caseId,

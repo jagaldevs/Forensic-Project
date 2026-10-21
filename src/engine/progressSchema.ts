@@ -55,6 +55,7 @@ const caseProgress = z.object({
     )
     .optional(),
   locked: z.boolean().optional(),
+  selfAssessment: z.record(z.string(), z.enum(['yes', 'partly', 'not-yet'])).optional(),
 });
 
 const stepAnswer = z.discriminatedUnion('type', [

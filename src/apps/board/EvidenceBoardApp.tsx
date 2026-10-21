@@ -12,6 +12,7 @@ import { statusInfo } from '../../ui/labels';
 import { useCaseState } from '../shared/hooks';
 import { BoardCard, CARD_H, CARD_W, type Pos } from './BoardCard';
 import b from './board.module.css';
+import { stringMid, stringPath } from './strings';
 
 /** Claims sit on the right edge of the visible board, but never closer than this to the left. */
 const MIN_CLAIM_X = 700;
@@ -278,22 +279,3 @@ const relationHelp: Record<Relation, string> = {
   contradicts: 'This evidence makes the claim less likely, or shows it rests on a mistake.',
   inconclusive: "This evidence is relevant, but it can't decide the claim either way.",
 };
-
-type Pt = { x: number; y: number };
-
-/** A string that sags a little under its own weight. */
-function stringPath(a: Pt, z: Pt): string {
-  const c = stringControl(a, z);
-  return `M${a.x},${a.y} Q${c.x},${c.y} ${z.x},${z.y}`;
-}
-
-function stringControl(a: Pt, z: Pt): Pt {
-  const sag = 30 + Math.hypot(z.x - a.x, z.y - a.y) * 0.08;
-  return { x: (a.x + z.x) / 2, y: (a.y + z.y) / 2 + sag };
-}
-
-/** Midpoint of the quadratic curve (t = 0.5). */
-function stringMid(a: Pt, z: Pt): Pt {
-  const c = stringControl(a, z);
-  return { x: 0.25 * a.x + 0.5 * c.x + 0.25 * z.x, y: 0.25 * a.y + 0.5 * c.y + 0.25 * z.y };
-}
