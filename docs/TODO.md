@@ -20,6 +20,9 @@ A running list for the end-of-project review. Newest additions at the bottom of 
 - [ ] Listen to the sound effects on classroom speakers (levels were set by reasoning).
 - [ ] Read the Guided notes, nudges and Deep dive challenges in all three cases (drafted for
       review; see the support levels entry in CLAUDE.md).
+- [ ] Review the teacher guide and student sheets (`docs/lessons/`), and check the curriculum
+      codes against the ACARA website (taken from a reproduction of the v9 tables).
+- [ ] Add the lab's Netlify link to the teacher brief once it is final.
 
 ## Decisions to review
 

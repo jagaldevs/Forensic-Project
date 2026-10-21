@@ -1,4 +1,4 @@
-# HRS Digital Forensics Lab: a one-page brief for science teachers
+# HRS Digital Forensics Lab: brief for science teachers
 
 **What it is.** A web app for the Year 8 Digital Forensics unit. Students sign in to a fictional
 forensics lab and investigate realistic but entirely made-up digital evidence: photo metadata, IP
@@ -58,4 +58,5 @@ A first-run tour shows students the desktop. In each case, students choose a **s
   device each lesson, or save their progress code.
 - Ask the lab owner for the teacher code and the assessment code (set in `src/config/teacher.ts`).
 - Play The Waterfront Alibi yourself first, with teacher mode on, to see the answer key.
-- Lesson sequences and plans: see the teacher and student lesson guides (coming next).
+- Lesson plans: the [teacher guide](lessons/teacher-guide.md) (six 60-minute lessons and a rubric)
+  and the [student sheets](lessons/student-lessons.md). Word copies are in `docs/word/`.

@@ -65,7 +65,10 @@ src/
   missions/<id>/  Training Academy: meta.ts (eager) + mission.ts (lazy) + assets/; index.ts registry
   academy/        AcademyScreen (hub), MissionScreen (step player), StepInputs, MediaView
 docs/writing-a-case.md, docs/writing-a-mission.md, docs/accessibility.md (audit + keyboard map),
-docs/TODO.md (running list of open items for the end-of-project review)
+docs/TODO.md (running list of open items for the end-of-project review),
+docs/teacher-brief.md (one page for science teachers), docs/lessons/ (teacher guide: 6 × 60 min
+lessons + rubric; student sheets), docs/word/ (Word copies, built by `npm run docs:word` from
+scripts/build-word-docs.mjs; rebuild after editing those Markdown files)
 scripts/generate-icons.mjs   placeholder PWA icons
 ```
 
@@ -256,3 +259,10 @@ Support levels (21 Oct 2026, requested: differentiate for less and more technica
 - **Assessments:** students may choose any level; Guided notes stay on (they explain, not answer); no nudges; extensions chosen so they don't give away answers.
 - Progress codes stay v3 (new fields are optional). Content for all three cases was drafted by one subagent per case and reviewed; open points are in `docs/TODO.md`.
 - Deferred: Deep dive "raw view first", and a class default level via the shared link.
+
+Teacher documents (21 Oct 2026):
+
+- One-page brief for science teachers, and a 6 × 60-minute lesson sequence (chosen over 4 or 8–10 lessons): observation vs inference → uncertainty (Waterfront) → ethics and warrants → systematic error (Jamie) → new evidence and peer review → assessment (Science Fair Switch) with a written reflection and a 4-level rubric. Each lesson names the science idea behind the forensics (error bars, calibration, correlation vs causation).
+- Australian Curriculum v9 Year 8 codes cited (AC9S8H01, H03, I04–I08); wording taken from a reproduction of the ACARA tables, flagged in the guide for checking.
+- Markdown is the source; Word copies are generated (`docx` + `marked`, dev only). The brief must stay on one A4 page (check after edits).
+- Logo: `src/brand/haileybury-logo.jpg` (supplied by the owner); full logo on large slots, a CSS crop of the crest in top bars.
