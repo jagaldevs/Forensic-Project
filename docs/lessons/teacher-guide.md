@@ -1,4 +1,4 @@
-# Digital Forensics: teacher guide (6 lessons × 60 minutes)
+# Digital Forensics: teacher guide (7 lessons × 60 minutes)
 
 Year 8 Science · HRS Digital Forensics Lab. Read the one-page [teacher brief](../teacher-brief.md)
 first. Student sheets for every lesson are in [student-lessons.md](student-lessons.md).
@@ -26,15 +26,15 @@ The science links make this more than a computing unit. Make them explicit in ev
 
 ## Curriculum links (Victorian Curriculum F–10 Version 2.0, Science Levels 7 and 8)
 
-| Code     | Content description                                                                                                                                                                                                                                   | Lessons    |
-| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| VC2S8H01 | Scientific knowledge, including models and theories, can change because of new evidence                                                                                                                                                               | 4, 5       |
-| VC2S8H03 | Proposed scientific responses to socio-scientific issues impact on society and may involve ethical, environmental, social and economic considerations                                                                                                 | 3          |
-| VC2S8I04 | Data and information can be organised and processed by selecting and constructing representations including tables, graphs, keys, models and mathematical relationships                                                                               | 4, 5       |
-| VC2S8I05 | Information and processed data can be analysed to show patterns, trends and relationships, and to identify anomalies                                                                                                                                  | 2, 4       |
-| VC2S8I06 | Scientific methods, conclusions and claims can be analysed to identify assumptions, possible sources of error, conflicting evidence and unanswered questions                                                                                          | 1–6        |
-| VC2S8I07 | Evidence-based arguments can be constructed to support conclusions or evaluate claims, including consideration of ethical issues and protocols associated with using or citing secondary data or information                                          | 2, 3, 5, 6 |
-| VC2S8I08 | Communicating ideas, findings and arguments for specific purposes and audiences involves the selection and use of appropriate presentation formats, scientific vocabulary, models and other representations, and may include the use of digital tools | 5, 6       |
+| Code     | Content description                                                                                                                                                                                                                                   | Lessons       |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| VC2S8H01 | Scientific knowledge, including models and theories, can change because of new evidence                                                                                                                                                               | 4, 5, 6       |
+| VC2S8H03 | Proposed scientific responses to socio-scientific issues impact on society and may involve ethical, environmental, social and economic considerations                                                                                                 | 3, 6, 7       |
+| VC2S8I04 | Data and information can be organised and processed by selecting and constructing representations including tables, graphs, keys, models and mathematical relationships                                                                               | 4, 5          |
+| VC2S8I05 | Information and processed data can be analysed to show patterns, trends and relationships, and to identify anomalies                                                                                                                                  | 2, 4          |
+| VC2S8I06 | Scientific methods, conclusions and claims can be analysed to identify assumptions, possible sources of error, conflicting evidence and unanswered questions                                                                                          | 1–7           |
+| VC2S8I07 | Evidence-based arguments can be constructed to support conclusions or evaluate claims, including consideration of ethical issues and protocols associated with using or citing secondary data or information                                          | 2, 3, 5, 6, 7 |
+| VC2S8I08 | Communicating ideas, findings and arguments for specific purposes and audiences involves the selection and use of appropriate presentation formats, scientific vocabulary, models and other representations, and may include the use of digital tools | 5, 7          |
 
 The unit also works towards this part of the Level 8 achievement standard: students "explain how
 new evidence can lead to changes in scientific knowledge" and "discuss the relevant ethical …
@@ -51,10 +51,11 @@ document.
 | 3      | Limits, ethics and warrants   | Waterfront debrief (presenter view); Academy: Ethics & Privacy | Warrant debate                   |
 | 4      | Systematic error              | Academy: Timestamps & Time Zones; **Where was Jamie?** part 1  | Two-clocks starter               |
 | 5      | New evidence changes theories | Where was Jamie? part 2; Jamie debrief                         | Board gallery walk (peer review) |
-| 6      | Assessment                    | **The Science Fair Switch** (assessment case)                  | Written reflection               |
+| 6      | Whose search was it?          | Academy: Search History & Cookies; **The Midnight Raid**       | Rubric preview                   |
+| 7      | Assessment                    | **The Science Fair Switch** (assessment case)                  | Written reflection               |
 
-Homework (optional, about 6 minutes): Academy: Search History & Cookies before lesson 6. The
-assessment uses a browser history, and this mission is the only practice for reading one.
+Only six lessons? Set The Midnight Raid as homework before the assessment, or run it in place of
+the gallery walk in lesson 5. It is the practice for search histories and fitness-band logs.
 
 ## Before the unit
 
@@ -69,9 +70,12 @@ assessment uses a browser history, and this mission is the only practice for rea
 - [ ] Print the student sheets (one per lesson) and, for lesson 1, the card sort; for lesson 3,
       the warrant scenarios (both at the end of this guide).
 - [ ] Turn teacher mode **off** on any device students will use. It stays on until turned off.
+- [ ] Optional: to suggest a support level for the whole class, share the link with
+      `?level=guided` (or `standard`, `deep`) on the end. Students can still change it.
 - [ ] Check that no fictional student in the cases shares a name with a real student in the class
       (e.g. Morgan Lee, Priya Nair, Tom Baxter, Jamie Ellison, Kit Lam, Elliot Barker, Sasha
-      Morales). Rename them in the case files if needed.
+      Morales, Kai and Finn Thornton, Ruby Halloran, Leo Marsh, Zara Quinn). Rename them in the
+      case files if needed.
 
 **Familiar names.** The lab uses the school's name and Mrs Staggs's name (with her permission) to
 feel familiar: she introduces the Training Academy, is mentioned in each case briefing, and sends
@@ -239,13 +243,58 @@ improves reasoning.
 | 0–25  | **Finish Where was Jamie?** Q3 (could Jamie reach Parap by 8 pm? use the Map's travel calculator) and Q4 (where the search should have started, and what data was needed, fairly obtained). Release any drops a student hasn't triggered (Teacher Panel → _Evidence drops_). |
 | 25–40 | **Gallery walk.** Students leave their Evidence Board open and move around. On each board they visit, leave one sticky note: green for a strong link ("this supports the claim because…"), yellow for a question ("what does this _not_ show?").                             |
 | 40–55 | **Debrief with the presenter view.** Why did the search start at Mindil Beach? (Jamie's cropped sunset post looked like Mindil; the original photo shows Cullen Bay.) Ask: when has new evidence changed what scientists thought? (e.g. a new fossil, a better instrument).  |
-| 55–60 | **Exit ticket.** Remind students about the assessment next lesson, and set the optional Search History mission as homework.                                                                                                                                                  |
+| 55–60 | **Exit ticket.** Save progress. Next lesson is a practice case before the assessment.                                                                                                                                                                                        |
 
 **Exit ticket:** Name one piece of evidence that changed your thinking, and how.
 
 ---
 
-## Lesson 6: Assessment: The Science Fair Switch
+## Lesson 6: Whose search was it? Practice case: The Midnight Raid
+
+**Learning intention:** Use observation and inference to judge a phone's search history and
+sensor data, working more independently before the assessment.
+
+**Success criteria:** Students can
+
+- explain why a search in a history does not show who typed it
+- describe what a fitness band and a motion light measure, and what they cannot tell us
+- decide which requests for someone's data are fair.
+
+**Curriculum:** VC2S8H01, VC2S8H03, VC2S8I06, VC2S8I07.
+
+**You need:** the lab link; student sheet 6. Teacher mode on your device with The Midnight Raid
+open; the rubric (lesson 7) ready to show.
+
+| Time  | What happens                                                                                                                                                                                                                                                                                                                                                                                                |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0–8   | **Academy:** _Search History & Cookies_ (about 6 min).                                                                                                                                                                                                                                                                                                                                                      |
+| 8–45  | **The Midnight Raid** (about 35 min). On Year 8 camp, Cabin 4's snack box is raided overnight and Kai is blamed because "midnight snack ideas" is in the history on Kai's phone. Treat it as a rehearsal: "Work as if it were the assessment, and only press Check when you're confident." A second trail-camera photo arrives as an **evidence drop** after students view the first (or after 10 minutes). |
+| 45–55 | **Debrief with the presenter view**, then show the rubric. Pairs rate one of their own answers against the _Shows and does not show_ row and say what would move it up a level. Science link: the band's "asleep" is an instrument's estimate, not an observation, like any reading that is calculated from something else.                                                                                 |
+| 55–60 | **Exit ticket.** Save progress. Remind students the assessment is next lesson.                                                                                                                                                                                                                                                                                                                              |
+
+**The key moment:** the search is in Kai's phone history because the phone's browser is signed
+in to the family account. Kai's phone was switched off in the locked phone box; the search was
+typed on the family tablet at home by Kai's older brother. A search history records what an
+**account** searched for, not who typed it, or on which device.
+
+**Permission, not warrants:** in this school-scale case, students ask the people the data
+belongs to (Kai's parent) instead of a magistrate. The test is the same: necessary and
+proportionate. One hour of the family tablet's history is granted; a year of Kai's searches and
+messages is refused.
+
+**Watch for:**
+
+- "It's in Kai's history, so Kai searched it." Check the profile line and the phone box sheet.
+- "The band shows Kai walked to the box at 1:10." The band counts steps and measures heart rate;
+  it doesn't know where Kai was. The verandah light also switched on while the band said Kai was
+  asleep.
+- "Kai searched about possums, so Kai knew." Check the time: 7:20 am, after the box was found.
+
+**Exit ticket:** "The search history shows… but it does not show…"
+
+---
+
+## Lesson 7: Assessment: The Science Fair Switch
 
 **Learning intention:** Show how you reason about digital evidence on your own.
 
@@ -254,19 +303,21 @@ improves reasoning.
 **Curriculum:** VC2S8I06, VC2S8I07, VC2S8I08, VC2S8H03.
 
 **You need:** the **assessment access code** on the board (or given out on slips); student sheet
-6 (the reflection task).
+7 (the reflection task).
 
-| Time  | What happens                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 0–5   | Students open the lab and, on the case list, choose _Enter access code_ on The Science Fair Switch, and type the code. Remind them: **no hints** in this case, they choose a support level as usual, and they **submit once** from the report.                                                                                                                                                                                                  |
-| 5–50  | **The Science Fair Switch** (about 45 min). A Year 9 team's results file was changed the night before judging at the school's science fair. Evidence includes a cloud drive with version history (times shown in **UTC**), two emails (one spoofed), browser histories, a fitness band, a smart doorbell and lab sensors. Students answer five questions (four verdicts, one open) and press **Save** on each, then **Submit** from the Report. |
-| 50–60 | **Reflection** (student sheet 6), handwritten or typed.                                                                                                                                                                                                                                                                                                                                                                                         |
+| Time  | What happens                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0–5   | Students open the lab and, on the case list, choose _Enter access code_ on The Science Fair Switch, and type the code. Remind them: **no hints** in this case, they choose a support level as usual, and they **submit once** from the report.                                                                                                                                                                                               |
+| 5–50  | **The Science Fair Switch** (about 45 min). A Year 9 team's results file was changed the night before judging at the school's science fair. Evidence includes a cloud drive with version history (times shown in **UTC**), two emails (one fake), browser histories, a fitness band, a smart doorbell and lab sensors. Students answer five questions (four verdicts, one open) and press **Save** on each, then **Submit** from the Report. |
+| 50–60 | **Reflection** (student sheet 7), handwritten or typed.                                                                                                                                                                                                                                                                                                                                                                                      |
 
 **After the lesson:** each student copies their **progress code** (top bar → Back up progress)
 and submits it (e.g. in a learning platform assignment) along with their report PDF and
 reflection. With teacher mode on, press **Teacher Review** on the case list and paste each code to see the
 auto-scored verdicts and evidence, their writing, warrant choices, hash checks, clock
-corrections, support level and Deep dive answers. Nothing is uploaded anywhere.
+corrections, support level and Deep dive answers. Nothing is uploaded anywhere. To see the
+whole class at once, choose **Whole class**, paste every code, pick the case, and download the
+.csv for your markbook.
 
 **If something goes wrong:** the Teacher Panel → _Case controls_ can **re-open** a submitted
 assessment or reset it on that device. The access code is not secure, so treat this as a
@@ -277,13 +328,13 @@ classroom task, not an exam.
 The app auto-scores the objective parts of each verdict question: the accepted verdict, all key
 evidence attached and no distractors. Use the rubric for the written reasoning and the reflection.
 
-| Criterion                                 | Beginning                                        | Developing                                   | Proficient                                                 | Extending                                                                                               |
-| ----------------------------------------- | ------------------------------------------------ | -------------------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| **Judgements and evidence** (VC2S8I07)    | Verdicts given with little or unrelated evidence | Some verdicts supported by relevant evidence | Most verdicts accepted, with the key evidence attached     | All verdicts justified with key evidence; distractors recognised and explained                          |
-| **Shows and does not show** (VC2S8I06)    | Treats evidence as proof                         | Describes what evidence shows                | Explains what evidence shows **and** what it does not show | Identifies assumptions and sources of error (time zones, shared devices, spoofed headers, edited files) |
-| **Limitations and further evidence**      | Limitation missing or vague                      | A general limitation ("it could be wrong")   | A specific limitation for each judgement                   | Proposes specific further evidence that would decide between explanations                               |
-| **Ethics and proportionality** (VC2S8H03) | Not considered                                   | Mentions privacy                             | Explains why a request is or isn't proportionate           | Weighs the need for data against people's privacy, suggesting the least intrusive option                |
-| **Communication** (VC2S8I08)              | Hard to follow                                   | Mostly clear                                 | Clear and uses correct terms                               | Concise, precise and well organised for its audience                                                    |
+| Criterion                                 | Beginning                                        | Developing                                   | Proficient                                                 | Extending                                                                                                        |
+| ----------------------------------------- | ------------------------------------------------ | -------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Judgements and evidence** (VC2S8I07)    | Verdicts given with little or unrelated evidence | Some verdicts supported by relevant evidence | Most verdicts accepted, with the key evidence attached     | All verdicts justified with key evidence; distractors recognised and explained                                   |
+| **Shows and does not show** (VC2S8I06)    | Treats evidence as proof                         | Describes what evidence shows                | Explains what evidence shows **and** what it does not show | Identifies assumptions and sources of error (time zones, shared devices and accounts, fake emails, edited files) |
+| **Limitations and further evidence**      | Limitation missing or vague                      | A general limitation ("it could be wrong")   | A specific limitation for each judgement                   | Proposes specific further evidence that would decide between explanations                                        |
+| **Ethics and proportionality** (VC2S8H03) | Not considered                                   | Mentions privacy                             | Explains why a request is or isn't proportionate           | Weighs the need for data against people's privacy, suggesting the least intrusive option                         |
+| **Communication** (VC2S8I08)              | Hard to follow                                   | Mostly clear                                 | Clear and uses correct terms                               | Concise, precise and well organised for its audience                                                             |
 
 ### Reflection task (10 minutes, about 150 words)
 

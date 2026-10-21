@@ -150,7 +150,6 @@ investigators improves our reasoning.
    - **green**: a strong link ("this supports the claim because…")
    - **yellow**: a question ("what does this _not_ show?")
 3. Class debrief: why did the search start at Mindil Beach?
-4. Optional homework: Training Academy, _Search History & Cookies_.
 
 **Think about it:** can you think of a time new evidence changed what scientists believed?
 
@@ -162,7 +161,38 @@ How it changed my thinking: ____________________________________________________
 
 ---
 
-## Lesson 6: Assessment: The Science Fair Switch
+## Lesson 6: Whose search was it?
+
+**Today I'm learning** to use observation and inference with a phone's search history and with
+sensors, and to work more on my own before the assessment.
+
+**I can:**
+
+- explain why a search in a history does not show who typed it
+- describe what a fitness band and a motion light measure, and what they cannot tell us
+- decide whether a request for someone's data is fair.
+
+**What to do**
+
+1. Training Academy: complete _Search History & Cookies_.
+2. Open **The Midnight Raid**. Read the briefing from Mr Pritchard and choose your support level.
+3. Work as if it were the assessment: investigate carefully, and only press **Check** when you
+   are confident.
+4. Some data belongs to other people: you will need to **ask permission**. Ask only for what
+   the question needs.
+5. Watch for new evidence arriving.
+
+**Think about it:** a fitness band says someone was "asleep". Did it see them sleeping?
+
+**Exit ticket**
+
+The search history shows ____________________________________________________________
+
+but it does **not** show _________________________________________________________
+
+---
+
+## Lesson 7: Assessment: The Science Fair Switch
 
 **Today I'm showing** how I reason about digital evidence on my own.
 

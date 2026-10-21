@@ -2,7 +2,8 @@
 
 **What it is.** A web app for the Year 8 Digital Forensics unit. Students sign in to a fictional
 forensics lab and investigate realistic but entirely made-up digital evidence: photo metadata, IP
-lookups, router logs, messages, CCTV stills, emails, cloud files and smart-device logs. They pin
+lookups, router logs, messages, CCTV stills, phone search histories, emails, cloud files and
+smart-device logs. They pin
 evidence to a corkboard, link it to claims, and make judgements with reasons. It feels like a
 game, but the work is scientific reasoning.
 
@@ -15,7 +16,7 @@ game, but the work is scientific reasoning.
 The ideas students meet: an IP address that "geolocates near the crime scene" is only an
 estimate; a device is not a person; clocks and time zones can mislead; a match is not proof;
 data can be changed after collection (hashes); and investigators need a proportionate reason
-(a warrant) to see private data. Students choose a verdict (Strongly supported, Possible, Not
+(a warrant, or the owner's permission) to see private data. Students choose a verdict (Strongly supported, Possible, Not
 supported, Can't tell), attach the evidence, explain their reasoning, and name a limitation.
 
 **What's in it**
@@ -23,9 +24,10 @@ supported, Can't tell), attach the evidence, explain their reasoning, and name a
 | Part                    | Time         | What students do                                                                                                                 |
 | ----------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------- |
 | Training Academy        | 6–8 min each | Six short missions: Metadata, Digital Footprints, Search History, IP Addresses, Time Zones, Ethics & Privacy. Badges, no scores. |
-| The Waterfront Alibi    | ~25 min      | Introductory case. A trophy goes missing; does an IP login really put Riley at the scene?                                        |
-| Where was Jamie?        | ~40 min      | A missing person found safe. Why did the search go to the wrong beach? A 30-minute time-zone puzzle.                             |
-| The Science Fair Switch | ~45 min      | **Assessment case** (needs an access code): no hints, one submission. Spoofed email, edited cloud file, smart-device logs.       |
+| The Waterfront Alibi    | ~25 min      | Introductory. A trophy goes missing; does an IP login put Riley at the scene?                                                    |
+| Where was Jamie?        | ~40 min      | A missing person, found safe. Why did the search go to the wrong beach?                                                          |
+| The Midnight Raid       | ~35 min      | Practice case on camp: whose search was "midnight snack ideas"?                                                                  |
+| The Science Fair Switch | ~45 min      | **Assessment** (access code): no hints, one submission. Fake email, edited cloud file.                                           |
 
 A first-run tour shows students the desktop. In each case, students choose a **support level**:
 **Guided** (plain-English notes on reading each item, plus a nudge), **Standard**, or **Deep dive**
@@ -41,6 +43,7 @@ A first-run tour shows students the desktop. In each case, students choose a **s
 - **Teacher Review**: a student copies their **progress code** (top bar, Back up progress) and
   pastes it into Teacher Review. You see auto-scored verdicts and evidence, their writing, warrant
   choices, hash checks, support level and Deep dive answers. Written reasoning is yours to mark.
+  **Whole class** takes every code at once: a students × questions table with a .csv download.
 
 **Privacy and safety**
 
@@ -55,8 +58,9 @@ A first-run tour shows students the desktop. In each case, students choose a **s
 **Before you use it with a class**
 
 - Share the link (Netlify) and check it opens on student devices. Students should use the same
-  device each lesson, or save their progress code.
+  device each lesson, or save their progress code. Adding `?level=guided` to the link suggests
+  Guided for the class (students can still change it).
 - Ask the lab owner for the teacher code and the assessment code (set in `src/config/teacher.ts`).
 - Play The Waterfront Alibi yourself first, with teacher mode on, to see the answer key.
-- Lesson plans: the [teacher guide](lessons/teacher-guide.md) (six 60-minute lessons and a rubric)
+- Lesson plans: the [teacher guide](lessons/teacher-guide.md) (seven 60-minute lessons and a rubric)
   and the [student sheets](lessons/student-lessons.md). Word copies are in `docs/word/`.
