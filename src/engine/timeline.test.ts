@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { buildTimeline, minutesToClock, recordedToMinutes } from './timeline';
+import { buildTimeline, hourHeadings, minutesToClock, recordedToMinutes } from './timeline';
 import { travelEstimate } from './geo/travel';
 import type { Evidence } from './types';
 
@@ -39,6 +39,30 @@ describe('timeline', () => {
   test('handles seconds and times after midnight', () => {
     expect(recordedToMinutes('2026-08-22T19:12:30', '2026-08-22')).toBe(19 * 60 + 12.5);
     expect(minutesToClock(recordedToMinutes('2026-08-23T00:10', '2026-08-22'))).toBe('00:10');
+  });
+});
+
+describe('hour headings', () => {
+  test('one heading per hour, without dates when everything is on the case date', () => {
+    const points = buildTimeline(
+      [doc('a', '2026-08-22T18:45'), doc('b', '2026-08-22T18:50'), doc('c', '2026-08-22T19:31')],
+      '2026-08-22',
+      '+09:30',
+    );
+    expect(hourHeadings(points, '2026-08-22')).toEqual(['6:00 pm', null, '7:00 pm']);
+  });
+
+  test('past midnight, headings say which day', () => {
+    const points = buildTimeline(
+      [doc('a', '2026-08-22T23:40'), doc('b', '2026-08-23T00:15'), doc('c', '2026-08-23T00:20')],
+      '2026-08-22',
+      '+09:30',
+    );
+    expect(hourHeadings(points, '2026-08-22')).toEqual([
+      'Sat 22 Aug, 11:00 pm',
+      'Sun 23 Aug, 12:00 am',
+      null,
+    ]);
   });
 });
 

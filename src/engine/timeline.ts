@@ -5,7 +5,7 @@
  * device's clock was set to another time zone can apply a correction for that device, and
  * its events move to the right place. The engine never corrects anything by itself.
  */
-import { offsetMinutes } from './format';
+import { clockTo12, formatShortDate, offsetMinutes } from './format';
 import type { Evidence } from './types';
 
 /** Time zones a student can say a device was set to. */
@@ -67,6 +67,30 @@ export function buildTimeline(
     }
   }
   return points.sort((a, b) => a.minutes - b.minutes);
+}
+
+const dayOf = (minutes: number) => Math.floor(minutes / 1440);
+
+/** "2026-08-22" plus 1 day → "Sun 23 Aug". */
+function dateLabel(caseDate: string, day: number): string {
+  const ms = Date.parse(`${caseDate}T00:00:00Z`) + day * 86_400_000;
+  return formatShortDate(new Date(ms).toISOString(), '+00:00');
+}
+
+/**
+ * The hour heading to show above each point ("7:00 pm"), or null when it is in the same hour
+ * as the point before. When the timeline runs over more than one day (e.g. past midnight),
+ * headings where the day changes also give the date ("Sun 23 Aug, 12:00 am").
+ */
+export function hourHeadings(points: TimelinePoint[], caseDate: string): (string | null)[] {
+  const multiDay = new Set(points.map((p) => dayOf(p.minutes))).size > 1;
+  return points.map((p, i) => {
+    const prev = points[i - 1];
+    if (prev && Math.floor(prev.minutes / 60) === Math.floor(p.minutes / 60)) return null;
+    const hour = clockTo12(`${minutesToClock(p.minutes).slice(0, 2)}:00`);
+    const newDay = !prev || dayOf(prev.minutes) !== dayOf(p.minutes);
+    return multiDay && newDay ? `${dateLabel(caseDate, dayOf(p.minutes))}, ${hour}` : hour;
+  });
 }
 
 /** Devices that have at least one point on the timeline (the ones students can correct). */

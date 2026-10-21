@@ -3,6 +3,7 @@ import { clockTo12, clockToMinutes } from '../../engine/format';
 import {
   buildTimeline,
   clockZones,
+  hourHeadings,
   minutesToClock,
   timelineDeviceIds,
 } from '../../engine/timeline';
@@ -27,6 +28,7 @@ export default function TimelineApp() {
   const corrections = progress.clockCorrections ?? {};
   const points = buildTimeline(evidence, c.incident.date, c.timeZone.utcOffset, corrections);
   const deviceIds = timelineDeviceIds(evidence);
+  const headings = hourHeadings(points, c.incident.date);
   const winStart = clockToMinutes(c.incident.windowStart);
   const winEnd = clockToMinutes(c.incident.windowEnd);
   const teacherMode = useSettings((st) => st.teacherMode);
@@ -96,13 +98,12 @@ export default function TimelineApp() {
           const item = evidence.find((e) => e.id === p.evidenceId)!;
           const device = c.devices.find((d) => d.id === p.deviceId);
           const inWindow = p.minutes >= winStart && p.minutes <= winEnd;
-          const prev = points[i - 1];
-          const newHour = !prev || Math.floor(prev.minutes / 60) !== Math.floor(p.minutes / 60);
+          const heading = headings[i];
           return (
             <li key={`${p.evidenceId}-${i}`} className={`${t.row} ${inWindow ? '' : t.outside}`}>
-              {newHour && (
+              {heading && (
                 <div className={t.hour} aria-hidden="true">
-                  {clockTo12(`${minutesToClock(p.minutes).slice(0, 2)}:00`)}
+                  {heading}
                 </div>
               )}
               <div className={t.time}>
