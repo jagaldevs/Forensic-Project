@@ -5,11 +5,14 @@
  * browser cannot compress. Nothing is sent anywhere.
  */
 import type { CaseProgress } from '../engine/progressTypes';
+import type { MissionProgress } from '../stores/academyStore';
 
+/** v2 added Training Academy progress. v1 codes still import (with no academy progress). */
 export interface ProgressBackup {
-  v: 1;
+  v: 2;
   agentName: string;
   cases: Record<string, CaseProgress>;
+  academy: Record<string, MissionProgress>;
 }
 
 const PREFIX = 'HRSFL1.';
@@ -65,5 +68,11 @@ export async function decodeProgress(code: string): Promise<ProgressBackup> {
   const { progressBackupSchema } = await import('../engine/progressSchema');
   const parsed = progressBackupSchema.safeParse(JSON.parse(json));
   if (!parsed.success) throw new Error('That progress code is damaged or from a different app.');
-  return parsed.data as ProgressBackup;
+  const data = parsed.data;
+  return {
+    v: 2,
+    agentName: data.agentName,
+    cases: data.cases as Record<string, CaseProgress>,
+    academy: (data.v === 2 ? data.academy : {}) as Record<string, MissionProgress>,
+  };
 }

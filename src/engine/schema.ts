@@ -29,7 +29,7 @@ const sha256 = z.string().regex(/^[a-f0-9]{64}$/, 'SHA-256 hashes are 64 lowerca
 /** A point on the shared city map, in kilometres from the map's top-left corner. */
 export const mapPointSchema = z.object({ x: z.number().min(0), y: z.number().min(0) });
 
-const labelValue = z.object({
+export const labelValue = z.object({
   label: z.string().min(1),
   value: z.string(),
   /** Optional explanation shown under the value (e.g. why GPS was removed). */
@@ -333,6 +333,8 @@ export const caseSchema = z
       difficulty: z.enum(['introductory', 'standard', 'challenging']),
       learningIntentions: z.array(z.string()).min(1),
       successCriteria: z.array(z.string()),
+      /** Training Academy mission ids worth doing first (shown on the case card, never locked). */
+      recommendedMissions: z.array(idSchema).optional(),
     }),
     /** How times are displayed to students, e.g. ACST (UTC+09:30). */
     timeZone: z.object({

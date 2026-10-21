@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { decodeProgress, encodeProgress } from '../lib/progressCode';
 import { isStorageAvailable } from '../lib/safeStorage';
 import { useProgress } from '../stores/progressStore';
+import { useAcademy } from '../stores/academyStore';
 import { useSettings } from '../stores/settingsStore';
 import { Button } from '../ui/Button';
 import { Dialog } from '../ui/Dialog';
@@ -17,7 +18,8 @@ export function BackupDialog({ onClose }: { onClose: () => void }) {
   useEffect(() => {
     const { agentName } = useSettings.getState();
     const { cases } = useProgress.getState();
-    encodeProgress({ v: 1, agentName, cases }).then(setCode);
+    const { missions: academy } = useAcademy.getState();
+    encodeProgress({ v: 2, agentName, cases, academy }).then(setCode);
   }, []);
 
   const copy = async () => {
@@ -33,6 +35,7 @@ export function BackupDialog({ onClose }: { onClose: () => void }) {
     try {
       const backup = await decodeProgress(importText);
       useProgress.getState().replaceAll(backup.cases);
+      useAcademy.getState().replaceAll(backup.academy);
       if (backup.agentName) useSettings.getState().setAgentName(backup.agentName);
       setMessage({ ok: true, text: 'Progress restored.' });
     } catch (e) {

@@ -44,8 +44,34 @@ const caseProgress = z.object({
   submittedAt: z.number().nullable(),
 });
 
-export const progressBackupSchema = z.object({
-  v: z.literal(1),
-  agentName: z.string().max(64),
-  cases: z.record(z.string(), caseProgress),
+const stepAnswer = z.discriminatedUnion('type', [
+  z.object({ type: z.literal('choice'), selected: z.array(z.string()) }),
+  z.object({ type: z.literal('classify'), placements: z.record(z.string(), z.string()) }),
+  z.object({ type: z.literal('order'), order: z.array(z.string()) }),
+  z.object({ type: z.literal('spot'), selected: z.array(z.string()) }),
+  z.object({ type: z.literal('shortAnswer'), text: z.string() }),
+  z.object({ type: z.literal('reflect'), text: z.string() }),
+]);
+
+const missionProgress = z.object({
+  startedAt: z.number(),
+  stepIndex: z.number().int().nonnegative(),
+  steps: z.record(
+    z.string(),
+    z.object({
+      attempts: z.number(),
+      correct: z.boolean(),
+      done: z.boolean(),
+      hints: z.array(z.string()),
+      answer: stepAnswer.optional(),
+    }),
+  ),
+  completedAt: z.number().nullable(),
 });
+
+const base = { agentName: z.string().max(64), cases: z.record(z.string(), caseProgress) };
+
+export const progressBackupSchema = z.discriminatedUnion('v', [
+  z.object({ v: z.literal(1), ...base }),
+  z.object({ v: z.literal(2), ...base, academy: z.record(z.string(), missionProgress) }),
+]);
