@@ -145,6 +145,14 @@
   --z-topbar: 5001;
   --z-toast: 6000;
   --z-modal: 7000;
+
+  /* Charts (Wearables app) */
+  --chart-steps: #6cb8ff;
+  --chart-heart: #ff8fb8;
+  --chart-grid: #2b2b36;
+  --chart-axis: #a6a6b4;
+  --chart-off-fill: rgb(242 193 78 / 10%);
+  --chart-off-hatch: rgb(242 193 78 / 55%);
 }
 
 @media (prefers-reduced-motion: reduce) {
