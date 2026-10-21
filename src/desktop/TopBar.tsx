@@ -44,6 +44,12 @@ export function TopBar() {
           <span className={s.hideNarrow}>· not secure</span>
         </span>
       )}
+      {progress.locked && (
+        <span className={s.chip} title="This assessment has been submitted and can't be changed.">
+          <Icon name="lock" size={14} />
+          <strong>Submitted</strong>
+        </span>
+      )}
       <span className={s.chip} title="Warrants you can still use in this case">
         <Icon name="warrant" size={14} />
         Warrants: <strong>{warrants}</strong>
