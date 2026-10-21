@@ -1,4 +1,5 @@
 import { Logo } from '../brand/Logo';
+import { local } from '../brand/local';
 import type { MissionMeta } from '../engine/missionTypes';
 import { missionCatalogue } from '../missions';
 import { useAcademy } from '../stores/academyStore';
@@ -29,8 +30,9 @@ export default function AcademyScreen() {
             </div>
             <h1 className={s.title}>Learn the tools of the trade</h1>
             <p className={s.small}>
-              Six short missions. Do them in any order; the numbers are a suggested path. Each one
-              earns a badge.
+              {local.scienceTeacher} has signed you up for investigator training. Six short
+              missions: do them in any order (the numbers are a suggested path). Each one earns a
+              badge.
             </p>
           </div>
           <div className={s.row}>

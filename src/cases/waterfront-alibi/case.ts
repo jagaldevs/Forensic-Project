@@ -2,6 +2,7 @@
  * Case: The Waterfront Alibi (Phase 1 mini case, about 25 minutes).
  * Everything here is fictional. IPs use documentation ranges; MACs are locally administered.
  */
+import { local } from '../../brand/local';
 import { defineCase } from '../../engine/defineCase';
 import { meta } from './meta';
 import photoGaming from './assets/photo-gaming-setup.svg';
@@ -24,11 +25,11 @@ export default defineCase({
   briefing: {
     from: { name: 'Detective Sergeant Leah Tran', role: 'Digital Evidence Unit' },
     subject: 'Case 26-0814: The Waterfront Alibi',
-    message: `Agent, thanks for coming in at short notice.
+    message: `Agent, thanks for coming in at short notice. ${local.scienceTeacher} tells me her Year 8 class at ${local.school} has been training as digital investigators, and I could use some fresh eyes.
 
 On Friday 14 August, the Top End Robotics Cup trophy disappeared from its display in the foyer of the Harbourside Convention Centre at the Waterfront. Staff last saw it at 7:30 pm. By 8:15 pm it was gone.
 
-Riley Okafor, 19, volunteered at the event and set up the display that afternoon. Riley says he left at 5:30 pm and spent the whole evening gaming at home in Palmerston.
+Riley Okafor, 19, a former ${local.schoolShort} student, volunteered at the event and set up the display that afternoon. Riley says he left at 5:30 pm and spent the whole evening gaming at home in Palmerston.
 
 One of my team ran a quick check. Riley's StreamCloud account logged in at 7:52 pm from IP address 203.0.113.47, and a free lookup website put that address in Darwin City, right near the Waterfront. Some people here think that settles it.
 
@@ -43,7 +44,7 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
       id: 'riley-okafor',
       name: 'Riley Okafor',
       age: 19,
-      role: 'Event volunteer (person of interest)',
+      role: `Event volunteer and former ${local.schoolShort} student (person of interest)`,
       summary:
         'Set up the trophy display on Friday afternoon. Says he left at 5:30 pm and was gaming at home all evening.',
     },

@@ -15,6 +15,7 @@
  *  20:05 Parent's messages stop being delivered. Search goes to Mindil Beach.
  *  21:40 Jamie found safe at Sasha's home in Parap.
  */
+import { local } from '../../brand/local';
 import { defineCase } from '../../engine/defineCase';
 import { meta } from './meta';
 import cctvLagoon from './assets/cctv-lagoon-gate.svg';
@@ -42,7 +43,9 @@ export default defineCase({
   briefing: {
     from: { name: 'Detective Sergeant Leah Tran', role: 'Digital Evidence Unit' },
     subject: 'Case 26-0822: Where was Jamie? (review)',
-    message: `First, the good news: Jamie is safe. Jamie was found at 9:40 pm on Saturday at a friend's house in Parap, tired, hungry and with a flat phone. Nobody was hurt and nobody is in trouble.
+    message: `Agent, ${local.scienceTeacher} tells me her Year 8 class at ${local.school} has been training as digital investigators, so I have asked for your help with a review. In this story, Jamie’s friends Kit, Elliot and Sasha are ${local.schoolShort} students.
+
+First, the good news: Jamie is safe. Jamie was found at 9:40 pm on Saturday at a friend's house in Parap, tired, hungry and with a flat phone. Nobody was hurt and nobody is in trouble.
 
 But it took us two hours to find Jamie, and our search team spent most of that time at Mindil Beach, which was the wrong place. I want to know why the evidence pointed us there, and what it could have told us if we had read it properly.
 
@@ -78,21 +81,21 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
       id: 'kit-lam',
       name: 'Kit Lam',
       age: 14,
-      role: "Jamie's friend",
+      role: `Jamie's friend (${local.schoolShort} student)`,
       summary: 'Was at the lagoon with Jamie.',
     },
     {
       id: 'elliot-barker',
       name: 'Elliot Barker',
       age: 14,
-      role: "Jamie's friend",
+      role: `Jamie's friend (${local.schoolShort} student)`,
       summary: 'Was at the lagoon and left at about 6 pm.',
     },
     {
       id: 'sasha-morales',
       name: 'Sasha Morales',
       age: 14,
-      role: "Jamie's friend",
+      role: `Jamie's friend (${local.schoolShort} student)`,
       summary: 'Lives in Parap. Not at the lagoon that day.',
     },
   ],

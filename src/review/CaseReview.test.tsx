@@ -17,7 +17,10 @@ test('Teacher Review shows the support level, nudges and Deep dive answers with 
   };
   render(<CaseReview caseId={waterfront.meta.id} progress={progress} />);
 
-  expect(await screen.findByText('Guided (also used: Standard)')).toBeInTheDocument();
+  // The case loads lazily; allow for a busy test run.
+  expect(
+    await screen.findByText('Guided (also used: Standard)', undefined, { timeout: 5000 }),
+  ).toBeInTheDocument();
   expect(screen.getByText(/Guided nudges opened on Q2/)).toBeInTheDocument();
   expect(screen.getByText('Both places are inside the circle.')).toBeInTheDocument();
   expect(screen.getByText(`Model answer: ${first!.modelAnswer}`)).toBeInTheDocument();

@@ -1,4 +1,5 @@
 import logoUrl from './haileybury-logo.jpg';
+import { local } from './local';
 
 /**
  * Branding in one place.
@@ -18,8 +19,8 @@ export const brand: {
   /** The crest's box inside the logo image, in image pixels (for small sizes). */
   crest: { x: number; y: number; width: number; height: number; imageSize: number };
 } = {
-  schoolName: 'Haileybury Rendall School',
-  shortName: 'HRS',
+  schoolName: local.school,
+  shortName: local.schoolShort,
   labName: 'Digital Forensics Lab',
   logoUrl,
   logoAlt: 'Haileybury Rendall School',

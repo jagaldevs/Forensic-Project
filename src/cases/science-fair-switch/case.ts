@@ -7,7 +7,7 @@
  *        (LAB-LAPTOP-07) and never signs out.
  *  18:04 Morgan arrives home (doorbell). 18:25 Morgan saves the genuine final results from
  *        MORGAN-CHROMEBOOK (the drive shows 08:55 UTC).
- *  19:31 A new QuickPost account is created on the college's after-hours network.
+ *  19:31 A new QuickPost account is created on the school's after-hours network.
  *  19:48 It sends Team 4 a fake "head judge" email: deadline "extended" to 11:59 pm.
  *  21:00 Real deadline. 21:04 Morgan's band goes on the charger at home until 06:40.
  *  23:08 Someone wakes LAB-LAPTOP-07 in Lab 2, still signed in as Morgan.
@@ -16,6 +16,7 @@
  *  Next morning 07:52 Someone edits the poster photo after it was collected at 07:40.
  * Who did it is NOT established by the evidence. Team 4 should be cleared of the change.
  */
+import { local } from '../../brand/local';
 import { defineCase } from '../../engine/defineCase';
 import { meta } from './meta';
 import posterPhoto from './assets/team4-poster.svg';
@@ -54,9 +55,9 @@ const historyGuide =
 
 const schoolNet = '203.0.113.60';
 const team4 = [
-  { name: 'Morgan Lee', address: 'morgan.lee@arafurapark.example' },
-  { name: 'Priya Nair', address: 'priya.nair@arafurapark.example' },
-  { name: 'Tom Baxter', address: 'tom.baxter@arafurapark.example' },
+  { name: 'Morgan Lee', address: `morgan.lee@${local.schoolEmailDomain}` },
+  { name: 'Priya Nair', address: `priya.nair@${local.schoolEmailDomain}` },
+  { name: 'Tom Baxter', address: `tom.baxter@${local.schoolEmailDomain}` },
 ];
 const headJudge = {
   name: 'Dr Helen Achebe (Head Judge)',
@@ -69,20 +70,20 @@ export default defineCase({
   incident: {
     summary:
       'Team 4’s results spreadsheet was changed the night before judging. The change was saved “from Morgan Lee’s account”.',
-    location: 'Arafura Park College, Darwin',
+    location: `${local.school}, Darwin`,
     date: day,
     windowStart: '21:00',
     windowEnd: '23:59',
   },
 
   briefing: {
-    from: { name: 'Mr Daniel Osei', role: 'Science Coordinator, Arafura Park College' },
+    from: { name: local.scienceTeacher, role: `Science teacher, ${local.school}` },
     subject: 'Assessment: The Science Fair Switch',
-    message: `Agent, I need an independent investigator.
+    message: `Agent, I need an independent investigator, and I'd like it to be you.
 
-On Friday morning, just before judging at the Junior Science Fair, we noticed that Year 9 Team 4's results spreadsheet had been changed. Their algae suddenly grew three times faster. The fair rules say results are final at 9:00 pm on Thursday, and the cloud drive says the last change was made by Morgan Lee, one of the team. Some people think that settles it.
+On Friday morning, just before judging at the Junior Science Fair, Mr Osei, our science coordinator, noticed that Year 9 Team 4's results spreadsheet had been changed. Their algae suddenly grew three times faster. The fair rules say results are final at 9:00 pm on Thursday, and the cloud drive says the last change was made by Morgan Lee, one of the team. Some people think that settles it.
 
-Morgan says they never touched the file after dinner. The team also showed me an email from the head judge saying the deadline had been extended. I have collected everything we have. Morgan's parent has given consent for Morgan's fitness band and the family's doorbell logs. Anything belonging to other people needs a warrant.
+Morgan says they never touched the file after dinner. The team also showed Mr Osei an email from the head judge saying the deadline had been extended, and he has collected everything we have. Morgan's parent has given consent for Morgan's fitness band and the family's doorbell logs. Anything belonging to other people needs a warrant.
 
 This is an assessment. Work on your own. You will not get hints, your answers are saved but not checked, and you can only submit your report once. Before you submit, make sure every answer names the evidence it relies on, what it shows and what it does not show.
 
@@ -122,7 +123,7 @@ Check every clock and every hash. Morgan deserves a fair investigation.`,
       id: 'daniel-osei',
       name: 'Daniel Osei',
       role: 'Science Coordinator',
-      summary: 'Runs the college’s entry in the fair. Collected the evidence on Friday morning.',
+      summary: 'Runs the school’s entry in the fair. Collected the evidence on Friday morning.',
     },
     {
       id: 'helen-achebe',
@@ -149,7 +150,7 @@ Check every clock and every hash. Morgan deserves a fair investigation.`,
     },
     {
       id: 'lab-laptop-07',
-      ownerLabel: 'Arafura Park College (shared Lab 2 laptop)',
+      ownerLabel: `${local.school} (shared Lab 2 laptop)`,
       type: 'laptop',
       name: 'LAB-LAPTOP-07',
       model: 'EduBook 14',
@@ -178,7 +179,7 @@ Check every clock and every hash. Morgan deserves a fair investigation.`,
     },
     {
       id: 'lab2-sensor',
-      ownerLabel: 'Arafura Park College facilities',
+      ownerLabel: `${local.school} facilities`,
       type: 'smart-home',
       name: 'Science block sensors (Lab 2)',
       model: 'BuildingWatch S2',
@@ -330,7 +331,9 @@ Check every clock and every hash. Morgan deserves a fair investigation.`,
       source: 'Morgan Lee’s school inbox (shared by Morgan)',
       inbox: 'Morgan Lee (school email)',
       from: headJudge,
-      to: [{ name: 'Year 9 science fair teams', address: 'y9-fair-teams@arafurapark.example' }],
+      to: [
+        { name: 'Year 9 science fair teams', address: `y9-fair-teams@${local.schoolEmailDomain}` },
+      ],
       subject: 'Reminder: results due 9:00 pm tonight',
       sentAt: at('08:30:00'),
       body: `Good morning teams,
@@ -346,7 +349,7 @@ Head Judge, NT Junior Science Fair`,
         {
           from: 'mail.ntsciencefair.example',
           fromIp: '192.0.2.25',
-          by: 'mx1.arafurapark.example',
+          by: `mx1.${local.schoolEmailDomain}`,
           at: at('08:30:04'),
         },
         {
@@ -396,7 +399,7 @@ Head Judge`,
         {
           from: 'smtp-out3.quickpost.example',
           fromIp: '198.51.100.73',
-          by: 'mx1.arafurapark.example',
+          by: `mx1.${local.schoolEmailDomain}`,
           at: at('19:48:06'),
         },
         {
@@ -531,7 +534,7 @@ Head Judge`,
       title: 'Science block sensors: Lab 2',
       summary:
         'Lab 2’s door opened at 11:07 pm and its motion sensor was triggered until 11:31 pm.',
-      source: 'Arafura Park College facilities system',
+      source: `${local.school} facilities system`,
       releasedBy: 'drop-lab-sensor',
       deviceId: 'lab2-sensor',
       service: 'BuildingWatch',
@@ -564,7 +567,7 @@ Head Judge`,
       title: 'LAB-LAPTOP-07 browser history',
       summary:
         'Morgan’s class research on Thursday afternoon, then a gap: history from 11:10 to 11:35 pm was cleared.',
-      source: 'Arafura Park College IT (school-owned device)',
+      source: `${local.school} IT (school-owned device)`,
       browser: 'Lumen Browser',
       profile: 'Lab 2 student account (StreamCloud signed in as Morgan Lee)',
       deviceId: 'lab-laptop-07',
@@ -730,7 +733,7 @@ Head Judge`,
       app: 'locker',
       title: 'Science block cleaning roster',
       summary: 'Cleaners worked in the science block from 6:00 to 7:30 pm on Thursday.',
-      source: 'Arafura Park College facilities',
+      source: `${local.school} facilities`,
       fields: [
         { label: 'Thursday 17 September', value: '6:00 pm to 7:30 pm, Labs 1 to 4' },
         { label: 'Locked up', value: 'Main doors at 7:30 pm. Lab 2 left open for boarders.' },
@@ -745,9 +748,9 @@ Head Judge`,
       title: 'LAB-LAPTOP-07 session log',
       summary:
         'The lab laptop stayed signed in to Morgan’s StreamCloud account from 3:58 pm. It was woken at 11:08 pm and the results file was saved at 11:22 pm.',
-      source: 'Arafura Park College IT (obtained under warrant)',
+      source: `${local.school} IT (obtained under warrant)`,
       lockedBy: 'warrant',
-      service: 'Arafura Park College IT: device log',
+      service: `${local.school} IT: device log`,
       account: 'LAB-LAPTOP-07 (shared “Lab 2 student” account)',
       events: [
         { at: at('15:58:12'), event: 'StreamCloud signed in as Morgan Lee', ip: schoolNet },
@@ -761,7 +764,7 @@ Head Judge`,
         { at: at('23:35:02'), event: 'Browser history cleared (last 25 minutes)', ip: schoolNet },
         { at: at('23:36:15'), event: 'Laptop put to sleep', ip: schoolNet },
       ],
-      note: '203.0.113.60 is the college’s after-hours network, used by the boarding house and the science block.',
+      note: '203.0.113.60 is the school’s after-hours network, used by the boarding house and the science block.',
       timeline: [
         { recorded: rec('23:08'), label: 'Lab laptop woken, still signed in as Morgan' },
         { recorded: rec('23:22'), label: 'Lab laptop saves team4-algae-results' },
@@ -777,7 +780,7 @@ Head Judge`,
       app: 'locker',
       title: 'QuickPost sign-in record',
       summary:
-        'The account that sent the fake email was created at 7:31 pm and used from the college’s after-hours network.',
+        'The account that sent the fake email was created at 7:31 pm and used from the school’s after-hours network.',
       source: 'QuickPost (obtained under warrant)',
       lockedBy: 'warrant',
       service: 'QuickPost',
@@ -798,7 +801,7 @@ Head Judge`,
       ],
       note: 'Requested for Thursday 7 to 8 pm only.',
       timeline: [
-        { recorded: rec('19:41'), label: 'Fake judge account signs in from the college network' },
+        { recorded: rec('19:41'), label: 'Fake judge account signs in from the school network' },
       ],
       guided:
         'A sign-in record from an email service lists what happened on one account: when it was created, signed in, sent mail and signed out. Each line shows the IP address of the network it was used from. That tells you which network connection was used, not which person or device.',
@@ -909,21 +912,20 @@ Head Judge`,
       id: 'reminder-email-route',
       title: 'Follow an email’s route',
       prompt:
-        'Open the head judge’s Thursday morning reminder email and choose “Show original”. Using its Received lines, describe the email’s journey step by step, from the first computer to the college’s mail server. For each step, say which server passed it on, which server received it, the IP address and the time. Then explain one thing these headers cannot tell you.',
+        'Open the head judge’s Thursday morning reminder email and choose “Show original”. Using its Received lines, describe the email’s journey step by step, from the first computer to the school’s mail server. For each step, say which server passed it on, which server received it, the IP address and the time. Then explain one thing these headers cannot tell you.',
       evidenceIds: ['email-genuine'],
       guidance: [
         'Start with the bottom Received line: it is the first step of the journey.',
         'For each line: “from” is the server that sent it on, “by” is the server that received it.',
         'Work out how long the whole journey took, from the Date line to the top Received line.',
       ],
-      modelAnswer:
-        'Read bottom up. Step 1: office-pc-12.ntsciencefair.example (192.0.2.140) passed it to mail.ntsciencefair.example at 8:30:01 am ACST, so it left a computer in the fair’s office through the fair’s own mail server. Step 2: mail.ntsciencefair.example (192.0.2.25) passed it to mx1.arafurapark.example, the college’s incoming mail server, at 8:30:04 am. Sent at 8:30:00 am, it took about 4 seconds. The headers show which servers and networks handled it and when, but not who was typing at the office computer.',
+      modelAnswer: `Read bottom up. Step 1: office-pc-12.ntsciencefair.example (192.0.2.140) passed it to mail.ntsciencefair.example at 8:30:01 am ACST, so it left a computer in the fair’s office through the fair’s own mail server. Step 2: mail.ntsciencefair.example (192.0.2.25) passed it to mx1.${local.schoolEmailDomain}, the school’s incoming mail server, at 8:30:04 am. Sent at 8:30:00 am, it took about 4 seconds. The headers show which servers and networks handled it and when, but not who was typing at the office computer.`,
     },
     {
       id: 'intake-procedure',
       title: 'Design an evidence intake procedure',
       prompt:
-        'Read Mr Osei’s evidence intake record. Write a step-by-step procedure (4 to 6 steps) the college could use the next time it collects digital evidence. For each step, explain how it protects the chain of custody, and explain the part hashing plays.',
+        'Read Mr Osei’s evidence intake record. Write a step-by-step procedure (4 to 6 steps) the school could use the next time it collects digital evidence. For each step, explain how it protects the chain of custody, and explain the part hashing plays.',
       evidenceIds: ['intake-record'],
       guidance: [
         'Think about where a collected file should be kept, and who can change it there.',
@@ -940,7 +942,7 @@ Head Judge`,
       id: 'drop-lab-sensor',
       title: 'Facilities sent a sensor log',
       notification:
-        'The college facilities team has sent the Lab 2 door and motion sensor log for Thursday night. It is in Wearables & Smart Home.',
+        'The school’s facilities team has sent the Lab 2 door and motion sensor log for Thursday night. It is in Wearables & Smart Home.',
       triggers: [
         { type: 'afterEvidenceViewed', evidenceId: 'laptop-session' },
         { type: 'afterMinutes', minutes: 20 },
@@ -955,8 +957,7 @@ Head Judge`,
       {
         id: 'warrant-laptop',
         title: 'Lab laptop session log',
-        scope:
-          'Arafura Park College IT: the sign-in and session log for LAB-LAPTOP-07, Thursday 17 September, 3:00 pm to midnight.',
+        scope: `${local.school} IT: the sign-in and session log for LAB-LAPTOP-07, Thursday 17 September, 3:00 pm to midnight.`,
         targets: ['laptop-session'],
         proportionate: true,
         outcome:
