@@ -1,0 +1,377 @@
+/* Desktop: top bar, window area, windows, dock, notifications. */
+
+.desktop {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-rows: var(--topbar-height) 1fr auto;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 45%, var(--glow-desktop), transparent 70%), var(--bg-0);
+  overflow: clip;
+}
+
+/* ---------- Top bar ---------- */
+
+.topbar {
+  z-index: var(--z-topbar);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0 var(--space-3);
+  background: var(--bar-bg);
+  border-bottom: 1px solid var(--border);
+  min-width: 0;
+}
+
+.topbarTitle {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  min-width: 0;
+  font-size: var(--text-sm);
+}
+
+.topbarTitle strong {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topbarCase {
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topbarSpacer {
+  flex: 1;
+}
+
+.topbarTools {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.chip strong {
+  color: var(--text);
+}
+
+@media (max-width: 760px) {
+  .hideNarrow {
+    display: none;
+  }
+}
+
+/* ---------- Window area ---------- */
+
+.area {
+  position: relative;
+  overflow: clip;
+}
+
+.wallpaper {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  text-align: center;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.wallpaper strong {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: var(--text-2xl);
+  color: var(--bg-3);
+  letter-spacing: 0.04em;
+  margin-bottom: var(--space-2);
+}
+
+.window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-1);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-window);
+  overflow: hidden;
+  animation: windowIn var(--dur-med) var(--ease-out);
+  outline: none;
+}
+
+.window[hidden] {
+  display: none;
+}
+
+.window.active {
+  box-shadow:
+    var(--shadow-lift),
+    0 0 0 1px var(--accent);
+}
+
+.window:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--focus-ring),
+    0 0 0 5px var(--accent);
+}
+
+.maximised {
+  inset: 0;
+  border-radius: 0;
+}
+
+@keyframes windowIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(8px);
+  }
+}
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--touch-target);
+  padding: 0 var(--space-1) 0 var(--space-3);
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--border);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  color: var(--text-muted);
+}
+
+.active .titlebar {
+  color: var(--text);
+  background: linear-gradient(to bottom, var(--bg-3), var(--surface-raised));
+}
+
+.active .titlebar > svg:first-child {
+  color: var(--accent);
+}
+
+.maximised .titlebar {
+  cursor: default;
+}
+
+.windowTitle {
+  flex: 1;
+  font-size: var(--text-sm);
+  font-weight: 650;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.windowButtons {
+  display: flex;
+}
+
+.windowBody {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  position: relative;
+}
+
+.windowLoading {
+  padding: var(--space-5);
+  color: var(--text-muted);
+}
+
+.resizeHandle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: end;
+  padding: 4px;
+  cursor: nwse-resize;
+  touch-action: none;
+  color: var(--text-faint);
+}
+
+@media (pointer: coarse) {
+  .resizeHandle {
+    width: var(--touch-target);
+    height: var(--touch-target);
+  }
+}
+
+/* ---------- Dock ---------- */
+
+.dock {
+  z-index: var(--z-dock);
+  display: flex;
+  justify-content: center;
+  padding: var(--space-2) var(--space-3) calc(var(--space-2) + env(safe-area-inset-bottom));
+  background: var(--bar-bg);
+  border-top: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+.dockInner {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.dockButton {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 68px;
+  min-height: 56px;
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  transition:
+    background var(--dur-fast),
+    color var(--dur-fast),
+    transform var(--dur-fast);
+}
+
+.dockButton:hover {
+  background: var(--bg-2);
+  color: var(--text);
+}
+
+.dockButton:active {
+  transform: translateY(1px);
+}
+
+.dockButton svg {
+  width: 24px;
+  height: 24px;
+}
+
+.dockOpen {
+  color: var(--text);
+}
+
+/* Open indicator below the icon. */
+.dockOpen::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  width: 16px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.dockActive {
+  background: var(--bg-2);
+  border-color: var(--border-strong);
+}
+
+.dockBadge {
+  position: absolute;
+  top: 2px;
+  right: 8px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 10px;
+  background: var(--brand-magenta);
+  color: var(--on-brand);
+  font-size: 0.7rem;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+}
+
+.dockBadgeMuted {
+  background: var(--bg-3);
+  color: var(--text-muted);
+}
+
+.dockDivider {
+  width: 1px;
+  margin: var(--space-2) var(--space-1);
+  background: var(--border);
+}
+
+.dockReport {
+  color: var(--accent);
+}
+
+/* ---------- Toasts ---------- */
+
+.toasts {
+  position: fixed;
+  top: calc(var(--topbar-height) + var(--space-3));
+  right: var(--space-3);
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: min(380px, calc(100vw - 2rem));
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
+  background: var(--bg-2);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-window);
+  animation: toastIn var(--dur-slow) var(--ease-out);
+}
+
+.toast > svg {
+  color: var(--accent);
+  margin-top: 2px;
+}
+
+.toastTitle {
+  font-weight: 700;
+  font-size: var(--text-sm);
+}
+
+.toastBody {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.toastAction {
+  margin-top: var(--space-2);
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+}

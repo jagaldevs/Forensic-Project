@@ -1,6 +1,14 @@
 import type { Relation, Verdict } from '../engine/types';
 import type { IconName } from './Icon';
 
+/** Verdicts in the order students see them, strongest first. */
+export const verdictOrder: Verdict[] = [
+  'strongly-supported',
+  'possible',
+  'not-supported',
+  'cant-tell',
+];
+
 /** Verdict wording shown to students. Status is never shown by colour alone. */
 export const verdictInfo: Record<Verdict, { label: string; description: string; icon: IconName }> =
   {

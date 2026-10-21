@@ -9,6 +9,8 @@ export interface Toast {
   icon?: IconName;
   /** Optional button to open an app, e.g. "Open Photos". */
   action?: { label: string; appId: DesktopAppId; params?: Record<string, string> };
+  /** A new toast with the same key replaces the old one instead of stacking. */
+  key?: string;
 }
 
 interface ToastState {
@@ -22,6 +24,9 @@ let nextId = 1;
 /** Notifications (evidence drops, warrant outcomes). Not persisted. */
 export const useToasts = create<ToastState>()((set, get) => ({
   toasts: [],
-  push: (toast) => set({ toasts: [...get().toasts.slice(-3), { ...toast, id: nextId++ }] }),
+  push: (toast) => {
+    const others = get().toasts.filter((t) => !toast.key || t.key !== toast.key);
+    set({ toasts: [...others.slice(-3), { ...toast, id: nextId++ }] });
+  },
   dismiss: (id) => set({ toasts: get().toasts.filter((t) => t.id !== id) }),
 }));

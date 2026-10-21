@@ -120,6 +120,13 @@ samp,
   scrollbar-color: var(--border-strong) transparent;
 }
 
+@media print {
+  body {
+    background: var(--print-paper);
+    color: var(--print-ink);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

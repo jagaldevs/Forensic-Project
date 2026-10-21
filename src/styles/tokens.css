@@ -17,6 +17,10 @@
   --accent-strong: #ff6fb8; /* PLACEHOLDER BRAND: hover/active tint */
   --accent-soft: rgb(240 71 158 / 14%); /* PLACEHOLDER BRAND: highlight wash */
   --on-brand: #ffffff;
+  /* Background glows: brand magenta at low opacity (update with the brand colour). */
+  --glow-stage: rgb(181 0 106 / 22%); /* PLACEHOLDER BRAND */
+  --glow-stage-soft: rgb(181 0 106 / 10%); /* PLACEHOLDER BRAND */
+  --glow-desktop: rgb(181 0 106 / 12%); /* PLACEHOLDER BRAND */
   /* ------------------------------------------------------------ */
 
   /* Backgrounds (near-black lab) */
@@ -25,6 +29,9 @@
   --bg-2: #1b1b23;
   --bg-3: #24242e;
   --bg-overlay: rgb(5 5 8 / 72%);
+  --bar-bg: rgb(11 11 15 / 93%);
+  --panel-glass: rgb(19 19 25 / 88%);
+  --scanline: rgb(255 255 255 / 2.5%);
 
   /* Neutral data surfaces */
   --surface: #17171e;
@@ -54,6 +61,7 @@
   --status-unassessed-bg: rgb(166 166 180 / 12%);
   --status-info: #6cb8ff;
   --status-info-bg: rgb(108 184 255 / 14%);
+  --status-info-line: rgb(108 184 255 / 35%);
 
   /* Evidence board */
   --cork: #3a2c22;
@@ -61,6 +69,9 @@
   --card-paper: #f3efe6;
   --card-ink: #1a1a1f;
   --card-ink-muted: #4d4d57;
+  --card-ink-line: rgb(26 26 31 / 25%);
+  --card-ink-wash: rgb(26 26 31 / 8%);
+  --card-paper-faint: rgb(243 239 230 / 30%);
   --string: var(--accent);
   --pin: var(--brand-magenta);
 
@@ -72,6 +83,7 @@
   --map-road: #4a4f45;
   --map-road-major: #6d7262;
   --map-label: #cfd3c7;
+  --map-sea-label: #6f93b4;
   --map-radius-fill: rgb(240 71 158 / 16%);
 
   /* Focus */
@@ -106,6 +118,14 @@
   --shadow-window: 0 18px 50px rgb(0 0 0 / 55%), 0 0 0 1px var(--border);
   --shadow-card: 0 6px 16px rgb(0 0 0 / 45%);
   --glow-accent: 0 0 0 1px var(--accent), 0 0 24px rgb(240 71 158 / 30%);
+  --shadow-lift: 0 18px 44px rgb(0 0 0 / 58%);
+  --shadow-pin: 0 2px 4px rgb(0 0 0 / 40%);
+  --shadow-string: 0 2px 1px rgb(0 0 0 / 45%);
+
+  /* Print (report) */
+  --print-paper: #ffffff;
+  --print-ink: #000000;
+  --print-rule: #bbbbbb;
 
   /* Sizing */
   --touch-target: 44px;

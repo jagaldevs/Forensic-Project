@@ -23,9 +23,22 @@ export function releasedEvidence(caseFile: CaseFile, progress: CaseProgress): Ev
   return caseFile.evidence.filter((e) => isReleased(e, progress));
 }
 
-/** Evidence the student can open and use (released and unlocked). */
+/**
+ * Some evidence is only "collected" once the student finds it with a tool: an IP lookup
+ * result appears in the locker after the student looks the address up.
+ */
+export function isDiscovered(item: Evidence, progress: CaseProgress): boolean {
+  return item.app !== 'iplookup' || item.id in progress.viewed;
+}
+
+/** Evidence listed in the locker: released and discovered (may still be locked). */
+export function collectedEvidence(caseFile: CaseFile, progress: CaseProgress): Evidence[] {
+  return releasedEvidence(caseFile, progress).filter((e) => isDiscovered(e, progress));
+}
+
+/** Evidence the student can open, pin and attach (collected and unlocked). */
 export function usableEvidence(caseFile: CaseFile, progress: CaseProgress): Evidence[] {
-  return releasedEvidence(caseFile, progress).filter((e) => !isLocked(e, caseFile, progress));
+  return collectedEvidence(caseFile, progress).filter((e) => !isLocked(e, caseFile, progress));
 }
 
 export function warrantsRemaining(caseFile: CaseFile, progress: CaseProgress): number {

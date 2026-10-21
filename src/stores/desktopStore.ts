@@ -41,6 +41,18 @@ export function clampRect(r: Rect, area = desktopSize): Rect {
   return { x, y, w, h };
 }
 
+/** Shrink and move a window so it fits entirely inside the desktop. */
+export function fitRect(r: Rect, area = desktopSize): Rect {
+  const w = Math.min(r.w, area.w);
+  const h = Math.min(r.h, area.h);
+  return {
+    w,
+    h,
+    x: Math.max(0, Math.min(r.x, area.w - w)),
+    y: Math.max(0, Math.min(r.y, area.h - h)),
+  };
+}
+
 interface DesktopState {
   caseId: string | null;
   windows: WindowState[];
@@ -54,6 +66,8 @@ interface DesktopState {
   toggleMaximise: (id: DesktopAppId) => void;
   setRect: (id: DesktopAppId, rect: Rect) => void;
   setParams: (id: DesktopAppId, params: Record<string, string>) => void;
+  /** Keep every window on screen after the desktop is resized (e.g. iPad rotation). */
+  clampAll: () => void;
 }
 
 export const useDesktop = create<DesktopState>()(
@@ -116,6 +130,7 @@ export const useDesktop = create<DesktopState>()(
         toggleMaximise: (id) => patch(id, (w) => ({ maximised: !w.maximised })),
         setRect: (id, rect) => patch(id, () => clampRect(rect)),
         setParams: (id, params) => patch(id, (w) => ({ params: { ...w.params, ...params } })),
+        clampAll: () => set({ windows: get().windows.map((w) => ({ ...w, ...fitRect(w) })) }),
       };
     },
     {
@@ -126,6 +141,8 @@ export const useDesktop = create<DesktopState>()(
     },
   ),
 );
+
+if (import.meta.env.DEV) Object.assign(window, { __desktop: useDesktop });
 
 /** Which window is in front (and not minimised). */
 export function topWindowId(windows: WindowState[]): DesktopAppId | null {

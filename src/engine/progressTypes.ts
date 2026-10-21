@@ -71,6 +71,11 @@ export function emptyJudgement(): Judgement {
   return { verdict: null, explanation: '', limitation: '', attempts: 0, lastResult: null };
 }
 
+/** A verdict question is done when its check passed; an open question when it was submitted. */
+export function isQuestionDone(progress: CaseProgress, question: { id: string }): boolean {
+  return progress.judgements[question.id]?.lastResult?.correct === true;
+}
+
 /** Evidence attached to a question = the board links to it. */
 export function attachedEvidenceIds(progress: CaseProgress, questionId: string): string[] {
   return progress.links.filter((l) => l.questionId === questionId).map((l) => l.evidenceId);
