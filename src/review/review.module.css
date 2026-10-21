@@ -289,3 +289,107 @@
   gap: var(--space-1);
   margin-bottom: var(--space-3);
 }
+
+/* ---------- Mode tabs and class summary ---------- */
+
+.modeTabs {
+  display: flex;
+  gap: var(--space-1);
+  max-width: 900px;
+  margin: 0 auto var(--space-4);
+}
+
+.modeTab {
+  min-height: var(--touch-target);
+  padding: 0 var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-1);
+  font-weight: 650;
+}
+
+.modeTab[aria-selected='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.sheetWide {
+  max-width: 1200px;
+}
+
+.summaryHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.summaryErrors {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: var(--status-contradicts);
+  font-size: var(--text-sm);
+}
+
+.summaryErrors li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.summaryTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.summaryTable th,
+.summaryTable td {
+  padding: var(--space-2);
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.summaryTable thead th {
+  background: var(--surface);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.summaryTable tbody th {
+  font-weight: 650;
+}
+
+.summaryNotes {
+  min-width: 12rem;
+  color: var(--status-inconclusive);
+}
+
+.summaryNotes span {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.summaryKey {
+  margin: 0;
+  padding-left: var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+@media print {
+  .modeTabs {
+    display: none;
+  }
+}
