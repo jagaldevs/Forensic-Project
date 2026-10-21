@@ -8,6 +8,8 @@ import { Toasts } from './Toasts';
 import { DropWatcher } from './DropWatcher';
 import { Window } from './Window';
 import { useSettings } from '../stores/settingsStore';
+import { useTour } from '../stores/tourStore';
+import { Tour } from './Tour';
 import s from './desktop.module.css';
 
 /** The investigator's workstation. */
@@ -27,7 +29,10 @@ export default function DesktopScreen() {
       desktop.open('locker');
       desktop.open('brief');
     }
-  }, [c.meta.id]);
+    // First time on any case (not an assessment): offer the desktop tour.
+    if (!useSettings.getState().tourDone && !c.meta.assessment) useTour.getState().start();
+    return () => useTour.getState().stop();
+  }, [c.meta.id, c.meta.assessment]);
 
   // Keep the window manager informed of the usable area (for clamping and compact mode).
   useLayoutEffect(() => {
@@ -61,6 +66,7 @@ export default function DesktopScreen() {
             </Window>
           );
         })}
+        <Tour />
       </main>
       <Dock />
       <Toasts />

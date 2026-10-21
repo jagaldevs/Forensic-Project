@@ -121,7 +121,7 @@ function VerdictForm({ q }: { q: VerdictQuestion }) {
 
         <fieldset className={j.fieldset}>
           <legend className={j.legend}>1. Your verdict on the claim</legend>
-          <div className={j.verdicts}>
+          <div className={j.verdicts} data-tour="verdicts">
             {verdictOrder.map((v) => {
               const info = verdictInfo[v];
               return (

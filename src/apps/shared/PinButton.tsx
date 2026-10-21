@@ -41,6 +41,7 @@ export function PinButton({
       disabled={progress.locked}
       onClick={toggle}
       title={pinned ? 'Unpin from the evidence board' : 'Pin to the evidence board'}
+      data-tour="pin"
     >
       {pinned ? 'Pinned' : 'Pin to board'}
     </Button>

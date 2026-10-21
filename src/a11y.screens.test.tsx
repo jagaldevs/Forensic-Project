@@ -58,4 +58,7 @@ test('desktop with windows open passes axe', async () => {
     timeout: 5000,
   });
   expect(await axeViolations(container)).toEqual([]);
+  // The first-run tour (welcome dialog) is portalled to <body>.
+  expect(document.querySelector('[aria-modal="true"]')).not.toBeNull();
+  expect(await axeViolations(document.body)).toEqual([]);
 });

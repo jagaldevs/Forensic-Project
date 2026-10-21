@@ -17,11 +17,14 @@ interface SettingsState {
   teacherModeUsedAt: number | null;
   /** The assessment access code was entered on this device. */
   assessmentAccess: boolean;
+  /** The desktop tour was finished or skipped on this device. */
+  tourDone: boolean;
   setAgentName: (name: string) => void;
   toggleMuted: () => void;
   cycleTextScale: () => void;
   setTeacherMode: (on: boolean) => void;
   grantAssessmentAccess: () => void;
+  setTourDone: (done: boolean) => void;
 }
 
 export const useSettings = create<SettingsState>()(
@@ -33,6 +36,7 @@ export const useSettings = create<SettingsState>()(
       teacherMode: false,
       teacherModeUsedAt: null,
       assessmentAccess: false,
+      tourDone: false,
       setAgentName: (agentName) => set({ agentName: agentName.trim().slice(0, 32) }),
       toggleMuted: () => set({ muted: !get().muted }),
       cycleTextScale: () => {
@@ -47,6 +51,7 @@ export const useSettings = create<SettingsState>()(
             : get().teacherModeUsedAt,
         }),
       grantAssessmentAccess: () => set({ assessmentAccess: true }),
+      setTourDone: (tourDone) => set({ tourDone }),
     }),
     { name: 'hrsfl-settings', version: 1, storage: createJSONStorage(() => safeStorage) },
   ),

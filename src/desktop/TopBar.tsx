@@ -8,6 +8,7 @@ import { BackupDialog } from '../screens/BackupDialog';
 import { useNav } from '../stores/navStore';
 import { useCaseProgress } from '../stores/progressStore';
 import { useSettings } from '../stores/settingsStore';
+import { useTour } from '../stores/tourStore';
 import { Button } from '../ui/Button';
 import { Icon } from '../ui/Icon';
 import s from './desktop.module.css';
@@ -73,6 +74,13 @@ export function TopBar() {
             toggleMuted();
             playSound('pin'); // a quiet click to confirm sound is on (silent when muting)
           }}
+        />
+        <Button
+          size="small"
+          variant="ghost"
+          icon="question"
+          label="Show the desktop tour"
+          onClick={() => useTour.getState().start()}
         />
         <Button
           size="small"
