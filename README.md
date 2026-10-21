@@ -72,7 +72,8 @@ docs/         Guides, including how to write a case
 
 ## Writing a case
 
-See [`docs/writing-a-case.md`](docs/writing-a-case.md). `npm test` checks every case for
+See [`docs/writing-a-case.md`](docs/writing-a-case.md). Training Academy missions work the
+same way: see [`docs/writing-a-mission.md`](docs/writing-a-mission.md). `npm test` checks every case for
 structure, broken references, real brand names and non-documentation IP addresses.
 
 ## Privacy and safety

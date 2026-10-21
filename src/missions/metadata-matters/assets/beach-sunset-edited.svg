@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Beach at sunset, edited with a filter and text">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5b1f9b"/>
+      <stop offset="0.5" stop-color="#ff3f8e"/>
+      <stop offset="1" stop-color="#ffc24a"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff7a5c"/>
+      <stop offset="1" stop-color="#2a3fa6"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <circle cx="420" cy="330" r="62" fill="#ffe15a"/>
+  <rect y="330" width="800" height="150" fill="url(#sea)"/>
+  <path d="M0 470 Q200 440 400 462 T800 455 V600 H0z" fill="#f0b066"/>
+  <path d="M0 520 Q240 500 520 515 T800 510 V600 H0z" fill="#d99a50"/>
+  <g fill="#1a0f2e">
+    <path d="M120 470 q8 -120 30 -230 l8 2 q-18 110 -26 228z"/>
+    <path d="M152 244 q-60 -10 -100 30 q50 -14 100 -22z"/>
+    <path d="M156 244 q50 -40 110 -20 q-60 0 -108 28z"/>
+    <path d="M154 240 q-20 -50 -70 -60 q40 30 64 64z"/>
+    <path d="M158 242 q30 -60 80 -64 q-46 22 -74 68z"/>
+  </g>
+  <g fill="#ffffff">
+    <path d="M640 90l8 22 22 8-22 8-8 22-8-22-22-8 22-8z"/>
+    <path d="M700 170l5 13 13 5-13 5-5 13-5-13-13-5 13-5z"/>
+    <path d="M90 110l6 16 16 6-16 6-6 16-6-16-16-6 16-6z"/>
+  </g>
+  <rect x="210" y="520" width="380" height="54" rx="27" fill="#ffffff" opacity="0.9"/>
+  <text x="400" y="556" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="26" fill="#c2186b">best night ever!!</text>
+</svg>
