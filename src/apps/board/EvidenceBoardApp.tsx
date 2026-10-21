@@ -83,7 +83,12 @@ export default function EvidenceBoardApp() {
   return (
     <div className={b.wrap}>
       <div className={b.toolbar} role="status" aria-live="polite">
-        {linkingFrom ? (
+        {progress.locked ? (
+          <span className={b.help}>
+            <Icon name="lock" size={16} className="inline-icon" /> This assessment has been
+            submitted, so the board is locked.
+          </span>
+        ) : linkingFrom ? (
           <>
             <Icon name="link" size={18} />
             <span>

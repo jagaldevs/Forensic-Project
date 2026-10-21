@@ -38,6 +38,7 @@ export function PinButton({
       variant={pinned ? 'secondary' : 'primary'}
       icon={pinned ? 'check' : 'pin'}
       aria-pressed={pinned}
+      disabled={progress.locked}
       onClick={toggle}
       title={pinned ? 'Unpin from the evidence board' : 'Pin to the evidence board'}
     >
