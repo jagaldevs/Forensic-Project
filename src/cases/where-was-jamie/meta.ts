@@ -7,6 +7,7 @@ export const meta: CaseFile['meta'] = {
   tagline:
     'Jamie is safe. But on the night, the search went to the wrong beach. Rebuild the timeline and find out why.',
   yearLevel: 8,
+  order: 2,
   estimatedMinutes: 40,
   difficulty: 'standard',
   learningIntentions: [

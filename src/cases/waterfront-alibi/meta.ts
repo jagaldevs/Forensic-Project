@@ -6,6 +6,7 @@ export const meta: CaseFile['meta'] = {
   title: 'The Waterfront Alibi',
   tagline: 'A trophy vanishes. An IP address points to the city. Does it point to Riley?',
   yearLevel: 8,
+  order: 1,
   estimatedMinutes: 25,
   difficulty: 'introductory',
   learningIntentions: [

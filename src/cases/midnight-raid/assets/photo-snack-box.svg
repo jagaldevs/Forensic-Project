@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Daylight photo of an open plastic snack tub on a wooden verandah, with torn packets, a chewed zip-lock bag and small paw prints in spilled brown powder beside a teaspoon">
+  <title>Ruby's photo, 7:08 am: the raided snack box on the Cabin 4 verandah</title>
+  <defs>
+    <linearGradient id="light" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff6e0" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.12"/>
+    </linearGradient>
+    <g id="print">
+      <ellipse cx="0" cy="6" rx="7" ry="6" fill="#5a3a22"/>
+      <circle cx="-9" cy="-4" r="2.6" fill="#5a3a22"/>
+      <circle cx="-4" cy="-9" r="2.6" fill="#5a3a22"/>
+      <circle cx="2" cy="-10" r="2.6" fill="#5a3a22"/>
+      <circle cx="8" cy="-7" r="2.6" fill="#5a3a22"/>
+      <circle cx="11" cy="0" r="2.6" fill="#5a3a22"/>
+    </g>
+  </defs>
+  <!-- wooden verandah boards -->
+  <rect width="800" height="600" fill="#b98a5a"/>
+  <g fill="#a87a4c">
+    <rect y="0" width="800" height="70"/><rect y="150" width="800" height="70"/>
+    <rect y="300" width="800" height="70"/><rect y="450" width="800" height="70"/>
+  </g>
+  <g stroke="#8a5f38" stroke-width="3">
+    <line x1="0" y1="72" x2="800" y2="72"/><line x1="0" y1="148" x2="800" y2="148"/>
+    <line x1="0" y1="222" x2="800" y2="222"/><line x1="0" y1="298" x2="800" y2="298"/>
+    <line x1="0" y1="372" x2="800" y2="372"/><line x1="0" y1="448" x2="800" y2="448"/>
+    <line x1="0" y1="522" x2="800" y2="522"/>
+  </g>
+  <g stroke="#9a6d43" stroke-width="1.5" fill="none" opacity="0.7">
+    <path d="M40 30 q120 10 260 0"/><path d="M420 110 q140 -8 300 4"/><path d="M80 260 q160 8 300 -2"/>
+    <path d="M460 410 q120 10 280 0"/><path d="M60 560 q200 -6 360 4"/>
+  </g>
+  <!-- the plastic tub, open, lid pushed aside -->
+  <rect x="120" y="70" width="250" height="170" rx="16" fill="#cfe6f2" stroke="#8fb5c8" stroke-width="4"/>
+  <rect x="140" y="88" width="210" height="134" rx="10" fill="#e8f3f8"/>
+  <rect x="380" y="40" width="240" height="70" rx="14" fill="#5b8fb0" transform="rotate(14 500 75)"/>
+  <!-- leftovers inside the tub -->
+  <rect x="160" y="110" width="70" height="40" rx="6" fill="#e2b33c"/>
+  <rect x="250" y="150" width="80" height="44" rx="6" fill="#d35a4a"/>
+  <!-- torn chip packets -->
+  <path d="M430 210 l90 -20 l26 60 l-18 6 l-10 -14 l-14 18 l-62 -10 z" fill="#e9c43a"/>
+  <path d="M440 214 l70 -16" stroke="#b8901c" stroke-width="3"/>
+  <path d="M560 260 l70 10 l-6 50 l-12 -4 l-8 10 l-10 -8 l-40 -6 z" fill="#4c9a5a"/>
+  <g fill="#f3d27a"><circle cx="540" cy="262" r="6"/><circle cx="555" cy="280" r="5"/><circle cx="526" cy="250" r="4"/><circle cx="600" cy="330" r="5"/></g>
+  <!-- chewed zip-lock bag -->
+  <path d="M190 300 h120 v70 l-10 8 l-8 -8 l-10 10 l-8 -10 l-12 9 l-8 -9 l-10 10 l-10 -8 l-12 8 l-10 -8 l-12 6 z" fill="#eef4f6" fill-opacity="0.85" stroke="#9fb4bd" stroke-width="3"/>
+  <line x1="190" y1="314" x2="310" y2="314" stroke="#7aa0b0" stroke-width="4"/>
+  <!-- spilled hot chocolate powder with small paw prints -->
+  <path d="M380 400 q60 -40 150 -20 q90 20 120 70 q-20 60 -130 70 q-120 6 -160 -40 q-20 -40 20 -80 z" fill="#7a4e2e" opacity="0.55"/>
+  <use href="#print" transform="translate(430 440) rotate(-20) scale(1.5)"/>
+  <use href="#print" transform="translate(480 470) rotate(-10) scale(1.5)"/>
+  <use href="#print" transform="translate(530 440) rotate(-25) scale(1.5)"/>
+  <use href="#print" transform="translate(580 480) rotate(-12) scale(1.5)"/>
+  <!-- teaspoon for scale -->
+  <g transform="rotate(-8 640 540)">
+    <ellipse cx="610" cy="540" rx="18" ry="11" fill="#d7dbe0" stroke="#9aa1a8" stroke-width="2"/>
+    <rect x="626" y="536" width="110" height="7" rx="3" fill="#d7dbe0" stroke="#9aa1a8" stroke-width="2"/>
+  </g>
+  <rect width="800" height="600" fill="url(#light)"/>
+</svg>

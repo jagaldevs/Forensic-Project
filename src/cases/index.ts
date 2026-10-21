@@ -11,7 +11,12 @@ const caseModules = import.meta.glob<{ default: CaseFile }>('./*/case.ts');
 
 export const caseCatalogue: CaseMeta[] = Object.values(metaModules)
   .map((m) => m.meta)
-  .sort((a, b) => a.estimatedMinutes - b.estimatedMinutes || a.title.localeCompare(b.title));
+  .sort(
+    (a, b) =>
+      (a.order ?? 99) - (b.order ?? 99) ||
+      a.estimatedMinutes - b.estimatedMinutes ||
+      a.title.localeCompare(b.title),
+  );
 
 export function findCaseMeta(id: string): CaseMeta | undefined {
   return caseCatalogue.find((m) => m.id === id);

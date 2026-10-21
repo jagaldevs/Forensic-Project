@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Infrared trail camera still at night: a brushtail possum sitting on the lid of a plastic tub, with a torn chip packet beside it">
+  <title>Trail camera, 1:27 am: a brushtail possum on the snack box lid</title>
+  <defs>
+    <filter id="mono">
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.3" numOctaves="2" seed="9"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="2.2"/></filter>
+    <filter id="fur"><feGaussianBlur stdDeviation="1.1"/></filter>
+    <filter id="glow"><feGaussianBlur stdDeviation="1.2"/></filter>
+    <radialGradient id="flash" cx="0.62" cy="0.62" r="0.7">
+      <stop offset="0" stop-color="#a4a4a4"/>
+      <stop offset="0.55" stop-color="#606060"/>
+      <stop offset="1" stop-color="#1e1e1e"/>
+    </radialGradient>
+  </defs>
+  <g filter="url(#mono)">
+    <rect width="800" height="500" fill="url(#flash)"/>
+    <!-- bush behind -->
+    <g fill="#2a2a2a" filter="url(#soft)">
+      <ellipse cx="80" cy="140" rx="140" ry="110"/>
+      <ellipse cx="290" cy="100" rx="160" ry="90"/>
+    </g>
+    <!-- track -->
+    <polygon points="0,500 200,250 290,250 360,500" fill="#8c8c8c" opacity="0.45"/>
+    <!-- verandah posts, rail and floorboards (closer and in focus this time) -->
+    <rect x="380" y="110" width="420" height="16" fill="#727272"/>
+    <rect x="392" y="126" width="14" height="210" fill="#5e5e5e"/>
+    <rect x="770" y="126" width="14" height="210" fill="#5e5e5e"/>
+    <line x1="406" y1="200" x2="770" y2="200" stroke="#686868" stroke-width="6"/>
+    <polygon points="370,336 800,336 800,430 340,430" fill="#7d7d7d"/>
+    <g stroke="#6a6a6a" stroke-width="2">
+      <line x1="362" y1="360" x2="800" y2="360"/><line x1="354" y1="384" x2="800" y2="384"/><line x1="347" y1="408" x2="800" y2="408"/>
+    </g>
+    <rect x="340" y="430" width="460" height="18" fill="#4c4c4c"/>
+    <!-- plastic tub with its lid on -->
+    <path d="M520 300 h190 l-10 78 h-170 z" fill="#c9c9c9"/>
+    <rect x="512" y="292" width="206" height="14" rx="5" fill="#dedede"/>
+    <path d="M532 320 h166" stroke="#b2b2b2" stroke-width="2"/>
+    <!-- torn chip packet on the boards -->
+    <path d="M430 372 l46 -12 l14 30 l-12 4 l-6 -8 l-8 10 l-30 -6 z" fill="#e4e4e4"/>
+    <path d="M438 376 l34 -9" stroke="#9c9c9c" stroke-width="2"/>
+    <g fill="#f0f0f0"><circle cx="500" cy="396" r="3"/><circle cx="512" cy="390" r="2.5"/><circle cx="488" cy="402" r="2"/></g>
+    <!-- the possum, sitting on the lid -->
+    <g filter="url(#fur)">
+      <!-- bushy dark tail curling down the side of the tub -->
+      <path d="M690 270 q60 10 54 70 q-4 40 -36 40 q22 -14 18 -40 q-6 -40 -46 -52 z" fill="#262626"/>
+      <!-- body -->
+      <ellipse cx="636" cy="262" rx="62" ry="36" fill="#8a8a8a"/>
+      <ellipse cx="626" cy="272" rx="40" ry="20" fill="#b4b4b4"/>
+      <!-- front legs on the lid -->
+      <rect x="590" y="276" width="13" height="20" rx="6" fill="#7a7a7a"/>
+      <rect x="612" y="280" width="13" height="16" rx="6" fill="#7a7a7a"/>
+      <!-- head -->
+      <ellipse cx="582" cy="238" rx="30" ry="25" fill="#949494"/>
+      <ellipse cx="562" cy="248" rx="16" ry="11" fill="#c4c4c4"/>
+      <!-- pointed ears -->
+      <path d="M566 222 l-6 -28 l20 20 z" fill="#7a7a7a"/>
+      <path d="M596 218 l6 -28 l12 26 z" fill="#7a7a7a"/>
+      <path d="M568 218 l-3 -14 l10 10 z" fill="#d0d0d0"/>
+      <path d="M600 214 l3 -14 l6 13 z" fill="#d0d0d0"/>
+      <!-- dark eye stripes and nose -->
+      <ellipse cx="569" cy="236" rx="7" ry="5" fill="#3a3a3a"/>
+      <ellipse cx="591" cy="234" rx="7" ry="5" fill="#3a3a3a"/>
+      <ellipse cx="552" cy="252" rx="5" ry="4" fill="#4a4a4a"/>
+    </g>
+    <g fill="#ffffff" filter="url(#glow)">
+      <circle cx="569" cy="236" r="3.2"/>
+      <circle cx="591" cy="234" r="3.2"/>
+    </g>
+  </g>
+  <rect width="800" height="500" filter="url(#grain)" opacity="0.25" style="mix-blend-mode:overlay"/>
+</svg>

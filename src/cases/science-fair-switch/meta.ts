@@ -7,6 +7,7 @@ export const meta: CaseFile['meta'] = {
   tagline:
     'The night before judging, Team 4’s results changed “from Morgan’s account”. Was it Morgan? Prove it either way.',
   yearLevel: 8,
+  order: 4,
   estimatedMinutes: 45,
   difficulty: 'challenging',
   assessment: true,

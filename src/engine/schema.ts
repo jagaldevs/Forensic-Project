@@ -519,6 +519,8 @@ export const caseSchema = z
       successCriteria: z.array(z.string()),
       /** Training Academy mission ids worth doing first (shown on the case card, never locked). */
       recommendedMissions: z.array(idSchema).optional(),
+      /** Position on the case list, lowest first (the order the teacher guide uses them). */
+      order: z.number().int().optional(),
       /**
        * An assessment case: hidden behind the assessment access code, no hints, one submission
        * that locks the report, scores visible only in Teacher Review. NOT exam-secure: the case
