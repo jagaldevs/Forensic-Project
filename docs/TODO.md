@@ -44,5 +44,5 @@ A running list for the end-of-project review. Newest additions at the bottom of 
 - [ ] Teacher sets a class default support level through the shared link (e.g. `?level=guided`).
 - [ ] A practice case that uses Email, Cloud Drive, Wearables and Browser History before the
       assessment (students currently meet these apps first in the assessment).
-- [ ] Teacher guide: lesson sequence, which Academy missions go before which case, discussion
+- [x] Teacher guide: lesson sequence, which Academy missions go before which case, discussion
       prompts.

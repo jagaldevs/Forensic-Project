@@ -149,6 +149,7 @@ The schema cross-checks references (every evidence/question/device id referenced
 3. **Flagship case "Where was Jamie?"** — missing-person timeline: Messages, Map, CCTV-style stills, Social Feed. Time-zone trap: phone on AEST (UTC+10) vs Darwin ACST (UTC+9:30, no DST) → mysterious 30-minute discrepancy. **Done (21 Oct 2026)**: `src/cases/where-was-jamie/`, plus Messages, Social Feed, CCTV, Map (travel calculator) and Timeline (clock corrections) apps.
 4. **Remaining apps**, final unseen assessment case, polished report export, teacher mode. **Done (21 Oct 2026)**: Browser & Search History, Cloud Drive, Email, Wearables & Smart Home apps; Evidence Locker chain of custody + Verify all hashes; teacher mode + Teacher Panel; Teacher Review; report export polish; assessment case `src/cases/science-fair-switch/`.
 5. **Polish** — sound design, onboarding tutorial, accessibility audit, performance pass. **Done (21 Oct 2026)**: automated + manual accessibility audit (`docs/accessibility.md`), first-run desktop tour, sound redesign, performance and offline check, Timeline date headings.
+6. **Classroom readiness** (next; handoff in `docs/handoff-phase-6.md`) — practice case for Email, Cloud Drive, Wearables and Browser History; class summary table with .csv in Teacher Review; class default support level from the link; app icons and brand colours; Netlify deploy check.
 
 ### Phase 1 definition of done
 
