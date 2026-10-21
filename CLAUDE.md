@@ -27,7 +27,7 @@ Signature idea: an IP that "geolocates near the crime scene" is approximate, a d
 ## Stack
 
 - React 19 + Vite 8 + TypeScript 6.0 (`strict`, `noUncheckedIndexedAccess`). Use current versions (check `npm view <pkg> version`), not versions from memory. TypeScript is pinned `~6.0` because typescript-eslint does not support TS 7 yet.
-- Zustand stores, all persisted through `lib/safeStorage`: `progressStore` (case progress), `desktopStore` (window layout), `settingsStore` (codename, mute, text size), `navStore` (current screen). `toastStore` is not persisted.
+- Zustand stores, all persisted through `lib/safeStorage`: `progressStore` (case progress), `desktopStore` (window layout), `settingsStore` (codename, mute, text size, tour done), `navStore` (current screen). `toastStore` and `tourStore` are not persisted.
 - zod schemas for case files; validated in tests and when a case loads in dev. **Never import `engine/schema.ts` from runtime code** (it would bundle zod): runtime code imports types from `engine/types.ts` and `defineCase` from `engine/defineCase.ts`. zod is only bundled in the lazily loaded progress-code validator.
 - Vitest for unit tests, especially case validation and answer checking. A test loads **every** case file and validates it.
 - Window manager: hand-rolled with Pointer Events (see Decisions).
@@ -44,7 +44,7 @@ src/
   app/            App.tsx (boot → codename → cases), CaseShell (loads a case: briefing/desktop/report), CaseContext
   screens/        Boot, Agent (codename), CaseSelect, Briefing, Report, BackupDialog, Loading
   desktop/        DesktopScreen, Window (hand-rolled), Dock, TopBar, Toasts, DropWatcher, releaseDrop,
-                  appMeta (app ids/titles/sizes)
+                  appMeta (app ids/titles/sizes), Tour + tourSteps (first-run desktop tour)
   apps/           registry.tsx (lazy app components) + one folder per app (incl. browser, drive, email,
                   wearables, teacher); shared/ = EvidenceHeader (+ teacher notes), PinButton, HashLine
                   (+ tamper warning), useHashCheck, LockedNotice, WarrantDialog, hooks; board/strings.ts
@@ -54,18 +54,21 @@ src/
   config/         teacher.ts: teacher code + assessment access code (placeholders, NOT secure)
   review/         TeacherReviewScreen (paste a progress code), CaseReview, AcademyReview
   stores/         progressStore, desktopStore, settingsStore, navStore, toastStore
-  lib/            safeStorage, progressCode, sound (Web Audio, synthesised), usePointerDrag, usePrefersReducedMotion
-  ui/             Button, Dialog (focus trap), Icon (inline SVG set), StatusBadge/Badge, labels (verdict/relation wording)
+  lib/            safeStorage, progressCode, sound (Web Audio, synthesised), usePointerDrag, usePrefersReducedMotion,
+                  useFocusTrap (dialogs, presenter view)
+  ui/             Button, Dialog (focus trap), Icon (inline SVG set), StatusBadge/Badge, labels (verdict/relation wording),
+                  tabKeys (arrow keys for role="tablist")
+  test/           setup, axe (axe-core helper for a11y tests)
   styles/         tokens.css (ALL colours), global.css, fonts/ (vendored latin woff2 + licences)
   brand/          brand.ts + Logo.tsx (logo slot)
   cases/<id>/     meta.ts (eager, for case list) + case.ts (lazy) + assets/
   missions/<id>/  Training Academy: meta.ts (eager) + mission.ts (lazy) + assets/; index.ts registry
   academy/        AcademyScreen (hub), MissionScreen (step player), StepInputs, MediaView
-docs/writing-a-case.md, docs/writing-a-mission.md
+docs/writing-a-case.md, docs/writing-a-mission.md, docs/accessibility.md (audit + keyboard map)
 scripts/generate-icons.mjs   placeholder PWA icons
 ```
 
-Tests are co-located (`*.test.ts(x)`). `src/cases/cases.test.ts` validates every case.
+Tests are co-located (`*.test.ts(x)`). `src/cases/cases.test.ts` validates every case. `src/a11y*.test.tsx` run axe over every app and screen; `src/styles/contrast.test.ts` checks the colour tokens for WCAG AA.
 
 ## Dev notes
 
@@ -73,7 +76,7 @@ Tests are co-located (`*.test.ts(x)`). `src/cases/cases.test.ts` validates every
 - A session started in this folder reads this project's own `.claude/launch.json` instead: `dev` (:5173) and `preview-build` (:4173).
 - This folder is on OneDrive and Vite sometimes misses a file change; if the dev page shows stale code after a reload, `touch` the file.
 - After editing a Zustand store module, do a full page reload; HMR can keep the old store instance.
-- In dev, `window.__desktop` exposes the desktop store for debugging.
+- In dev, `window.__desktop`, `__progress`, `__settings` and `__nav` expose the stores for debugging.
 - Avoid shell heredocs for files containing backslashes (they get mangled); use the editor/Write tool.
 
 ## Design system
@@ -141,7 +144,7 @@ The schema cross-checks references (every evidence/question/device id referenced
 2. **Training Academy** — short interactive modules: metadata, digital footprints, search history & cookies, IP addresses & networks, timestamps & time zones, ethics & privacy. **MVP done (21 Oct 2026)**: six missions, data-driven like cases (`engine/missionSchema.ts`, `engine/checkStep.ts`, `stores/academyStore.ts`).
 3. **Flagship case "Where was Jamie?"** — missing-person timeline: Messages, Map, CCTV-style stills, Social Feed. Time-zone trap: phone on AEST (UTC+10) vs Darwin ACST (UTC+9:30, no DST) → mysterious 30-minute discrepancy. **Done (21 Oct 2026)**: `src/cases/where-was-jamie/`, plus Messages, Social Feed, CCTV, Map (travel calculator) and Timeline (clock corrections) apps.
 4. **Remaining apps**, final unseen assessment case, polished report export, teacher mode. **Done (21 Oct 2026)**: Browser & Search History, Cloud Drive, Email, Wearables & Smart Home apps; Evidence Locker chain of custody + Verify all hashes; teacher mode + Teacher Panel; Teacher Review; report export polish; assessment case `src/cases/science-fair-switch/`.
-5. **Polish** — sound design, onboarding tutorial, accessibility audit, performance pass.
+5. **Polish** — sound design, onboarding tutorial, accessibility audit, performance pass. **Done (21 Oct 2026)**: automated + manual accessibility audit (`docs/accessibility.md`), first-run desktop tour, sound redesign, performance and offline check, Timeline date headings.
 
 ### Phase 1 definition of done
 
@@ -233,3 +236,12 @@ Visual overhaul (21 Oct 2026, requested: "more professional, less vibe-coded col
 - Chose direction B (light case file) from three mock-ups (dark graphite, light case file, dark chrome around light panes). All colours changed in `tokens.css` only; `--accent` is now a dark magenta for text on white, `--accent-soft` a neutral grey wash.
 - Badges are square-cornered tags: status tones keep a pale tint + icon + word; `info`/`accent`/`unassessed` and tone-less badges are plain grey. Case and mission cards show a plain line of facts instead of coloured pills.
 - Pin to board, toasts, drop releases, case cards and mission cards use neutral buttons. Chat bubbles for the device owner are blue (`--bubble-mine`). Cork board, string and map keep their character in lighter, realistic colours.
+
+Made during the Phase 5 (polish) build (for review):
+
+- **Accessibility:** automated checks (axe-core, dev only, over every app in every case and every screen; a token contrast test that re-checks `tokens.css`) plus a manual keyboard pass at laptop and iPad sizes and all three text sizes. Fixes and the keyboard map are in `docs/accessibility.md`. New tokens `--field-border` (3:1 field outlines) and `--string-halo` (board string on cork). Tab rows follow the ARIA tabs pattern; dialogs and the presenter view share `useFocusTrap`. Still to do: VoiceOver on a real iPad and ChromeVox on a Chromebook.
+- **Onboarding** is an overlay tour on the real desktop (chosen over a tutorial case). It starts on the first non-assessment case, advances when the student actually opens the Locker, pins, opens the board, links and chooses a verdict, and always has Next. Done/skipped is remembered per device in `settingsStore.tourDone` (not in progress codes). The **?** button in the top bar replays it. Steps are data in `desktop/tourSteps.ts`. The coach card sits on the side away from the highlighted control.
+- **Sound** (still muted by default) only at key moments: window open/close, evidence drop, pin, link, check result (arpeggio or gentle hint, never a buzzer), warrant granted/refused (stamp), report submitted, and a click when sound is turned on. No sounds on ordinary buttons or typing. Recipes are readable data in `lib/sound.ts`; levels were set by reasoning and need a listen on real speakers.
+- **Performance:** no changes needed. First load is the app shell (about 80 KB gzipped JS, 5 KB CSS) plus two fonts (88 KB); cases, apps, academy, report and Teacher Review load on demand (checked in the build preview). The offline precache is 96 files (about 890 KB uncompressed); with the server stopped, a case, apps and missions never opened before still load.
+- **Small fixes:** Timeline hour headings add the date when a timeline crosses midnight (`hourHeadings`). Notifications pause while focused or pointed at, and are cleared when a case closes. Top-bar labels hide below 1000px so Report and Leave case stay visible at the largest text size on an iPad. Repeated buttons are named by what they act on ("Open case, The Waterfront Alibi").
+- **Class summary table** in Teacher Review is deferred again (one code at a time for now).

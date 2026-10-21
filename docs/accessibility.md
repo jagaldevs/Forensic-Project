@@ -27,6 +27,7 @@ so the manual checks below still matter when apps change.
 | Dialogs        | Focus stays inside; Escape closes; focus returns to the button that opened it                                                |
 | Presenter view | Left/Right change question; Escape closes                                                                                    |
 | Notifications  | They stay while focused or pointed at                                                                                        |
+| Desktop tour   | Escape on the welcome skips it; the coach card is not modal, so keep working; the ? button in the top bar replays it         |
 
 ## Manual audit, 21 Oct 2026
 
