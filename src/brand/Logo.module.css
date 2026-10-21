@@ -34,12 +34,25 @@
   padding: 6px;
 }
 
-.img.small {
-  height: 32px;
-  width: auto;
+/* The logo is a JPEG on white: multiply makes the white disappear on the grey desk. */
+.img,
+.crest img {
+  mix-blend-mode: multiply;
 }
 
 .img.large {
-  height: 72px;
+  height: 112px;
   width: auto;
+}
+
+.crest {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  overflow: hidden;
+}
+
+.crest img {
+  position: absolute;
+  max-width: none;
 }

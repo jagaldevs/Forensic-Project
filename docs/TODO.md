@@ -6,8 +6,14 @@ A running list for the end-of-project review. Newest additions at the bottom of 
 
 - [ ] Replace the placeholder teacher code and assessment access code in `src/config/teacher.ts`
       (`CHANGE-ME-TEACHER-2026`, `CHANGE-ME-ASSESS-2026`).
+- [x] Logo added (`src/brand/haileybury-logo.jpg`): full logo on the boot screen and report cover,
+      crest only in top bars.
 - [ ] Add the official brand colours (values marked `PLACEHOLDER BRAND` in `src/styles/tokens.css`;
-      `npm test` re-checks contrast) and the logo (`src/brand/`).
+      `npm test` re-checks contrast). The current magenta is close to the logo's plum but not
+      matched to it.
+- [ ] App icons (`public/pwa-*.png`, `apple-touch-icon.png`) are still placeholders: make them from
+      the crest, ideally from a vector (SVG) version of the logo, which would also print more
+      sharply than the 300 px JPEG.
 - [ ] Test on a real iPad (Safari) and a Chromebook: touch dragging of windows and board cards,
       the dock scrolling, installing as an app, offline after first load.
 - [ ] Screen readers: one run through a case with VoiceOver on iPad and ChromeVox on a Chromebook.
