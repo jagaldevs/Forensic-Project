@@ -86,7 +86,10 @@ function LogView({ log }: { log: NetworkLog }) {
   const hours = Array.from({ length: (to - from) / 60 + 1 }, (_, i) => from + i * 60);
   const sameDay = log.logDate === c.incident.date;
   const winStart = clockToMinutes(c.incident.windowStart);
-  const winEnd = clockToMinutes(c.incident.windowEnd);
+  // A window that ends before it starts runs past midnight (e.g. 9 pm to 6:45 am).
+  const winEnd =
+    clockToMinutes(c.incident.windowEnd) +
+    (c.incident.windowEnd < c.incident.windowStart ? 24 * 60 : 0);
 
   return (
     <article>

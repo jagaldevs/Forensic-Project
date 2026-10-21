@@ -30,7 +30,10 @@ export default function TimelineApp() {
   const deviceIds = timelineDeviceIds(evidence);
   const headings = hourHeadings(points, c.incident.date);
   const winStart = clockToMinutes(c.incident.windowStart);
-  const winEnd = clockToMinutes(c.incident.windowEnd);
+  // A window that ends before it starts runs past midnight (e.g. 9 pm to 6:45 am).
+  const winEnd =
+    clockToMinutes(c.incident.windowEnd) +
+    (c.incident.windowEnd < c.incident.windowStart ? 24 * 60 : 0);
   const teacherMode = useSettings((st) => st.teacherMode);
 
   if (!points.length)
