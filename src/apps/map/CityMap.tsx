@@ -167,7 +167,7 @@ export function CityMap({
           region.labels.map((l) => (
             <text
               key={l.text}
-              className={s.seaLabel}
+              className={l.onLand ? s.areaLabel : s.seaLabel}
               style={text(1.4)}
               x={l.at.x}
               y={l.at.y}

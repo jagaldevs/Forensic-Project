@@ -37,6 +37,8 @@ export interface MapLabel {
   at: MapPoint;
   /** Degrees, for labels that follow a river or an arm of the sea. */
   rotate?: number;
+  /** A name on land (a range, a park) rather than on water. Default: water. */
+  onLand?: boolean;
 }
 
 export interface MapRegion {

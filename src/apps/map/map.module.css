@@ -125,3 +125,14 @@
     opacity: 0;
   }
 }
+
+.areaLabel {
+  font-family: var(--font-ui);
+  font-size: 1.4px;
+  font-style: italic;
+  fill: var(--map-label);
+  opacity: 0.75;
+  paint-order: stroke;
+  stroke: var(--map-land);
+  stroke-linejoin: round;
+}

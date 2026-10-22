@@ -28,6 +28,7 @@
  */
 import { local } from '../../brand/local';
 import { defineCase } from '../../engine/defineCase';
+import { litchfieldLatLon as ll } from '../../engine/geo/litchfield';
 import { meta } from './meta';
 import trailcam0112 from './assets/trailcam-0112.svg';
 import trailcam0127 from './assets/trailcam-0127.svg';
@@ -189,8 +190,22 @@ For every piece of evidence, ask yourself three things. What does it show? What 
     },
   ],
 
-  // The camp is outside the area of the shared city map, so this case has no map pins.
-  mapMarkers: [],
+  map: 'litchfield',
+  mapMarkers: [
+    // The centre is fictional; its pin matches the GPS in Ruby's photo.
+    {
+      id: 'camp',
+      label: 'Wangi Ridge Outdoor Education Centre (camp)',
+      kind: 'scene',
+      at: ll(-13.165, 130.67),
+    },
+    {
+      id: 'weather-station',
+      label: 'Batchelor weather station',
+      kind: 'place',
+      at: ll(-13.055, 131.02),
+    },
+  ],
 
   evidence: [
     {
@@ -421,7 +436,7 @@ For every piece of evidence, ask yourself three things. What does it show? What 
       ],
       guided: historyGuide,
       teacherNote:
-        'Key for Q1. The same searches, typed on the tablet in Palmerston, more than 100 km from camp. With Jo’s statement, it explains the history on Kai’s phone. The record shows the device; Jo’s statement (from Finn) says who was using it.',
+        'Key for Q1. The same searches, typed on the tablet in Palmerston, over 100 km from camp by road. With Jo’s statement, it explains the history on Kai’s phone. The record shows the device; Jo’s statement (from Finn) says who was using it.',
     },
     {
       id: 'band-kai',

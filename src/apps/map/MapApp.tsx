@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { darwin } from '../../engine/geo/darwin';
+import { regionFor } from '../../engine/geo/regions';
 import { viewAround } from '../../engine/geo/region';
 import { travelEstimate, travelModes, type TravelMode } from '../../engine/geo/travel';
 import type { MapPoint } from '../../engine/types';
@@ -20,9 +20,10 @@ interface Spot {
 /** The case map with a travel-time calculator. */
 export default function MapApp() {
   const { c } = useCaseState();
+  const region = regionFor(c);
   const spots: Spot[] = [
     ...c.mapMarkers.map((m, i) => ({ id: m.id, label: `${i + 1}. ${m.label}`, at: m.at })),
-    ...darwin.places.map((p) => ({ id: p.id, label: p.name, at: p.at })),
+    ...region.places.map((p) => ({ id: p.id, label: p.name, at: p.at })),
   ];
   const [from, setFrom] = useState(spots[0]?.id ?? '');
   const [to, setTo] = useState(spots[1]?.id ?? '');
@@ -48,9 +49,10 @@ export default function MapApp() {
           </Button>
         </div>
         <CityMap
+          region={region}
           view={
             zoomed
-              ? viewAround(darwin, [
+              ? viewAround(region, [
                   ...c.mapMarkers.map((m) => m.at),
                   ...(a ? [a.at] : []),
                   ...(b ? [b.at] : []),
@@ -59,7 +61,7 @@ export default function MapApp() {
           }
           markers={c.mapMarkers}
           route={estimate && a && b ? { from: a.at, to: b.at } : undefined}
-          description={`Map of the Darwin region with ${c.mapMarkers.length} case locations marked.`}
+          description={`Map of ${region.name} with ${c.mapMarkers.length} case locations marked.`}
         />
       </div>
       <section className={mp.panel} aria-labelledby="travel-title">

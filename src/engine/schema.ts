@@ -586,7 +586,9 @@ export const caseSchema = z
         mac: mac.optional(),
       }),
     ),
-    /** Case-specific pins on the shared city map. */
+    /** Which map the case uses (default: the Darwin region). */
+    map: z.enum(['darwin', 'litchfield']).optional(),
+    /** Case-specific pins on the case's map. */
     mapMarkers: z.array(
       z.object({
         id: idSchema,
