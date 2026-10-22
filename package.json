@@ -18,7 +18,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "docs:word": "node scripts/build-word-docs.mjs",
-    "icons": "node scripts/generate-icons.mjs"
+    "icons": "node scripts/generate-icons.mjs",
+    "photo": "node scripts/prepare-photo.mjs"
   },
   "dependencies": {
     "react": "^19.3.1",
