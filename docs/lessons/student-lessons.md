@@ -184,6 +184,8 @@ sensors, and to work more on my own before the assessment.
 
 **Think about it:** a fitness band says someone was "asleep". Did it see them sleeping?
 
+**Homework:** Training Academy: complete _Emails & Cloud Files_ before the assessment.
+
 **Exit ticket**
 
 The search history shows ____________________________________________________________

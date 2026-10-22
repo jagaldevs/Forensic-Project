@@ -18,7 +18,7 @@ export const meta: CaseFile['meta'] = {
     'Use hashes to decide whether evidence has been changed since it was collected.',
     'Decide which requests for other people’s data are proportionate.',
   ],
-  recommendedMissions: ['time-zones', 'metadata-matters', 'digital-footprints', 'ethics-privacy'],
+  recommendedMissions: ['email-cloud', 'time-zones', 'metadata-matters', 'ethics-privacy'],
   successCriteria: [
     'I can convert a UTC time to ACST and use it to check a deadline.',
     'I can compare an email’s From, Reply to and recipients with a genuine email to judge where it came from.',

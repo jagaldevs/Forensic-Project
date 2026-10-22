@@ -12,7 +12,7 @@ import a from './academy.module.css';
 
 const missionIcon = (meta: MissionMeta) => meta.icon as IconName;
 
-/** Training Academy hub: six short missions, in any order, each earning a badge. */
+/** Training Academy hub: seven short missions, in any order, each earning a badge. */
 export default function AcademyScreen() {
   const go = useNav((st) => st.go);
   const openMission = useNav((st) => st.openMission);

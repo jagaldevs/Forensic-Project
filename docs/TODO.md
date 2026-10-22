@@ -60,9 +60,13 @@ A running list for the end-of-project review. Newest additions at the bottom of 
       (`kind: 'permission'`): students ask Kai's parent rather than a magistrate. Same mechanics.
 - [ ] **Seven lessons.** The practice case is a new lesson 6, so the assessment is lesson 7. The
       guide says what to do with only six lessons (homework, or instead of the gallery walk).
-- [ ] **The Midnight Raid doesn't practise Email or Cloud Drive.** Students still meet those
-      apps first in the assessment, but its email question no longer needs headers, and the
-      Drive's zone label works like the clock corrections from Where was Jamie?.
+- [ ] **Email and Cloud Drive warm-up (Phase 7).** New Academy mission _Emails & Cloud Files_
+      (8 steps, about 9 min, set as homework after lesson 6): compare a fake "coach" email with
+      a genuine one (Reply to, recipients, what it asks for), sort what an email can and can't
+      show, read a version history in UTC, and see that "saved by" is an account, not a person.
+      Same skills as the assessment, different data (a fictional junior football club). The
+      assessment now recommends it. Read it through
+      (`src/missions/email-cloud/mission.ts`).
 
 - [ ] **Phase 7 review fixes (22 Oct 2026).** Agreed with you: assessment Q3 (Morgan at school?)
       now accepts Not supported or Can't tell; the "mindil??" comment in Where was Jamie? comes

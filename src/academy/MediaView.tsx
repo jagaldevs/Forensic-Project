@@ -1,9 +1,10 @@
 import type { Media } from '../engine/missionTypes';
 import { CityMap } from '../apps/map/CityMap';
+import { Paragraphs } from '../ui/Paragraphs';
 import shared from '../apps/shared/shared.module.css';
 import a from './academy.module.css';
 
-/** Photos, maps and tables shown alongside a mission step. */
+/** Photos, maps, tables and emails shown alongside a mission step. */
 export function MediaView({ items }: { items: Media[] }) {
   return (
     <div className={a.media}>
@@ -35,6 +36,40 @@ export function MediaView({ items }: { items: Media[] }) {
                 )}
               </figure>
             </div>
+          );
+        if (m.kind === 'email')
+          return (
+            <article key={i} className={a.email} aria-label={m.caption ?? `Email: ${m.subject}`}>
+              {m.caption && <p className={a.emailCaption}>{m.caption}</p>}
+              <h3 className={a.emailSubject}>{m.subject}</h3>
+              <table className={shared.kv}>
+                <tbody>
+                  <tr>
+                    <th scope="row">From</th>
+                    <td>
+                      {m.from.name} &lt;{m.from.address}&gt;
+                    </td>
+                  </tr>
+                  {m.replyTo && (
+                    <tr>
+                      <th scope="row">Reply to</th>
+                      <td>
+                        {m.replyTo.name} &lt;{m.replyTo.address}&gt;
+                      </td>
+                    </tr>
+                  )}
+                  <tr>
+                    <th scope="row">To</th>
+                    <td>{m.to.join(', ')}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Sent</th>
+                    <td>{m.sent}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <Paragraphs text={m.body} className={a.emailBody} />
+            </article>
           );
         if (m.kind === 'map')
           return (

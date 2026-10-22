@@ -149,7 +149,7 @@ export function ClassifyInput({ step, answer, onChange, done }: InputProps<'clas
                 <span>{b.label}</span>
                 {picked && !done && (
                   <Button size="small" variant="primary" onClick={() => place(b.id)}>
-                    Put here
+                    Put here <span className="visually-hidden">: {b.label}</span>
                   </Button>
                 )}
               </div>

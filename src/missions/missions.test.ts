@@ -13,8 +13,8 @@ const missions = Object.entries(missionModules).map(([path, mod]) => ({
   data: mod.default,
 }));
 
-test('the academy has six missions with unique suggested positions', () => {
-  expect(missions).toHaveLength(6);
+test('the academy has seven missions with unique suggested positions', () => {
+  expect(missions).toHaveLength(7);
   const orders = missions.map((m) => m.data.meta.order);
   expect(new Set(orders).size).toBe(orders.length);
 });

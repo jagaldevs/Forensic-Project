@@ -83,7 +83,8 @@ export function CaseSelectScreen() {
             <h2 id="academy-title">Training Academy</h2>
             <p>
               New to digital forensics? Short missions on metadata, digital footprints, search
-              history, IP addresses, time zones and privacy. Each case lists the ones that help.
+              history, IP addresses, time zones, privacy, and emails and cloud files. Each case
+              lists the ones that help.
             </p>
           </div>
           <span className={earned ? s.cardStatusOn : s.small}>

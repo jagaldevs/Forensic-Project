@@ -46,7 +46,29 @@ const tableMedia = z.object({
   mono: z.boolean().optional(),
 });
 
-export const mediaSchema = z.discriminatedUnion('kind', [photoMedia, mapMedia, tableMedia]);
+const mailbox = z.object({ name: z.string().min(1), address: z.string().min(3) });
+
+/** An email as any reader sees it (no technical headers). */
+const emailMedia = z.object({
+  kind: z.literal('email'),
+  caption: z.string().optional(),
+  from: mailbox,
+  /** Shown only when replies go somewhere other than From. */
+  replyTo: mailbox.optional(),
+  to: z.array(z.string().min(1)).min(1),
+  /** As the reader's device shows it, e.g. "Tue 3 March, 4:15 pm". */
+  sent: z.string().min(1),
+  subject: z.string().min(1),
+  /** Paragraphs separated by a blank line. */
+  body: z.string().min(1),
+});
+
+export const mediaSchema = z.discriminatedUnion('kind', [
+  photoMedia,
+  mapMedia,
+  tableMedia,
+  emailMedia,
+]);
 export type Media = z.infer<typeof mediaSchema>;
 
 // ---------- Steps ----------

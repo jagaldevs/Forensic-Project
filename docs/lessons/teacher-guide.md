@@ -44,15 +44,15 @@ document.
 
 ## Unit at a glance
 
-| Lesson | Focus                         | In the lab                                                     | Off the screen                   |
-| ------ | ----------------------------- | -------------------------------------------------------------- | -------------------------------- |
-| 1      | Observation vs inference      | Desktop tour; Academy: Digital Footprints, Metadata Matters    | "Is this proof?" card sort       |
-| 2      | Uncertainty                   | Academy: IP Addresses & Networks; **The Waterfront Alibi**     | Error-bar starter; exit ticket   |
-| 3      | Limits, ethics and warrants   | Waterfront debrief (presenter view); Academy: Ethics & Privacy | Warrant debate                   |
-| 4      | Systematic error              | Academy: Timestamps & Time Zones; **Where was Jamie?** part 1  | Two-clocks starter               |
-| 5      | New evidence changes theories | Where was Jamie? part 2; Jamie debrief                         | Board gallery walk (peer review) |
-| 6      | Whose search was it?          | Academy: Search History & Cookies; **The Midnight Raid**       | Rubric preview                   |
-| 7      | Assessment                    | **The Science Fair Switch** (assessment case)                  | Written reflection               |
+| Lesson | Focus                         | In the lab                                                                                       | Off the screen                   |
+| ------ | ----------------------------- | ------------------------------------------------------------------------------------------------ | -------------------------------- |
+| 1      | Observation vs inference      | Desktop tour; Academy: Digital Footprints, Metadata Matters                                      | "Is this proof?" card sort       |
+| 2      | Uncertainty                   | Academy: IP Addresses & Networks; **The Waterfront Alibi**                                       | Error-bar starter; exit ticket   |
+| 3      | Limits, ethics and warrants   | Waterfront debrief (presenter view); Academy: Ethics & Privacy                                   | Warrant debate                   |
+| 4      | Systematic error              | Academy: Timestamps & Time Zones; **Where was Jamie?** part 1                                    | Two-clocks starter               |
+| 5      | New evidence changes theories | Where was Jamie? part 2; Jamie debrief                                                           | Board gallery walk (peer review) |
+| 6      | Whose search was it?          | Academy: Search History & Cookies; **The Midnight Raid**; homework: Academy Emails & Cloud Files | Rubric preview                   |
+| 7      | Assessment                    | **The Science Fair Switch** (assessment case)                                                    | Written reflection               |
 
 Only six lessons? Set The Midnight Raid as homework before the assessment, or run it in place of
 the gallery walk in lesson 5. It is the practice for search histories and fitness-band logs.
@@ -272,7 +272,7 @@ open; the rubric (lesson 7) ready to show.
 | 0–8   | **Academy:** _Search History & Cookies_ (about 6 min).                                                                                                                                                                                                                                                                                                                                                      |
 | 8–45  | **The Midnight Raid** (about 35 min). On Year 8 camp, Cabin 4's snack box is raided overnight and Kai is blamed because "midnight snack ideas" is in the history on Kai's phone. Treat it as a rehearsal: "Work as if it were the assessment, and only press Check when you're confident." A second trail-camera photo arrives as an **evidence drop** after students view the first (or after 10 minutes). |
 | 45–55 | **Debrief with the presenter view**, then show the rubric. Pairs rate one of their own answers against the _Shows and does not show_ row and say what would move it up a level. Science link: the band's "asleep" is an instrument's estimate, not an observation, like any reading that is calculated from something else.                                                                                 |
-| 55–60 | **Exit ticket.** Save progress. Remind students the assessment is next lesson.                                                                                                                                                                                                                                                                                                                              |
+| 55–60 | **Exit ticket.** Save progress. Remind students the assessment is next lesson. **Homework:** Academy _Emails & Cloud Files_ (about 9 min), the warm-up for the assessment's emails and cloud drive: comparing an email with a genuine one, a version history shown in UTC, and "saved by" meaning an account, not a person.                                                                                 |
 
 **The key moment:** the search is in Kai's phone history because the phone's browser is signed
 in to the family account. Kai's phone was switched off in the locked phone box; the search was
