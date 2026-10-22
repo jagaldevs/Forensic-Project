@@ -138,6 +138,9 @@
   align-items: flex-start;
   font-family: var(--font-ui);
   animation: rise var(--dur-slow) var(--ease-out);
+  /* The fade-in isolates this group, so the logo's multiply blend needs the desk colour here
+     too, or its white JPEG background shows while it fades in. */
+  background: var(--bg-0);
 }
 
 .bootTitle h1 {
