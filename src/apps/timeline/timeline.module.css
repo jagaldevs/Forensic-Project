@@ -28,6 +28,12 @@
   border-radius: var(--radius-md);
 }
 
+.zoneNote {
+  margin: var(--space-1) 0 var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
 .clockGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));

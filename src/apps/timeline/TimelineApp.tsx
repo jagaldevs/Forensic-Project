@@ -56,6 +56,12 @@ export default function TimelineApp() {
         <h3 id="clocks-title" className={t.heading}>
           <Icon name="clock" size={16} /> Device clocks
         </h3>
+        {c.timeZone.utcOffset === '+09:30' && (
+          <p className={t.zoneNote}>
+            Case time is Darwin time (ACST, UTC+9:30). The Northern Territory has no daylight
+            saving, so Darwin time is the same all year.
+          </p>
+        )}
         <div className={t.clockGrid}>
           {deviceIds.map((id) => {
             const device = c.devices.find((d) => d.id === id);

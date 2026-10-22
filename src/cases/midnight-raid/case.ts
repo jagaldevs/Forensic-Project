@@ -762,11 +762,11 @@ For every piece of evidence, ask yourself three things. What does it show? What 
           value: 'Keep all food in the kitchen overnight. Please don’t feed the possums.',
         },
       ],
-      body: 'Bandicoots and the occasional feral cat also pass the cabins at night.',
+      body: 'Bandicoots and the occasional feral cat also pass the cabins at night. Northern brown bandicoots dig small cone-shaped holes looking for insects and rarely climb onto verandahs; their front prints are narrow, with long middle toes. Cats leave round prints with four toes and usually no claw marks.',
       guided:
         'This note is from an expert who knows the area. It describes what is typical for an animal, which helps you compare it with what was found. A description of what usually happens is general knowledge: it doesn’t prove what happened on one particular night.',
       teacherNote:
-        'Key for Q3. Lets students compare the paw prints and chewed bag with what possums do. Mentions other animals so students consider alternatives.',
+        'Key for Q3. Lets students compare the paw prints and chewed bag with what possums do. Describes other animals’ tracks so students can test alternative explanations against the five-toed prints.',
     },
     {
       id: 'weather-record',
@@ -782,6 +782,11 @@ For every piece of evidence, ask yourself three things. What does it show? What 
         { label: 'Wind', value: 'Light south-easterly, 5 to 10 km/h' },
         { label: 'Rain', value: '0 mm' },
         { label: 'Sky', value: 'Clear' },
+        { label: 'Humidity', value: '45% at 9 pm, 70% at dawn' },
+        {
+          label: 'Season',
+          value: 'Late dry season. The hot, humid build-up usually starts in October.',
+        },
       ],
       guided:
         'A weather station records temperature, wind and rain at one place. Conditions a few kilometres away can be a little different.',
