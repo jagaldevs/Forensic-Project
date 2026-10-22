@@ -1,28 +1,142 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="A puppy in a backyard">
-  <rect width="800" height="600" fill="#9fd3f0"/>
-  <rect y="360" width="800" height="240" fill="#6fae4f"/>
-  <g fill="#c99a6b"><rect x="0" y="250" width="800" height="16"/><rect x="0" y="300" width="800" height="16"/></g>
-  <g fill="#b78756">
-    <rect x="40" y="230" width="22" height="140"/><rect x="200" y="230" width="22" height="140"/><rect x="360" y="230" width="22" height="140"/>
-    <rect x="520" y="230" width="22" height="140"/><rect x="680" y="230" width="22" height="140"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="A cartoon puppy sitting in a sunny backyard next to a red ball">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8ec5e6"/>
+      <stop offset="1" stop-color="#f6d9ab"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff1c9"/>
+      <stop offset="1" stop-color="#fff1c9" stop-opacity="0"/>
+    </radialGradient>
+    <g id="flower">
+      <g fill="#fbf7ee">
+        <ellipse cx="-12" cy="-8" rx="11" ry="6" transform="rotate(-30 -12 -8)"/>
+        <ellipse cx="2" cy="-15" rx="11" ry="6" transform="rotate(40 2 -15)"/>
+        <ellipse cx="13" cy="-5" rx="11" ry="6" transform="rotate(10 13 -5)"/>
+        <ellipse cx="0" cy="3" rx="11" ry="6" transform="rotate(-70 0 3)"/>
+        <ellipse cx="-11" cy="6" rx="11" ry="6" transform="rotate(60 -11 6)"/>
+      </g>
+      <circle r="5" fill="#f2c230"/>
+    </g>
+    <g id="tip">
+      <g fill="#2f7a4f">
+        <ellipse cx="-21" cy="-8" rx="26" ry="9" transform="rotate(20 -21 -8)"/>
+        <ellipse cx="-11" cy="-19" rx="26" ry="9" transform="rotate(60 -11 -19)"/>
+        <ellipse cx="11" cy="-19" rx="26" ry="9" transform="rotate(-60 11 -19)"/>
+        <ellipse cx="21" cy="-8" rx="26" ry="9" transform="rotate(-20 21 -8)"/>
+      </g>
+      <g fill="#245f3d">
+        <ellipse cx="21" cy="8" rx="26" ry="9" transform="rotate(20 21 8)"/>
+        <ellipse cx="-21" cy="8" rx="26" ry="9" transform="rotate(-20 -21 8)"/>
+      </g>
+      <use href="#flower" x="0" y="-6"/>
+      <use href="#flower" x="-16" y="10"/>
+    </g>
+  </defs>
+
+  <!-- Sunny dry-season sky, sun high in the west -->
+  <rect width="800" height="220" fill="url(#sky)"/>
+  <circle cx="90" cy="70" r="110" fill="url(#glow)"/>
+  <circle cx="90" cy="70" r="34" fill="#ffe2a0"/>
+
+  <!-- Mango tree over the back fence -->
+  <g id="mango-tree">
+    <rect x="640" y="160" width="26" height="80" fill="#6f5339"/>
+    <g fill="#2f6b45">
+      <circle cx="610" cy="110" r="50"/>
+      <circle cx="680" cy="95" r="55"/>
+      <circle cx="585" cy="190" r="55"/>
+    </g>
+    <g fill="#245f3d">
+      <circle cx="650" cy="150" r="80"/>
+      <circle cx="725" cy="180" r="65"/>
+    </g>
+    <g fill="#e0b24a">
+      <ellipse cx="612" cy="182" rx="7" ry="10"/>
+      <ellipse cx="706" cy="188" rx="7" ry="10"/>
+      <ellipse cx="664" cy="196" rx="7" ry="10"/>
+    </g>
+    <path d="M612 172v-6M706 178v-6M664 186v-6" stroke="#245f3d" stroke-width="2"/>
   </g>
-  <circle cx="680" cy="90" r="40" fill="#fff3a6"/>
-  <ellipse cx="400" cy="470" rx="150" ry="22" fill="#4f8a37"/>
-  <g>
-    <ellipse cx="400" cy="400" rx="110" ry="70" fill="#e0a663"/>
-    <rect x="320" y="420" width="30" height="60" rx="12" fill="#e0a663"/>
-    <rect x="450" y="420" width="30" height="60" rx="12" fill="#e0a663"/>
-    <path d="M505 380 q50 -40 40 -80" stroke="#e0a663" stroke-width="18" fill="none" stroke-linecap="round"/>
-    <circle cx="300" cy="320" r="70" fill="#eab676"/>
-    <ellipse cx="248" cy="290" rx="24" ry="48" fill="#a8743f" transform="rotate(20 248 290)"/>
-    <ellipse cx="352" cy="290" rx="24" ry="48" fill="#a8743f" transform="rotate(-20 352 290)"/>
-    <ellipse cx="300" cy="350" rx="34" ry="24" fill="#f6d3a3"/>
-    <circle cx="300" cy="340" r="10" fill="#2a1d14"/>
-    <circle cx="275" cy="310" r="8" fill="#2a1d14"/><circle cx="325" cy="310" r="8" fill="#2a1d14"/>
-    <circle cx="278" cy="307" r="3" fill="#fff"/><circle cx="328" cy="307" r="3" fill="#fff"/>
-    <path d="M290 362 q10 14 20 0" stroke="#2a1d14" stroke-width="4" fill="none"/>
-    <path d="M300 368 q0 18 -8 22 q-8 -6 0 -22z" fill="#e66b7d"/>
+
+  <!-- Timber paling fence -->
+  <g id="fence">
+    <rect y="210" width="800" height="180" fill="#c49a6c"/>
+    <path d="M40 210v180M80 210v180M120 210v180M160 210v180M200 210v180M240 210v180M280 210v180M320 210v180M360 210v180M400 210v180M440 210v180M480 210v180M520 210v180M560 210v180M600 210v180M640 210v180M680 210v180M720 210v180M760 210v180" stroke="#a8805a" stroke-width="3"/>
+    <rect y="204" width="800" height="10" fill="#a8805a"/>
+    <rect y="296" width="800" height="8" fill="#b38a5f"/>
   </g>
-  <circle cx="560" cy="460" r="22" fill="#ff5a5a"/>
-  <path d="M542 452 q18 8 36 0" stroke="#fff" stroke-width="3" fill="none"/>
+
+  <!-- Red-earth garden bed with shrubs -->
+  <path d="M0 382Q200 372 400 380T800 378V420H0Z" fill="#b5562f"/>
+  <g id="shrubs">
+    <g fill="#3f8f4f">
+      <circle cx="250" cy="382" r="24"/><circle cx="286" cy="390" r="18"/>
+      <circle cx="530" cy="384" r="22"/><circle cx="700" cy="380" r="26"/><circle cx="748" cy="388" r="18"/>
+    </g>
+    <g fill="#2e6d3b">
+      <circle cx="262" cy="392" r="14"/><circle cx="540" cy="394" r="12"/><circle cx="714" cy="392" r="14"/>
+    </g>
+    <g fill="#d64f8a">
+      <circle cx="244" cy="372" r="4"/><circle cx="258" cy="380" r="4"/><circle cx="694" cy="370" r="4"/><circle cx="708" cy="380" r="4"/><circle cx="740" cy="384" r="4"/>
+    </g>
+  </g>
+  <rect y="412" width="800" height="6" fill="#8f4325"/>
+
+  <!-- Frangipani in the garden bed -->
+  <g id="frangipani">
+    <path d="M120 412V320M120 330L78 262M120 320L122 236M120 324L164 254" stroke="#9c8a7a" stroke-width="14" stroke-linecap="round" fill="none"/>
+    <path d="M126 412V326" stroke="#85735f" stroke-width="5"/>
+    <use href="#tip" x="78" y="262"/>
+    <use href="#tip" x="122" y="236"/>
+    <use href="#tip" x="164" y="254"/>
+  </g>
+
+  <!-- Lawn -->
+  <rect y="418" width="800" height="182" fill="#8fc05a"/>
+  <g fill="none" stroke="#74a548" stroke-width="3" stroke-linecap="round">
+    <path d="M60 470l6 -12l6 12M180 540l6 -12l6 12M250 460l6 -12l6 12M120 580l6 -12l6 12M640 470l6 -12l6 12M720 560l6 -12l6 12M560 580l6 -12l6 12M300 590l6 -12l6 12M740 450l6 -12l6 12"/>
+  </g>
+
+  <!-- Shadows fall to the right, away from the sun -->
+  <g fill="#6f9f45" opacity="0.6">
+    <ellipse cx="420" cy="552" rx="110" ry="14"/>
+    <ellipse cx="584" cy="546" rx="40" ry="8"/>
+  </g>
+
+  <!-- The puppy -->
+  <g id="puppy">
+    <path d="M452 500q50 -10 52 -60" stroke="#d9a066" stroke-width="16" stroke-linecap="round" fill="none"/>
+    <ellipse cx="390" cy="470" rx="70" ry="78" fill="#d9a066"/>
+    <path d="M420 400q40 30 38 94q-10 40 -40 50z" fill="#c08550"/>
+    <ellipse cx="330" cy="520" rx="40" ry="26" fill="#d9a066"/>
+    <ellipse cx="450" cy="520" rx="40" ry="26" fill="#c08550"/>
+    <ellipse cx="390" cy="480" rx="36" ry="50" fill="#f3e2c4"/>
+    <rect x="356" y="470" width="26" height="74" rx="13" fill="#d9a066"/>
+    <rect x="398" y="470" width="26" height="74" rx="13" fill="#d9a066"/>
+    <g fill="#f3e2c4"><ellipse cx="369" cy="544" rx="18" ry="10"/><ellipse cx="411" cy="544" rx="18" ry="10"/></g>
+    <rect x="350" y="416" width="80" height="14" rx="7" fill="#3d8fb3"/>
+    <circle cx="390" cy="436" r="7" fill="#e0b24a"/>
+    <circle cx="390" cy="360" r="62" fill="#d9a066"/>
+    <g fill="#a86b3c">
+      <ellipse cx="332" cy="370" rx="22" ry="42" transform="rotate(20 332 370)"/>
+      <ellipse cx="448" cy="370" rx="22" ry="42" transform="rotate(-20 448 370)"/>
+      <ellipse cx="412" cy="344" rx="16" ry="14"/>
+    </g>
+    <ellipse cx="390" cy="390" rx="34" ry="26" fill="#f3e2c4"/>
+    <g fill="#2b2322"><circle cx="368" cy="346" r="6"/><circle cx="412" cy="346" r="6"/></g>
+    <g fill="#ffffff"><circle cx="370" cy="344" r="2"/><circle cx="414" cy="344" r="2"/></g>
+    <path d="M384 398q6 16 12 0z" fill="#e0707a"/>
+    <path d="M390 384v8q-8 8 -16 2M390 392q8 8 16 2" stroke="#2b2322" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="390" cy="378" rx="11" ry="8" fill="#2b2322"/>
+    <g fill="#e27a5f" opacity="0.25"><circle cx="356" cy="380" r="7"/><circle cx="424" cy="380" r="7"/></g>
+  </g>
+
+  <!-- The red ball -->
+  <g id="ball">
+    <circle cx="570" cy="512" r="34" fill="#d94a3d"/>
+    <path d="M598 492a34 34 0 0 1 -46 48a40 40 0 0 0 46 -48z" fill="#b53a30"/>
+    <path d="M540 498q30 14 58 -2" stroke="#f6f4ef" stroke-width="3" fill="none" opacity="0.8"/>
+    <circle cx="556" cy="494" r="6" fill="#f6f4ef" opacity="0.6"/>
+  </g>
 </svg>

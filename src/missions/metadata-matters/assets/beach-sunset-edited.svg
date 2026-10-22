@@ -1,39 +1,158 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Beach at sunset, edited with a filter and text">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="The same Mindil Beach sunset photo, edited with a bright filter, sparkle stickers and the words best night ever!!">
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#5b1f9b"/>
-      <stop offset="0.5" stop-color="#ff3f8e"/>
-      <stop offset="1" stop-color="#ffc24a"/>
+      <stop offset="0" stop-color="#7f97c9"/>
+      <stop offset="0.55" stop-color="#eeae90"/>
+      <stop offset="1" stop-color="#ffd89c"/>
     </linearGradient>
     <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ff7a5c"/>
-      <stop offset="1" stop-color="#2a3fa6"/>
+      <stop offset="0" stop-color="#e7a88c"/>
+      <stop offset="1" stop-color="#4a86ab"/>
     </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff1c9"/>
+      <stop offset="1" stop-color="#fff1c9" stop-opacity="0"/>
+    </radialGradient>
+    <!-- The editing app's filter: brighter and more saturated -->
+    <filter id="pop" filterUnits="userSpaceOnUse" x="0" y="0" width="800" height="600" color-interpolation-filters="sRGB">
+      <feColorMatrix type="saturate" values="1.7"/>
+      <feComponentTransfer>
+        <feFuncR type="linear" slope="1.12" intercept="0.05"/>
+        <feFuncG type="linear" slope="1.1" intercept="0.03"/>
+        <feFuncB type="linear" slope="1.05" intercept="0.02"/>
+      </feComponentTransfer>
+    </filter>
+    <path id="sparkle" d="M0 -20Q3 -3 20 0Q3 3 0 20Q-3 3 -20 0Q-3 -3 0 -20Z"/>
   </defs>
-  <rect width="800" height="600" fill="url(#sky)"/>
-  <circle cx="420" cy="330" r="62" fill="#ffe15a"/>
-  <rect y="330" width="800" height="150" fill="url(#sea)"/>
-  <g stroke="#ffe9a8" stroke-width="4" opacity="0.7">
-    <line x1="370" y1="350" x2="470" y2="350"/><line x1="385" y1="372" x2="455" y2="372"/><line x1="400" y1="394" x2="440" y2="394"/>
+
+  <!-- The original photo, unchanged except for the filter -->
+  <g id="photo" filter="url(#pop)">
+    <!-- Sky, with the sun setting over Beagle Gulf -->
+    <rect width="800" height="332" fill="url(#sky)"/>
+    <circle cx="500" cy="318" r="200" fill="url(#glow)"/>
+    <circle cx="500" cy="318" r="36" fill="#ffe2a0"/>
+    <g id="clouds">
+      <rect x="400" y="120" width="180" height="10" rx="5" fill="#b9a2c4"/>
+      <rect x="560" y="178" width="200" height="12" rx="6" fill="#d9a3b0"/>
+      <rect x="600" y="186" width="150" height="8" rx="4" fill="#f5c59a"/>
+      <rect x="290" y="232" width="170" height="10" rx="5" fill="#e6a99c"/>
+      <rect x="330" y="239" width="110" height="7" rx="3.5" fill="#f8d19c"/>
+      <rect x="640" y="250" width="120" height="8" rx="4" fill="#efb39a"/>
+    </g>
+
+    <!-- Beagle Gulf: low land far away, a small sailing boat, the sun's path on the water -->
+    <rect y="330" width="800" height="96" fill="url(#sea)"/>
+    <rect y="330" width="800" height="4" fill="#ffd59a" opacity="0.6"/>
+    <path d="M600 331Q660 320 720 323T800 322V331Z" fill="#b893a3"/>
+    <g id="boat">
+      <path d="M240 330h40l-6 6h-28z" fill="#4a4660"/>
+      <path d="M262 328V292l18 34z" fill="#f3e3d3"/>
+    </g>
+    <g stroke="#ffe2a0" stroke-width="4" stroke-linecap="round" opacity="0.85">
+      <path d="M478 340h44M470 352h60M484 364h32M466 378h68M480 394h40M470 410h60"/>
+    </g>
+    <g stroke="#f6d9ab" stroke-width="3" stroke-linecap="round" opacity="0.5">
+      <path d="M300 362h24M380 384h18M620 370h30M700 396h22M220 400h26"/>
+    </g>
+
+    <!-- Wet sand at the water's edge, then dry sand -->
+    <rect y="424" width="800" height="60" fill="#cfae86"/>
+    <g fill="none" stroke="#f8efe2" stroke-linecap="round">
+      <path d="M0 426q40 -6 80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0" stroke-width="4"/>
+      <path d="M0 436q50 -6 100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0" stroke-width="2" opacity="0.6"/>
+    </g>
+    <g stroke="#f6d9ab" stroke-width="4" stroke-linecap="round" opacity="0.7">
+      <path d="M482 446h36M474 458h52M488 470h24"/>
+    </g>
+    <path d="M0 480Q100 472 200 478T400 478T600 482T800 476V600H0Z" fill="#edd5a5"/>
+    <g id="footprints" fill="#dcc08e">
+      <ellipse cx="566" cy="594" rx="5" ry="8"/>
+      <ellipse cx="552" cy="578" rx="5" ry="8"/>
+      <ellipse cx="556" cy="560" rx="5" ry="8"/>
+      <ellipse cx="540" cy="544" rx="4" ry="7"/>
+      <ellipse cx="544" cy="528" rx="4" ry="7"/>
+      <ellipse cx="528" cy="514" rx="4" ry="6"/>
+      <ellipse cx="530" cy="500" rx="4" ry="6"/>
+      <ellipse cx="516" cy="488" rx="3" ry="5"/>
+    </g>
+    <g id="grass" fill="none" stroke="#7f8c4c" stroke-width="3" stroke-linecap="round">
+      <path d="M20 600q2 -26 -12 -44M28 600q2 -32 14 -52M36 600q6 -22 22 -30M140 600q-2 -24 -16 -36M148 600q2 -30 12 -46M156 600q6 -20 20 -26"/>
+    </g>
+
+    <!-- Long shadows falling towards the camera, away from the sun -->
+    <g fill="#b89a6e" opacity="0.4">
+      <path d="M412 474L370 590H398L430 474Z"/>
+      <path d="M466 474L436 590H464L484 474Z"/>
+    </g>
+
+    <!-- Friend 1, seen from behind: coral T-shirt, navy shorts -->
+    <g id="friend-left">
+      <g stroke="#8d5a3b" stroke-linecap="round">
+        <path d="M414 440v30M426 440v30" stroke-width="10"/>
+        <path d="M406 392l-6 40M434 392l6 40" stroke-width="9"/>
+      </g>
+      <rect x="405" y="424" width="30" height="22" rx="5" fill="#2d3e66"/>
+      <rect x="402" y="384" width="36" height="46" rx="11" fill="#e27a5f"/>
+      <rect x="426" y="386" width="12" height="42" rx="6" fill="#c8664d"/>
+      <path d="M406 390l-3 14M434 390l3 14" stroke="#e27a5f" stroke-width="12" stroke-linecap="round"/>
+      <rect x="415" y="372" width="10" height="14" fill="#7a4d32"/>
+      <circle cx="420" cy="364" r="14" fill="#8d5a3b"/>
+      <g fill="#8d5a3b"><circle cx="406" cy="366" r="3"/><circle cx="434" cy="366" r="3"/></g>
+      <circle cx="420" cy="361" r="14.5" fill="#1f1a19"/>
+    </g>
+
+    <!-- Friend 2, seen from behind: mustard T-shirt, pointing at the sun -->
+    <g id="friend-right">
+      <g stroke="#e8bf98" stroke-linecap="round">
+        <path d="M468 438v32M480 438v32" stroke-width="10"/>
+        <path d="M460 386l-6 40M488 386l20 -34" stroke-width="9"/>
+      </g>
+      <circle cx="509" cy="350" r="5" fill="#e8bf98"/>
+      <rect x="459" y="420" width="30" height="24" rx="5" fill="#f6f4ef"/>
+      <rect x="456" y="378" width="36" height="48" rx="11" fill="#e0b24a"/>
+      <rect x="480" y="380" width="12" height="44" rx="6" fill="#c99c3c"/>
+      <path d="M460 384l-3 14M488 384l7 -11" stroke="#e0b24a" stroke-width="12" stroke-linecap="round"/>
+      <rect x="469" y="366" width="10" height="14" fill="#d9ab84"/>
+      <circle cx="474" cy="356" r="14" fill="#e8bf98"/>
+      <g fill="#e8bf98"><circle cx="460" cy="358" r="3"/><circle cx="488" cy="358" r="3"/></g>
+      <circle cx="474" cy="353" r="14.5" fill="#a8692f"/>
+      <ellipse cx="474" cy="374" rx="6" ry="12" fill="#a8692f"/>
+      <rect x="469" y="362" width="10" height="4" rx="2" fill="#3d8fb3"/>
+    </g>
+
+    <!-- Carpentaria palm, dark against the sunset -->
+    <g id="palm">
+      <path d="M96 600Q80 380 140 150" stroke="#4f3f35" stroke-width="16" fill="none"/>
+      <path d="M96 600Q84 400 126 220" stroke="#3e3129" stroke-width="5" fill="none"/>
+      <path d="M129 196L140 150" stroke="#34503f" stroke-width="18"/>
+      <g fill="#2a4a3c">
+        <path d="M140 150q-80 -10 -126 48q70 -32 126 -26z"/>
+        <path d="M140 150q70 -34 136 10q-70 -18 -136 8z"/>
+        <path d="M140 150q-24 -66 -84 -82q52 32 72 86z"/>
+        <path d="M140 150q18 -70 78 -86q-46 36 -64 90z"/>
+        <path d="M140 150q60 6 100 66q-50 -40 -100 -46z"/>
+      </g>
+      <path d="M140 150q-58 12 -88 72q50 -44 94 -52z" fill="#1f382e"/>
+      <g fill="#8f4325"><circle cx="134" cy="170" r="4"/><circle cx="142" cy="174" r="4"/><circle cx="137" cy="179" r="4"/></g>
+    </g>
+    <rect width="800" height="600" fill="#ff6f9c" opacity="0.08"/>
   </g>
-  <path d="M0 470 Q200 440 400 462 T800 455 V600 H0z" fill="#f0b066"/>
-  <path d="M0 520 Q240 500 520 515 T800 510 V600 H0z" fill="#d99a50"/>
-  <g fill="#1a0f2e">
-    <path d="M120 470 q8 -120 30 -230 l8 2 q-18 110 -26 228z"/>
-    <path d="M152 244 q-60 -10 -100 30 q50 -14 100 -22z"/>
-    <path d="M156 244 q50 -40 110 -20 q-60 0 -108 28z"/>
-    <path d="M154 240 q-20 -50 -70 -60 q40 30 64 64z"/>
-    <path d="M158 242 q30 -60 80 -64 q-46 22 -74 68z"/>
+
+  <!-- Added in the editing app: sparkle stickers -->
+  <g id="stickers" stroke="#ffffff" stroke-width="3" stroke-linejoin="round">
+    <use href="#sparkle" fill="#ffe066" transform="translate(340 200) scale(1.2)"/>
+    <use href="#sparkle" fill="#ff8fc7" transform="translate(610 230) scale(0.9)"/>
+    <use href="#sparkle" fill="#ffe066" transform="translate(730 300) scale(1.4)"/>
+    <use href="#sparkle" fill="#ffffff" transform="translate(300 290) scale(0.7)"/>
+    <use href="#sparkle" fill="#ff8fc7" transform="translate(250 530) scale(1.3)"/>
+    <use href="#sparkle" fill="#ffe066" transform="translate(690 530) scale(1.1)"/>
+    <use href="#sparkle" fill="#ffffff" transform="translate(740 450) scale(0.7)"/>
   </g>
-  <g fill="#1a0f2e">
-    <circle cx="600" cy="446" r="7"/><rect x="594" y="452" width="12" height="22" rx="4"/>
-    <circle cx="622" cy="448" r="6"/><rect x="617" y="453" width="10" height="20" rx="4"/>
+
+  <!-- Added in the editing app: text label -->
+  <g id="label" transform="rotate(-4 400 104)">
+    <rect x="194" y="72" width="420" height="76" rx="38" fill="#000000" opacity="0.12"/>
+    <rect x="190" y="66" width="420" height="76" rx="38" fill="#ffffff"/>
+    <text x="400" y="118" text-anchor="middle" font-family="sans-serif" font-size="40" font-weight="700" fill="#d6336c">best night ever!!</text>
   </g>
-  <g fill="#ffffff">
-    <path d="M640 90l8 22 22 8-22 8-8 22-8-22-22-8 22-8z"/>
-    <path d="M700 170l5 13 13 5-13 5-5 13-5-13-13-5 13-5z"/>
-    <path d="M90 110l6 16 16 6-16 6-6 16-6-16-16-6 16-6z"/>
-  </g>
-  <rect x="210" y="520" width="380" height="54" rx="27" fill="#ffffff" opacity="0.9"/>
-  <text x="400" y="556" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="26" fill="#c2186b">best night ever!!</text>
 </svg>

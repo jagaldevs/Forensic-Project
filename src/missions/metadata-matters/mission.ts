@@ -8,7 +8,7 @@ import puppy from './assets/puppy.svg';
 const photo1 = {
   kind: 'photo' as const,
   src: sunset,
-  alt: 'A beach at sunset with a palm tree silhouette and two people standing on the sand.',
+  alt: 'A beach at sunset, with a palm tree on the left and two people at the water’s edge watching the sun go down.',
   caption: 'Photo 1: IMG_0412.jpg (original file from the phone)',
   metadata: [
     { label: 'DateTimeOriginal', value: '2026:08:13 18:52:07' },
