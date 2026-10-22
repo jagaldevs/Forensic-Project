@@ -1,60 +1,160 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="CCTV still of a lagoon entry gate">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="CCTV still: a teenager with a green backpack walks out through the lagoon gate, back to the camera">
   <defs>
-    <filter id="mono">
-      <feColorMatrix type="saturate" values="0.45"/>
-    </filter>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a7b2b6"/>
+      <stop offset="1" stop-color="#d3c8b6"/>
+    </linearGradient>
+    <linearGradient id="lagoon" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#86a6ae"/>
+      <stop offset="1" stop-color="#5e838e"/>
+    </linearGradient>
+    <pattern id="pickets" width="14" height="10" patternUnits="userSpaceOnUse">
+      <rect width="4" height="10" fill="#3a4043"/>
+    </pattern>
+    <pattern id="scanlines" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="1" fill="#000" opacity="0.12"/>
+    </pattern>
+    <filter id="soft"><feGaussianBlur stdDeviation="0.8"/></filter>
     <filter id="grain" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="11"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="11"/>
       <feColorMatrix type="saturate" values="0"/>
     </filter>
-    <filter id="blur"><feGaussianBlur stdDeviation="1.6"/></filter>
-    <radialGradient id="vig" cx="0.5" cy="0.5" r="0.75">
-      <stop offset="0.6" stop-color="#000" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.65"/>
+    <radialGradient id="vignette" cx="0.5" cy="0.5" r="0.72">
+      <stop offset="0.55" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.6"/>
     </radialGradient>
   </defs>
-  <g filter="url(#mono)">
-    <rect width="800" height="500" fill="#8aa0a8"/>
-    <!-- paved forecourt in perspective -->
-    <polygon points="0,180 800,140 800,500 0,500" fill="#b9b3a6"/>
-    <g stroke="#9c968a" stroke-width="2">
-      <line x1="0" y1="260" x2="800" y2="230"/><line x1="0" y1="350" x2="800" y2="330"/><line x1="0" y1="440" x2="800" y2="430"/>
-      <line x1="200" y1="170" x2="60" y2="500"/><line x1="420" y1="160" x2="380" y2="500"/><line x1="640" y1="150" x2="720" y2="500"/>
+
+  <rect width="800" height="500" fill="#9a9f9c"/>
+
+  <!-- High-angle camera inside the lagoon area, looking out through the gate. Colours are muted
+       like a cheap security camera; only Jamie's backpack keeps a clear green. -->
+  <g id="scene" filter="url(#soft)">
+    <!-- Beyond the gate: a strip of evening sky, the convention centre and apartments -->
+    <rect width="800" height="60" fill="url(#sky)"/>
+    <g id="towers">
+      <rect x="560" width="70" height="104" fill="#d4d1ca"/>
+      <rect x="612" width="18" height="104" fill="#b9b6af"/>
+      <rect x="650" y="14" width="96" height="90" fill="#d4d1ca"/>
+      <rect x="726" y="14" width="20" height="90" fill="#b9b6af"/>
+      <path d="M568 10h40v6h-40zM568 28h40v6h-40zM568 46h40v6h-40zM568 64h40v6h-40zM568 82h40v6h-40zM658 26h62v6h-62zM658 44h62v6h-62zM658 62h62v6h-62zM658 80h62v6h-62z" fill="#9aabb1"/>
     </g>
-    <!-- lagoon water and fence -->
-    <rect x="0" y="40" width="800" height="120" fill="#5f8fa3"/>
-    <g stroke="#2d3438" stroke-width="5">
-      <line x1="0" y1="150" x2="330" y2="140"/><line x1="470" y1="136" x2="800" y2="126"/>
-      <line x1="0" y1="120" x2="330" y2="112"/><line x1="470" y1="108" x2="800" y2="100"/>
+    <g id="convention-centre">
+      <rect x="30" y="52" width="400" height="50" fill="#d9d6cf"/>
+      <rect x="30" y="66" width="400" height="24" fill="#9aabb1"/>
+      <path d="M70 66v24M110 66v24M150 66v24M190 66v24M230 66v24M270 66v24M310 66v24M350 66v24M390 66v24" stroke="#d9d6cf" stroke-width="3"/>
+      <path d="M18 56Q220 30 444 50L444 58Q220 40 18 64Z" fill="#bdb8ae"/>
     </g>
-    <g fill="#2d3438">
-      <rect x="40" y="100" width="6" height="56"/><rect x="140" y="98" width="6" height="56"/><rect x="240" y="96" width="6" height="54"/>
-      <rect x="520" y="92" width="6" height="52"/><rect x="620" y="90" width="6" height="52"/><rect x="720" y="88" width="6" height="52"/>
+
+    <!-- Forecourt outside the fence -->
+    <rect y="100" width="800" height="190" fill="#c4bfb4"/>
+    <rect y="100" width="800" height="6" fill="#aaa59a"/>
+    <path d="M0 150Q400 140 800 150M0 196Q400 184 800 196" stroke="#b3ada1" stroke-width="2" fill="none"/>
+
+    <!-- Carpentaria palms outside -->
+    <g id="palm-left">
+      <path d="M250 204Q244 150 258 104" stroke="#7d6f62" stroke-width="7" fill="none"/>
+      <g fill="#5a7563">
+        <path d="M258 104q-34 -6 -54 18q30 -12 54 -10z"/>
+        <path d="M258 104q30 -14 56 4q-30 -6 -56 4z"/>
+        <path d="M258 104q-10 -28 -36 -34q22 14 30 36z"/>
+        <path d="M258 104q8 -30 34 -36q-20 16 -28 38z"/>
+      </g>
+      <path d="M258 104q-24 4 -38 30q22 -18 40 -22z" fill="#475e50"/>
     </g>
-    <!-- gate posts and sign -->
-    <rect x="320" y="60" width="16" height="110" fill="#3a4246"/>
-    <rect x="466" y="56" width="16" height="110" fill="#3a4246"/>
-    <rect x="336" y="60" width="130" height="26" fill="#e9e6dd"/>
-    <text x="401" y="79" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="15" fill="#2d3438">LAGOON ENTRY</text>
-    <!-- benches, bins -->
-    <rect x="80" y="230" width="120" height="14" fill="#6b5f50"/><rect x="88" y="244" width="8" height="22" fill="#6b5f50"/><rect x="184" y="244" width="8" height="22" fill="#6b5f50"/>
-    <rect x="640" y="200" width="30" height="44" rx="4" fill="#4c5a52"/>
-    <!-- figure walking out with a backpack (blurred, back to camera) -->
-    <g filter="url(#blur)">
-      <ellipse cx="420" cy="372" rx="34" ry="8" fill="#000" opacity="0.25"/>
-      <circle cx="420" cy="252" r="17" fill="#3a2e28"/>
-      <path d="M396 272 q24 -10 48 0 l6 62 q-30 8 -60 0z" fill="#d8d3c8"/>
-      <rect x="403" y="270" width="34" height="44" rx="8" fill="#4f7d4c"/>
-      <rect x="400" y="332" width="16" height="38" fill="#26262a"/>
-      <rect x="424" y="332" width="16" height="38" fill="#26262a"/>
+    <g id="palm-right">
+      <path d="M534 204Q540 140 540 90" stroke="#7d6f62" stroke-width="7" fill="none"/>
+      <g fill="#5a7563">
+        <path d="M540 90q-34 -6 -54 18q30 -12 54 -10z"/>
+        <path d="M540 90q30 -14 56 4q-30 -6 -56 4z"/>
+        <path d="M540 90q-10 -28 -36 -34q22 14 30 36z"/>
+        <path d="M540 90q8 -30 34 -36q-20 16 -28 38z"/>
+      </g>
+      <path d="M540 90q-24 4 -38 30q22 -18 40 -22z" fill="#475e50"/>
     </g>
-    <!-- two other people near the gate, very small -->
-    <g filter="url(#blur)" opacity="0.8">
-      <circle cx="560" cy="170" r="9" fill="#3a2e28"/><rect x="551" y="178" width="18" height="34" rx="5" fill="#7d6b5c"/>
-      <circle cx="590" cy="172" r="9" fill="#3a2e28"/><rect x="581" y="180" width="18" height="32" rx="5" fill="#5c6b7d"/>
+
+    <!-- Paving inside the lagoon area (lines bow outwards: wide-angle lens) -->
+    <path d="M0 286Q400 262 800 286V500H0Z" fill="#d0c9bc"/>
+    <g stroke="#b9b1a3" stroke-width="2" fill="none">
+      <path d="M0 336Q400 352 800 336M0 404Q400 428 800 404M0 474Q400 504 800 474"/>
+      <path d="M120 500L300 280M330 500L380 278M560 500L470 279M760 500L560 280"/>
+    </g>
+
+    <!-- Corner of the lagoon itself -->
+    <path d="M0 400Q150 404 290 500H0Z" fill="url(#lagoon)"/>
+    <path d="M0 400Q150 404 290 500" stroke="#e4ded2" stroke-width="8" fill="none"/>
+    <g stroke="#d3e2e3" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.6">
+      <path d="M10 440q25 -5 50 0t50 0t50 0"/>
+      <path d="M10 472q30 -6 60 0t60 0t60 0"/>
+    </g>
+
+    <!-- Bench with a towel left on it -->
+    <g id="bench">
+      <path d="M80 330v18M190 330v18" stroke="#5f554b" stroke-width="6"/>
+      <rect x="70" y="318" width="130" height="14" rx="3" fill="#7b6c5d"/>
+      <rect x="120" y="312" width="42" height="10" rx="2" fill="#b98a7c"/>
+    </g>
+
+    <!-- Pool fence with the gate open; pickets from a repeating pattern -->
+    <g id="fence">
+      <path d="M0 214Q172 204 344 202V274Q172 276 0 286Z" fill="url(#pickets)"/>
+      <path d="M466 202Q633 204 800 214V286Q633 276 466 274Z" fill="url(#pickets)"/>
+      <path d="M0 214Q172 204 344 202M466 202Q633 204 800 214M0 284Q172 274 344 272M466 272Q633 274 800 284" stroke="#33393c" stroke-width="5" fill="none"/>
+      <rect x="334" y="180" width="14" height="98" fill="#2c3235"/>
+      <rect x="462" y="180" width="14" height="98" fill="#2c3235"/>
+      <path d="M476 202L530 216V300L476 276Z" fill="url(#pickets)"/>
+      <path d="M476 202L530 216V300L476 276" stroke="#2c3235" stroke-width="4" fill="none"/>
+    </g>
+
+    <!-- Two people chatting near the fence -->
+    <g id="pair">
+      <g fill="#000" opacity="0.2">
+        <ellipse cx="614" cy="320" rx="24" ry="5"/>
+        <ellipse cx="662" cy="324" rx="24" ry="5"/>
+      </g>
+      <g stroke="#7a5a46" stroke-width="8" stroke-linecap="round"><path d="M594 296v22M606 296v22"/></g>
+      <rect x="588" y="280" width="24" height="18" rx="5" fill="#3d4658"/>
+      <g stroke="#7a5a46" stroke-width="8" stroke-linecap="round"><path d="M586 252l-4 32M614 252l4 32"/></g>
+      <rect x="584" y="244" width="32" height="42" rx="11" fill="#b9a479"/>
+      <circle cx="600" cy="232" r="13" fill="#7a5a46"/>
+      <path d="M587 230q0 -16 13 -16q13 0 13 16q-4 -8 -13 -8q-9 0 -13 8z" fill="#241d1b"/>
+      <g fill="#241d1b"><circle cx="596" cy="234" r="1.6"/><circle cx="604" cy="234" r="1.6"/></g>
+
+      <g stroke="#c9a98c" stroke-width="8" stroke-linecap="round"><path d="M642 300v22M654 300v22M636 256l-4 30M660 256l2 30"/></g>
+      <rect x="636" y="284" width="26" height="18" rx="5" fill="#4a4f57"/>
+      <rect x="634" y="248" width="28" height="42" rx="10" fill="#b4887c"/>
+      <rect x="652" y="248" width="8" height="34" rx="2" fill="#d8d5cc"/>
+      <circle cx="648" cy="236" r="13" fill="#c9a98c"/>
+      <path d="M635 234q0 -16 13 -16q14 0 14 14q2 10 8 16q-12 0 -14 -12q-8 -6 -21 -2z" fill="#6a5442"/>
+      <circle cx="641" cy="238" r="1.6" fill="#241d1b"/>
+    </g>
+
+    <!-- Jamie, from behind: white T-shirt, black shorts, green backpack, walking out -->
+    <g id="jamie">
+      <ellipse cx="420" cy="286" rx="30" ry="7" fill="#000" opacity="0.22"/>
+      <g stroke="#a07c62" stroke-width="10" stroke-linecap="round"><path d="M398 246l-2 26M414 246l4 34"/></g>
+      <ellipse cx="396" cy="274" rx="6" ry="4" fill="#2a2a2e"/>
+      <ellipse cx="419" cy="284" rx="7" ry="4" fill="#cfcac0"/>
+      <rect x="386" y="228" width="40" height="22" rx="6" fill="#232427"/>
+      <g stroke="#a07c62" stroke-width="9" stroke-linecap="round"><path d="M386 196l-8 38M426 196l8 32"/></g>
+      <rect x="382" y="186" width="48" height="46" rx="14" fill="#e6e4de"/>
+      <g stroke="#e6e4de" stroke-width="14" stroke-linecap="round"><path d="M388 192l-4 12M424 192l4 12"/></g>
+      <rect x="400" y="176" width="12" height="12" fill="#8f6d55"/>
+      <g fill="#386b42"><rect x="391" y="182" width="7" height="8" rx="2"/><rect x="414" y="182" width="7" height="8" rx="2"/></g>
+      <rect x="390" y="188" width="32" height="40" rx="10" fill="#4b8a56"/>
+      <rect x="408" y="190" width="14" height="36" rx="7" fill="#386b42"/>
+      <rect x="395" y="208" width="22" height="14" rx="4" fill="#417a4b"/>
+      <path d="M399 190q7 -8 14 0" stroke="#386b42" stroke-width="3" fill="none"/>
+      <g fill="#3a302b">
+        <circle cx="405" cy="168" r="16"/>
+        <circle cx="394" cy="162" r="9"/><circle cx="416" cy="162" r="9"/><circle cx="405" cy="155" r="10"/>
+      </g>
+      <g fill="#a07c62"><circle cx="388" cy="174" r="3.5"/><circle cx="422" cy="174" r="3.5"/></g>
     </g>
   </g>
-  <rect width="800" height="500" fill="url(#vig)"/>
-  <rect width="800" height="500" filter="url(#grain)" opacity="0.28" style="mix-blend-mode:overlay"/>
-  <g stroke="#ffffff" stroke-opacity="0.05"><line x1="0" y1="100" x2="800" y2="100"/><line x1="0" y1="300" x2="800" y2="300"/></g>
+
+  <!-- Camera look: dark corners, scanlines and grain -->
+  <rect width="800" height="500" fill="url(#vignette)"/>
+  <rect width="800" height="500" fill="url(#scanlines)"/>
+  <rect width="800" height="500" filter="url(#grain)" opacity="0.22" style="mix-blend-mode:overlay"/>
 </svg>

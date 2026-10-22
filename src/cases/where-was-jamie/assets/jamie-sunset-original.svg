@@ -1,33 +1,119 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" role="img" aria-label="Sunset over the water at a marina, with a Cullen Bay Marina sign and moored boats on the left">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" role="img" aria-label="Sunset over the water at a marina, with moored boats and a Cullen Bay Marina sign on the left">
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2f2a63"/><stop offset="0.55" stop-color="#e46a70"/><stop offset="1" stop-color="#ffbf6b"/>
+      <stop offset="0" stop-color="#7f8cc0"/>
+      <stop offset="0.5" stop-color="#e9a08a"/>
+      <stop offset="1" stop-color="#ffd49a"/>
     </linearGradient>
     <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#f09a6f"/><stop offset="1" stop-color="#2d3f7a"/>
+      <stop offset="0" stop-color="#f3c08f"/>
+      <stop offset="0.4" stop-color="#b49aa6"/>
+      <stop offset="1" stop-color="#2f7395"/>
     </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff1c9"/>
+      <stop offset="1" stop-color="#fff1c9" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <rect width="1000" height="750" fill="url(#sky)"/>
-  <circle cx="640" cy="430" r="70" fill="#ffd47a"/>
-  <rect y="430" width="1000" height="320" fill="url(#sea)"/>
-  <g stroke="#ffe0a8" stroke-width="5" opacity="0.6">
-    <line x1="590" y1="455" x2="690" y2="455"/><line x1="605" y1="480" x2="675" y2="480"/><line x1="620" y1="505" x2="660" y2="505"/>
+
+  <!-- NOTE: the posted copy (jamie-sunset-cropped.svg) shows only x 440-1000, y 230-650 of this
+       drawing. Keep everything that identifies the place (sign, boats, masts, buildings, land)
+       left of x 390. -->
+
+  <!-- Dry-season sky with a few thin clouds -->
+  <rect width="1000" height="420" fill="url(#sky)"/>
+  <g id="clouds">
+    <g fill="#e8a99a">
+      <rect x="500" y="244" width="200" height="8" rx="4"/>
+      <rect x="780" y="300" width="170" height="8" rx="4"/>
+      <rect x="60" y="150" width="220" height="8" rx="4"/>
+    </g>
+    <g fill="#ffd9a8">
+      <rect x="560" y="256" width="140" height="6" rx="3"/>
+      <rect x="820" y="312" width="100" height="6" rx="3"/>
+      <rect x="120" y="162" width="140" height="6" rx="3"/>
+    </g>
   </g>
-  <!-- marina on the left: boats, masts, pontoon -->
-  <g fill="#1d1a33">
-    <path d="M20 470 h190 l-26 34 h-140z"/><path d="M60 520 h150 l-20 28 h-112z"/>
-    <rect x="110" y="250" width="5" height="222"/><rect x="150" y="300" width="4" height="222"/>
-    <path d="M115 260 l70 200 h-70z" opacity="0.6"/>
-    <rect x="0" y="560" width="330" height="18"/>
-    <rect x="40" y="560" width="10" height="190"/><rect x="200" y="560" width="10" height="190"/>
+
+  <!-- The sun, just touching the horizon over the open water -->
+  <circle cx="700" cy="400" r="230" fill="url(#glow)" opacity="0.9"/>
+  <circle cx="700" cy="398" r="44" fill="#ffe2a0"/>
+
+  <!-- Low far shore, only on the left -->
+  <path d="M0 404Q90 392 190 396Q290 400 380 414L384 420H0Z" fill="#9a7f94"/>
+
+  <!-- Calm sea -->
+  <rect y="420" width="1000" height="330" fill="url(#sea)"/>
+  <g id="sun-path" stroke="#ffe2a0" stroke-linecap="round" opacity="0.85">
+    <path d="M652 432h96M668 446h64M640 460h50M712 460h40M676 476h48" stroke-width="5"/>
+    <path d="M650 494h34M698 494h50M684 514h36M660 536h26M708 536h32M690 560h24" stroke-width="4"/>
+    <path d="M672 588h18M704 588h22M692 620h16" stroke-width="3"/>
   </g>
-  <!-- marina sign -->
-  <g transform="translate(220 360)">
-    <rect x="0" y="0" width="200" height="66" rx="6" fill="#f4f1e8"/>
-    <rect x="96" y="66" width="8" height="140" fill="#1d1a33"/>
-    <text x="100" y="28" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="20" fill="#1d3f6e">CULLEN BAY</text>
-    <text x="100" y="52" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="16" fill="#1d3f6e">MARINA</text>
+  <path d="M470 450h60M820 444h80M880 470h70M500 490h50M840 510h90M520 560h70M860 580h60M560 620h50M900 640h60" stroke="#f6d3b0" stroke-width="3" stroke-linecap="round" opacity="0.45"/>
+
+  <!-- A few birds heading home -->
+  <g stroke="#4b3f5e" stroke-linecap="round" fill="none">
+    <path d="M560 300q8 -8 16 0q8 -8 16 0" stroke-width="3"/>
+    <path d="M612 280q6 -6 12 0q6 -6 12 0" stroke-width="2.5"/>
+    <path d="M590 322q5 -5 10 0q5 -5 10 0" stroke-width="2"/>
   </g>
-  <!-- far shore -->
-  <path d="M430 432 q120 -10 240 -4 q160 -8 330 -2 v8 h-570z" fill="#3a2747" opacity="0.8"/>
+
+  <!-- Everything below is the marina on the left (x < 390) -->
+  <g id="marina-buildings">
+    <rect y="376" width="70" height="54" fill="#efe1d4"/>
+    <rect x="70" y="392" width="90" height="38" fill="#ddcbbd"/>
+    <path d="M-4 378h78l-6 -8h-66z" fill="#c9b3a6"/>
+    <g fill="#ffd58a">
+      <path d="M10 388h14v8h-14zM34 388h14v8h-14zM10 404h14v8h-14zM34 404h14v8h-14z"/>
+      <path d="M82 402h16v8h-16zM108 402h16v8h-16zM134 402h16v8h-16z"/>
+    </g>
+  </g>
+
+  <g id="breakwall">
+    <path d="M0 428L330 434Q376 436 376 446L0 446Z" fill="#b9a08c"/>
+    <path d="M0 428L330 434" stroke="#d8c2ab" stroke-width="3"/>
+  </g>
+
+  <g id="boats">
+    <path d="M46 210V446" stroke="#6d6466" stroke-width="3"/>
+    <path d="M0 446h96l-12 18h-84z" fill="#e7ddd2"/>
+
+    <g stroke="#6d6466" fill="none">
+      <path d="M100 140V462M252 110V500" stroke-width="4"/>
+      <path d="M100 140L22 462M100 140L186 462M252 110L152 500M252 110L356 500" stroke-width="1.5" opacity="0.7"/>
+      <path d="M100 432L160 436M252 470L330 474" stroke-width="4"/>
+    </g>
+    <path d="M252 110l18 6l-18 6z" fill="#e27a5f"/>
+    <circle cx="100" cy="140" r="3" fill="#fff1c9"/>
+
+    <path d="M102 426L158 432V438L102 434Z" fill="#f3ece4"/>
+    <path d="M20 462h170l-18 26h-134z" fill="#f3ece4"/>
+    <path d="M31 478H179L172 488H38Z" fill="#d8cdc2"/>
+    <rect x="64" y="446" width="70" height="16" rx="5" fill="#e3d8cc"/>
+    <rect x="72" y="451" width="54" height="5" fill="#8aa7bd"/>
+
+    <path d="M254 464L328 470V476L254 472Z" fill="#f6f0e8"/>
+    <path d="M150 500h210l-22 30h-166z" fill="#f6f0e8"/>
+    <path d="M163 518H347L338 530H172Z" fill="#d8cdc2"/>
+    <rect x="206" y="482" width="90" height="18" rx="6" fill="#e3d8cc"/>
+    <rect x="216" y="488" width="70" height="6" fill="#8aa7bd"/>
+  </g>
+  <path d="M40 498h40M96 498h50M50 508h30M110 508h36M240 456h50M300 470h60" stroke="#f3ece4" stroke-width="4" stroke-linecap="round" opacity="0.35"/>
+
+  <!-- Jetty in the foreground with the marina sign -->
+  <g id="jetty">
+    <path d="M0 636L372 668V750H0Z" fill="#c9a585"/>
+    <path d="M372 668L386 672V750H372Z" fill="#8f6d55"/>
+    <path d="M60 641L40 750M130 647L110 750M200 653L184 750M270 659L256 750M340 665L330 750" stroke="#a8876b" stroke-width="3"/>
+    <path d="M0 636L372 668" stroke="#e2c3a2" stroke-width="4"/>
+  </g>
+  <g id="sign">
+    <rect x="74" y="630" width="12" height="60" fill="#5b4a40"/>
+    <rect x="264" y="630" width="12" height="74" fill="#5b4a40"/>
+    <rect x="30" y="540" width="300" height="100" rx="8" fill="#24324f"/>
+    <rect x="30" y="540" width="300" height="92" rx="8" fill="#2d3e66"/>
+    <rect x="38" y="548" width="284" height="76" rx="5" fill="none" stroke="#f6f4ef" stroke-width="3"/>
+    <text x="180" y="588" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="40" fill="#f6f4ef">Cullen Bay</text>
+    <text x="180" y="618" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="24" fill="#f6f4ef" letter-spacing="4">MARINA</text>
+  </g>
 </svg>

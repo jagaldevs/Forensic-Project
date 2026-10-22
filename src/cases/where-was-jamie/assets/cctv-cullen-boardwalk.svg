@@ -1,51 +1,144 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="CCTV still of a marina boardwalk at dusk">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="CCTV still at dusk: a teenager with a green backpack holds up a phone by the marina boardwalk railing">
   <defs>
-    <filter id="mono">
-      <feColorMatrix type="saturate" values="0.45"/>
-    </filter>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#454c66"/>
+      <stop offset="0.7" stop-color="#8b7a82"/>
+      <stop offset="1" stop-color="#c49d86"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6c6f80"/>
+      <stop offset="1" stop-color="#343e4c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffd58a" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#ffd58a" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="scanlines" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="1" fill="#000" opacity="0.14"/>
+    </pattern>
+    <filter id="soft"><feGaussianBlur stdDeviation="0.9"/></filter>
     <filter id="grain" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="5"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="5"/>
       <feColorMatrix type="saturate" values="0"/>
     </filter>
-    <filter id="blur"><feGaussianBlur stdDeviation="1.8"/></filter>
-    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#3d3f5c"/><stop offset="1" stop-color="#c98a6a"/>
-    </linearGradient>
-    <radialGradient id="vig" cx="0.5" cy="0.5" r="0.75">
-      <stop offset="0.6" stop-color="#000" stop-opacity="0"/>
+    <radialGradient id="vignette" cx="0.5" cy="0.5" r="0.72">
+      <stop offset="0.5" stop-color="#000" stop-opacity="0"/>
       <stop offset="1" stop-color="#000" stop-opacity="0.7"/>
     </radialGradient>
   </defs>
-  <g filter="url(#mono)">
-    <rect width="800" height="210" fill="url(#sky)"/>
-    <rect y="210" width="800" height="120" fill="#4d5b6e"/>
-    <!-- moored boats with masts -->
-    <g fill="#d9d6cf">
-      <path d="M60 250 h140 l-20 26 h-100z"/><path d="M260 246 h120 l-16 24 h-88z"/><path d="M450 252 h150 l-22 26 h-108z"/>
+
+  <rect width="800" height="500" fill="#4a4a52"/>
+
+  <!-- High-angle camera on the Cullen Bay boardwalk, just after sunset -->
+  <g id="scene" filter="url(#soft)">
+    <!-- Afterglow sky and the far shore -->
+    <rect width="800" height="156" fill="url(#sky)"/>
+    <path d="M0 146Q200 138 420 144Q620 136 800 142V158H0Z" fill="#3a3c4e"/>
+    <g fill="#ffd58a"><circle cx="90" cy="148" r="1.6"/><circle cx="300" cy="146" r="1.6"/><circle cx="470" cy="146" r="1.6"/><circle cx="640" cy="142" r="1.6"/></g>
+
+    <!-- Marina water with the last of the sky reflected in it -->
+    <rect y="156" width="800" height="170" fill="url(#water)"/>
+    <path d="M80 170h60M220 178h80M410 168h50M600 176h70M720 186h40" stroke="#b99582" stroke-width="2" opacity="0.6"/>
+
+    <!-- Moored boats: masts against the sky, cabin lights on -->
+    <g id="boats">
+      <g stroke="#2b2d33" fill="none">
+        <path d="M120 40V212M552 18V206M756 56V214" stroke-width="3"/>
+        <path d="M120 186L186 190M552 180L620 184" stroke-width="3"/>
+        <path d="M120 40L32 212M120 40L208 212M552 18L462 206M552 18L638 206M756 56L690 214" stroke-width="1.2" opacity="0.7"/>
+      </g>
+      <path d="M30 212h180l-20 30h-140z" fill="#bdbab4"/>
+      <path d="M42 230H198L190 242H50Z" fill="#9d9a95"/>
+      <rect x="80" y="198" width="76" height="14" rx="5" fill="#a9a6a0"/>
+      <rect x="88" y="202" width="60" height="5" fill="#ffd58a"/>
+
+      <path d="M226 222h112l-12 24h-90z" fill="#c4c1bb"/>
+      <rect x="246" y="202" width="70" height="20" rx="6" fill="#b0ada7"/>
+      <rect x="262" y="192" width="40" height="10" rx="3" fill="#a09d97"/>
+      <rect x="252" y="208" width="58" height="6" fill="#ffd58a"/>
+
+      <path d="M460 206h180l-20 28h-140z" fill="#bdbab4"/>
+      <path d="M471 222H629L620 234H480Z" fill="#9d9a95"/>
+      <rect x="506" y="192" width="76" height="14" rx="5" fill="#a9a6a0"/>
+      <rect x="514" y="196" width="60" height="5" fill="#ffd58a"/>
+
+      <path d="M688 214H800V242H708Z" fill="#bdbab4"/>
+      <path d="M699 230H800V242H708Z" fill="#9d9a95"/>
+
+      <g fill="#ffd58a"><circle cx="120" cy="40" r="3"/><circle cx="552" cy="18" r="3"/><circle cx="756" cy="56" r="3"/></g>
     </g>
-    <g stroke="#2a2c33" stroke-width="3">
-      <line x1="130" y1="250" x2="130" y2="110"/><line x1="320" y1="246" x2="320" y2="90"/><line x1="525" y1="252" x2="525" y2="120"/>
-      <line x1="660" y1="248" x2="660" y2="130"/>
+    <g stroke-width="3" stroke-linecap="round" opacity="0.5">
+      <path d="M50 252h130M70 260h90M480 246h130M500 254h90" stroke="#8d93a0"/>
+      <path d="M256 254h50M266 262h30" stroke="#ffd58a"/>
     </g>
-    <!-- boardwalk -->
-    <polygon points="0,330 800,300 800,500 0,500" fill="#8a6f55"/>
-    <g stroke="#6f5845" stroke-width="3">
-      <line x1="0" y1="370" x2="800" y2="345"/><line x1="0" y1="420" x2="800" y2="400"/><line x1="0" y1="470" x2="800" y2="455"/>
+
+    <!-- Boardwalk deck (curved edge: wide-angle lens) -->
+    <path d="M0 324Q400 308 800 324V500H0Z" fill="#7e705f"/>
+    <path d="M36 323L-120 500M120 320L0 500M204 318L120 500M288 317L240 500M372 316L360 500M456 316L480 500M540 317L600 500M624 319L720 500M708 321L840 500" stroke="#6c604f" stroke-width="3"/>
+    <path d="M0 324Q400 308 800 324" stroke="#9a8a76" stroke-width="4" fill="none"/>
+
+    <!-- Warm pools of lamplight on the deck -->
+    <g fill="#ffd58a" opacity="0.16">
+      <ellipse cx="690" cy="380" rx="120" ry="28"/>
+      <ellipse cx="110" cy="384" rx="110" ry="26"/>
     </g>
-    <g fill="#2a2c33"><rect x="0" y="318" width="800" height="6"/><rect x="100" y="300" width="6" height="30"/><rect x="300" y="294" width="6" height="30"/><rect x="500" y="288" width="6" height="30"/><rect x="700" y="282" width="6" height="30"/></g>
-    <!-- lamp -->
-    <rect x="740" y="170" width="6" height="140" fill="#2a2c33"/><circle cx="743" cy="168" r="10" fill="#f1e6c6"/>
-    <!-- figure with backpack, side-on, blurred -->
-    <g filter="url(#blur)">
-      <ellipse cx="300" cy="455" rx="30" ry="7" fill="#000" opacity="0.3"/>
-      <circle cx="300" cy="340" r="16" fill="#3a2e28"/>
-      <path d="M282 360 q18 -8 36 0 l4 58 q-22 6 -44 0z" fill="#d8d3c8"/>
-      <rect x="312" y="360" width="20" height="40" rx="7" fill="#4f7d4c"/>
-      <rect x="284" y="414" width="14" height="38" fill="#26262a"/><rect x="302" y="414" width="14" height="38" fill="#26262a"/>
-      <!-- phone held up -->
-      <rect x="268" y="344" width="10" height="16" rx="2" fill="#111"/>
+
+    <!-- Railing along the water -->
+    <g id="railing">
+      <path d="M0 284Q400 268 800 284" stroke="#24262b" stroke-width="5" fill="none"/>
+      <path d="M0 302Q400 286 800 302" stroke="#24262b" stroke-width="3" fill="none"/>
+      <g fill="#24262b">
+        <rect x="37" y="280" width="6" height="44"/><rect x="137" y="277" width="6" height="44"/>
+        <rect x="237" y="275" width="6" height="44"/><rect x="337" y="274" width="6" height="44"/>
+        <rect x="437" y="274" width="6" height="44"/><rect x="537" y="275" width="6" height="44"/>
+        <rect x="637" y="277" width="6" height="44"/><rect x="737" y="280" width="6" height="44"/>
+      </g>
+      <circle cx="590" cy="298" r="11" fill="none" stroke="#c98a6a" stroke-width="6"/>
+    </g>
+
+    <!-- Lamp posts -->
+    <g id="lamps">
+      <rect x="687" y="150" width="6" height="172" fill="#24262b"/>
+      <rect x="107" y="166" width="6" height="158" fill="#24262b"/>
+      <circle cx="690" cy="156" r="70" fill="url(#glow)"/>
+      <circle cx="110" cy="172" r="64" fill="url(#glow)"/>
+      <rect x="678" y="140" width="24" height="12" rx="4" fill="#24262b"/>
+      <rect x="98" y="156" width="24" height="12" rx="4" fill="#24262b"/>
+      <ellipse cx="690" cy="155" rx="9" ry="5" fill="#ffe6b0"/>
+      <ellipse cx="110" cy="171" rx="9" ry="5" fill="#ffe6b0"/>
+    </g>
+
+    <!-- Jamie, from behind: white T-shirt, black shorts, green backpack, phone held up -->
+    <g id="jamie">
+      <ellipse cx="368" cy="374" rx="28" ry="6" fill="#000" opacity="0.28"/>
+      <g stroke="#9c7458" stroke-width="10" stroke-linecap="round"><path d="M352 336l-1 32M368 336l1 32"/></g>
+      <g fill="#2a2a2e"><ellipse cx="351" cy="370" rx="7" ry="4"/><ellipse cx="369" cy="370" rx="7" ry="4"/></g>
+      <rect x="342" y="314" width="36" height="24" rx="6" fill="#212226"/>
+      <g stroke="#9c7458" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <path d="M342 272L334 246L351 224"/>
+        <path d="M378 272L388 246L370 224"/>
+      </g>
+      <rect x="338" y="268" width="44" height="52" rx="14" fill="#dcd9d2"/>
+      <g stroke="#dcd9d2" stroke-width="14" stroke-linecap="round"><path d="M344 274l-4 -12M376 274l4 -12"/></g>
+      <rect x="354" y="258" width="12" height="12" fill="#86664f"/>
+      <g fill="#366640"><rect x="345" y="266" width="7" height="8" rx="2"/><rect x="368" y="266" width="7" height="8" rx="2"/></g>
+      <rect x="344" y="272" width="32" height="42" rx="10" fill="#4a8653"/>
+      <rect x="362" y="274" width="14" height="38" rx="7" fill="#366640"/>
+      <rect x="350" y="294" width="20" height="14" rx="4" fill="#3f774a"/>
+      <path d="M354 274q6 -7 12 0" stroke="#366640" stroke-width="3" fill="none"/>
+      <g fill="#3a302b">
+        <circle cx="360" cy="248" r="17"/>
+        <circle cx="348" cy="242" r="9"/><circle cx="372" cy="242" r="9"/><circle cx="360" cy="235" r="10"/>
+      </g>
+      <g fill="#9c7458"><circle cx="342" cy="254" r="3.5"/><circle cx="378" cy="254" r="3.5"/></g>
+      <rect x="350" y="196" width="22" height="30" rx="4" fill="#1c1e22"/>
+      <rect x="353" y="199" width="16" height="24" rx="2" fill="#e8c79e"/>
+      <g fill="#9c7458"><circle cx="351" cy="222" r="5.5"/><circle cx="371" cy="222" r="5.5"/></g>
     </g>
   </g>
-  <rect width="800" height="500" fill="url(#vig)"/>
-  <rect width="800" height="500" filter="url(#grain)" opacity="0.3" style="mix-blend-mode:overlay"/>
+
+  <!-- Camera look: dark corners, scanlines and grain -->
+  <rect width="800" height="500" fill="url(#vignette)"/>
+  <rect width="800" height="500" fill="url(#scanlines)"/>
+  <rect width="800" height="500" filter="url(#grain)" opacity="0.26" style="mix-blend-mode:overlay"/>
 </svg>
