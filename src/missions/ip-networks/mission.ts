@@ -2,6 +2,7 @@
  * Mission 4: IP Addresses & Networks. The Quinn household is fictional; the IP comes from the
  * 198.51.100.0/24 documentation range and the MACs are locally administered.
  */
+import { darwinLatLon as ll } from '../../engine/geo/darwin';
 import { defineMission } from '../../engine/missionTypes';
 import { meta } from './meta';
 
@@ -85,14 +86,14 @@ So the rest of the internet sees the household connection, not the individual de
         {
           kind: 'map',
           description:
-            'Map of the Darwin region. A 20 km circle centred on Darwin City covers the city, Nightcliff, Casuarina, the airport and Berrimah.',
-          circle: { centre: { x: 18.6, y: 27.4 }, radiusKm: 20, label: 'Darwin (regional hub)' },
+            'Map of the Darwin region. A 20 km circle centred on Darwin City covers the whole city, the northern suburbs including Nightcliff and Casuarina, the airport, Berrimah and Palmerston.',
+          circle: { centre: ll(-12.4634, 130.8418), radiusKm: 20, label: 'Darwin (regional hub)' },
           markers: [
             {
               id: 'quinn-home',
               label: 'Quinn home, Nightcliff',
               kind: 'home',
-              at: { x: 15.9, y: 13.8 },
+              at: ll(-12.383, 130.847),
             },
           ],
         },
@@ -117,7 +118,7 @@ So the rest of the internet sees the household connection, not the individual de
       ],
       correct: ['circle'],
       explanation:
-        'Lookup sites guess a location from where the internet provider registers its addresses, often a regional hub. The pin is just the centre of the guess; the accuracy circle shows everywhere the connection could be. Here the real home is 15 km from the pin.',
+        'Lookup sites guess a location from where the internet provider registers its addresses, often a regional hub. The pin is just the centre of the guess; the accuracy circle shows everywhere the connection could be. Here the real home is about 9 km from the pin.',
     },
     {
       id: 'ip-can-show',

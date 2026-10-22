@@ -4,6 +4,7 @@
  */
 import { local } from '../../brand/local';
 import { defineCase } from '../../engine/defineCase';
+import { darwinLatLon as ll } from '../../engine/geo/darwin';
 import { meta } from './meta';
 import photoGaming from './assets/photo-gaming-setup.svg';
 import photoFoyer from './assets/photo-foyer-witness.svg';
@@ -121,8 +122,14 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
   ],
 
   mapMarkers: [
-    { id: 'scene', label: 'Convention centre (scene)', kind: 'scene', at: { x: 20.1, y: 29.0 } },
-    { id: 'okafor-home', label: 'Okafor home', kind: 'home', at: { x: 35.9, y: 35.1 } },
+    {
+      id: 'scene',
+      label: 'Convention centre (scene)',
+      kind: 'scene',
+      at: ll(-12.4688, 130.8468),
+    },
+    // A fictional home in Palmerston.
+    { id: 'okafor-home', label: 'Okafor home', kind: 'home', at: ll(-12.487, 130.982) },
   ],
 
   evidence: [
@@ -159,10 +166,10 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
       network: 'TopNet Home Fibre: Top End residential pool',
       locationLabel: 'Darwin (regional hub)',
       accuracyRadiusKm: 25,
-      centre: { x: 18.6, y: 27.4 },
+      centre: ll(-12.4634, 130.8418),
       note: 'Geolocation databases estimate a location from where an internet provider registers or routes a block of addresses, often a regional hub. They do not know where a device actually is. TopNet routes home connections across the Top End through its Darwin City hub.',
       teacherNote:
-        'The pin lands in Darwin City, which is why it looks damning. The 25 km radius covers the Waterfront AND Palmerston (and most of the region), so the lookup cannot separate the two.',
+        'The pin lands in Darwin City, which is why it looks damning. The 25 km radius covers the Waterfront AND Palmerston (in fact everything on the map except Humpty Doo), so the lookup cannot separate the two.',
       guided:
         'An ISP (internet service provider) is the company that connects a home or business to the internet. The location here is an estimate from a database, based on where the ISP registers or routes its addresses. It is not a GPS reading of the device. The accuracy radius means the real connection could be anywhere inside a circle that size around the pin.',
     },
@@ -465,7 +472,7 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
         'An IP lookup cannot pinpoint a device because …',
       ],
       modelAnswer:
-        'The circle is centred on Darwin City and takes in the Waterfront, Cullen Bay, Mindil Beach, Parap, Fannie Bay, Nightcliff, Casuarina, the Airport, Winnellie, Berrimah, East Arm and Palmerston (Howard Springs sits right on the edge). The scene and the Okafor home are only about 17 km apart in a straight line, so both sit well inside the same circle. The lookup estimates where TopNet registers or routes the address (its Darwin City hub), not where the device is, so it cannot separate any two places inside the circle.',
+        'The circle is centred on Darwin City and takes in the whole city and the Waterfront, the northern suburbs (Fannie Bay, Parap, Nightcliff, Casuarina, Lee Point), the Airport, Winnellie, Berrimah, East Arm, Mandorah across the harbour, Palmerston and Howard Springs (near the edge). Only Humpty Doo is outside. The scene and the Okafor home are only about 15 km apart in a straight line, so both sit well inside the same circle. The lookup estimates where TopNet registers or routes the address (its Darwin City hub), not where the device is, so it cannot separate any two places inside the circle.',
     },
     {
       id: 'ext-router-sessions',

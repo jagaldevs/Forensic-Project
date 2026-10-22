@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { places, viewAround } from '../../engine/geo/cityMap';
+import { darwin } from '../../engine/geo/darwin';
+import { viewAround } from '../../engine/geo/region';
 import { travelEstimate, travelModes, type TravelMode } from '../../engine/geo/travel';
 import type { MapPoint } from '../../engine/types';
 import { Button } from '../../ui/Button';
@@ -21,7 +22,7 @@ export default function MapApp() {
   const { c } = useCaseState();
   const spots: Spot[] = [
     ...c.mapMarkers.map((m, i) => ({ id: m.id, label: `${i + 1}. ${m.label}`, at: m.at })),
-    ...places.map((p) => ({ id: p.id, label: p.name, at: p.at })),
+    ...darwin.places.map((p) => ({ id: p.id, label: p.name, at: p.at })),
   ];
   const [from, setFrom] = useState(spots[0]?.id ?? '');
   const [to, setTo] = useState(spots[1]?.id ?? '');
@@ -49,7 +50,7 @@ export default function MapApp() {
         <CityMap
           view={
             zoomed
-              ? viewAround([
+              ? viewAround(darwin, [
                   ...c.mapMarkers.map((m) => m.at),
                   ...(a ? [a.at] : []),
                   ...(b ? [b.at] : []),

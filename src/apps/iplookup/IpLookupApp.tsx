@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { releasedEvidence, usableEvidence } from '../../engine/availability';
-import { distanceKm, placesWithin } from '../../engine/geo/cityMap';
+import { darwin } from '../../engine/geo/darwin';
+import { distanceKm, placesWithin } from '../../engine/geo/region';
 import type { EvidenceOfType } from '../../engine/types';
 import { useDesktop } from '../../stores/desktopStore';
 import { useProgress } from '../../stores/progressStore';
@@ -125,7 +126,7 @@ function IpResult({
   record: IpRecord;
   markers: ReturnType<typeof useCaseState>['c']['mapMarkers'];
 }) {
-  const inside = placesWithin(record.centre, record.accuracyRadiusKm);
+  const inside = placesWithin(darwin, record.centre, record.accuracyRadiusKm);
   const markersInside = markers.filter(
     (m) => distanceKm(m.at, record.centre) <= record.accuracyRadiusKm,
   );

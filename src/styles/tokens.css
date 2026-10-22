@@ -100,6 +100,10 @@
   --map-label: #2f343a;
   --map-sea-label: #355a7a;
   --map-radius-fill: rgb(181 0 106 / 12%);
+  --map-park: #e1ead6;
+  --map-park-edge: #c7d6b6;
+  --map-river: #a9c6dc;
+  --map-runway: #c9ccc2;
 
   /* Focus: a clear blue ring, the convention in professional software */
   --focus-ring: #0b57d0;

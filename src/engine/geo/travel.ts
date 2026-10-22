@@ -4,7 +4,7 @@
  * range of typical speeds, plus waiting time for buses.
  */
 import type { MapPoint } from '../types';
-import { distanceKm } from './cityMap';
+import { distanceKm } from './region';
 
 export type TravelMode = 'walk' | 'cycle' | 'bus' | 'car';
 

@@ -38,10 +38,16 @@ A running list for the end-of-project review. Newest additions at the bottom of 
 - [x] **Assessment Guided note on the Cloud Drive file**: softened. It still explains created,
       modified, versions and the zone label, but no longer says to check the zone "before
       comparing it with other evidence".
-- [x] **Where was Jamie?, Q3:** the 19:34 tower sector now covers Parap and about 4 km of the main
-      road back towards the city, and the model answers say Jamie was roughly halfway there.
-      Times are unchanged (moving 19:34 would clash with the 19:31 message that was sent but not
-      delivered).
+- [x] **Where was Jamie?, Q3:** the 19:34 tower sector covers Parap and about 2 km of the main
+      road back towards the city. On the true-scale map (Phase 7) the bus trip is about 4 km, so
+      the model answers say Jamie was most of the way there. Times are unchanged (moving 19:34
+      would clash with the 19:31 message that was sent but not delivered).
+- [ ] **True-scale Darwin map (Phase 7).** The old map stretched the north about twice too far,
+      so distances changed: Cullen Bay to Mindil is now a 16 to 20 minute walk (was 56 to 68),
+      the Waterfront to the Okafor home is about 15 km (was 17), and the IP mission's home is
+      about 9 km from the pin (was 15). Every answer still holds; the numbers they quote are
+      pinned by `src/engine/geo/darwin.test.ts`. Glance at the map to check it looks right to a
+      local.
 - [ ] **Assessment Q2 without headers.** The fake email can now be spotted from what any reader
       sees: Reply to (now shown in the normal Email view) goes to a free QuickPost address, it
       asks Team 4 to reply directly, and it went to Team 4 only, against the fair rules. SPF,

@@ -12,13 +12,14 @@
  *  19:20 Jamie posts a CROPPED sunset photo; Mia (not in the group chat) comments "mindil??".
  *  19:24 Bus card taps on at Cullen Bay, Route 4 towards Parap.
  *  19:34 Phone's last network connection, to a tower sector that reaches from Parap back along
- *        the bus route (Jamie is roughly halfway there). Battery dies.
+ *        the bus route (Jamie is most of the way there). Battery dies.
  *  20:05 Parent's messages are no longer delivered.
  *  20:45 Casey reports Jamie missing. The search goes to Mindil Beach.
  *  21:40 Jamie found safe at Sasha's home in Parap.
  */
 import { local } from '../../brand/local';
 import { defineCase } from '../../engine/defineCase';
+import { darwinLatLon as ll } from '../../engine/geo/darwin';
 import { meta } from './meta';
 import cctvLagoon from './assets/cctv-lagoon-gate.svg';
 import cctvCullen from './assets/cctv-cullen-boardwalk.svg';
@@ -147,26 +148,27 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
       id: 'lagoon',
       label: 'Wave Lagoon gate, Waterfront',
       kind: 'place',
-      at: { x: 19.3, y: 29.0 },
+      at: ll(-12.4668, 130.8442),
     },
     {
       id: 'cullen-boardwalk',
       label: 'Cullen Bay marina boardwalk',
       kind: 'place',
-      at: { x: 17.5, y: 27.2 },
+      at: ll(-12.4515, 130.825),
     },
     {
       id: 'mindil',
       label: 'Mindil Beach (where the search went)',
       kind: 'scene',
-      at: { x: 15.5, y: 23.8 },
+      at: ll(-12.444, 130.832),
     },
-    { id: 'sasha-home', label: "Sasha's home, Parap", kind: 'home', at: { x: 18.0, y: 21.7 } },
+    // Fictional homes.
+    { id: 'sasha-home', label: "Sasha's home, Parap", kind: 'home', at: ll(-12.432, 130.846) },
     {
       id: 'ellison-home',
       label: 'Ellison home, Nightcliff',
       kind: 'home',
-      at: { x: 15.9, y: 13.7 },
+      at: ll(-12.384, 130.852),
     },
   ],
 
@@ -414,7 +416,7 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
         { label: 'OffsetTimeOriginal', value: '+09:30' },
         { label: 'Make', value: 'Nimbus' },
         { label: 'Model', value: 'Nimbus N6' },
-        { label: 'GPS', value: '12° 27′ 05″ S, 130° 49′ 22″ E (Cullen Bay)' },
+        { label: 'GPS', value: '12° 27′ 05″ S, 130° 49′ 30″ E (Cullen Bay)' },
         { label: 'Software', value: 'Nimbus Camera 5.0' },
       ],
       timeline: [
@@ -550,7 +552,7 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
       app: 'locker',
       title: 'Phone network records',
       summary:
-        'Jamie’s phone last connected at 7:34 pm to a tower sector that covers Parap and several kilometres of the main road towards the city. Nothing after that.',
+        'Jamie’s phone last connected at 7:34 pm to a tower sector that covers Parap and a couple of kilometres of the main road towards the city. Nothing after that.',
       source: 'Mobile network provider (obtained under warrant)',
       lockedBy: 'warrant',
       fields: [
@@ -558,7 +560,7 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
         { label: 'Last connection', value: '7:34 pm, sector PARAP-N2' },
         {
           label: 'Sector coverage',
-          value: 'Parap shops and about 4 km of the main road back towards the city',
+          value: 'Parap shops and about 2 km of the main road back towards the city',
           note: 'Like IP geolocation, a tower sector is an area, not an exact spot.',
         },
         { label: 'After 7:34 pm', value: 'No further connections (phone switched off or flat)' },
@@ -572,7 +574,7 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
       guided:
         'Phones connect to nearby mobile towers, and each tower’s coverage is split into sectors (slices pointing in different directions). The record shows which sector the phone used and when, which places the phone somewhere in that area, not at an exact address. A phone that is switched off or flat stops connecting.',
       teacherNote:
-        'Puts the phone somewhere in the Parap sector at 19:34. Ten minutes after the 19:24 tap-on, a bus has covered roughly half of the 7 km trip, which is inside the sector (it reaches back along the main road). Consistent with the bus; the search should have started in Parap.',
+        'Puts the phone somewhere in the Parap sector at 19:34. Ten minutes after the 19:24 tap-on, a bus has covered most of the 4 km trip, which is inside the sector (it reaches back along the main road). Consistent with the bus; the search should have started in Parap.',
     },
     {
       id: 'friends-messages',
@@ -677,7 +679,7 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
         'Start from the last place and time you can put Jamie. Then think about how Jamie could travel to Parap and roughly how long it might take.',
       hints: {
         correct:
-          'Good reasoning. Jamie’s card tapped onto a bus towards Parap at 7:24 pm, and the Map’s estimate for that bus trip is roughly 20 to 40 minutes, so arriving by about 8 pm fits. Jamie had also arranged it with Sasha. Remember the tap shows the card was used, not who used it.',
+          'Good reasoning. Jamie’s card tapped onto a bus towards Parap at 7:24 pm, and the Map’s estimate for that bus trip is roughly 15 to 30 minutes including waiting at the stop, so arriving well before 8 pm fits. Jamie had also arranged it with Sasha. Remember the tap shows the card was used, not who used it.',
         verdict:
           'Use the Map’s travel-time calculator. Is there a record of Jamie leaving Cullen Bay, and of where Jamie was heading?',
         byVerdict: {
@@ -696,7 +698,7 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
         },
       },
       modelAnswer:
-        'Possible, even likely. Jamie asked Sasha at 7:12 pm and Sasha agreed. Jamie’s bus card tapped on at Cullen Bay at 7:24 pm on a route towards Parap, and a bus trip of roughly 20 to 40 minutes would arrive around 7:45 to 8:05 pm. At 7:34 pm the phone last connected to a tower sector that covers Parap and the main road leading to it, which fits Jamie being on the bus, roughly halfway there. But the card and phone show devices, not Jamie, and there is no record of where Jamie got off.',
+        'Possible, even likely. Jamie asked Sasha at 7:12 pm and Sasha agreed. Jamie’s bus card tapped on at Cullen Bay at 7:24 pm on a route towards Parap, and the Map estimates the bus trip at roughly 15 to 30 minutes including waiting, so Jamie, already on board, could arrive by about 7:40 to 7:55 pm. At 7:34 pm the phone last connected to a tower sector that covers Parap and the main road leading to it, which fits Jamie being on the bus, most of the way there. But the card and phone show devices, not Jamie, and there is no record of where Jamie got off.',
       limitationExamples: [
         'The bus tap shows the card was used, not who used it.',
         'There is no tap-off, so we don’t know where the passenger got off.',
@@ -783,7 +785,7 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
         'A step is possible if the time available is at least the fastest estimate. Remember the estimates are rough.',
       ],
       modelAnswer:
-        'Lagoon gate to the Cullen Bay boardwalk is about 3.3 km by road, an estimated 36 to 44 minutes on foot; Jamie left the gate at 18:05 and took the sunset photo at Cullen Bay at 18:52 (47 minutes), so it fits. The boardwalk CCTV (about 19:02 once corrected) and the bus tap-on at Cullen Bay (19:24) are in the same area. Cullen Bay to Mindil Beach is an estimated 56 to 68 minutes each way on foot, but only 32 minutes passed between the photo and the tap-on, so a walk to Mindil and back was not possible (and Mindil is even further from the lagoon, about 91 minutes or more on foot). The estimates are approximate and only test whether a route is possible, not that it happened.',
+        'Lagoon gate to the Cullen Bay boardwalk is about 3.5 km by road, an estimated 38 to 46 minutes on foot; Jamie left the gate at 18:05 and took the sunset photo at Cullen Bay at 18:52 (47 minutes), so it fits, but only just: Jamie went fairly directly. The boardwalk CCTV (about 19:02 once corrected) and the bus tap-on at Cullen Bay (19:24) are in the same area. Cullen Bay to Mindil Beach is an estimated 16 to 20 minutes each way on foot, so a round trip takes at least 32 minutes. Only 10 minutes passed between the photo and the boardwalk CCTV, and 22 minutes between the CCTV and the tap-on, so a walk to Mindil and back was not possible. The estimates are approximate and only test whether a route is possible, not that it happened.',
     },
   ],
 
