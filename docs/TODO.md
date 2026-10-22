@@ -80,6 +80,19 @@ A running list for the end-of-project review. Newest additions at the bottom of 
       in other fields; DoorSense and Kitchen Basics were renamed because they matched real
       products.
 
+- [ ] **New evidence images (Phase 7).** All 13 drawn in one style (docs/illustration-style.md),
+      reviewed in the browser against their alt text. Look at them in the apps, especially the
+      foyer witness (nobody identifiable) and the snack-box prints against the teaspoon. Note:
+      in the 1:12 trail-camera frame the snack box still looks closed (fits Kai's account; a
+      teacher note says so, no answer depends on it).
+- [ ] **Your photos (optional).** The Cullen Bay sunset (Where was Jamie?) and the beach sunset
+      (metadata mission) are drawn stand-ins. To swap in a photo you took (no people, number
+      plates or private homes): `npm run photo -- in.jpg src/.../assets/name.jpg`, then point the
+      case or mission at the new file. The posted crop of the Cullen Bay photo must show no
+      landmarks.
+- [ ] **Printed reports.** Reports now show small thumbnails of attached photos and CCTV. Checked
+      on screen; print one to PDF to confirm the layout on paper.
+
 ## Deferred features
 
 - [x] Class summary table in Teacher Review (Whole class tab, with a .csv download).
