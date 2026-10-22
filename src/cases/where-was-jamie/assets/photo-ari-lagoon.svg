@@ -1,40 +1,209 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Three teenagers with towels beside a wave lagoon in late afternoon">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Three teenagers with towels beside the Waterfront wave lagoon in late afternoon light">
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#7fb5e0"/><stop offset="1" stop-color="#f3c99a"/>
+      <stop offset="0" stop-color="#8ec5e6"/>
+      <stop offset="1" stop-color="#f6d9ab"/>
     </linearGradient>
-    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#3fb7c9"/><stop offset="1" stop-color="#1f7f9a"/>
+    <linearGradient id="lagoon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5fcad6"/>
+      <stop offset="1" stop-color="#2f9db0"/>
     </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff1c9"/>
+      <stop offset="1" stop-color="#fff1c9" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <rect width="800" height="600" fill="url(#sky)"/>
-  <g fill="#c9d8e3" opacity="0.8">
-    <rect x="560" y="80" width="70" height="170"/><rect x="640" y="120" width="60" height="130"/><rect x="500" y="140" width="50" height="110"/>
+
+  <!-- Sky, with the low sun in the west -->
+  <rect width="800" height="280" fill="url(#sky)"/>
+  <circle cx="96" cy="176" r="130" fill="url(#glow)" opacity="0.8"/>
+  <circle cx="96" cy="176" r="34" fill="#ffe2a0"/>
+
+  <!-- Harbour in the distance -->
+  <rect y="236" width="800" height="30" fill="#3d8fb3"/>
+  <g stroke="#ffe2a0" stroke-width="2" stroke-linecap="round" opacity="0.8">
+    <path d="M70 244h40M96 252h28M60 258h24M150 248h18"/>
   </g>
-  <rect y="250" width="800" height="150" fill="url(#water)"/>
-  <g stroke="#bff0f7" stroke-width="5" fill="none" opacity="0.8">
-    <path d="M0 290 q50 -14 100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0"/>
-    <path d="M0 330 q50 -12 100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0"/>
+
+  <!-- Convention centre: long and low, with a sweeping roof -->
+  <g id="convention-centre">
+    <rect x="160" y="216" width="300" height="40" fill="#f3efe7"/>
+    <rect x="160" y="228" width="300" height="20" fill="#a8cbdc"/>
+    <path d="M168 228v20M198 228v20M228 228v20M258 228v20M288 228v20M318 228v20M348 228v20M378 228v20M408 228v20M438 228v20" stroke="#f3efe7" stroke-width="3"/>
+    <path d="M148 220Q300 186 476 214L476 222Q300 196 148 228Z" fill="#dcd5c8"/>
   </g>
-  <rect y="400" width="800" height="200" fill="#e6dccb"/>
-  <!-- three friends -->
-  <g>
-    <g transform="translate(250 330)">
-      <circle cx="0" cy="0" r="34" fill="#8a5a3c"/><path d="M-34 -6 q34 -40 68 0 q-10 -30 -34 -32 q-24 2 -34 32z" fill="#2b1e18"/>
-      <rect x="-42" y="34" width="84" height="120" rx="20" fill="#f08a5d"/>
-      <rect x="-50" y="100" width="100" height="24" rx="10" fill="#ffffff" transform="rotate(-8)"/>
-    </g>
-    <g transform="translate(400 320)">
-      <circle cx="0" cy="0" r="36" fill="#c99a76"/><path d="M-36 -4 q36 -46 72 0 q-6 -34 -36 -36 q-30 2 -36 36z" fill="#3a2a1e"/>
-      <rect x="-44" y="36" width="88" height="128" rx="20" fill="#e9e3d6"/>
-      <rect x="-30" y="44" width="60" height="70" rx="14" fill="#4f7d4c"/>
-      <path d="M-12 18 q12 10 24 0" stroke="#3a2a1e" stroke-width="4" fill="none"/>
-    </g>
-    <g transform="translate(550 334)">
-      <circle cx="0" cy="0" r="32" fill="#f0c8a0"/><path d="M-32 -2 q32 -40 64 0 q-6 -30 -32 -32 q-26 2 -32 32z" fill="#d6a35a"/>
-      <rect x="-40" y="32" width="80" height="118" rx="20" fill="#5d8bf0"/>
+
+  <!-- Waterfront apartments -->
+  <g id="towers">
+    <rect x="530" y="122" width="78" height="140" fill="#f3efe7"/>
+    <rect x="590" y="122" width="18" height="140" fill="#dcd5c8"/>
+    <rect x="620" y="156" width="74" height="106" fill="#f3efe7"/>
+    <rect x="676" y="156" width="18" height="106" fill="#dcd5c8"/>
+    <rect x="704" y="98" width="96" height="164" fill="#f3efe7"/>
+    <rect x="780" y="98" width="20" height="164" fill="#dcd5c8"/>
+    <g fill="#a8cbdc">
+      <path d="M538 134h50v6h-50zM538 152h50v6h-50zM538 170h50v6h-50zM538 188h50v6h-50zM538 206h50v6h-50zM538 224h50v6h-50zM538 242h50v6h-50z"/>
+      <path d="M628 168h46v6h-46zM628 186h46v6h-46zM628 204h46v6h-46zM628 222h46v6h-46zM628 240h46v6h-46z"/>
+      <path d="M712 110h64v6h-64zM712 128h64v6h-64zM712 146h64v6h-64zM712 164h64v6h-64zM712 182h64v6h-64zM712 200h64v6h-64zM712 218h64v6h-64zM712 236h64v6h-64z"/>
     </g>
   </g>
-  <!-- a raised hand making a peace sign -->
-  <path d="M452 270 l6 -40 l8 2 l-2 30 l6 -28 l8 2 l-6 40z" fill="#c99a76"/>
+
+  <!-- Far side of the lagoon: paving and a lifeguard stand with a red and yellow flag -->
+  <rect y="256" width="800" height="26" fill="#eadfcd"/>
+  <rect y="278" width="800" height="6" fill="#d2c4ad"/>
+  <g id="lifeguard">
+    <path d="M176 282l6-40h24l6 40" fill="none" stroke="#8a6a4a" stroke-width="4"/>
+    <rect x="178" y="232" width="32" height="12" rx="3" fill="#f6f4ef"/>
+    <path d="M214 244v-50" stroke="#5a4a3a" stroke-width="3"/>
+    <rect x="215" y="194" width="26" height="9" fill="#d94a3d"/>
+    <rect x="215" y="203" width="26" height="9" fill="#f2c230"/>
+  </g>
+
+  <!-- Carpentaria palms -->
+  <g id="palm-mid">
+    <path d="M478 282Q474 230 486 178" stroke="#8a6a4a" stroke-width="7" fill="none"/>
+    <g fill="#2f7a4f">
+      <path d="M486 178q-34 -6 -54 18q30 -12 54 -10z"/>
+      <path d="M486 178q30 -14 56 4q-30 -6 -56 4z"/>
+      <path d="M486 178q-10 -28 -36 -34q22 14 30 36z"/>
+      <path d="M486 178q8 -30 34 -36q-20 16 -28 38z"/>
+    </g>
+    <path d="M486 178q-24 4 -38 30q22 -18 40 -22z" fill="#245f3d"/>
+  </g>
+  <g id="palm-right">
+    <path d="M748 470Q740 300 770 140" stroke="#8a6a4a" stroke-width="12" fill="none"/>
+    <g fill="#2f7a4f">
+      <path d="M770 140q-60 -8 -96 34q52 -22 96 -18z"/>
+      <path d="M770 140q52 -26 100 6q-52 -12 -100 6z"/>
+      <path d="M770 140q-18 -50 -64 -62q40 24 54 64z"/>
+      <path d="M770 140q12 -52 58 -64q-34 28 -48 66z"/>
+    </g>
+    <path d="M770 140q-44 8 -66 52q38 -32 70 -38z" fill="#245f3d"/>
+  </g>
+  <g id="palm-left">
+    <path d="M58 600Q40 360 92 112" stroke="#8a6a4a" stroke-width="16" fill="none"/>
+    <path d="M58 600Q44 380 82 200" stroke="#6f5339" stroke-width="5" fill="none"/>
+    <g fill="#2f7a4f">
+      <path d="M92 112q-80 -10 -126 48q70 -32 126 -26z"/>
+      <path d="M92 112q70 -34 136 10q-70 -18 -136 8z"/>
+      <path d="M92 112q-24 -66 -84 -82q52 32 72 86z"/>
+      <path d="M92 112q18 -70 78 -86q-46 36 -64 90z"/>
+      <path d="M92 112q60 6 100 66q-50 -40 -100 -46z"/>
+    </g>
+    <path d="M92 112q-58 12 -88 72q50 -44 94 -52z" fill="#245f3d"/>
+  </g>
+
+  <!-- The wave lagoon -->
+  <rect y="284" width="800" height="186" fill="url(#lagoon)"/>
+  <g fill="none" stroke="#e9f8f7" stroke-linecap="round">
+    <path d="M0 304q50 -10 100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0" stroke-width="4" opacity="0.7"/>
+    <path d="M0 336q60 -12 120 0t120 0t120 0t120 0t120 0t120 0t120 0" stroke-width="5" opacity="0.55"/>
+    <path d="M0 378q70 -14 140 0t140 0t140 0t140 0t140 0t140 0" stroke-width="6" opacity="0.45"/>
+    <path d="M0 428q80 -14 160 0t160 0t160 0t160 0t160 0" stroke-width="6" opacity="0.35"/>
+  </g>
+  <g id="swimmers">
+    <circle cx="612" cy="322" r="7" fill="#8d5a3b"/>
+    <ellipse cx="612" cy="330" rx="15" ry="5" fill="#f2c230"/>
+    <circle cx="214" cy="356" r="8" fill="#e8bf98"/>
+    <path d="M206 352q8 -10 16 0" fill="#2b2322"/>
+  </g>
+
+  <!-- Pool edge and paving where the friends stand -->
+  <rect y="466" width="800" height="134" fill="#eadfcd"/>
+  <rect y="462" width="800" height="12" fill="#f6f0e4"/>
+  <g stroke="#d2c4ad" stroke-width="2"><path d="M0 520h800M0 572h800M120 474v46M330 474v46M560 474v46M220 520v52M450 520v52M690 520v52"/></g>
+
+  <!-- Long afternoon shadows, falling away from the sun -->
+  <g fill="#b9a98f" opacity="0.45">
+    <ellipse cx="350" cy="588" rx="70" ry="9"/>
+    <ellipse cx="462" cy="590" rx="74" ry="9"/>
+    <ellipse cx="572" cy="588" rx="70" ry="9"/>
+  </g>
+
+  <!-- Kit: coral T-shirt, mustard towel over one shoulder -->
+  <g id="kit">
+    <g stroke="#e8bf98" stroke-linecap="round" stroke-width="20">
+      <path d="M286 492v84M314 492v84"/>
+      <path d="M262 364l-14 90M338 364l12 88"/>
+    </g>
+    <g fill="#f6f4ef"><rect x="270" y="570" width="28" height="12" rx="6"/><rect x="302" y="570" width="28" height="12" rx="6"/></g>
+    <rect x="266" y="440" width="68" height="58" rx="12" fill="#2d3e66"/>
+    <rect x="260" y="340" width="80" height="112" rx="20" fill="#e27a5f"/>
+    <rect x="314" y="344" width="26" height="106" rx="13" fill="#c8664d"/>
+    <g stroke="#e27a5f" stroke-linecap="round" stroke-width="24"><path d="M264 358l-8 34M336 358l8 34"/></g>
+    <path d="M268 342h24l-4 100h-22z" fill="#e0b24a"/>
+    <path d="M270 362h20M269 386h21M268 410h21" stroke="#f6f4ef" stroke-width="4"/>
+    <circle cx="248" cy="458" r="10" fill="#e8bf98"/>
+    <circle cx="350" cy="456" r="10" fill="#e8bf98"/>
+    <rect x="291" y="314" width="18" height="30" fill="#d9ab84"/>
+    <circle cx="300" cy="290" r="30" fill="#e8bf98"/>
+    <path d="M268 296q-2 -44 32 -44q34 0 32 44l0 22q-6 -6 -8 -24q-24 -12 -48 0q-2 18 -8 24z" fill="#2b2322"/>
+    <g fill="#2b2322"><circle cx="290" cy="294" r="3.2"/><circle cx="310" cy="294" r="3.2"/></g>
+    <path d="M292 306q8 6 16 0" stroke="#2b2322" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Jamie: white T-shirt, black shorts, green backpack, teal towel round the neck -->
+  <g id="jamie">
+    <path d="M356 372q0 -58 56 -58q56 0 56 58z" fill="#3f8f4f"/>
+    <path d="M440 330q22 12 28 42h-20z" fill="#2e6d3b"/>
+    <g stroke="#b97d55" stroke-linecap="round" stroke-width="21">
+      <path d="M398 490v86M426 490v86"/>
+      <path d="M372 362l-16 88M452 362l14 86"/>
+    </g>
+    <g fill="#2d3e66"><rect x="382" y="570" width="28" height="12" rx="6"/><rect x="414" y="570" width="28" height="12" rx="6"/></g>
+    <rect x="378" y="438" width="68" height="60" rx="12" fill="#262a33"/>
+    <rect x="370" y="336" width="84" height="114" rx="20" fill="#f6f4ef"/>
+    <rect x="426" y="340" width="28" height="108" rx="14" fill="#e3ded3"/>
+    <g stroke="#f6f4ef" stroke-linecap="round" stroke-width="25"><path d="M374 354l-8 34M450 354l8 34"/></g>
+    <g fill="#3f8f4f"><path d="M380 340h14l2 96h-14z"/><path d="M430 340h14l-2 96h-14z"/></g>
+    <rect x="379" y="414" width="18" height="6" rx="2" fill="#2e6d3b"/>
+    <rect x="427" y="414" width="18" height="6" rx="2" fill="#2e6d3b"/>
+    <circle cx="356" cy="456" r="10" fill="#b97d55"/>
+    <circle cx="466" cy="454" r="10" fill="#b97d55"/>
+    <rect x="403" y="306" width="18" height="34" fill="#9e6847"/>
+    <path d="M388 330q24 26 48 0l8 10q-32 34 -64 0z" fill="#2f9db0"/>
+    <circle cx="412" cy="282" r="31" fill="#b97d55"/>
+    <g fill="#3b2a20">
+      <circle cx="392" cy="262" r="14"/><circle cx="408" cy="254" r="15"/><circle cx="426" cy="256" r="14"/>
+      <circle cx="438" cy="270" r="10"/><circle cx="386" cy="276" r="9"/>
+    </g>
+    <g fill="#2b2322"><circle cx="402" cy="286" r="3.2"/><circle cx="422" cy="286" r="3.2"/></g>
+    <path d="M400 298q12 10 24 0" stroke="#2b2322" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+    <g fill="#e27a5f" opacity="0.25"><circle cx="394" cy="296" r="5"/><circle cx="430" cy="296" r="5"/></g>
+  </g>
+
+  <!-- Elliot: mustard T-shirt, towel in one hand -->
+  <g id="elliot">
+    <g stroke="#8d5a3b" stroke-linecap="round" stroke-width="20">
+      <path d="M506 494v82M534 494v82"/>
+      <path d="M482 366l-12 88M558 366l18 82"/>
+    </g>
+    <g fill="#f6f4ef"><rect x="490" y="570" width="28" height="12" rx="6"/><rect x="522" y="570" width="28" height="12" rx="6"/></g>
+    <rect x="486" y="442" width="68" height="58" rx="12" fill="#2d3e66"/>
+    <rect x="480" y="342" width="80" height="112" rx="20" fill="#e0b24a"/>
+    <rect x="534" y="346" width="26" height="106" rx="13" fill="#c99c3c"/>
+    <g stroke="#e0b24a" stroke-linecap="round" stroke-width="24"><path d="M484 360l-6 34M556 360l10 32"/></g>
+    <circle cx="470" cy="458" r="10" fill="#8d5a3b"/>
+    <rect x="568" y="446" width="30" height="80" rx="4" fill="#f6f4ef"/>
+    <path d="M568 470h30M568 492h30" stroke="#3d8fb3" stroke-width="5"/>
+    <circle cx="578" cy="450" r="10" fill="#8d5a3b"/>
+    <rect x="511" y="316" width="18" height="30" fill="#7a4d32"/>
+    <circle cx="520" cy="292" r="30" fill="#8d5a3b"/>
+    <path d="M490 288q-2 -32 30 -32q32 0 30 32q-6 -16 -30 -16q-24 0 -30 16z" fill="#1f1a19"/>
+    <g fill="#1f1a19"><circle cx="510" cy="296" r="3.2"/><circle cx="530" cy="296" r="3.2"/></g>
+    <path d="M513 308q7 4 14 0" stroke="#1f1a19" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Frangipani in the corner -->
+  <g id="frangipani" transform="translate(708 548)">
+    <g fill="#245f3d"><path d="M0 0q-40 -10 -60 20q30 -6 60 -20z"/><path d="M0 0q34 -24 70 -6q-36 0 -70 6z"/></g>
+    <g fill="#fbf7ee">
+      <ellipse cx="-14" cy="-10" rx="12" ry="7" transform="rotate(-30 -14 -10)"/>
+      <ellipse cx="2" cy="-18" rx="12" ry="7" transform="rotate(40 2 -18)"/>
+      <ellipse cx="14" cy="-6" rx="12" ry="7" transform="rotate(10 14 -6)"/>
+      <ellipse cx="0" cy="2" rx="12" ry="7" transform="rotate(-70 0 2)"/>
+      <ellipse cx="-12" cy="6" rx="12" ry="7" transform="rotate(60 -12 6)"/>
+    </g>
+    <circle cx="0" cy="-4" r="5" fill="#f2c230"/>
+  </g>
 </svg>
