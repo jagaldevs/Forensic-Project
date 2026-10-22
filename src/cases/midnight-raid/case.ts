@@ -325,8 +325,8 @@ For every piece of evidence, ask yourself three things. What does it show? What 
         {
           at: rec('23:41'),
           kind: 'visit',
-          title: '10 easy late-night snacks - Kitchen Basics',
-          url: 'https://kitchenbasics.example/late-night-snacks',
+          title: '10 easy late-night snacks - Pantry Pal',
+          url: 'https://pantrypal.example/late-night-snacks',
         },
         { at: rec('23:42'), kind: 'search', title: 'is it bad to eat cereal at midnight' },
         {
@@ -395,8 +395,8 @@ For every piece of evidence, ask yourself three things. What does it show? What 
         {
           at: rec('23:41'),
           kind: 'visit',
-          title: '10 easy late-night snacks - Kitchen Basics',
-          url: 'https://kitchenbasics.example/late-night-snacks',
+          title: '10 easy late-night snacks - Pantry Pal',
+          url: 'https://pantrypal.example/late-night-snacks',
         },
         { at: rec('23:42'), kind: 'search', title: 'is it bad to eat cereal at midnight' },
         {
@@ -414,6 +414,10 @@ For every piece of evidence, ask yourself three things. What does it show? What 
             'Family tablet (at home): search “year 12 chemistry equilibrium practice questions”',
         },
         { recorded: rec('23:40'), label: 'Family tablet (at home): search “midnight snack ideas”' },
+        {
+          recorded: rec('23:42'),
+          label: 'Family tablet (at home): search “is it bad to eat cereal at midnight”',
+        },
       ],
       guided: historyGuide,
       teacherNote:
@@ -565,7 +569,7 @@ For every piece of evidence, ask yourself three things. What does it show? What 
       guided:
         'A motion light has a sensor that notices warmth moving across in front of it, then switches the light on for a set time. The log only says when the light switched on. It can’t tell the difference between a person, an animal or anything else warm that moves.',
       teacherNote:
-        'Key for Q2. 1:11 and 1:13 are close to Kai’s steps, but 1:26 and 1:31 happen while Kai’s band says asleep, and the trail camera shows a possum at 1:27. The light can’t say what moved.',
+        'Key for Q2. 1:11 and 1:13 are close to Kai’s steps, but 1:26 and 1:31 happen while Kai’s band says asleep, and the trail camera shows a possum at 1:27. The light can’t say what moved. The evening switch-ons (8:47, 8:52 and 9:34 pm) are students and leaders coming and going before and after lights out; nobody needs to explain each one, which is a good point about ordinary “noise” in data.',
     },
     {
       id: 'trailcam-0112',
@@ -651,7 +655,7 @@ For every piece of evidence, ask yourself three things. What does it show? What 
       guided:
         'Metadata is information the phone saves inside the photo file. DateTimeOriginal is when the photo was taken, by the phone’s clock, and GPS is where the phone was. A photo shows how things looked when it was taken, which may be some time after they happened. An object of known size in the picture, like a teaspoon, helps you judge how big other things are.',
       teacherNote:
-        'Key for Q3. Small five-toed prints about 3 cm across (compare the teaspoon) and a chewed bag fit the ranger’s description of a brushtail possum. Taken at 7:08 am, hours after the raid.',
+        'Key for Q3. Small five-toed prints about 3 cm long (compare the teaspoon) and a chewed bag fit the ranger’s description of a brushtail possum. Taken at 7:08 am, hours after the raid.',
     },
     {
       id: 'chat-cabin4',
@@ -716,7 +720,7 @@ For every piece of evidence, ask yourself three things. What does it show? What 
       guided:
         'This is the group chat as saved on Ruby’s phone, so the times are on Ruby’s phone clock. Each message is what someone wrote at that moment: what they noticed, remembered or guessed. Hearing a door is an observation; who opened it is an inference.',
       teacherNote:
-        'Shows how the blame started. Leo heard a door (observation), not who or why. Zara saw the search in the history (observation) and assumed Kai typed it (inference). Use it to talk about observation vs inference.',
+        'Shows how the blame started. Leo heard a door (observation), not who or why. Kai says the water bottle was on the shelf by the door, which could explain the sound, but nothing records whether the door was opened. This is deliberately left open. Zara saw the search in the history (observation) and assumed Kai typed it (inference). Use it to talk about observation vs inference.',
     },
     {
       id: 'ranger-note',
@@ -755,7 +759,7 @@ For every piece of evidence, ask yourself three things. What does it show? What 
       app: 'locker',
       title: 'Overnight weather record',
       summary: 'A warm, clear night near Litchfield with light winds and no rain.',
-      source: 'Top End Weather Service, Batchelor station (about 30 km from the centre)',
+      source: 'Top End Weather Service, Batchelor station (about 40 km from the centre)',
       fields: [
         { label: 'Date', value: 'Wednesday 9 to Thursday 10 September' },
         { label: '9:00 pm temperature', value: '27 °C' },
@@ -944,7 +948,7 @@ For every piece of evidence, ask yourself three things. What does it show? What 
         'Asking for a whole year of Kai’s history would / would not be fair because …',
       ],
       modelAnswer:
-        'Helpful evidence: any other trail-camera photos from that night (the ranger says there were only two), checking the box lid and latch and the chewed bag for teeth marks, comparing the paw prints with a reference guide, and a calm talk with the cabin about what each person actually saw or heard. Asking Jo for one hour of the family tablet’s history was fair: it was narrow, about the exact time of the search, and the people it belonged to agreed. A year of Kai’s history and messages would not be fair: it is far more than the question needs, it is a 14-year-old’s private life, and old searches can’t show what happened on one night. To stop it happening again, food should stay in the kitchen overnight.',
+        'Helpful evidence: trail-camera photos from before midnight or after 5 am (the ranger says only two were taken between midnight and 5 am), checking the box lid and latch and the chewed bag for teeth marks, comparing the paw prints with a reference guide, and a calm talk with the cabin about what each person actually saw or heard. Asking Jo for one hour of the family tablet’s history was fair: it was narrow, about the exact time of the search, and the people it belonged to agreed. A year of Kai’s history and messages would not be fair: it is far more than the question needs, it is a 14-year-old’s private life, and old searches can’t show what happened on one night. To stop it happening again, food should stay in the kitchen overnight.',
       keyPoints: [
         'Names useful further evidence (more camera photos, the box and bag, a reference for paw prints, calm conversations)',
         'The one-hour tablet history was proportionate and had consent',

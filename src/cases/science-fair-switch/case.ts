@@ -49,7 +49,11 @@ const changedRows = [
 
 /** Guided notes shared by items of the same kind, so no single item stands out. */
 const emailGuide =
-  'The From line is what the email says about its sender, and whoever writes an email can type anything there. “Reply to”, if it is shown, is where replies will go, and it can be different from From. Compare the email with others from the same sender: who it went to, where replies go, and whether it fits the rules. “Show original” has the full technical record of the email’s journey if you want to dig deeper, but you don’t need it.';
+  'The From line is what the email says about its sender, and whoever writes an email can type anything there. “Reply to”, if it is shown, is where replies will go, and it can be different from From. “To” lists everyone the email was sent to. “Show original” has the full technical record of the email’s journey if you want to dig deeper, but you don’t need it.';
+const documentGuide =
+  'A document like this is a written record made by a person or an organisation. Ask who wrote it, when, and how they would know. A record can be accurate and still leave things out.';
+const statementGuide =
+  'A statement is what a person says happened, in their own words. It is a claim to test against other evidence, not a record made by a device.';
 const historyGuide =
   'A “visit” is a page that was opened and a “search” is something typed into a search box, each with the time on that device’s clock. The profile line shows which browser account was in use. If a period is marked as cleared, someone used a clear-history option and the entries from that time are gone: you can see when they were removed, but not what they were.';
 
@@ -122,7 +126,7 @@ Check every clock and every hash. Morgan deserves a fair investigation.`,
     {
       id: 'daniel-osei',
       name: 'Daniel Osei',
-      role: 'Science Coordinator',
+      role: 'Science coordinator',
       summary: 'Runs the school’s entry in the fair. Collected the evidence on Friday morning.',
     },
     {
@@ -175,7 +179,7 @@ Check every clock and every hash. Morgan deserves a fair investigation.`,
       ownerLabel: 'Lee family',
       type: 'smart-home',
       name: 'Lee family front doorbell',
-      model: 'DoorSense Mini',
+      model: 'PorchPing Mini',
     },
     {
       id: 'lab2-sensor',
@@ -206,6 +210,7 @@ Check every clock and every hash. Morgan deserves a fair investigation.`,
       body: 'The drive says it was last changed at 13:52, which I first read as Thursday afternoon. But the team’s own poster photo shows the new +255% result, so the team must have known about the change. Unless there is a good explanation, Team 4 will be disqualified.',
       teacherNote:
         'The accusation, with two errors built in: 13:52 is UTC (23:22 in Darwin), and the poster photo was edited after collection. Neutral context, not key evidence.',
+      guided: documentGuide,
     },
     {
       id: 'morgan-statement',
@@ -219,11 +224,13 @@ Check every clock and every hash. Morgan deserves a fair investigation.`,
         { label: 'Left school', value: 'About 5:15 pm, by bus' },
         { label: 'Final save', value: '“About 6:25, on my Chromebook at home”' },
         { label: 'Lab 2 laptop', value: '“I used it in class. I think I just closed the lid.”' },
+        { label: 'Band', value: '“I put it on the charger after dinner.”' },
         { label: 'Bed', value: 'About 10 pm' },
       ],
       body: '“I got the email about the extension but I didn’t need it. Our results were finished. I never changed the numbers.”',
       teacherNote:
         'A statement is a claim to test, not evidence that settles anything. The “closed the lid” detail is the clue to the signed-in laptop.',
+      guided: statementGuide,
     },
     {
       id: 'fair-rules',
@@ -249,6 +256,7 @@ Check every clock and every hash. Morgan deserves a fair investigation.`,
       timeline: [{ recorded: rec('21:00'), label: 'Results deadline (fair rules)' }],
       teacherNote:
         'Key for Q1: fixes the deadline at 21:00 ACST. The “all teams at once” rule also helps Q2 (the fake email went to Team 4 only).',
+      guided: documentGuide,
     },
     {
       id: 'drive-results',
@@ -419,7 +427,7 @@ Head Judge`,
       timeline: [{ recorded: rec('19:48'), label: 'Fake “head judge” email: deadline “extended”' }],
       guided: emailGuide,
       teacherNote:
-        'Key for Q2. Spoofed. Visible without “Show original”: Reply to is a QuickPost address, and it went to Team 4 only, against the fair rules. In the original: the From line is copied, but Reply-To and Message-ID are QuickPost, it was sent through QuickPost’s servers, SPF fails and there is no DKIM. Sent to Team 4 only, against the fair rules.',
+        'Key for Q2. Spoofed. Visible without “Show original”: Reply to is a QuickPost address, and it went to Team 4 only, against the fair rules. In the original: the From line is copied, but Reply-To and Message-ID are QuickPost, it was sent through QuickPost’s servers, SPF fails and there is no DKIM.',
     },
     {
       id: 'band-morgan',
@@ -493,9 +501,9 @@ Head Judge`,
       title: 'Lee family doorbell log',
       summary:
         'Someone arrives at the Lee home at 6:04 pm. The front door is not opened again until 7:35 am.',
-      source: 'DoorSense app export (Sam Lee gave consent)',
+      source: 'PorchPing app export (Sam Lee gave consent)',
       deviceId: 'lee-doorbell',
-      service: 'DoorSense',
+      service: 'PorchPing',
       events: [
         { at: rec('18:04'), kind: 'motion', event: 'Person detected at front door' },
         { at: rec('18:05'), kind: 'door', event: 'Front door opened' },
@@ -634,12 +642,19 @@ Head Judge`,
       type: 'browserHistory',
       app: 'browser',
       title: 'MORGAN-CHROMEBOOK browser history',
-      summary: 'Homework and videos at home between 7:02 and 8:58 pm. Nothing after 9 pm.',
+      summary:
+        'The results file at 6:24 pm, then homework and videos until 8:58 pm. Nothing after 9 pm.',
       source: 'Morgan’s Chromebook (shown by Morgan with Sam Lee present)',
       browser: 'Lumen Browser',
       profile: 'Morgan',
       deviceId: 'morgan-chromebook',
       entries: [
+        {
+          at: rec('18:24'),
+          kind: 'visit',
+          title: 'team4-algae-results - StreamCloud Drive',
+          url: 'https://drive.streamcloud.example/d/team4-algae-results',
+        },
         { at: rec('19:02'), kind: 'search', title: 'persuasive essay hooks year 9' },
         {
           at: rec('19:06'),
@@ -657,8 +672,8 @@ Head Judge`,
         {
           at: rec('20:17'),
           kind: 'visit',
-          title: 'Two-minute mug cake - Kitchen Basics',
-          url: 'https://kitchenbasics.example/mug-cake',
+          title: 'Two-minute mug cake - Pantry Pal',
+          url: 'https://pantrypal.example/mug-cake',
         },
         { at: rec('20:58'), kind: 'search', title: 'sunrise time darwin tomorrow' },
       ],
@@ -671,7 +686,7 @@ Head Judge`,
       ],
       guided: historyGuide,
       teacherNote:
-        'Distractor for Q1: it says nothing about when the results file changed. Also only shows the Chromebook was used, not by whom, and an absence of history after 9 pm is not proof of anything.',
+        'Context, not key evidence. The 6:24 pm visit to the results file fits the genuine 6:25 pm version. It only shows the Chromebook was used, not by whom, and an absence of history after 9 pm is not proof of anything.',
     },
     {
       id: 'poster-photo',
@@ -699,7 +714,7 @@ Head Judge`,
       guided:
         'Metadata is information saved inside the photo file. DateTimeOriginal is when the photo was taken, ModifyDate is when the file was last saved, and Software is the program that saved it. The hash is a fingerprint of the file’s exact contents: change even one pixel and the hash changes completely.',
       teacherNote:
-        'Key for Q4. The hash no longer matches the one recorded at collection (07:40), and ModifyDate (07:52) is after collection, with editing software. The photo was altered, so it can’t be trusted as a record.',
+        'Key for Q4. The hash no longer matches the one recorded at collection (07:40), and ModifyDate (07:52) is after collection, with editing software. Also, DateTimeOriginal is Thursday 4:30 pm, before the results were finished (6:25 pm) or changed (11:22 pm), so a genuine photo from then could not show “+255%”. The photo was altered, so it can’t be trusted as a record.',
     },
     {
       id: 'intake-record',
@@ -707,7 +722,7 @@ Head Judge`,
       app: 'locker',
       title: 'Evidence intake record',
       summary:
-        'When each item was collected on Friday morning, with its SHA-256 hash at the moment of collection.',
+        'When the poster photo was collected on Friday morning, with its SHA-256 hash at the moment of collection.',
       source: 'Kept by Mr Osei',
       fields: [
         { label: 'Item', value: 'team4-poster.jpg (Team 4 shared folder)' },
@@ -740,6 +755,7 @@ Head Judge`,
       ],
       teacherNote:
         'Distractor: the cleaners left hours before the change. The only useful detail is that Lab 2 stays open for boarders.',
+      guided: documentGuide,
     },
     {
       id: 'laptop-session',
@@ -830,7 +846,7 @@ Head Judge`,
       claim: 'The results file was changed after the deadline',
       acceptedVerdicts: ['strongly-supported'],
       keyEvidenceIds: ['drive-results', 'fair-rules'],
-      distractorEvidenceIds: ['history-chromebook'],
+      distractorEvidenceIds: ['cleaning-roster'],
       modelAnswer:
         'Strongly supported. The Cloud Drive shows times in UTC. The last version was saved at 13:52 UTC, which is 23:22 ACST (add 9 hours 30 minutes), 2 hours 22 minutes after the 9:00 pm ACST deadline in the fair rules. The version before it, with the genuine results, was saved at 08:55 UTC (6:25 pm ACST), before the deadline. This shows when the file changed, not who changed it.',
       limitationExamples: [
@@ -858,11 +874,11 @@ Head Judge`,
       kind: 'verdict',
       prompt: 'Do the doorbell and wearable logs place Morgan at school when the file was changed?',
       claim: 'Morgan was at school at 11:22 pm',
-      acceptedVerdicts: ['not-supported'],
+      acceptedVerdicts: ['not-supported', 'cant-tell'],
       keyEvidenceIds: ['band-morgan', 'doorbell-lee'],
       distractorEvidenceIds: ['poster-photo'],
       modelAnswer:
-        'Not supported. Nothing places Morgan at school. Morgan’s band was taken off at 9:03 pm and charged until 6:40 am, syncing over the home Wi-Fi, so it was at home, with no steps at all. The doorbell shows someone arriving home at 6:04 pm and the front door not opening again until 7:35 am. These fit Morgan’s account, but they don’t prove it: the band shows where the band was, not Morgan, and the doorbell only watches the front door and doesn’t identify anyone.',
+        'Not supported (Can’t tell is also reasonable). Nothing places Morgan at school. Morgan’s band was taken off at 9:03 pm and charged until 6:40 am, syncing over the home Wi-Fi, so it was at home, with no steps at all. The doorbell shows someone arriving home at 6:04 pm and the front door not opening again until 7:35 am. These fit Morgan’s account, but they don’t prove it: the band shows where the band was, not Morgan, and the doorbell only watches the front door and doesn’t identify anyone.',
       limitationExamples: [
         'A device is not a person: the band was at home, which doesn’t prove Morgan was.',
         'The doorbell only covers the front door; there is a back door and a garage.',
@@ -877,7 +893,7 @@ Head Judge`,
       keyEvidenceIds: ['poster-photo', 'intake-record'],
       distractorEvidenceIds: ['cleaning-roster'],
       modelAnswer:
-        'Not supported. The photo’s SHA-256 hash no longer matches the hash in the intake record taken when it was collected at 7:40 am, so the file has changed since. Its metadata agrees: it was modified at 7:52 am with photo-editing software, after collection. The shared folder was left open, so someone could edit it. An altered photo can’t show what the team’s poster said.',
+        'Not supported. The photo’s SHA-256 hash no longer matches the hash in the intake record taken when it was collected at 7:40 am, so the file has changed since. Its metadata agrees: it was modified at 7:52 am with photo-editing software, after collection, and it says the photo was taken at 4:30 pm on Thursday, before the results were finished or changed, so a genuine photo could not show “+255%”. The shared folder was left open, so someone could edit it. An altered photo can’t show what the team’s poster said.',
       limitationExamples: [
         'The hash shows the file changed, not what was changed or who changed it.',
         'Metadata can itself be edited, so the hash is the stronger check.',
@@ -895,14 +911,14 @@ Head Judge`,
         'Name two things you would request next, and explain why each is proportionate (or not).',
       ],
       modelAnswer:
-        'Morgan signed in to StreamCloud on the shared Lab 2 laptop in class and never signed out. At 11:22 pm someone used that laptop in Lab 2 (door and motion sensor, laptop session log) to change the results, then cleared the browser history. Earlier, a fake “head judge” email from a new QuickPost account on the same college network made late changes seem allowed. The genuine results (+85%) are in version 4 of the file, saved from Morgan’s Chromebook at 6:25 pm, before the deadline. Team 4 should be cleared of changing the results, and the genuine version restored. The evidence does not show who did it: the account, laptop and network are shared. Next I would ask for the boarding house sign-in records and any corridor CCTV for 11 pm to midnight, and interview the boarders who use Lab 2. These are narrow in time and place. Asking for every Year 9 student’s emails and messages for a week would be disproportionate: too many people, too long, and mostly private.',
+        'Morgan signed in to StreamCloud on the shared Lab 2 laptop in class and never signed out. At 11:22 pm someone used that laptop in Lab 2 (door and motion sensor, laptop session log) to change the results, then cleared the browser history. Earlier, a fake “head judge” email from a new QuickPost account on the same school network made late changes seem allowed. The genuine results (+85%) are in version 4 of the file, saved from Morgan’s Chromebook at 6:25 pm, before the deadline. Team 4 should be cleared of changing the results, and the genuine version restored. The evidence does not show who did it: the account, laptop and network are shared. Next I would ask for the boarding house sign-in records and any corridor CCTV for 11 pm to midnight, and interview the boarders who use Lab 2. These are narrow in time and place. Asking for every Year 9 student’s emails and messages for a week would be disproportionate: too many people, too long, and mostly private.',
       keyPoints: [
         'The shared laptop was still signed in to Morgan’s account; account ≠ person',
         'The change was at 23:22 ACST (13:52 UTC), after the deadline',
         'The extension email was fake (replies go to QuickPost; sent to Team 4 only, against the rules)',
         'The genuine results survive in the version history (6:25 pm)',
         'Team 4 should be cleared; the person responsible is not identified',
-        'Narrow, time-limited next requests; the whole-year request is disproportionate',
+        'Narrow, time-limited next requests; asking for every Year 9 student’s emails and messages for a week is disproportionate',
       ],
     },
   ],
