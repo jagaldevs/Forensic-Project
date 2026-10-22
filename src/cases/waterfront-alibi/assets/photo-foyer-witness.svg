@@ -1,129 +1,130 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Convention centre foyer at night">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="A blurry photo of a convention centre foyer at night: a person in a dark hooded jumper, back to the camera, beside a glass display case">
   <defs>
     <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#050a18"/>
-      <stop offset="1" stop-color="#14254a"/>
+      <stop offset="0" stop-color="#1d2747"/>
+      <stop offset="1" stop-color="#33406b"/>
     </linearGradient>
-    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#3a3632"/>
-      <stop offset="1" stop-color="#1c1a18"/>
+    <linearGradient id="harbour" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a3766"/>
+      <stop offset="1" stop-color="#182042"/>
     </linearGradient>
-    <linearGradient id="ceiling" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#121216"/>
-      <stop offset="1" stop-color="#26262c"/>
-    </linearGradient>
-    <linearGradient id="caseGlass" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#bfe3ff" stop-opacity="0.28"/>
-      <stop offset="0.5" stop-color="#bfe3ff" stop-opacity="0.08"/>
-      <stop offset="1" stop-color="#bfe3ff" stop-opacity="0.22"/>
-    </linearGradient>
-    <linearGradient id="hoodie" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#1c1d24"/>
-      <stop offset="1" stop-color="#0d0d12"/>
-    </linearGradient>
-    <radialGradient id="spot" cx="0.5" cy="0" r="1">
-      <stop offset="0" stop-color="#fff4d6" stop-opacity="0.35"/>
-      <stop offset="1" stop-color="#fff4d6" stop-opacity="0"/>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff6dc"/>
+      <stop offset="1" stop-color="#fff6dc" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="vignette" cx="0.5" cy="0.5" r="0.75">
-      <stop offset="0.5" stop-color="#000" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.7"/>
-    </radialGradient>
-    <filter id="blurMove"><feGaussianBlur stdDeviation="2.4 0.8"/></filter>
-    <filter id="soft"><feGaussianBlur stdDeviation="1.4"/></filter>
-    <filter id="grain" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="3"/>
-      <feColorMatrix type="saturate" values="0"/>
-      
-      
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.6"/>
     </filter>
+
+    <!-- The person: back to the camera, hood up, sleeves over the hands. Ordinary build, plain clothes. -->
+    <g id="person">
+      <rect x="414" y="434" width="38" height="96" rx="8" fill="#3a4256"/>
+      <rect x="460" y="434" width="38" height="96" rx="8" fill="#343b4e"/>
+      <rect x="410" y="522" width="44" height="14" rx="7" fill="#1b1d24"/>
+      <rect x="458" y="522" width="44" height="14" rx="7" fill="#1b1d24"/>
+      <path d="M404 304L392 424" stroke="#2a2e3c" stroke-width="28" stroke-linecap="round"/>
+      <path d="M508 304L520 424" stroke="#242733" stroke-width="28" stroke-linecap="round"/>
+      <path d="M398 440V326Q398 290 434 288H478Q514 290 514 326V440z" fill="#2a2e3c"/>
+      <path d="M490 290Q514 296 514 326V440H490z" fill="#242733"/>
+      <rect x="398" y="426" width="116" height="14" fill="#22252f"/>
+      <path d="M420 300Q412 226 456 222Q500 226 492 300z" fill="#2a2e3c"/>
+      <path d="M470 226Q500 236 492 300H474Q480 260 470 226z" fill="#242733"/>
+      <path d="M456 224Q460 262 456 300" stroke="#1c1f2a" stroke-width="3" fill="none"/>
+      <path d="M414 300Q456 316 498 300L506 318Q456 336 406 318z" fill="#2a2e3c"/>
+    </g>
   </defs>
 
-  <!-- Ceiling and lights -->
-  <rect width="800" height="120" fill="url(#ceiling)"/>
+  <!-- Ceiling with downlights -->
+  <rect width="800" height="50" fill="#e3dccd"/>
+  <rect y="44" width="800" height="6" fill="#cfc6b6"/>
+  <g fill="url(#glow)" opacity="0.8">
+    <circle cx="100" cy="26" r="30"/><circle cx="250" cy="26" r="30"/><circle cx="400" cy="26" r="30"/><circle cx="550" cy="26" r="30"/><circle cx="700" cy="26" r="30"/>
+  </g>
   <g fill="#fff6dc">
-    <ellipse cx="150" cy="40" rx="30" ry="5"/><ellipse cx="400" cy="34" rx="34" ry="5"/><ellipse cx="650" cy="40" rx="30" ry="5"/>
+    <circle cx="100" cy="26" r="5"/><circle cx="250" cy="26" r="5"/><circle cx="400" cy="26" r="5"/><circle cx="550" cy="26" r="5"/><circle cx="700" cy="26" r="5"/>
   </g>
 
-  <!-- Glass wall with harbour at night -->
-  <rect x="0" y="110" width="800" height="250" fill="url(#night)"/>
-  <rect x="0" y="300" width="800" height="60" fill="#0a1630"/>
-  <g filter="url(#soft)">
-    <g fill="#ffcf7a" opacity="0.85">
-      <rect x="40" y="262" width="4" height="40"/><rect x="120" y="270" width="3" height="34"/><rect x="510" y="266" width="4" height="38"/>
-      <rect x="610" y="258" width="3" height="46"/><rect x="700" y="268" width="4" height="36"/>
+  <!-- Big foyer windows: the harbour at night -->
+  <g id="harbour-view">
+    <rect y="50" width="800" height="290" fill="url(#night)"/>
+    <path d="M0 244L60 240L120 242L160 236L240 238L300 234L380 240L460 236L540 240L620 234L700 238L800 236V258H0z" fill="#131932"/>
+    <g fill="#ffd58a">
+      <circle cx="40" cy="248" r="2"/><circle cx="96" cy="250" r="2"/><circle cx="150" cy="246" r="2"/><circle cx="210" cy="250" r="2"/>
+      <circle cx="350" cy="248" r="2"/><circle cx="420" cy="250" r="2"/><circle cx="560" cy="248" r="2"/><circle cx="640" cy="246" r="2"/><circle cx="760" cy="250" r="2"/>
     </g>
-    <g fill="#ffcf7a" opacity="0.35">
-      <rect x="38" y="306" width="8" height="40"/><rect x="508" y="306" width="8" height="40"/><rect x="608" y="306" width="7" height="44"/>
+    <rect y="256" width="800" height="84" fill="url(#harbour)"/>
+    <g stroke="#ffd58a" stroke-width="2" opacity="0.5">
+      <path d="M40 262v10M40 280v6M96 264v8M150 262v12M150 282v5M210 264v8M350 262v10M420 264v8M560 262v12M560 282v5M640 262v8M760 264v10"/>
     </g>
-    <g fill="#9fd0ff" opacity="0.7"><circle cx="300" cy="278" r="3"/><circle cx="330" cy="282" r="2.5"/><circle cx="760" cy="276" r="3"/></g>
-  </g>
-  <!-- Mullions -->
-  <g fill="#1d1f26"><rect x="0" y="110" width="800" height="10"/><rect x="190" y="110" width="8" height="250"/><rect x="398" y="110" width="8" height="250"/><rect x="606" y="110" width="8" height="250"/></g>
-  <!-- Reflections on glass -->
-  <polygon points="220,120 260,120 200,360 160,360" fill="#ffffff" opacity="0.04"/>
-  <polygon points="640,120 690,120 630,360 580,360" fill="#ffffff" opacity="0.05"/>
-
-  <!-- Floor -->
-  <polygon points="0,360 800,360 800,600 0,600" fill="url(#floor)"/>
-  <g stroke="#4a4540" stroke-width="1" opacity="0.6">
-    <line x1="400" y1="360" x2="-200" y2="600"/><line x1="400" y1="360" x2="100" y2="600"/><line x1="400" y1="360" x2="400" y2="600"/>
-    <line x1="400" y1="360" x2="700" y2="600"/><line x1="400" y1="360" x2="1000" y2="600"/>
-    <line x1="0" y1="400" x2="800" y2="400"/><line x1="0" y1="460" x2="800" y2="460"/><line x1="0" y1="540" x2="800" y2="540"/>
+    <g id="boat" fill="#0f1428">
+      <path d="M286 290h40l-6 8h-28z"/>
+      <path d="M306 290V262" stroke="#0f1428" stroke-width="2"/>
+    </g>
+    <circle cx="306" cy="262" r="2" fill="#ffd58a"/>
+    <path d="M306 304v8M306 318v4" stroke="#ffd58a" stroke-width="2" opacity="0.4"/>
+    <g fill="#fff" opacity="0.05">
+      <path d="M150 50H200L120 340H70z"/>
+      <path d="M580 50H630L550 340H500z"/>
+    </g>
+    <path d="M4 50V340M134 50V340M264 50V340M394 50V340M524 50V340M654 50V340M784 50V340" stroke="#c9c0af" stroke-width="10"/>
+    <rect y="336" width="800" height="10" fill="#cfc6b6"/>
   </g>
 
-  <!-- Banner -->
-  <g transform="translate(300 128)">
-    <rect width="260" height="70" fill="#7a0f4a"/>
-    <rect x="6" y="6" width="248" height="58" fill="none" stroke="#f3c6dd" stroke-width="1.5" opacity="0.7"/>
-    <text x="130" y="32" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="18" fill="#ffffff">TOP END ROBOTICS CUP</text>
-    <text x="130" y="54" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#f3c6dd">2026 · Grand Final</text>
+  <!-- Polished floor -->
+  <rect y="346" width="800" height="254" fill="#d9cdb7"/>
+  <rect y="346" width="800" height="70" fill="#33406b" opacity="0.18"/>
+  <g stroke="#c6b89f" stroke-width="2">
+    <path d="M250 346L-147 600M300 346L35 600M350 346L218 600M400 346V600M450 346L582 600M500 346L765 600M550 346L947 600"/>
+    <path d="M0 370H800M0 410H800M0 470H800M0 560H800"/>
   </g>
-  <line x1="310" y1="110" x2="310" y2="128" stroke="#555" stroke-width="2"/>
-  <line x1="550" y1="110" x2="550" y2="128" stroke="#555" stroke-width="2"/>
-
-  <!-- Spotlight on display -->
-  <polygon points="430,110 520,110 600,430 360,430" fill="url(#spot)"/>
-
-  <!-- Display plinth and glass case -->
-  <rect x="420" y="330" width="120" height="120" fill="#e9e4dc"/>
-  <rect x="420" y="330" width="120" height="8" fill="#ffffff"/>
-  <rect x="420" y="440" width="120" height="10" fill="#c8c1b6"/>
-  <rect x="430" y="232" width="100" height="98" fill="url(#caseGlass)" stroke="#d9efff" stroke-opacity="0.5"/>
-  <!-- Trophy (partly hidden by glare) -->
-  <g opacity="0.8">
-    <path d="M462 256 h36 q0 30 -18 36 q-18 -6 -18 -36z" fill="#d8b44a"/>
-    <rect x="474" y="292" width="12" height="16" fill="#c49b33"/>
-    <rect x="464" y="308" width="32" height="10" fill="#7a6326"/>
-  </g>
-  <polygon points="440,236 470,236 450,328 432,328" fill="#ffffff" opacity="0.18"/>
-  <text x="480" y="400" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#555">PLEASE DO NOT TOUCH</text>
-
-  <!-- Person in dark hoodie, back to camera (motion blurred) -->
-  <g filter="url(#blurMove)">
-    <path d="M300 300 q36 -24 72 0 l14 120 q-50 14 -100 0z" fill="url(#hoodie)"/>
-    <path d="M308 232 q28 -26 56 0 q8 30 -6 58 q-22 12 -44 0 q-14 -28 -6 -58z" fill="#16171d"/>
-    <path d="M316 240 q20 -16 40 0" fill="none" stroke="#2a2b33" stroke-width="3"/>
-    <path d="M300 300 l-20 90 l14 4 l22 -80z" fill="#121318"/>
-    <path d="M372 300 l26 70 l-12 8 l-24 -60z" fill="#121318"/>
-    <rect x="304" y="418" width="30" height="110" fill="#1e2230"/>
-    <rect x="340" y="418" width="30" height="110" fill="#1e2230"/>
-    <rect x="300" y="524" width="36" height="14" rx="5" fill="#0c0c0f"/>
-    <rect x="338" y="524" width="36" height="14" rx="5" fill="#0c0c0f"/>
-  </g>
-  <ellipse cx="340" cy="540" rx="60" ry="8" fill="#000" opacity="0.35"/>
-
-  <!-- Distant blurred visitor -->
-  <g filter="url(#soft)" opacity="0.55">
-    <circle cx="690" cy="318" r="10" fill="#6b5d52"/>
-    <rect x="678" y="328" width="24" height="56" rx="8" fill="#43506a"/>
-    <rect x="680" y="384" width="8" height="34" fill="#2b2b33"/><rect x="692" y="384" width="8" height="34" fill="#2b2b33"/>
+  <g fill="#fff6dc" opacity="0.25">
+    <ellipse cx="250" cy="450" rx="120" ry="20"/><ellipse cx="620" cy="460" rx="120" ry="20"/>
   </g>
 
-  <!-- Pillar -->
-  <rect x="60" y="110" width="50" height="490" fill="#2b2a30"/>
-  <rect x="60" y="110" width="8" height="490" fill="#3a3940"/>
+  <!-- Pillar on the right -->
+  <rect x="700" y="50" width="40" height="510" fill="#f3efe7"/>
+  <rect x="728" y="50" width="12" height="510" fill="#dcd5c8"/>
 
-  <rect width="800" height="600" fill="url(#vignette)"/>
-  <rect width="800" height="600" filter="url(#grain)" opacity="0.32" style="mix-blend-mode:overlay"/>
+  <!-- Indoor palm in a planter -->
+  <g id="planter">
+    <path d="M114 470V420" stroke="#8a6a4a" stroke-width="5"/>
+    <g fill="#2f7a4f">
+      <path d="M114 420q-50 -20 -70 10q34 -16 70 -4z"/>
+      <path d="M114 420q46 -24 74 4q-38 -14 -74 2z"/>
+      <path d="M114 420q-18 -50 -54 -60q32 22 46 62z"/>
+      <path d="M114 420q14 -54 50 -62q-28 24 -42 64z"/>
+    </g>
+    <path d="M114 420q-36 6 -56 40q30 -30 58 -32z" fill="#245f3d"/>
+    <path d="M84 470h60l-8 60h-44z" fill="#dcd5c8"/>
+    <path d="M126 470h18l-8 60h-14z" fill="#c4bcad"/>
+  </g>
+
+  <!-- Event banner: the only text in the photo -->
+  <g id="banner" font-family="sans-serif" font-size="30" font-weight="700" text-anchor="middle">
+    <path d="M262 50V72M638 50V72" stroke="#8a8a8a" stroke-width="2"/>
+    <rect x="240" y="70" width="420" height="64" fill="#2d3e66"/>
+    <rect x="240" y="126" width="420" height="8" fill="#e0b24a"/>
+    <text x="454" y="111" fill="#f6f4ef" opacity="0.3">Top End Robotics Cup</text>
+    <text x="450" y="110" fill="#f6f4ef">Top End Robotics Cup</text>
+  </g>
+
+  <!-- Display case on a plinth. Reflections on the glass hide what is on the stand. -->
+  <g id="display-case">
+    <rect x="470" y="528" width="120" height="30" fill="#f3efe7" opacity="0.25"/>
+    <rect x="470" y="372" width="120" height="156" fill="#f3efe7"/>
+    <rect x="572" y="372" width="18" height="156" fill="#dcd5c8"/>
+    <rect x="466" y="366" width="128" height="8" fill="#dcd5c8"/>
+    <rect x="506" y="400" width="48" height="14" fill="#c9b07a"/>
+    <rect x="474" y="232" width="112" height="134" fill="#a8cbdc" opacity="0.35"/>
+    <rect x="512" y="346" width="44" height="20" fill="#2d3e66"/>
+    <path d="M508 234H572L558 344H496z" fill="#f4f7fa" opacity="0.25"/>
+    <path d="M516 234H560L548 344H506z" fill="#f4f7fa" opacity="0.7"/>
+    <rect x="474" y="232" width="112" height="134" fill="none" stroke="#e9eef0" stroke-width="3"/>
+    <rect x="468" y="224" width="124" height="10" fill="#dcd5c8"/>
+  </g>
+
+  <!-- The person, soft focus with a faint motion ghost -->
+  <ellipse cx="460" cy="534" rx="60" ry="6" fill="#000" opacity="0.15"/>
+  <use href="#person" x="10" opacity="0.25"/>
+  <use href="#person" filter="url(#soft)"/>
 </svg>

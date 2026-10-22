@@ -255,7 +255,7 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
       releasedBy: 'drop-witness-photo',
       src: photoFoyer,
       fileName: 'IMG_20260814_200612.jpg',
-      alt: 'A convention centre foyer at night. A person in a dark hooded jumper stands with their back to the camera beside a glass display case under a "Top End Robotics Cup" banner. Their face is not visible. The image is slightly blurred.',
+      alt: 'A convention centre foyer at night. A person in a dark hooded jumper stands with their back to the camera beside a glass display case under a "Top End Robotics Cup" banner. Their face is not visible. Reflections on the glass hide what is on the display stand. The image is slightly blurred.',
       metadata: [
         { label: 'DateTimeOriginal', value: '2026:08:14 20:06:12' },
         { label: 'OffsetTimeOriginal', value: '+09:30' },

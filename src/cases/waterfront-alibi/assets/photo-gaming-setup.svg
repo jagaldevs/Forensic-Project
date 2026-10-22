@@ -1,140 +1,160 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Gaming setup at night">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="A dim bedroom gaming setup at night, with a racing game on the monitor">
   <defs>
-    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#16161f"/>
-      <stop offset="1" stop-color="#0c0c12"/>
+    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1d2747"/>
+      <stop offset="1" stop-color="#33406b"/>
     </linearGradient>
-    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#060914"/>
-      <stop offset="1" stop-color="#16203a"/>
-    </linearGradient>
-    <linearGradient id="desk" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2a2019"/>
-      <stop offset="1" stop-color="#120d0a"/>
-    </linearGradient>
-    <linearGradient id="screenSky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ff8a3d"/>
-      <stop offset="0.55" stop-color="#d6427a"/>
-      <stop offset="1" stop-color="#3a1f5c"/>
+    <linearGradient id="game-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5b6fb5"/>
+      <stop offset="1" stop-color="#f7b267"/>
     </linearGradient>
     <linearGradient id="rgb" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#ff3b6b"/>
-      <stop offset="0.25" stop-color="#ffb13b"/>
-      <stop offset="0.5" stop-color="#43e08a"/>
-      <stop offset="0.75" stop-color="#3bb4ff"/>
-      <stop offset="1" stop-color="#b85cff"/>
+      <stop offset="0" stop-color="#e05aa0"/>
+      <stop offset="0.35" stop-color="#e0b24a"/>
+      <stop offset="0.7" stop-color="#4fc0cf"/>
+      <stop offset="1" stop-color="#8a7fe0"/>
     </linearGradient>
-    <radialGradient id="glow" cx="0.5" cy="0.45" r="0.6">
-      <stop offset="0" stop-color="#d6427a" stop-opacity="0.35"/>
-      <stop offset="1" stop-color="#d6427a" stop-opacity="0"/>
+    <radialGradient id="screen-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#8fb0ff" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#8fb0ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="warm-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffd58a" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#ffd58a" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="vignette" cx="0.5" cy="0.5" r="0.75">
       <stop offset="0.55" stop-color="#000" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.5"/>
     </radialGradient>
-    <filter id="grain" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
-      <feColorMatrix type="saturate" values="0"/>
-      
-      
-    </filter>
-    <filter id="soft"><feGaussianBlur stdDeviation="1.2"/></filter>
   </defs>
 
-  <rect width="800" height="600" fill="url(#wall)"/>
+  <!-- Bedroom wall, lit by the screen and the desk lamp -->
+  <rect width="800" height="600" fill="#232839"/>
+  <circle cx="430" cy="250" r="320" fill="url(#screen-glow)"/>
+  <circle cx="660" cy="320" r="200" fill="url(#warm-glow)" opacity="0.6"/>
 
-  <!-- Window with night sky -->
-  <rect x="40" y="40" width="190" height="230" rx="4" fill="#20202b"/>
-  <rect x="50" y="50" width="170" height="210" fill="url(#sky)"/>
-  <line x1="135" y1="50" x2="135" y2="260" stroke="#20202b" stroke-width="6"/>
-  <line x1="50" y1="150" x2="220" y2="150" stroke="#20202b" stroke-width="6"/>
-  <g fill="#ffd27a" opacity="0.8">
-    <circle cx="70" cy="238" r="1.6"/><circle cx="96" cy="232" r="1.2"/><circle cx="160" cy="240" r="1.5"/>
-    <circle cx="188" cy="228" r="1.1"/><circle cx="205" cy="242" r="1.4"/><circle cx="118" cy="244" r="1"/>
+  <!-- Window: night outside, a street light and a palm (could be any street) -->
+  <g id="window">
+    <rect x="40" y="50" width="210" height="240" fill="#3a4058"/>
+    <rect x="48" y="58" width="194" height="224" fill="url(#night)"/>
+    <g fill="#dfe4f2" opacity="0.8">
+      <circle cx="70" cy="112" r="1.5"/><circle cx="200" cy="106" r="1.5"/><circle cx="226" cy="140" r="1.5"/><circle cx="96" cy="210" r="1.5"/>
+    </g>
+    <circle cx="192" cy="164" r="46" fill="url(#warm-glow)"/>
+    <path d="M206 282V160h-12" stroke="#10142a" stroke-width="4" fill="none"/>
+    <rect x="184" y="158" width="16" height="6" rx="3" fill="#ffd58a"/>
+    <path d="M48 282v-32l40-18l40 18v32z" fill="#151a30"/>
+    <path d="M150 282v-20h92v20z" fill="#181d35"/>
+    <path d="M110 282Q104 220 124 170" stroke="#10142a" stroke-width="6" fill="none"/>
+    <g fill="#10142a">
+      <path d="M124 170q-34 -6 -54 18q30 -12 54 -10z"/>
+      <path d="M124 170q30 -14 56 4q-30 -6 -56 4z"/>
+      <path d="M124 170q-10 -28 -36 -34q22 14 30 36z"/>
+      <path d="M124 170q8 -30 34 -36q-20 16 -28 38z"/>
+      <path d="M124 170q-24 4 -38 30q22 -18 40 -22z"/>
+    </g>
+    <rect x="48" y="58" width="194" height="40" fill="#4a5070"/>
+    <path d="M48 68h194M48 78h194M48 88h194" stroke="#3a4058" stroke-width="2"/>
+    <path d="M230 98v32" stroke="#4a5070" stroke-width="2"/>
+    <rect x="143" y="58" width="4" height="224" fill="#3a4058"/>
+    <rect x="48" y="168" width="194" height="4" fill="#3a4058"/>
+    <rect x="34" y="288" width="222" height="10" fill="#464c66"/>
   </g>
-  <g fill="#cfd8ff" opacity="0.7"><circle cx="80" cy="80" r="0.9"/><circle cx="170" cy="70" r="1"/><circle cx="200" cy="110" r="0.8"/></g>
-
-  <!-- Poster -->
-  <rect x="560" y="50" width="150" height="110" rx="3" fill="#1f2433" transform="rotate(2 635 105)"/>
-  <g transform="rotate(2 635 105)" opacity="0.8">
-    <circle cx="610" cy="100" r="26" fill="none" stroke="#3bb4ff" stroke-width="4"/>
-    <rect x="645" y="80" width="50" height="8" fill="#43e08a"/>
-    <rect x="645" y="96" width="38" height="6" fill="#8891a8"/>
-    <rect x="645" y="110" width="44" height="6" fill="#8891a8"/>
-  </g>
-
-  <!-- Screen glow on the wall -->
-  <ellipse cx="400" cy="250" rx="330" ry="220" fill="url(#glow)"/>
-
-  <!-- Monitor -->
-  <rect x="215" y="120" width="370" height="230" rx="10" fill="#0a0a0d"/>
-  <rect x="226" y="131" width="348" height="208" fill="url(#screenSky)"/>
-  <!-- In-game scene: sunset road -->
-  <circle cx="400" cy="230" r="34" fill="#ffd166" opacity="0.9"/>
-  <polygon points="226,262 330,232 470,232 574,262 574,339 226,339" fill="#2b1840"/>
-  <polygon points="380,232 420,232 520,339 280,339" fill="#3b3b4f"/>
-  <polygon points="397,240 403,240 406,262 394,262" fill="#f5f5f5"/>
-  <polygon points="392,276 408,276 413,306 387,306" fill="#f5f5f5"/>
-  <!-- Car -->
-  <path d="M352 318 q48 -34 96 0 v14 h-96 z" fill="#ff3b6b"/>
-  <rect x="368" y="304" width="64" height="12" rx="4" fill="#1b1030"/>
-  <circle cx="366" cy="333" r="6" fill="#111"/><circle cx="434" cy="333" r="6" fill="#111"/>
-  <!-- HUD -->
-  <g font-family="monospace" font-size="13" fill="#ffffff" opacity="0.9">
-    <text x="238" y="152">LAP 2/3</text>
-    <text x="500" y="152">1:42.6</text>
-    <text x="238" y="330">ORBIT RALLY</text>
-  </g>
-  <rect x="520" y="300" width="44" height="30" rx="4" fill="#000" opacity="0.5"/>
-  <text x="528" y="320" font-family="monospace" font-size="14" fill="#43e08a">186</text>
-  <!-- Stand -->
-  <rect x="385" y="350" width="30" height="40" fill="#0d0d11"/>
-  <rect x="340" y="386" width="120" height="10" rx="4" fill="#0d0d11"/>
 
   <!-- Desk -->
-  <polygon points="0,390 800,390 800,600 0,600" fill="url(#desk)"/>
-  <rect x="0" y="388" width="800" height="5" fill="#3a2c22"/>
+  <rect y="404" width="800" height="66" fill="#3d3230"/>
+  <rect y="470" width="800" height="18" fill="#2b2321"/>
+  <rect y="488" width="800" height="112" fill="#161823"/>
+  <ellipse cx="430" cy="430" rx="220" ry="30" fill="#8fb0ff" opacity="0.12"/>
 
-  <!-- Keyboard with RGB -->
-  <g transform="translate(250 430)">
-    <rect width="280" height="80" rx="8" fill="#101015"/>
-    <rect x="4" y="76" width="272" height="5" rx="2" fill="url(#rgb)" opacity="0.9" filter="url(#soft)"/>
-    <g fill="url(#rgb)" opacity="0.85">
-      <rect x="12" y="10" width="256" height="12" rx="2"/>
-      <rect x="12" y="26" width="256" height="12" rx="2"/>
-      <rect x="12" y="42" width="256" height="12" rx="2"/>
-      <rect x="60" y="58" width="160" height="12" rx="2"/>
+  <!-- Desk lamp: warm light from the right -->
+  <g id="lamp">
+    <path d="M624 330L678 322L720 420H560z" fill="#ffd58a" opacity="0.12"/>
+    <ellipse cx="640" cy="430" rx="90" ry="14" fill="#ffd58a" opacity="0.3"/>
+    <ellipse cx="712" cy="418" rx="34" ry="8" fill="#3a3f52"/>
+    <path d="M712 416L700 340L652 304" stroke="#3a3f52" stroke-width="6" fill="none" stroke-linejoin="round"/>
+    <circle cx="700" cy="340" r="5" fill="#4a5070"/>
+    <path d="M630 296L668 290L680 322L622 330z" fill="#e0b24a"/>
+    <path d="M668 290L680 322L664 324z" fill="#c99c3c"/>
+    <ellipse cx="651" cy="327" rx="28" ry="5" fill="#ffe2a0"/>
+  </g>
+
+  <!-- Headphones on a stand -->
+  <g id="headphones">
+    <ellipse cx="170" cy="418" rx="34" ry="7" fill="#2a2d3a"/>
+    <rect x="166" y="262" width="8" height="156" fill="#2a2d3a"/>
+    <path d="M150 266Q170 256 190 266" stroke="#2a2d3a" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M126 304Q170 214 214 304" stroke="#1b1d26" stroke-width="10" fill="none"/>
+    <rect x="112" y="296" width="28" height="52" rx="12" fill="#1b1d26"/>
+    <rect x="200" y="296" width="28" height="52" rx="12" fill="#1b1d26"/>
+    <g fill="none" stroke="#4fc0cf" stroke-width="2" opacity="0.8">
+      <rect x="118" y="304" width="16" height="36" rx="8"/>
+      <rect x="206" y="304" width="16" height="36" rx="8"/>
     </g>
-    <g stroke="#101015" stroke-width="3">
-      <path d="M30 8v50M50 8v50M70 8v50M90 8v50M110 8v50M130 8v50M150 8v50M170 8v50M190 8v50M210 8v50M230 8v50M250 8v50"/>
+  </g>
+
+  <!-- Mug -->
+  <g id="mug">
+    <rect x="228" y="398" width="26" height="30" rx="3" fill="#8f8c86"/>
+    <path d="M254 404q12 0 12 10q0 10 -12 10" stroke="#8f8c86" stroke-width="4" fill="none"/>
+  </g>
+
+  <!-- Monitor with a racing game (fictional, no logos) -->
+  <g id="monitor">
+    <rect x="416" y="346" width="28" height="56" fill="#1b1d26"/>
+    <ellipse cx="430" cy="406" rx="66" ry="9" fill="#1b1d26"/>
+    <rect x="248" y="136" width="364" height="216" rx="6" fill="#12141b"/>
+    <circle cx="600" cy="346" r="2" fill="#4fc0cf"/>
+    <g id="game">
+      <rect x="260" y="148" width="340" height="86" fill="url(#game-sky)"/>
+      <circle cx="520" cy="214" r="16" fill="#ffe2a0"/>
+      <path d="M260 234L300 206L340 224L384 196L430 222L470 204L520 226L560 208L600 228V234z" fill="#6a5a8e"/>
+      <rect x="260" y="234" width="340" height="106" fill="#3f8a55"/>
+      <path d="M290 340H570L436 234H424z" fill="#4b4c58"/>
+      <path d="M424 234L290 340M436 234L570 340" stroke="#e27a5f" stroke-width="4" stroke-dasharray="10 8"/>
+      <path d="M430 240V340" stroke="#f6f4ef" stroke-width="3" stroke-dasharray="10 10"/>
+      <rect x="432" y="246" width="14" height="8" rx="2" fill="#4fc0cf"/>
+      <ellipse cx="430" cy="326" rx="44" ry="6" fill="#000" opacity="0.3"/>
+      <rect x="384" y="312" width="12" height="18" rx="3" fill="#15161c"/>
+      <rect x="464" y="312" width="12" height="18" rx="3" fill="#15161c"/>
+      <path d="M402 298L410 278H450L458 298z" fill="#c8664d"/>
+      <path d="M408 296L414 282H446L452 296z" fill="#2d3e66"/>
+      <rect x="390" y="296" width="80" height="28" rx="8" fill="#e27a5f"/>
+      <rect x="390" y="314" width="80" height="10" rx="4" fill="#c8664d"/>
+      <g fill="#ff5a4a"><rect x="396" y="302" width="14" height="6" rx="2"/><rect x="450" y="302" width="14" height="6" rx="2"/></g>
+      <rect x="270" y="158" width="44" height="34" rx="4" fill="#000" opacity="0.35"/>
+      <path d="M280 182q4 -16 16 -14q12 2 10 12q-2 8 -14 6z" stroke="#f6f4ef" stroke-width="2" fill="none"/>
+      <circle cx="296" cy="168" r="2.5" fill="#e0b24a"/>
+      <g fill="#f6f4ef" opacity="0.8"><rect x="556" y="160" width="34" height="5" rx="2"/><rect x="566" y="170" width="24" height="5" rx="2"/></g>
+      <path d="M558 326A18 18 0 1 1 586 326" stroke="#f6f4ef" stroke-width="3" fill="none" opacity="0.8"/>
+      <path d="M572 316L582 304" stroke="#e0b24a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M260 148H360L300 340H260z" fill="#fff" opacity="0.04"/>
     </g>
   </g>
 
   <!-- Mouse -->
-  <ellipse cx="610" cy="470" rx="22" ry="32" fill="#131318"/>
-  <ellipse cx="610" cy="470" rx="22" ry="32" fill="none" stroke="#3bb4ff" stroke-width="2" opacity="0.7"/>
-  <rect x="545" y="430" width="120" height="90" rx="6" fill="#1a1a22" opacity="0.6"/>
+  <rect x="586" y="424" width="60" height="46" rx="4" fill="#222532"/>
+  <ellipse cx="612" cy="448" rx="13" ry="19" fill="#1b1d26"/>
+  <path d="M612 432v8" stroke="#4fc0cf" stroke-width="2"/>
 
-  <!-- Headphones on stand -->
-  <rect x="130" y="320" width="10" height="110" fill="#1b1b22"/>
-  <rect x="105" y="425" width="60" height="10" rx="4" fill="#1b1b22"/>
-  <path d="M95 360 q40 -70 80 0" fill="none" stroke="#25252f" stroke-width="10" stroke-linecap="round"/>
-  <rect x="84" y="352" width="22" height="40" rx="9" fill="#25252f"/>
-  <rect x="164" y="352" width="22" height="40" rx="9" fill="#25252f"/>
-  <rect x="88" y="360" width="4" height="24" rx="2" fill="#b85cff" opacity="0.8"/>
+  <!-- Keyboard with coloured key lights -->
+  <g id="keyboard">
+    <ellipse cx="428" cy="470" rx="150" ry="10" fill="url(#rgb)" opacity="0.25"/>
+    <rect x="286" y="424" width="284" height="44" rx="5" fill="#1b1d26"/>
+    <g stroke-width="7" opacity="0.9">
+      <path d="M296 434h266" stroke="#e05aa0" stroke-dasharray="14 4"/>
+      <path d="M296 445h266" stroke="#8a7fe0" stroke-dasharray="14 4"/>
+      <path d="M296 456h266" stroke="#4fc0cf" stroke-dasharray="14 4 14 4 14 4 122 4 14 4 14 4 14 4 14 4 14"/>
+    </g>
+    <rect x="290" y="465" width="276" height="4" rx="2" fill="url(#rgb)"/>
+  </g>
 
-  <!-- Mug -->
-  <rect x="680" y="420" width="44" height="54" rx="6" fill="#2e3442"/>
-  <path d="M724 432 q20 4 0 30" fill="none" stroke="#2e3442" stroke-width="7"/>
-  <ellipse cx="702" cy="420" rx="22" ry="5" fill="#1a1d26"/>
+  <!-- Empty gaming chair in the foreground -->
+  <g id="chair">
+    <path d="M30 600V500Q30 470 70 470H170Q210 470 210 500V600z" fill="#181a24"/>
+    <path d="M110 476V600" stroke="#e27a5f" stroke-width="10" opacity="0.5"/>
+  </g>
 
-  <!-- Controller -->
-  <path d="M60 500 q30 -24 60 0 q16 30 -4 34 q-12 2 -18 -10 h-16 q-6 12 -18 10 q-20 -4 -4 -34z" fill="#1d1d26"/>
-  <circle cx="102" cy="506" r="3" fill="#43e08a"/>
-
-  <!-- Light from screen on desk -->
-  <ellipse cx="400" cy="420" rx="280" ry="40" fill="#d6427a" opacity="0.08"/>
-
+  <!-- Phone-camera darkening at the edges -->
   <rect width="800" height="600" fill="url(#vignette)"/>
-  <rect width="800" height="600" filter="url(#grain)" opacity="0.32" style="mix-blend-mode:overlay"/>
 </svg>
