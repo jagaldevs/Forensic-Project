@@ -25,7 +25,7 @@ work out from it (an inference).
 
 1. With a partner, sort the cards into **Observation** and **Inference**. Be ready to explain
    one that was hard to decide.
-2. Open the lab link. Choose a **codename**, not your real name.
+2. Open the lab at **forensic-project.netlify.app**. Choose a **codename**, not your real name.
 3. Open the **Training Academy**. Complete _Digital Footprints_, then _Metadata Matters_.
 4. Finished early? Try _IP Addresses & Networks_.
 

@@ -16,7 +16,7 @@ Signature idea: an IP that "geolocates near the crime scene" is approximate, a d
 
 ## Hosting and hard constraints
 
-- GitHub + Netlify, shared as a plain link. `netlify.toml`: build `npm run build`, publish `dist`, SPA fallback `/* /index.html 200`.
+- GitHub + Netlify, shared as a plain link: https://forensic-project.netlify.app/ (every push to `main` redeploys). `netlify.toml`: build `npm run build`, publish `dist`, SPA fallback `/* /index.html 200`.
 - **No logins, no backend, no analytics, no data leaves the device.**
 - Progress in `localStorage`, **always wrapped in try/catch**; the app must fully work if storage throws. Export/import progress code as a backup.
 - Installable PWA, offline after first load (`vite-plugin-pwa`).
@@ -150,7 +150,7 @@ The schema cross-checks references (every evidence/question/device id referenced
 3. **Flagship case "Where was Jamie?"** — missing-person timeline: Messages, Map, CCTV-style stills, Social Feed. Time-zone trap: phone on AEST (UTC+10) vs Darwin ACST (UTC+9:30, no DST) → mysterious 30-minute discrepancy. **Done (21 Oct 2026)**: `src/cases/where-was-jamie/`, plus Messages, Social Feed, CCTV, Map (travel calculator) and Timeline (clock corrections) apps.
 4. **Remaining apps**, final unseen assessment case, polished report export, teacher mode. **Done (21 Oct 2026)**: Browser & Search History, Cloud Drive, Email, Wearables & Smart Home apps; Evidence Locker chain of custody + Verify all hashes; teacher mode + Teacher Panel; Teacher Review; report export polish; assessment case `src/cases/science-fair-switch/`.
 5. **Polish** — sound design, onboarding tutorial, accessibility audit, performance pass. **Done (21 Oct 2026)**: automated + manual accessibility audit (`docs/accessibility.md`), first-run desktop tour, sound redesign, performance and offline check, Timeline date headings.
-6. **Classroom readiness** (handoff in `docs/handoff-phase-6.md`). **Mostly done (22 Oct 2026)**: practice case "The Midnight Raid" (`src/cases/midnight-raid/`, phone search history; lesson 6 of 7); Whole class summary table with .csv in Teacher Review; class default support level from `?level=`; app icons from the crest; assessment Q2 no longer needs email headers. Still to do: Netlify deploy check and the live link in the teacher brief; official brand colours (if supplied).
+6. **Classroom readiness** (handoff in `docs/handoff-phase-6.md`). **Mostly done (22 Oct 2026)**: practice case "The Midnight Raid" (`src/cases/midnight-raid/`, phone search history; lesson 6 of 7); Whole class summary table with .csv in Teacher Review; class default support level from `?level=`; app icons from the crest; assessment Q2 no longer needs email headers. Live at https://forensic-project.netlify.app/ (checked 22 Oct 2026: latest build, headers, manifest, SPA fallback). Still to do: real iPad and Chromebook checks; official brand colours (if supplied).
 
 ### Phase 1 definition of done
 

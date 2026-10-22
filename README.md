@@ -11,6 +11,8 @@ evidence board, link it to claims and make judgements, always asking:
 No logins, no backend, no analytics. Everything stays on the student's device. It works
 offline once loaded and can be installed as an app.
 
+**Live:** <https://forensic-project.netlify.app/>
+
 **Teachers:** start with the one-page [teacher brief](docs/teacher-brief.md), then the
 [teacher guide](docs/lessons/teacher-guide.md) (six 60-minute lessons, rubric) and the
 [student sheets](docs/lessons/student-lessons.md). Word copies are in [docs/word](docs/word)

@@ -57,7 +57,7 @@ A first-run tour shows students the desktop. In each case, students choose a **s
 
 **Before you use it with a class**
 
-- Share the link (Netlify) and check it opens on student devices. Students should use the same
+- Share the link, **https://forensic-project.netlify.app/**, and check it opens on student devices. Students should use the same
   device each lesson, or save their progress code. Adding `?level=guided` to the link suggests
   Guided for the class (students can still change it).
 - Ask the lab owner for the teacher code and the assessment code (set in `src/config/teacher.ts`).

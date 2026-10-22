@@ -22,8 +22,9 @@ A running list for the end-of-project review. Newest additions at the bottom of 
       review; see the support levels entry in CLAUDE.md).
 - [ ] Review the teacher guide and student sheets (`docs/lessons/`). Curriculum links use the
       Victorian Curriculum F–10 Version 2.0 (Science Levels 7 and 8), quoted from the VCAA document.
-- [ ] Deploy to Netlify, open the live link on a laptop, Chromebook and iPad, check it works
-      offline after first load, and add the link to the teacher brief.
+- [ ] The lab is live at https://forensic-project.netlify.app/ (every push to `main` redeploys). Open it on a
+      laptop, Chromebook and iPad, install it as an app, and check it works offline after first
+      load.
 - [ ] Check that no fictional student name in the cases matches a real student in the class
       (Morgan Lee, Priya Nair, Tom Baxter, Jamie Ellison, Kit Lam, Elliot Barker, Sasha Morales,
       Riley and Sam Okafor, Kai and Finn Thornton, Ruby Halloran, Leo Marsh, Zara Quinn). The

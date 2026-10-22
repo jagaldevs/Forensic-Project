@@ -59,7 +59,8 @@ the gallery walk in lesson 5. It is the practice for search histories and fitnes
 
 ## Before the unit
 
-- [ ] Get the lab link, the **teacher code** and the **assessment access code** from the lab owner.
+- [ ] The lab is at **https://forensic-project.netlify.app/**. Get the **teacher code** and the **assessment access code**
+      from the lab owner.
 - [ ] Open the link on a student laptop, a Chromebook and an iPad. Check it loads and the dock fits.
 - [ ] Play The Waterfront Alibi yourself with teacher mode on: on the case list, press **Teacher**
       and enter the teacher code. A Teacher icon appears in the dock of every case: the Teacher
