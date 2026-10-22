@@ -107,7 +107,13 @@ export function TopBar() {
           label="Back up progress"
           onClick={() => setShowBackup(true)}
         />
-        <Button size="small" variant="ghost" icon="report" onClick={() => go('report')}>
+        <Button
+          size="small"
+          variant="ghost"
+          icon="report"
+          aria-label="Report"
+          onClick={() => go('report')}
+        >
           <span className={s.hideNarrow}>Report</span>
         </Button>
         <Button size="small" variant="ghost" icon="exit" label="Leave case" onClick={exitCase} />

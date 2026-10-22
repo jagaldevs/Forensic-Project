@@ -3,7 +3,7 @@ import { collectedEvidence, isLocked } from '../../engine/availability';
 import { accessWording } from '../../engine/accessWording';
 import { formatShortDate, formatTime24 } from '../../engine/format';
 import type { CaseFile, Evidence } from '../../engine/types';
-import { appMeta } from '../../desktop/appMeta';
+import { appMeta, appsForCase } from '../../desktop/appMeta';
 import { useDesktop } from '../../stores/desktopStore';
 import { useProgress } from '../../stores/progressStore';
 import { Button } from '../../ui/Button';
@@ -89,8 +89,10 @@ export default function LockerApp({ params }: AppProps) {
             <>
               <p className={l.intro} style={{ marginBottom: 'var(--space-5)' }}>
                 {items.length} item{items.length === 1 ? '' : 's'} in the locker. Select one to
-                examine it. Some evidence only appears once you find it, for example by running an
-                IP lookup.
+                examine it.
+                {appsForCase(c).includes('iplookup')
+                  ? ' Some evidence only appears once you find it, for example by running an IP lookup.'
+                  : ' New evidence may arrive while you work.'}
               </p>
               <CustodyPanel />
             </>
@@ -176,8 +178,8 @@ function LockerDetail({ item, c }: { item: Evidence; c: CaseFile }) {
           )}
           <p className={s.prompt}>
             <strong>Think:</strong> this record shows an account was used from an IP address. Does
-            it tell you <em>who</em> was using it, or <em>where</em> they were? Try the IP address
-            in IP Lookup.
+            it tell you <em>who</em> was using it, or <em>where</em> they were?
+            {appsForCase(c).includes('iplookup') && ' Try the IP address in IP Lookup.'}
           </p>
         </>
       )}

@@ -30,7 +30,7 @@ const renderBoard = () =>
 test('linking by keyboard moves focus to the claims, then back to the card', async () => {
   const user = userEvent.setup();
   renderBoard();
-  const linkButton = screen.getByRole('button', { name: 'Link' });
+  const linkButton = screen.getByRole('button', { name: /^Link / });
   await user.click(linkButton);
 
   expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Link here (claim 1)' }));
@@ -42,7 +42,7 @@ test('linking by keyboard moves focus to the claims, then back to the card', asy
   await user.click(within(dialog).getByRole('button', { name: /Contradicts/ }));
 
   expect(screen.queryByRole('dialog')).toBeNull();
-  expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Link' }));
+  expect(document.activeElement).toBe(screen.getByRole('button', { name: /^Link / }));
   const [link] = useProgress.getState().cases[id]!.links;
   expect(link).toMatchObject({ evidenceId: item.id, relation: 'contradicts' });
 });
@@ -50,8 +50,8 @@ test('linking by keyboard moves focus to the claims, then back to the card', asy
 test('Escape cancels linking and returns focus to the card', async () => {
   const user = userEvent.setup();
   renderBoard();
-  await user.click(screen.getByRole('button', { name: 'Link' }));
+  await user.click(screen.getByRole('button', { name: /^Link / }));
   await user.keyboard('{Escape}');
   expect(screen.queryByRole('button', { name: /Link here/ })).toBeNull();
-  expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Link' }));
+  expect(document.activeElement).toBe(screen.getByRole('button', { name: /^Link / }));
 });

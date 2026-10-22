@@ -130,7 +130,18 @@ export const useDesktop = create<DesktopState>()(
         toggleMaximise: (id) => patch(id, (w) => ({ maximised: !w.maximised })),
         setRect: (id, rect) => patch(id, () => clampRect(rect)),
         setParams: (id, params) => patch(id, (w) => ({ params: { ...w.params, ...params } })),
-        clampAll: () => set({ windows: get().windows.map((w) => ({ ...w, ...fitRect(w) })) }),
+        // Below the compact width (e.g. an iPad turned to portrait) windows fill the desktop,
+        // as they do when opened there.
+        clampAll: () => {
+          const compact = desktopSize.w < COMPACT_WIDTH;
+          set({
+            windows: get().windows.map((w) => ({
+              ...w,
+              ...fitRect(w),
+              maximised: w.maximised || compact,
+            })),
+          });
+        },
       };
     },
     {

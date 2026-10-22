@@ -113,14 +113,18 @@ function AnswerKey() {
   );
 }
 
-function describeTrigger(tr: DropTrigger, titleOf: (id: string) => string): string {
+function describeTrigger(
+  tr: DropTrigger,
+  titleOf: (id: string) => string,
+  questionOf: (id: string) => string,
+): string {
   switch (tr.type) {
     case 'manual':
       return 'Only when you release it';
     case 'afterEvidenceViewed':
       return `After the student views "${titleOf(tr.evidenceId)}"`;
     case 'afterQuestionChecked':
-      return `After the student checks ${tr.questionId}`;
+      return `After the student checks ${questionOf(tr.questionId)}`;
     case 'afterMinutes':
       return `${tr.minutes} minutes after the case starts`;
   }
@@ -129,6 +133,10 @@ function describeTrigger(tr: DropTrigger, titleOf: (id: string) => string): stri
 function Drops() {
   const { c, progress } = useCaseState();
   const titleOf = (id: string) => c.evidence.find((e) => e.id === id)?.title ?? id;
+  const questionOf = (id: string) => {
+    const i = c.questions.findIndex((q) => q.id === id);
+    return i < 0 ? id : `Q${i + 1}`;
+  };
   if (!c.drops.length) return <p className={t.muted}>This case has no evidence drops.</p>;
 
   return (
@@ -156,7 +164,7 @@ function Drops() {
             <p className={t.muted}>{d.notification}</p>
             <ul className={t.small}>
               {d.triggers.map((tr, i) => (
-                <li key={i}>{describeTrigger(tr, titleOf)}</li>
+                <li key={i}>{describeTrigger(tr, titleOf, questionOf)}</li>
               ))}
               <li>
                 Contains:{' '}
@@ -177,15 +185,16 @@ function Controls() {
   const { c, progress, caseId } = useCaseState();
   const [confirm, setConfirm] = useState(false);
   const used = c.warrants.available - warrantsRemaining(c, progress);
+  const access = accessWording(c);
 
   return (
     <div className={t.stack}>
       <article className={t.card}>
-        <h3 className={t.qTitle}>Warrants</h3>
+        <h3 className={t.qTitle}>{access.heading}</h3>
         <p className={t.muted}>
-          {used} of {c.warrants.available} used. {progress.warrants.length} application
-          {progress.warrants.length === 1 ? '' : 's'} so far. Giving warrants back clears every
-          application, so warrant-locked evidence locks again.
+          {used} of {c.warrants.available} used. {progress.warrants.length} request
+          {progress.warrants.length === 1 ? '' : 's'} so far. Giving them back clears every request,
+          so the locked evidence locks again.
         </p>
         <div>
           <Button
@@ -193,7 +202,7 @@ function Controls() {
             disabled={!progress.warrants.length}
             onClick={() => useProgress.getState().resetWarrants(caseId)}
           >
-            {accessWording(c).giveBack}
+            {access.giveBack}
           </Button>
         </div>
       </article>
@@ -221,8 +230,8 @@ function Controls() {
       <article className={t.card}>
         <h3 className={t.qTitle}>Reset this case</h3>
         <p className={t.muted}>
-          Clears everything for this case on this device: board, judgements, warrants, drops and the
-          custody log. Useful before a demonstration.
+          Clears everything for this case on this device: board, judgements,{' '}
+          {access.heading.toLowerCase()}, drops and the custody log. Useful before a demonstration.
         </p>
         <div>
           <Button variant="danger" icon="trash" onClick={() => setConfirm(true)}>
@@ -239,7 +248,7 @@ function Controls() {
             <>
               <Button onClick={() => setConfirm(false)}>Cancel</Button>
               <Button
-                variant="primary"
+                variant="danger"
                 icon="trash"
                 onClick={() => {
                   useProgress.getState().resetCase(caseId);

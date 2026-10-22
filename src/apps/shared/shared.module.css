@@ -179,6 +179,31 @@
   flex: 0 1 34ch;
 }
 
+/* The hash is a button: tap to show it in full (no hover needed). */
+button.hashValue {
+  min-height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+button.hashValue code {
+  font: inherit;
+  font-family: var(--font-mono);
+}
+
+button.hashValue:hover code {
+  text-decoration: underline;
+}
+
+.hashFull {
+  flex-basis: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
 /* Key/value metadata tables */
 .kv {
   width: 100%;

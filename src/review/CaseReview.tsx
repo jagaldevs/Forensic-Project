@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { loadCase } from '../cases';
+import { findCaseMeta, loadCase } from '../cases';
 import { formatLocalDateTime } from '../engine/format';
 import { accessWording } from '../engine/accessWording';
 import { describeSupportLevels, type CaseProgress } from '../engine/progressTypes';
@@ -26,8 +26,10 @@ export function CaseReview({ caseId, progress }: { caseId: string; progress: Cas
   }, [caseId]);
 
   if (failed)
-    return <p className={r.empty}>Couldn&rsquo;t open the case &ldquo;{caseId}&rdquo;.</p>;
-  if (!c) return <p className={r.empty}>Loading {caseId}…</p>;
+    return (
+      <p className={r.empty}>Couldn&rsquo;t open {findCaseMeta(caseId)?.title ?? 'this case'}.</p>
+    );
+  if (!c) return <p className={r.empty}>Loading {findCaseMeta(caseId)?.title ?? 'the case'}…</p>;
 
   const score = scoreCase(c, progress);
   const verified = (progress.custody ?? []).filter((e) => e.action === 'verified');
@@ -45,7 +47,7 @@ export function CaseReview({ caseId, progress }: { caseId: string; progress: Cas
           )}
           {progress.submittedAt ? (
             <Badge tone="supports" icon="check">
-              {c.meta.assessment ? 'Submitted' : 'Marked complete'}{' '}
+              {c.meta.assessment ? 'Submitted' : 'Complete'}{' '}
               {formatLocalDateTime(progress.submittedAt)}
             </Badge>
           ) : (

@@ -86,7 +86,7 @@ export function BoardCard({ item, pos, dragPos, onDrag, maxX, linking, onLink }:
           aria-pressed={linking}
           data-link-for={item.id}
         >
-          Link
+          Link <span className="visually-hidden">{item.title}</span>
         </Button>
         <Button
           size="small"

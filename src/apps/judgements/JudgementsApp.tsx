@@ -363,7 +363,8 @@ function AttachControl({
   );
 }
 
-function Feedback({ judgement }: { judgement: Judgement }) {
+/** `open`: an unmarked open answer, so no verdict badge and no check count. */
+function Feedback({ judgement, open = false }: { judgement: Judgement; open?: boolean }) {
   const r = judgement.lastResult;
   if (!r) return null;
   return (
@@ -373,7 +374,9 @@ function Feedback({ judgement }: { judgement: Judgement }) {
       aria-label="Feedback"
     >
       <div className={j.feedbackHead}>
-        {r.correct ? (
+        {open ? (
+          <Badge icon="check">Saved for your teacher</Badge>
+        ) : r.correct ? (
           <Badge tone="supports" icon="supports">
             Well reasoned
           </Badge>
@@ -382,7 +385,7 @@ function Feedback({ judgement }: { judgement: Judgement }) {
             Worth another look
           </Badge>
         )}
-        <span className={j.attempts}>Check {judgement.attempts}</span>
+        {!open && <span className={j.attempts}>Check {judgement.attempts}</span>}
       </div>
       <ul>
         {r.messages.map((m, i) => (
@@ -392,7 +395,7 @@ function Feedback({ judgement }: { judgement: Judgement }) {
           </li>
         ))}
       </ul>
-      {r.correct && (
+      {r.correct && !open && (
         <p className={j.teacherNote}>Your written reasoning will be read by your teacher.</p>
       )}
     </section>
@@ -443,7 +446,7 @@ function OpenForm({ q }: { q: OpenQuestion }) {
             </ul>
           )}
         </div>
-        {!assessment && <Feedback judgement={judgement} />}
+        {!assessment && <Feedback judgement={judgement} open />}
       </fieldset>
     </form>
   );

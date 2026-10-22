@@ -77,13 +77,31 @@ export function CaseSelectScreen() {
           </section>
         )}
 
+        <section className={s.academyBanner} aria-labelledby="academy-title">
+          <Icon name="academy" size={22} />
+          <div className={s.academyText}>
+            <h2 id="academy-title">Training Academy</h2>
+            <p>
+              New to digital forensics? Short missions on metadata, digital footprints, search
+              history, IP addresses, time zones and privacy. Each case lists the ones that help.
+            </p>
+          </div>
+          <span className={earned ? s.cardStatusOn : s.small}>
+            {earned > 0 && <Icon name="medal" size={14} />}
+            {earned} of {missionCatalogue.length} badges
+          </span>
+          <Button icon="academy" onClick={() => go('academy')}>
+            Enter the academy
+          </Button>
+        </section>
+
         <div className={s.caseGrid}>
           {caseCatalogue.map((meta) => {
             const progress = cases[meta.id];
             const status = progress?.submittedAt
               ? meta.assessment
                 ? 'Submitted'
-                : 'Report submitted'
+                : 'Complete'
               : progress
                 ? 'In progress'
                 : 'New case';
@@ -122,7 +140,7 @@ export function CaseSelectScreen() {
                     {meta.recommendedMissions
                       .map((id) => findMissionMeta(id))
                       .filter((m) => m !== undefined)
-                      .map((m) => `${m.title}${academy[m.id]?.completedAt ? ' ✓' : ''}`)
+                      .map((m) => `${m.title}${academy[m.id]?.completedAt ? ' (done)' : ''}`)
                       .join(', ')}
                   </p>
                 ) : null}
@@ -159,25 +177,6 @@ export function CaseSelectScreen() {
               </article>
             );
           })}
-          <article className={`${s.caseCard} ${s.academyCard}`} aria-labelledby="academy-title">
-            <p className={s.cardMeta}>
-              <span>{missionCatalogue.length} short missions</span>
-              <span className={earned ? s.cardStatusOn : undefined}>
-                {earned > 0 && <Icon name="medal" size={14} />}
-                {earned} of {missionCatalogue.length} badges
-              </span>
-            </p>
-            <h2 id="academy-title">Training Academy</h2>
-            <p>
-              New to digital forensics? Learn the tools first: metadata, digital footprints, search
-              history, IP addresses, time zones, and privacy.
-            </p>
-            <div className={s.caseFooter}>
-              <Button icon="academy" onClick={() => go('academy')}>
-                Enter the academy
-              </Button>
-            </div>
-          </article>
         </div>
       </div>
 
@@ -239,8 +238,8 @@ export function CaseSelectScreen() {
           }
         >
           <p>
-            This clears your evidence board, judgements and warrants for this case. Back up your
-            progress first if you might want it later.
+            This clears your evidence board, judgements and everything else you have done in this
+            case. Back up your progress first if you might want it later.
           </p>
         </Dialog>
       )}

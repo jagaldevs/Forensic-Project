@@ -46,14 +46,14 @@ export const tourSteps: TourStep[] = [
   {
     title: 'Link evidence to a claim',
     body: () =>
-      'Press Link on a card, then Link here on a claim, and choose whether the evidence supports it, contradicts it, or can’t decide it.',
+      'Press Link on a card, then Link here on a claim, and choose Supports, Contradicts or Inconclusive.',
     highlight: ['[data-claim-link]', '[data-link-for]', '[data-dock-app="board"]'],
     done: (now, start) => now.links > start.links,
   },
   {
     title: 'Make a judgement',
     body: ({ assessment }) =>
-      `Open Judgements and choose a verdict for a claim. Then say why, name one limitation, and press ${assessment ? 'Save' : 'Check'}.`,
+      `Open Judgements and choose a verdict for a claim. Then say why, name one limitation, and press ${assessment ? 'Save my answer' : 'Check my judgement'}.`,
     highlight: ['[data-tour="verdicts"]', '[data-dock-app="judgements"]'],
     done: (now, start) => now.verdicts > start.verdicts,
   },

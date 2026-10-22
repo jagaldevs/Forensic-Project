@@ -38,7 +38,7 @@ export default function NetworkLogApp({ params }: AppProps) {
     return (
       <div className={s.empty}>
         <Icon name="router" size={40} />
-        <p>No network logs in this case yet.</p>
+        <p>No network logs have been collected yet.</p>
       </div>
     );
 

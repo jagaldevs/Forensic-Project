@@ -3,6 +3,7 @@
  * check. Collection is worked out from progress (case start, warrants, drops, lookups); views
  * and checks are logged as they happen.
  */
+import { accessWording } from './accessWording';
 import { collectedEvidence, isLocked } from './availability';
 import type { CaseProgress } from './progressTypes';
 import type { CaseFile, Evidence } from './types';
@@ -40,7 +41,10 @@ export function collection(
         progress.warrants.some((w) => w.granted && w.requestId === r.id),
     );
     const grant = progress.warrants.find((w) => w.granted && w.requestId === request?.id);
-    return { at: grant?.at ?? progress.startedAt, detail: `Warrant granted: ${request?.title}` };
+    return {
+      at: grant?.at ?? progress.startedAt,
+      detail: `${accessWording(c).granted}: ${request?.title}`,
+    };
   }
   return { at: progress.startedAt, detail: 'In the case file when it opened' };
 }

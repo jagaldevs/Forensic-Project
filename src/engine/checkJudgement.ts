@@ -93,7 +93,7 @@ export function checkOpenJudgement(now = Date.now()): CheckResult {
     messages: [
       {
         tone: 'good',
-        text: 'Answer saved for your teacher. Check that you named specific evidence and explained whether a warrant would be proportionate.',
+        text: 'Answer saved for your teacher. Check that you named specific evidence and explained whether each request for someone’s data would be fair and proportionate.',
       },
     ],
     at: now,

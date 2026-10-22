@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useId, useState } from 'react';
 import type { HashCheck } from '../../engine/hash';
 import type { Evidence } from '../../engine/types';
 import { Icon } from '../../ui/Icon';
@@ -12,14 +12,25 @@ import { useHashCheck } from './useHashCheck';
  */
 export function HashLine({ item }: { item: Evidence }) {
   const check = useHashCheck(item);
+  const [full, setFull] = useState(false);
 
   return (
     <>
       <div className={s.hash}>
         <span className={s.hashLabel}>SHA-256</span>
-        <code className={s.hashValue} title={check?.recorded}>
-          {check ? check.recorded : 'calculating…'}
-        </code>
+        {check ? (
+          <button
+            type="button"
+            className={`${s.hashValue} ${full ? s.hashFull : ''}`}
+            aria-expanded={full}
+            aria-label={full ? `Hash ${check.recorded}. Shorten` : 'Show the full hash'}
+            onClick={() => setFull(!full)}
+          >
+            <code>{check.recorded}</code>
+          </button>
+        ) : (
+          <code className={s.hashValue}>calculating…</code>
+        )}
         {check &&
           (check.match ? (
             <Badge tone="supports" icon="check">

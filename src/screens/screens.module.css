@@ -309,8 +309,36 @@
   font-size: var(--text-xs);
 }
 
-.academyCard {
-  background: var(--surface-raised);
+/* One line above the case cards: the Academy is recommended before the cases. */
+.academyBanner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.academyBanner > svg {
+  flex: none;
+  color: var(--text-muted);
+}
+
+.academyText {
+  flex: 1 1 20rem;
+  min-width: 0;
+}
+
+.academyText h2 {
+  font-size: var(--text-md);
+}
+
+.academyText p {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
 }
 
 .teacherBar {

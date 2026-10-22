@@ -13,7 +13,7 @@ import p from './photos.module.css';
 
 type Photo = EvidenceOfType<'photo'>;
 
-/** Photo viewer with a "Get Info" metadata panel. */
+/** Photo viewer with a "Get info" metadata panel. */
 export default function PhotosApp({ params }: AppProps) {
   const { c, progress, caseId } = useCaseState();
   const photos = usableEvidence(c, progress).filter((e): e is Photo => e.type === 'photo');
@@ -74,7 +74,7 @@ export default function PhotosApp({ params }: AppProps) {
               aria-controls="photo-info"
               onClick={() => setShowInfo((v) => !v)}
             >
-              Get Info
+              Get info
             </Button>
           </div>
         </div>
@@ -101,9 +101,8 @@ export default function PhotosApp({ params }: AppProps) {
                 </tbody>
               </table>
               <p className={s.prompt}>
-                <strong>Ask yourself:</strong> what does this photo show, and what can&rsquo;t it
-                show? Metadata records the device&rsquo;s clock and settings, not who was holding
-                it.
+                <strong>Think:</strong> what does this photo show, and what can&rsquo;t it show?
+                Metadata records the device&rsquo;s clock and settings, not who was holding it.
               </p>
             </aside>
           )}
