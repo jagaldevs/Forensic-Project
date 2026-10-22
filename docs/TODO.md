@@ -14,7 +14,7 @@ A running list for the end-of-project review. Newest additions at the bottom of 
 - [x] App icons are now made from the crest (`npm run icons`). They come from the 300 px JPEG, so
       the 512 px icons are upscaled: a vector (SVG) or larger logo would make them sharper, and
       would also print more sharply.
-- [ ] Test on a real iPad (Safari) and a Chromebook: touch dragging of windows and board cards,
+- [x] (Owner, 22 Oct 2026) Test on a real iPad (Safari) and a Chromebook: touch dragging of windows and board cards,
       the dock scrolling, installing as an app (check the crest icon), offline after first load.
 - [ ] Screen readers: one run through a case with VoiceOver on iPad and ChromeVox on a Chromebook.
 - [ ] Listen to the sound effects on classroom speakers (levels were set by reasoning).
@@ -22,7 +22,7 @@ A running list for the end-of-project review. Newest additions at the bottom of 
       review; see the support levels entry in CLAUDE.md).
 - [ ] Review the teacher guide and student sheets (`docs/lessons/`). Curriculum links use the
       Victorian Curriculum F–10 Version 2.0 (Science Levels 7 and 8), quoted from the VCAA document.
-- [ ] The lab is live at https://forensic-project.netlify.app/ (every push to `main` redeploys). Open it on a
+- [x] (Owner, 22 Oct 2026) The lab is live at https://forensic-project.netlify.app/ (every push to `main` redeploys). Open it on a
       laptop, Chromebook and iPad, install it as an app, and check it works offline after first
       load.
 - [ ] Check that no fictional student name in the cases matches a real student in the class
