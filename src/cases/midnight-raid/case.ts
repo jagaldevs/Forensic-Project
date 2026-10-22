@@ -598,7 +598,7 @@ For every piece of evidence, ask yourself three things. What does it show? What 
       location: 'Track beside Cabins 3 to 5, Wangi Ridge Outdoor Education Centre',
       deviceId: 'trail-cam',
       src: trailcam0112,
-      alt: 'A grainy black-and-white infrared photo of a gravel track at night. At the right edge is part of a cabin verandah. On the verandah rail is a blurry dark shape with two small bright dots, like eyes reflecting the flash.',
+      alt: 'A grainy black-and-white infrared photo of a gravel track at night. At the right edge is part of a cabin verandah, with a pale box on the boards near the steps. On the verandah rail is a blurry dark shape with two small bright dots, like eyes reflecting the flash.',
       overlay: '2026-09-10 01:12:44',
       note: 'Centre office: the camera points along the track. The Cabin 4 verandah rail is at the right edge of the picture; the cabin door is out of view.',
       timeline: [
@@ -610,7 +610,7 @@ For every piece of evidence, ask yourself three things. What does it show? What 
       ],
       guided: trailcamGuide,
       teacherNote:
-        'Can’t tell what it is: a deliberately unclear image. Viewing it triggers the drop with the clearer 1:27 am image.',
+        'Can’t tell what it is: a deliberately unclear image. Viewing it triggers the drop with the clearer 1:27 am image. Sharp-eyed students may notice the snack box still looks closed at 1:12, just after Kai’s steps (1:09 to 1:12); that fits Kai’s account but isn’t needed for any answer.',
     },
     {
       id: 'trailcam-0127',
@@ -625,7 +625,7 @@ For every piece of evidence, ask yourself three things. What does it show? What 
       location: 'Track beside Cabins 3 to 5, Wangi Ridge Outdoor Education Centre',
       deviceId: 'trail-cam',
       src: trailcam0127,
-      alt: 'A black-and-white infrared photo of a cabin verandah at night. A furry animal with pointed ears and a bushy dark tail sits on the lid of a plastic tub. Its eyes shine in the flash. A torn chip packet lies on the boards beside the tub.',
+      alt: 'A black-and-white infrared photo of the same gravel track and cabin verandah at night. A furry animal with pointed ears and a bushy dark tail sits on the lid of a plastic tub at the top of the verandah steps. Its eyes shine in the flash. The far end of the lid is lifted, and a torn chip packet lies on the boards beside the tub.',
       overlay: '2026-09-10 01:27:09',
       note: 'Ranger Tess Wardell: “That’s a common brushtail possum. These are the only two photos the camera took between midnight and 5 am.”',
       timeline: [

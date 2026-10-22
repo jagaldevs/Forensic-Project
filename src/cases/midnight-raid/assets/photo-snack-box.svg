@@ -1,60 +1,193 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Daylight photo of an open plastic snack tub on a wooden verandah, with torn packets, a chewed zip-lock bag and small paw prints in spilled brown powder beside a teaspoon">
-  <title>Ruby's photo, 7:08 am: the raided snack box on the Cabin 4 verandah</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Morning photo of the raided snack box on the Cabin 4 verandah: torn packets, a chewed zip-lock bag and small paw prints in spilled hot chocolate powder beside a teaspoon">
   <defs>
-    <linearGradient id="light" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#fff6e0" stop-opacity="0.35"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.12"/>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8ec5e6"/>
+      <stop offset="0.7" stop-color="#f6d9ab"/>
     </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff1c9"/>
+      <stop offset="1" stop-color="#fff1c9" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Chip packet: crimped at the left end, torn open at the right -->
+    <path id="packet" d="M-78 -42H60L52 -30L64 -20L54 -8L66 4L56 16L64 30L54 42H-78L-70 30L-78 18L-70 6L-78 -6L-70 -18L-78 -30Z"/>
+    <path id="packet-shade" d="M-74 10H60L56 16L64 30L54 42H-78L-70 30L-78 18Z"/>
+    <!-- Zip-lock bag with bite marks along the chewed corner -->
+    <path id="bag" d="M-100 -60H100V0q-12 0 -12 10q-12 0 -12 12q-12 0 -14 10q-12 0 -12 12q-10 0 -10 14V60H-100Z"/>
+    <!-- Possum front paw print, toes pointing up: about 33 units long before scaling -->
     <g id="print">
-      <ellipse cx="0" cy="6" rx="7" ry="6" fill="#5a3a22"/>
-      <circle cx="-9" cy="-4" r="2.6" fill="#5a3a22"/>
-      <circle cx="-4" cy="-9" r="2.6" fill="#5a3a22"/>
-      <circle cx="2" cy="-10" r="2.6" fill="#5a3a22"/>
-      <circle cx="8" cy="-7" r="2.6" fill="#5a3a22"/>
-      <circle cx="11" cy="0" r="2.6" fill="#5a3a22"/>
+      <path d="M-9 8q-2 -8 4 -10q5 -3 10 0q6 2 4 10q-1 6 -9 6q-8 0 -9 -6z"/>
+      <ellipse cx="-13" cy="-4" rx="3" ry="4.5" transform="rotate(-50 -13 -4)"/>
+      <ellipse cx="-8" cy="-12" rx="3" ry="4.5" transform="rotate(-25 -8 -12)"/>
+      <ellipse cx="0" cy="-15" rx="3" ry="4.5"/>
+      <ellipse cx="8" cy="-12" rx="3" ry="4.5" transform="rotate(25 8 -12)"/>
+      <ellipse cx="13" cy="-4" rx="3" ry="4.5" transform="rotate(50 13 -4)"/>
+    </g>
+    <!-- Teaspoon: bowl 44 long, whole spoon 154 long -->
+    <g id="spoon">
+      <ellipse cx="440" cy="556" rx="22" ry="15"/>
+      <path d="M460 553L548 547Q572 545 572 551Q572 557 548 557L460 559Z"/>
     </g>
   </defs>
-  <!-- wooden verandah boards -->
-  <rect width="800" height="600" fill="#b98a5a"/>
-  <g fill="#a87a4c">
-    <rect y="0" width="800" height="70"/><rect y="150" width="800" height="70"/>
-    <rect y="300" width="800" height="70"/><rect y="450" width="800" height="70"/>
+
+  <!-- Beyond the rail: morning sky, bush, a termite mound and a pandanus -->
+  <g id="outside">
+    <rect width="800" height="184" fill="url(#sky)"/>
+    <circle cx="300" cy="84" r="90" fill="url(#glow)"/>
+    <circle cx="300" cy="84" r="18" fill="#ffe2a0"/>
+    <g id="trees-left">
+      <path d="M40 120l4 -50h6l4 50zM150 120l3 -40h6l3 40z" fill="#d8cbb5"/>
+      <g fill="#2f7a4f"><ellipse cx="40" cy="62" rx="56" ry="26"/><ellipse cx="110" cy="72" rx="50" ry="22"/><ellipse cx="170" cy="70" rx="48" ry="24"/></g>
+      <path d="M-16 74q60 16 112 4q50 12 122 -4q-8 18 -40 22q-80 10 -194 -4z" fill="#245f3d"/>
+    </g>
+    <g id="trees-right">
+      <path d="M430 120l4 -46h6l4 46zM640 120l4 -52h6l4 52z" fill="#d8cbb5"/>
+      <g fill="#2f7a4f"><ellipse cx="440" cy="70" rx="50" ry="22"/><ellipse cx="520" cy="62" rx="56" ry="26"/><ellipse cx="610" cy="66" rx="52" ry="24"/><ellipse cx="700" cy="58" rx="60" ry="28"/><ellipse cx="780" cy="66" rx="50" ry="24"/></g>
+      <path d="M390 76q70 14 150 2q90 14 170 -2q50 8 100 0v16q-120 20 -420 0z" fill="#245f3d"/>
+    </g>
+    <rect y="112" width="800" height="72" fill="#cfae6e"/>
+    <path d="M0 146Q200 136 400 142T800 136V156Q600 162 400 160T0 168Z" fill="#b5562f"/>
+    <g id="termite-mound">
+      <path d="M500 142q2 -30 12 -46q6 -16 14 -14q8 4 12 20q10 18 10 40z" fill="#b5562f"/>
+      <path d="M526 82q8 4 12 20q10 18 10 40h-14q0 -36 -8 -60z" fill="#8f4325"/>
+    </g>
+    <g id="pandanus">
+      <path d="M702 150q-4 -30 6 -60" stroke="#8a6a4a" stroke-width="5" fill="none"/>
+      <path d="M694 150l8 -16M712 150l-6 -16" stroke="#8a6a4a" stroke-width="3"/>
+      <path fill="#2f7a4f" d="M708 88l-40 -4l38 -4zM708 88l-32 -24l34 18zM708 88l-8 -36l12 34zM708 88l18 -32l-12 34zM708 88l38 -18l-36 22zM708 88l42 6l-40 0z"/>
+      <path fill="#245f3d" d="M708 88l28 22l-30 -16zM708 88l-34 20l30 -16z"/>
+    </g>
   </g>
-  <g stroke="#8a5f38" stroke-width="3">
-    <line x1="0" y1="72" x2="800" y2="72"/><line x1="0" y1="148" x2="800" y2="148"/>
-    <line x1="0" y1="222" x2="800" y2="222"/><line x1="0" y1="298" x2="800" y2="298"/>
-    <line x1="0" y1="372" x2="800" y2="372"/><line x1="0" y1="448" x2="800" y2="448"/>
-    <line x1="0" y1="522" x2="800" y2="522"/>
+
+  <!-- Verandah rail, posts and the edge of the roof -->
+  <g id="rail">
+    <rect width="800" height="16" fill="#5f452e"/>
+    <rect y="108" width="800" height="14" fill="#8a6a4a"/>
+    <rect y="118" width="800" height="4" fill="#6f5339"/>
+    <path fill="#8a6a4a" d="M46 122h8v46h-8zM86 122h8v46h-8zM126 122h8v46h-8zM166 122h8v46h-8zM206 122h8v46h-8zM246 122h8v46h-8zM286 122h8v46h-8zM326 122h8v46h-8zM366 122h8v46h-8zM406 122h8v46h-8zM446 122h8v46h-8zM486 122h8v46h-8zM526 122h8v46h-8zM566 122h8v46h-8zM606 122h8v46h-8zM646 122h8v46h-8zM686 122h8v46h-8zM726 122h8v46h-8z"/>
+    <rect y="168" width="800" height="10" fill="#8a6a4a"/>
+    <rect y="178" width="800" height="6" fill="#6f5339"/>
+    <rect y="16" width="26" height="168" fill="#7b5a3c"/>
+    <rect y="16" width="10" height="168" fill="#8a6a4a"/>
+    <rect x="774" y="16" width="26" height="168" fill="#7b5a3c"/>
+    <rect x="774" y="16" width="10" height="168" fill="#8a6a4a"/>
   </g>
-  <g stroke="#9a6d43" stroke-width="1.5" fill="none" opacity="0.7">
-    <path d="M40 30 q120 10 260 0"/><path d="M420 110 q140 -8 300 4"/><path d="M80 260 q160 8 300 -2"/>
-    <path d="M460 410 q120 10 280 0"/><path d="M60 560 q200 -6 360 4"/>
+
+  <!-- Verandah boards, wider towards the camera -->
+  <g id="boards">
+    <rect y="184" width="800" height="416" fill="#c99a66"/>
+    <g fill="#c3925d">
+      <rect y="198" width="800" height="16"/><rect y="232" width="800" height="21"/><rect y="277" width="800" height="27"/>
+      <rect y="335" width="800" height="35"/><rect y="410" width="800" height="45"/><rect y="506" width="800" height="58"/>
+    </g>
+    <rect y="184" width="800" height="16" fill="#a87a4c" opacity="0.5"/>
+    <path d="M0 198H800M0 214H800M0 232H800M0 253H800M0 277H800M0 304H800M0 335H800M0 370H800M0 410H800M0 455H800M0 506H800M0 564H800" stroke="#9c6e43" stroke-width="3"/>
+    <path d="M30 290q120 8 240 -2M520 320q120 -6 250 4M60 390q160 10 300 -2M620 440q90 -6 170 4M80 590q200 -8 330 4M500 490q60 6 110 0" stroke="#b88a58" stroke-width="2" fill="none"/>
   </g>
-  <!-- the plastic tub, open, lid pushed aside -->
-  <rect x="120" y="70" width="250" height="170" rx="16" fill="#cfe6f2" stroke="#8fb5c8" stroke-width="4"/>
-  <rect x="140" y="88" width="210" height="134" rx="10" fill="#e8f3f8"/>
-  <rect x="380" y="40" width="240" height="70" rx="14" fill="#5b8fb0" transform="rotate(14 500 75)"/>
-  <!-- leftovers inside the tub -->
-  <rect x="160" y="110" width="70" height="40" rx="6" fill="#e2b33c"/>
-  <rect x="250" y="150" width="80" height="44" rx="6" fill="#d35a4a"/>
-  <!-- torn chip packets -->
-  <path d="M430 210 l90 -20 l26 60 l-18 6 l-10 -14 l-14 18 l-62 -10 z" fill="#e9c43a"/>
-  <path d="M440 214 l70 -16" stroke="#b8901c" stroke-width="3"/>
-  <path d="M560 260 l70 10 l-6 50 l-12 -4 l-8 10 l-10 -8 l-40 -6 z" fill="#4c9a5a"/>
-  <g fill="#f3d27a"><circle cx="540" cy="262" r="6"/><circle cx="555" cy="280" r="5"/><circle cx="526" cy="250" r="4"/><circle cx="600" cy="330" r="5"/></g>
-  <!-- chewed zip-lock bag -->
-  <path d="M190 300 h120 v70 l-10 8 l-8 -8 l-10 10 l-8 -10 l-12 9 l-8 -9 l-10 10 l-10 -8 l-12 8 l-10 -8 l-12 6 z" fill="#eef4f6" fill-opacity="0.85" stroke="#9fb4bd" stroke-width="3"/>
-  <line x1="190" y1="314" x2="310" y2="314" stroke="#7aa0b0" stroke-width="4"/>
-  <!-- spilled hot chocolate powder with small paw prints -->
-  <path d="M380 400 q60 -40 150 -20 q90 20 120 70 q-20 60 -130 70 q-120 6 -160 -40 q-20 -40 20 -80 z" fill="#7a4e2e" opacity="0.55"/>
-  <use href="#print" transform="translate(430 440) rotate(-20) scale(1.5)"/>
-  <use href="#print" transform="translate(480 470) rotate(-10) scale(1.5)"/>
-  <use href="#print" transform="translate(530 440) rotate(-25) scale(1.5)"/>
-  <use href="#print" transform="translate(580 480) rotate(-12) scale(1.5)"/>
-  <!-- teaspoon for scale -->
-  <g transform="rotate(-8 640 540)">
-    <ellipse cx="610" cy="540" rx="18" ry="11" fill="#d7dbe0" stroke="#9aa1a8" stroke-width="2"/>
-    <rect x="626" y="536" width="110" height="7" rx="3" fill="#d7dbe0" stroke="#9aa1a8" stroke-width="2"/>
+
+  <!-- The snack tub, open, with leftovers inside -->
+  <g id="tub">
+    <ellipse cx="206" cy="356" rx="136" ry="16" fill="#8a5f38" opacity="0.35"/>
+    <path d="M66 250H314L306 344Q304 352 296 352H84Q76 352 74 344Z" fill="#dfe8ea"/>
+    <path d="M276 250H314L306 344Q304 352 296 352H284Z" fill="#c3d1d6"/>
+    <path d="M70 272H310" stroke="#c9d6da" stroke-width="3"/>
+    <rect x="58" y="206" width="264" height="56" rx="16" fill="#eef3f4"/>
+    <rect x="72" y="216" width="236" height="38" rx="10" fill="#a9bcc3"/>
+    <rect x="92" y="224" width="56" height="18" rx="4" fill="#e0b24a" transform="rotate(-8 120 233)"/>
+    <path d="M170 236q14 -12 30 -4q14 -6 22 6q-10 12 -28 8q-16 4 -24 -10z" fill="#f6f4ef"/>
+    <rect x="240" y="226" width="50" height="16" rx="4" fill="#e27a5f" transform="rotate(10 265 234)"/>
   </g>
-  <rect width="800" height="600" fill="url(#light)"/>
+
+  <!-- The blue lid, pushed off and lying on the boards -->
+  <g id="lid" transform="rotate(9 450 236)">
+    <rect x="348" y="218" width="220" height="60" rx="14" fill="#8a5f38" opacity="0.35"/>
+    <rect x="340" y="206" width="220" height="60" rx="14" fill="#3a6d98"/>
+    <rect x="340" y="206" width="220" height="50" rx="14" fill="#4a86b8"/>
+    <rect x="356" y="216" width="188" height="30" rx="9" fill="#5b97c6"/>
+  </g>
+
+  <!-- Torn chip packet (mustard) with chips spilling out -->
+  <g id="packet-mustard" transform="translate(670 268) rotate(-14)">
+    <use href="#packet" fill="#8a5f38" opacity="0.35" transform="translate(10 12)"/>
+    <use href="#packet" fill="#e0b24a"/>
+    <use href="#packet-shade" fill="#c99c3c"/>
+    <path d="M-66 -40V40" stroke="#c99c3c" stroke-width="3"/>
+    <path d="M50 -30L60 -20L52 -8L62 4L54 16L60 28L46 20Q40 0 46 -20Z" fill="#d9dde2"/>
+    <circle cx="-10" cy="-4" r="20" fill="#e27a5f"/>
+    <ellipse cx="-10" cy="-4" rx="10" ry="6" fill="#f2d58a"/>
+  </g>
+  <g id="chips-mustard" fill="#f2d58a">
+    <path d="M746 256q8 -6 14 0q-2 8 -12 6z"/><path d="M768 278q10 -4 14 4q-6 6 -14 2z"/><path d="M744 290q8 -6 12 2q-4 6 -12 4z"/>
+    <path d="M778 250q8 -2 10 6q-6 4 -10 0z"/><path d="M760 306q8 -4 12 2q-4 6 -12 4z"/><path d="M334 318q8 -4 12 2q-4 6 -12 4z"/>
+  </g>
+
+  <!-- Chewed zip-lock bag: marshmallows inside, bite marks and shreds at one corner -->
+  <g id="zip-lock-bag" transform="translate(150 455) rotate(-8)">
+    <use href="#bag" fill="#8a5f38" opacity="0.3" transform="translate(10 12)"/>
+    <g fill="#f6f4ef"><rect x="-70" y="-20" width="22" height="16" rx="6"/><rect x="-20" y="0" width="22" height="16" rx="6"/><rect x="30" y="-24" width="22" height="16" rx="6"/></g>
+    <g fill="#f3c1cb"><rect x="-44" y="10" width="22" height="16" rx="6"/><rect x="8" y="-18" width="22" height="16" rx="6"/></g>
+    <use href="#bag" fill="#e9f3f6" fill-opacity="0.55" stroke="#a9bec6" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M-94 -46H94" stroke="#4a86b8" stroke-width="5"/>
+    <path d="M-94 -38H94" stroke="#a9bec6" stroke-width="2"/>
+    <path d="M104 20l8 4l-6 4zM96 46l10 -2l-4 8zM70 66l8 0l-4 7z" fill="#e9f3f6" stroke="#a9bec6" stroke-width="1.5"/>
+  </g>
+  <g id="loose-marshmallows">
+    <rect x="276" y="512" width="22" height="16" rx="6" fill="#f6f4ef" transform="rotate(20 287 520)"/>
+    <rect x="292" y="544" width="22" height="16" rx="6" fill="#f3c1cb" transform="rotate(-15 303 552)"/>
+  </g>
+
+  <!-- Hot chocolate powder spilled from a tipped-over tin -->
+  <g id="powder">
+    <path d="M612 404Q566 382 516 396Q462 402 422 420Q368 432 340 466Q308 506 328 546Q346 586 410 588Q474 594 526 576Q578 560 596 524Q614 488 604 456Q600 430 612 404Z" fill="#a77450" opacity="0.55"/>
+    <path d="M600 410Q560 394 520 404Q470 410 430 428Q380 440 352 472Q324 506 340 540Q356 572 410 576Q470 582 520 566Q566 552 584 520Q600 488 592 456Q588 428 600 410Z" fill="#8a5636"/>
+    <g fill="#8a5636"><circle cx="330" cy="436" r="3"/><circle cx="318" cy="476" r="2.5"/><circle cx="314" cy="520" r="3"/><circle cx="362" cy="592" r="2.5"/><circle cx="604" cy="566" r="3"/><circle cx="618" cy="540" r="2"/></g>
+  </g>
+  <g id="tin" transform="translate(650 395) rotate(-20)">
+    <ellipse cx="6" cy="36" rx="64" ry="10" fill="#8a5f38" opacity="0.35"/>
+    <rect x="-60" y="-32" width="120" height="64" rx="4" fill="#6b3f2a"/>
+    <rect x="-60" y="-32" width="120" height="14" fill="#85543a"/>
+    <rect x="-30" y="-32" width="66" height="64" fill="#f6f0e4"/>
+    <rect x="-30" y="14" width="66" height="18" fill="#e3d9c6"/>
+    <path d="M-6 -10h20v18q0 6 -6 6h-8q-6 0 -6 -6z" fill="#b5562f"/>
+    <path d="M14 -6q8 0 8 6t-8 6" stroke="#b5562f" stroke-width="3" fill="none"/>
+    <path d="M-1 -16q-3 -4 0 -8M7 -16q-3 -4 0 -8" stroke="#b5562f" stroke-width="2" fill="none"/>
+    <rect x="56" y="-32" width="6" height="64" rx="3" fill="#4f2e1f"/>
+    <ellipse cx="-60" cy="0" rx="12" ry="32" fill="#3e2416" stroke="#c9ced4" stroke-width="4"/>
+    <ellipse cx="-64" cy="14" rx="10" ry="14" fill="#8a5636"/>
+  </g>
+  <g id="tin-lid">
+    <ellipse cx="758" cy="430" rx="22" ry="13" fill="#8a5f38" opacity="0.35"/>
+    <ellipse cx="752" cy="422" rx="22" ry="13" fill="#c9ced4"/>
+    <ellipse cx="752" cy="422" rx="16" ry="9" fill="#b3b9c0"/>
+  </g>
+
+  <!-- Four small five-toed paw prints in the powder (each about 37 units long) -->
+  <g id="paw-prints" fill="#3e2312">
+    <use href="#print" transform="translate(410 515) rotate(75) scale(1.1)"/>
+    <use href="#print" transform="translate(458 482) rotate(80) scale(1.1)"/>
+    <use href="#print" transform="translate(510 518) rotate(72) scale(1.1)"/>
+    <use href="#print" transform="translate(556 484) rotate(78) scale(1.1)"/>
+  </g>
+
+  <!-- Teaspoon for scale, lying just below the prints: the bowl is a little longer than a print -->
+  <g id="teaspoon">
+    <use href="#spoon" fill="#5a3520" opacity="0.3" transform="translate(6 8)"/>
+    <use href="#spoon" fill="#d9dde2" stroke="#9aa1a8" stroke-width="1.5"/>
+    <ellipse cx="442" cy="557" rx="16" ry="10" fill="#bfc6ce"/>
+    <ellipse cx="434" cy="551" rx="6" ry="3" fill="#fff" opacity="0.8"/>
+    <path d="M470 554L548 549" stroke="#f4f6f8" stroke-width="2"/>
+  </g>
+
+  <!-- Second torn chip packet (coral), torn end towards the powder -->
+  <g id="packet-coral" transform="translate(705 530) rotate(18) scale(-0.85 0.85)">
+    <use href="#packet" fill="#8a5f38" opacity="0.35" transform="translate(-10 12)"/>
+    <use href="#packet" fill="#e27a5f"/>
+    <use href="#packet-shade" fill="#c8664d"/>
+    <path d="M-66 -40V40" stroke="#c8664d" stroke-width="3"/>
+    <path d="M50 -30L60 -20L52 -8L62 4L54 16L60 28L46 20Q40 0 46 -20Z" fill="#d9dde2"/>
+    <circle cx="-10" cy="-4" r="20" fill="#f6f4ef"/>
+    <ellipse cx="-10" cy="-4" rx="10" ry="6" fill="#f2d58a"/>
+  </g>
+  <g id="chips-coral" fill="#f2d58a">
+    <path d="M626 514q8 -6 14 0q-2 8 -12 6z"/><path d="M612 498q8 -4 12 2q-4 6 -12 4z"/><path d="M636 542q10 -4 14 4q-6 6 -14 2z"/>
+  </g>
 </svg>
