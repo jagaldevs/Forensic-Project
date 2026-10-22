@@ -13,6 +13,9 @@
   <rect width="800" height="600" fill="url(#sky)"/>
   <circle cx="420" cy="330" r="62" fill="#ffe15a"/>
   <rect y="330" width="800" height="150" fill="url(#sea)"/>
+  <g stroke="#ffe9a8" stroke-width="4" opacity="0.7">
+    <line x1="370" y1="350" x2="470" y2="350"/><line x1="385" y1="372" x2="455" y2="372"/><line x1="400" y1="394" x2="440" y2="394"/>
+  </g>
   <path d="M0 470 Q200 440 400 462 T800 455 V600 H0z" fill="#f0b066"/>
   <path d="M0 520 Q240 500 520 515 T800 510 V600 H0z" fill="#d99a50"/>
   <g fill="#1a0f2e">
@@ -21,6 +24,10 @@
     <path d="M156 244 q50 -40 110 -20 q-60 0 -108 28z"/>
     <path d="M154 240 q-20 -50 -70 -60 q40 30 64 64z"/>
     <path d="M158 242 q30 -60 80 -64 q-46 22 -74 68z"/>
+  </g>
+  <g fill="#1a0f2e">
+    <circle cx="600" cy="446" r="7"/><rect x="594" y="452" width="12" height="22" rx="4"/>
+    <circle cx="622" cy="448" r="6"/><rect x="617" y="453" width="10" height="20" rx="4"/>
   </g>
   <g fill="#ffffff">
     <path d="M640 90l8 22 22 8-22 8-8 22-8-22-22-8 22-8z"/>

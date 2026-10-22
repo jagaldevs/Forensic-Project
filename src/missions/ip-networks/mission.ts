@@ -28,7 +28,7 @@ export default defineMission({
       title: 'One house, one address',
       body: `Every connection to the internet needs an **IP address**, a bit like a return address on a letter, so replies come back to the right place.
 
-A home internet provider gives each household **one public IP address**. The home router shares it between every device in the house. Inside the home, each device is told apart by the router using its name and its **MAC address**.
+A home internet provider usually gives each household **one public IP address**. The home router shares it between every device in the house. Inside the home, each device is told apart by the router using its name and its **MAC address**.
 
 So the rest of the internet sees the household connection, not the individual device.
 

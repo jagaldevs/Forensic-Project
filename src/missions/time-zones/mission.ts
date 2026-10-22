@@ -36,7 +36,7 @@ Brisbane and Sydney are on AEST (UTC +10:00), which is **30 minutes ahead** of D
       body: 'A phone set to Brisbane time (AEST, UTC +10:00) took a photo. Its timestamp says 20:22.',
       media: [zones],
       question: 'What time was that in Darwin? Use 24-hour time, like 19:30.',
-      accept: ['19:52', '1952', '7:52pm', '7:52 pm'],
+      accept: ['19:52', '1952', '7:52pm', '7:52 pm', '752pm', '19:52acst', '1952acst'],
       placeholder: 'HH:MM',
       hint: 'Darwin is 30 minutes behind Brisbane.',
       explanation:
@@ -48,7 +48,7 @@ Brisbane and Sydney are on AEST (UTC +10:00), which is **30 minutes ahead** of D
       title: 'From UTC',
       body: 'Online services often log times in UTC. A server log says a login happened at 10:22 UTC.',
       question: 'What time was that in Darwin? Use 24-hour time.',
-      accept: ['19:52', '1952', '7:52pm', '7:52 pm'],
+      accept: ['19:52', '1952', '7:52pm', '7:52 pm', '752pm', '19:52acst', '1952acst'],
       placeholder: 'HH:MM',
       hint: 'Darwin is UTC +9:30, so add 9 hours and 30 minutes.',
       explanation: '10:22 + 9:30 = 19:52 in Darwin.',
@@ -110,7 +110,8 @@ Brisbane and Sydney are on AEST (UTC +10:00), which is **30 minutes ahead** of D
         {
           id: 'slashes',
           text: '14/08/26 7:52',
-          feedback: 'Is that am or pm? And in some countries 14/08 would be read differently.',
+          feedback:
+            'Is that am or pm, and in which zone? And 14/08/26 could even be read as 26 August 2014.',
         },
       ],
       correct: ['iso'],

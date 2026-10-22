@@ -97,7 +97,7 @@ If a whole family shares one computer and one profile, everyone’s browsing end
       id: 'cookie-or-not',
       type: 'classify',
       title: 'What is a cookie?',
-      body: 'A **cookie** is a small file a website saves in your browser so it can remember you next time: that you are signed in, your settings, or what is in your basket.',
+      body: 'A **cookie** is a small piece of data a website saves in your browser so it can remember you next time: that you are signed in, your settings, or what is in your basket.',
       question: 'Which of these would a website store in a cookie?',
       buckets: [
         { id: 'cookie', label: 'Stored in a cookie' },
@@ -114,7 +114,7 @@ If a whole family shares one computer and one profile, everyone’s browsing end
           id: 'basket',
           text: 'Items in an online shopping basket',
           bucket: 'cookie',
-          why: 'Shops often keep your basket in a cookie.',
+          why: 'Shops often use a cookie to remember your basket.',
         },
         {
           id: 'dark',

@@ -102,7 +102,7 @@ A good request is specific about **whose** data, **what** data, and **when**.`,
       id: 'why-it-matters',
       type: 'choice',
       title: 'Why does this matter?',
-      question: 'Why do we require warrants for private data? Choose all that apply.',
+      question: 'Why do we require warrants for private data?',
       options: [
         { id: 'innocent', text: 'To protect the privacy of innocent people', feedback: 'Yes.' },
         {
