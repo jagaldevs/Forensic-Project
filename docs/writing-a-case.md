@@ -135,16 +135,58 @@ Types available now (✓ = has its own app; others show in the Evidence Locker):
 Devices need an `ownerId` (a person) or an `ownerLabel` (e.g. "Waterfront venue operator" for
 a security camera).
 
-**Cropped images:** to make a cropped post, copy the SVG and change its `viewBox` to the part you
-want to show (see `src/cases/where-was-jamie/assets/`).
-
 **IP lookups** only appear in the locker once a student looks the address up, which rewards
-using the tool. `centre` is a point on the shared map in kilometres (Darwin City is about
-`{ x: 18.6, y: 27.4 }`, Palmerston `{ x: 35.2, y: 34.4 }`; see
-`src/engine/geo/cityMap.ts` for every place).
+using the tool. `centre` is a point on the map (see Maps below).
 
-**Photos:** import the image at the top of `case.ts` (`import photoA from './assets/photo-a.svg'`)
-and use it as `src`. Always write a good `alt` description.
+### Maps
+
+There are two illustrated maps, drawn to scale in kilometres from real latitude and longitude:
+**Darwin** (`src/engine/geo/darwin.ts`: the city, harbour, northern suburbs, airport,
+Palmerston, Howard Springs and Humpty Doo) and **Litchfield** (`src/engine/geo/litchfield.ts`:
+the national park, Wangi and Florence Falls, Batchelor). A case uses Darwin unless it sets
+`map: 'litchfield'`.
+
+Place pins and IP lookup centres with latitude and longitude, so they land in the right spot:
+
+```ts
+import { darwinLatLon as ll } from '../../engine/geo/darwin';
+
+mapMarkers: [
+  { id: 'scene', label: 'Convention centre (scene)', kind: 'scene', at: ll(-12.4688, 130.8468) },
+  // Homes are fictional: put them in a residential street, never on a real address.
+  { id: 'home', label: 'Okafor home', kind: 'home', at: ll(-12.487, 130.982) },
+],
+```
+
+Use `litchfieldLatLon` for the Litchfield map. Pins must be on land inside the map (`npm test`
+checks). Numbered pins are named in the legend; a suburb name under a pin is hidden.
+
+**Travel times** in the Map app are straight-line distance × 1.3 (roads aren't straight) at a
+range of speeds (walking 4.5–5.5 km/h, bike 12–18, bus 18–25 plus 3–15 minutes waiting, car
+30–45). If an answer depends on a distance or travel time, quote the calculator's numbers and
+add a test like `src/engine/geo/darwin.test.ts`, so a later map change flags the answer.
+
+To add a place or a road, edit the region file: everything is a latitude/longitude pair. Names
+close to the city can be `detail: true` (shown only when zoomed in).
+
+### Images
+
+Evidence images are hand-written SVG in one consistent style, described in
+[illustration-style.md](illustration-style.md) (palette, light, how people are drawn, 24 KB
+budget). Copy the look of an existing image, e.g.
+`src/cases/where-was-jamie/assets/photo-ari-lagoon.svg`.
+
+- Import the image at the top of `case.ts` (`import photoA from './assets/photo-a.svg'`) and
+  use it as `src`. Always write an `alt` that describes everything the story relies on.
+- Photos are `viewBox="0 0 800 600"`; CCTV and trail cameras `800 500` (the CCTV app draws the
+  camera name and time, so leave those out of the image).
+- **Cropped posts:** use the same drawing with a different `viewBox` that holds only what the
+  post shows (see `jamie-sunset-cropped.svg`). Keep anything identifying well outside it.
+- **Real photos** (public places, no people, taken by you): `npm run photo -- in.jpg
+src/cases/<id>/assets/name.jpg` shrinks them and removes every bit of EXIF and GPS data.
+  Photos may be up to 160 KB.
+- `src/assets.test.ts` checks every image: size, no external links or scripts, and an
+  `aria-label` on each SVG.
 
 **Cloud Drive files:** `versions` are oldest first, and the last one must match `modifiedAt`
 and `lastModifiedBy` (the tests check). Give versions `content` (a small `table` or some `text`)
@@ -315,10 +357,13 @@ example).
   Invent names (StreamCloud, TopNet, ChatterBox, Nimbus). Real platforms and brands are rejected.
 - IPs only from `192.0.2.x`, `198.51.100.x`, `203.0.113.x`.
 - Web and email addresses only on reserved domains: anything ending in `.example`, `.test` or
-  `.invalid` (e.g. `morgan.lee@arafurapark.example`, `https://lumen.example/search`).
+  `.invalid` (e.g. `morgan.lee@haileybury.example`, `https://lumen.example/search`).
 - MAC addresses: `00:00:5E:00:53:xx`, or locally administered (second character 2, 6, A or E,
   e.g. `02:5A:31:7C:11:04`).
-- Real Darwin places are fine; private addresses must be fictional.
+- Real Darwin places are fine; private addresses must be fictional. Invented business names
+  can still match real brands: search before you use one (DoorSense and Kitchen Basics were
+  renamed for this reason).
+- Images never show a real person; drawn people are friendly and simple.
 - Age-appropriate incidents only. No graphic content.
 - Search histories contain only benign searches. Nothing explains how to commit an offence or
   avoid investigators.

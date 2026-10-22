@@ -28,7 +28,7 @@ A running list for the end-of-project review. Newest additions at the bottom of 
 - [ ] Check that no fictional student name in the cases matches a real student in the class
       (Morgan Lee, Priya Nair, Tom Baxter, Jamie Ellison, Kit Lam, Elliot Barker, Sasha Morales,
       Mia Costa, Riley and Sam Okafor, Theo Mendes, Kai and Finn Thornton, Ruby Halloran, Leo
-      Marsh, Zara Quinn). The
+      Marsh, Zara Quinn, and Ava Chen in the Emails & Cloud Files mission). The
       school and Mrs Staggs now appear by name (she has agreed).
 - [ ] Play The Midnight Raid (new practice case, lesson 6) and read its story, questions and
       model answers (`src/cases/midnight-raid/`).

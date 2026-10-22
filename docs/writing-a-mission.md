@@ -60,9 +60,14 @@ just state it.
 { kind: 'photo', src: importedImage, alt: '…', caption: '…', metadata: [{ label, value, note? }] }
 { kind: 'map', description: '…', circle: { centre: { x, y }, radiusKm, label }, markers: [...] }
 { kind: 'table', caption: '…', columns: ['Time', 'Event'], rows: [['7:52 pm', '…']], mono: true }
+{ kind: 'email', caption: 'Email 1', from: { name, address }, replyTo?: { name, address },
+  to: ['Under-14s team list'], sent: 'Tue 3 March, 4:15 pm', subject: '…', body: '…' }
 ```
 
-Map coordinates are kilometres on the shared map (see `src/engine/geo/cityMap.ts`).
+Map points use latitude and longitude: `import { darwinLatLon as ll } from '../../engine/geo/darwin'`,
+then `at: ll(-12.383, 130.847)` (see "Maps" in [writing-a-case.md](writing-a-case.md)). Emails
+show only what any reader sees (no technical headers); addresses must end in `.example`.
+Images follow [illustration-style.md](illustration-style.md).
 
 ## Recommending a mission for a case
 

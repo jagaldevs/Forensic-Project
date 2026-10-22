@@ -50,7 +50,8 @@ src/
                   (+ tamper warning), useHashCheck, LockedNotice, WarrantDialog, hooks; board/strings.ts
   engine/         schema.ts (zod, tests/dev only), types.ts, defineCase.ts, safety.ts, availability.ts,
                   checkJudgement.ts, drops.ts, hash.ts, format.ts, report.ts, progressTypes.ts,
-                  custody.ts (chain of custody), score.ts (auto-scoring for Teacher Review), geo/cityMap.ts,
+                  custody.ts (chain of custody), score.ts (auto-scoring for Teacher Review),
+                  geo/ (region.ts map model + projection, darwin.ts, litchfield.ts, regions.ts, travel.ts),
                   classSummary.ts (Whole class table + .csv), accessWording.ts (warrant vs permission wording)
   config/         teacher.ts: teacher code + assessment access code (placeholders, NOT secure)
   review/         TeacherReviewScreen (One student / Whole class tabs), CaseReview, AcademyReview, ClassSummary
@@ -65,15 +66,17 @@ src/
   cases/<id>/     meta.ts (eager, for case list) + case.ts (lazy) + assets/
   missions/<id>/  Training Academy: meta.ts (eager) + mission.ts (lazy) + assets/; index.ts registry
   academy/        AcademyScreen (hub), MissionScreen (step player), StepInputs, MediaView
-docs/writing-a-case.md, docs/writing-a-mission.md, docs/accessibility.md (audit + keyboard map),
+docs/writing-a-case.md (incl. maps and images), docs/writing-a-mission.md, docs/illustration-style.md
+(evidence image style, palette, 24 KB budget), docs/accessibility.md (audit + keyboard map),
 docs/TODO.md (running list of open items for the end-of-project review),
-docs/teacher-brief.md (one page for science teachers), docs/lessons/ (teacher guide: 6 × 60 min
+docs/teacher-brief.md (one page for science teachers), docs/lessons/ (teacher guide: 7 × 60 min
 lessons + rubric; student sheets), docs/word/ (Word copies, built by `npm run docs:word` from
 scripts/build-word-docs.mjs; rebuild after editing those Markdown files)
 scripts/generate-icons.mjs   app icons cropped from the crest in the logo (npm run icons; dev dep jpeg-js)
+scripts/prepare-photo.mjs    shrink a supplied JPEG and strip EXIF/GPS (npm run photo -- in.jpg out.jpg)
 ```
 
-Tests are co-located (`*.test.ts(x)`). `src/cases/cases.test.ts` validates every case. `src/a11y*.test.tsx` run axe over every app and screen; `src/styles/contrast.test.ts` checks the colour tokens for WCAG AA.
+Tests are co-located (`*.test.ts(x)`). `src/cases/cases.test.ts` validates every case. `src/a11y*.test.tsx` run axe over every app and screen; `src/styles/contrast.test.ts` checks the colour tokens for WCAG AA. `src/assets.test.ts` checks every evidence image (size budget, no external references, labelled). `src/engine/geo/*.test.ts` pin the map facts that answers rely on.
 
 ## Dev notes
 
@@ -104,7 +107,7 @@ Tests are co-located (`*.test.ts(x)`). `src/cases/cases.test.ts` validates every
 
 ## Evidence apps (full set over time)
 
-Photos (Get Info metadata), IP Lookup (ISP, approx location, accuracy radius on map), Network Log (router logs), Map (illustrated SVG of fictional Darwin-inspired city + travel-time calculator), Messages, Browser & Search History, Cloud Drive (versions, created vs modified), Email ("Show original" headers), Wearables / Smart Home, Social Feed (incl. cropped image with uncropped original elsewhere), Evidence Locker (all collected items + hashes / chain of custody).
+Photos (Get Info metadata), IP Lookup (ISP, approx location, accuracy radius on map), Network Log (router logs), Map (true-scale illustrated SVG map of Darwin, or Litchfield for the camp case, + travel-time calculator), Messages, Browser & Search History, Cloud Drive (versions, created vs modified), Email ("Show original" headers), Wearables / Smart Home, Social Feed (incl. cropped image with uncropped original elsewhere), Evidence Locker (all collected items + hashes / chain of custody).
 
 ## Core mechanics
 
@@ -146,12 +149,12 @@ The schema cross-checks references (every evidence/question/device id referenced
 ## Phase plan
 
 1. **Foundations + vertical slice** — infra, design tokens, PWA, schema + validation test; boot → agent → case select → briefing → desktop; Photos, IP Lookup, Network Log (warrant-locked), Evidence Board, Judgements, basic Report; mini case "The Waterfront Alibi" (~25 min). **Done (21 Oct 2026).**
-2. **Training Academy** — short interactive modules: metadata, digital footprints, search history & cookies, IP addresses & networks, timestamps & time zones, ethics & privacy. **MVP done (21 Oct 2026)**: six missions, data-driven like cases (`engine/missionSchema.ts`, `engine/checkStep.ts`, `stores/academyStore.ts`).
+2. **Training Academy** — short interactive modules: metadata, digital footprints, search history & cookies, IP addresses & networks, timestamps & time zones, ethics & privacy. **MVP done (21 Oct 2026)**: six missions (a seventh, Emails & Cloud Files, added in Phase 7), data-driven like cases (`engine/missionSchema.ts`, `engine/checkStep.ts`, `stores/academyStore.ts`).
 3. **Flagship case "Where was Jamie?"** — missing-person timeline: Messages, Map, CCTV-style stills, Social Feed. Time-zone trap: phone on AEST (UTC+10) vs Darwin ACST (UTC+9:30, no DST) → mysterious 30-minute discrepancy. **Done (21 Oct 2026)**: `src/cases/where-was-jamie/`, plus Messages, Social Feed, CCTV, Map (travel calculator) and Timeline (clock corrections) apps.
 4. **Remaining apps**, final unseen assessment case, polished report export, teacher mode. **Done (21 Oct 2026)**: Browser & Search History, Cloud Drive, Email, Wearables & Smart Home apps; Evidence Locker chain of custody + Verify all hashes; teacher mode + Teacher Panel; Teacher Review; report export polish; assessment case `src/cases/science-fair-switch/`.
 5. **Polish** — sound design, onboarding tutorial, accessibility audit, performance pass. **Done (21 Oct 2026)**: automated + manual accessibility audit (`docs/accessibility.md`), first-run desktop tour, sound redesign, performance and offline check, Timeline date headings.
 6. **Classroom readiness** (handoff in `docs/handoff-phase-6.md`). **Mostly done (22 Oct 2026)**: practice case "The Midnight Raid" (`src/cases/midnight-raid/`, phone search history; lesson 6 of 7); Whole class summary table with .csv in Teacher Review; class default support level from `?level=`; app icons from the crest; assessment Q2 no longer needs email headers. Live at https://forensic-project.netlify.app/ (checked 22 Oct 2026: latest build, headers, manifest, SPA fallback). Still to do: real iPad and Chromebook checks; official brand colours (if supplied).
-7. **Review, polish and a local Darwin look** (next; handoff in `docs/handoff-phase-7.md`) — full review pass; a recognisable Darwin base map (and a Litchfield map for The Midnight Raid); richer evidence images in one consistent local style; polish; optional Email and Cloud Drive warm-up mission.
+7. **Review, polish and a local Darwin look** (handoff in `docs/handoff-phase-7.md`). **Done (22 Oct 2026)**: review pass (content reviewed by three subagents, app played at laptop and iPad sizes and all text sizes) with fixes in every case; a true-scale Darwin map and a Litchfield map; all 13 evidence images redrawn in one style; small local touches; report thumbnails; the Emails & Cloud Files warm-up mission. Still to do: your photos (optional), official brand colours (if supplied), real-device and screen-reader checks.
 
 ### Phase 1 definition of done
 
@@ -287,4 +290,13 @@ Made during Phase 6 (classroom readiness, 22 Oct 2026, for review):
 - **Whole class review:** paste any number of codes (split on the HRSFL1 prefix, so layout doesn't matter), pick a case, see one row per student: Passed / Not yet / Not answered per verdict question, Written / Blank for open ones, auto-score, nudges, hash checks, disproportionate requests, submitted (assessments) and notes (teacher mode used, duplicate codename, not started). The .csv has a BOM for Excel and guards against formula injection. Nothing is saved; the table stays while you open one student.
 - **Class level link:** `?level=guided|standard|deep|none` is stored on the device (`settingsStore.classLevel`) so an installed app keeps it; the briefing preselects it until the student chooses, with a note saying the teacher suggested it.
 - **Icons:** made from the 300 px logo JPEG (512 px versions are upscaled); a separate maskable icon; white manifest/theme colours; icons are not precached. The favicon keeps the magnifier, now magenta on white.
-- **Jamie Q3:** the 19:34 tower sector now reaches back along the bus route (about 4 km), so the connection fits Jamie being roughly halfway to Parap; times unchanged.
+- **Jamie Q3:** the 19:34 tower sector now reaches back along the bus route (about 4 km), so the connection fits Jamie being roughly halfway to Parap; times unchanged. (Phase 7: on the true-scale map the trip is about 4 km, the sector covers about 2 km of it, and Jamie is most of the way there.)
+
+Made during Phase 7 (review, maps, art, 22 Oct 2026, for review):
+
+- **Review fixes agreed with the owner:** assessment Q3 accepts Not supported or Can't tell (like the practice case); the "mindil??" comment in Where was Jamie? comes from Mia Costa, a classmate outside the group chat; the Training Academy is a banner above the case cards. Other fixes were wording and consistency (full list in git history and `docs/TODO.md`): Waterfront no longer states "Sam was home" as fact; Riley's friend is Theo Mendes; the assessment no longer mentions email headers in its learning intentions and has neutral Guided notes on every document; "warrant" wording follows `accessWording` everywhere; invented brands that matched real ones were renamed (DoorSense → PorchPing, Kitchen Basics → Pantry Pal).
+- **Maps are true scale and drawn from latitude/longitude** by hand (stylised, not traced from map data, so no attribution needed). A region is plain data (`engine/geo/region.ts`); `darwin.ts` and `litchfield.ts` are the two regions; cases pick one with `map` and place pins with `darwinLatLon`/`litchfieldLatLon`. The old map stretched the north about twice too far, so quoted distances changed (Cullen Bay to Mindil is a 16–20 minute walk, the Waterfront to the Okafor home about 15 km); `geo/darwin.test.ts` pins them. Suburbs near the city are named only when zoomed in; a name under a case pin is hidden. The Midnight Raid now has a Map (camp and Batchelor weather station).
+- **Images: mixed, as agreed.** Every evidence image is a hand-written SVG in one style (`docs/illustration-style.md`: flat shapes with one shade, dry-season light, friendly fictional people, 24 KB budget, enforced by `src/assets.test.ts`), drawn by four subagents and reviewed in the browser. The owner may later supply photos of public places (no people) for the Cullen Bay and beach sunsets; `npm run photo` shrinks them and strips EXIF/GPS. Alt text never names a place a step asks students to work out.
+- **Local touches only where they help the science:** weather records name the season (dry season, the build-up), the ranger's note describes other animals' tracks (alternative explanations), the Timeline says Darwin time has no daylight saving.
+- **Emails & Cloud Files mission** (homework after lesson 6): the assessment's email and cloud-drive skills on different data (a fictional junior football club), no headers. Academy media gained an `email` kind.
+- **Reports show thumbnails** of attached photo, CCTV and social-post evidence (checked on screen; print not yet checked on paper).
