@@ -155,7 +155,8 @@ student who is stuck. _Case controls_ can give back warrants if a student wastes
 - "The IP is in Darwin City, so Riley was in the city." The IP lookup is an estimate with a 25 km
   radius that includes Palmerston, and the router log shows the IP is the Okafor home connection.
 - "The router log proves Riley was home." It shows Riley's **laptop** was connected. Riley's
-  younger brother Sam was home too. A device is not a person (Q2's verdict is _Possible_).
+  younger brother Sam's phone was online at home too, so Sam was probably there. A device is not a
+  person (Q2's verdict is _Possible_).
 - "Photo B shows Riley." Someone in a dark hoodie, face not visible (Q3: _Can't tell_).
 
 **Exit ticket:** "The IP lookup shows… but it does not show…"
@@ -211,7 +212,7 @@ open.
 | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | 0–7   | **Starter: two clocks.** Show two clocks, one 30 minutes ahead, one a few seconds off at random. Which error can you correct, and how? Introduce _systematic error_ and _calibration_.                                                                                                                                                                                                           |
 | 7–15  | **Academy:** _Timestamps & Time Zones_ (about 8 min). Darwin is UTC+9:30 all year (no daylight saving); Brisbane is UTC+10.                                                                                                                                                                                                                                                                      |
-| 15–55 | **Where was Jamie?** (part 1, about 40 min across two lessons). Jamie is safe; the case asks why the search went to the wrong beach. Students use Messages, Social Feed, CCTV, Map and the **Timeline**. Two evidence drops arrive: a screenshot from Ari (after viewing the lagoon CCTV, or after 12 minutes) and a recovered original photo (after viewing Jamie's post, or after 10 minutes). |
+| 15–55 | **Where was Jamie?** (part 1, about 40 min across two lessons). Jamie is safe; the case asks why the search went to the wrong place. Students use Messages, Social Feed, CCTV, Map and the **Timeline**. Two evidence drops arrive: a screenshot from Ari (after viewing the lagoon CCTV, or after 12 minutes) and a recovered original photo (after viewing Jamie's post, or after 10 minutes). |
 | 55–60 | **Exit ticket.** Save progress.                                                                                                                                                                                                                                                                                                                                                                  |
 
 **The key moment:** Ari's photo seems to show Jamie at the lagoon **after** the CCTV shows Jamie

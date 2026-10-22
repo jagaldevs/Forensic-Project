@@ -25,7 +25,7 @@ supported, Can't tell), attach the evidence, explain their reasoning, and name a
 | ----------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------- |
 | Training Academy        | 6–8 min each | Six short missions: Metadata, Digital Footprints, Search History, IP Addresses, Time Zones, Ethics & Privacy. Badges, no scores. |
 | The Waterfront Alibi    | ~25 min      | Introductory. A trophy goes missing; does an IP login put Riley at the scene?                                                    |
-| Where was Jamie?        | ~40 min      | A missing person, found safe. Why did the search go to the wrong beach?                                                          |
+| Where was Jamie?        | ~40 min      | A missing person, found safe. Why did the search go to the wrong place?                                                          |
 | The Midnight Raid       | ~35 min      | Practice case on camp: whose search was "midnight snack ideas"?                                                                  |
 | The Science Fair Switch | ~45 min      | **Assessment** (access code): no hints, one submission. Fake email, edited cloud file.                                           |
 

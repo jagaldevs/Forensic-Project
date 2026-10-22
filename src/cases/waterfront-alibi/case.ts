@@ -33,7 +33,7 @@ Riley Okafor, 19, a former ${local.schoolShort} student, volunteered at the even
 
 One of my team ran a quick check. Riley's StreamCloud account logged in at 7:52 pm from IP address 203.0.113.47, and a free lookup website put that address in Darwin City, right near the Waterfront. Some people here think that settles it.
 
-I'm not so sure. Test that claim properly. Tell me what the evidence shows, what it doesn't show, and what we would need to know to be certain.
+I'm not so sure. Test that claim properly. Tell me what the evidence shows, what it doesn't show, and what we would need to know to be more confident.
 
 You have two warrants for this case. Use them wisely: a magistrate will only grant a request that is necessary and proportionate.`,
     questionIds: ['q1-ip-location', 'q2-at-home', 'q3-photo-identity', 'q4-next-steps'],
@@ -62,8 +62,8 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
       summary: 'Worked a late shift on Friday and got home at about 10:30 pm.',
     },
     {
-      id: 'kai-mendes',
-      name: 'Kai Mendes',
+      id: 'theo-mendes',
+      name: 'Theo Mendes',
       age: 19,
       role: "Riley's friend",
       summary: 'Received a photo from Riley on Friday evening.',
@@ -204,7 +204,7 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
       ],
       note: "A router logs devices, not people. Riley's phone does not appear in this log.",
       teacherNote:
-        "Key evidence. The IP in the login record is the Okafor home connection, which explains the 7:52 pm login without Riley being at the Waterfront. But SAM-PHONE was online all evening: Sam was home and could have used the laptop or the account. Riley's phone is absent, which could mean mobile data, wi-fi off, or not being home. Good discussion point.",
+        "Key evidence. The IP in the login record is the Okafor home connection, which explains the 7:52 pm login without Riley being at the Waterfront. But SAM-PHONE was online all evening, so Sam was probably home too (a phone is not a person, but it is a reasonable inference) and could have used the laptop or the account. Riley's phone is absent, which could mean mobile data, wi-fi off, or not being home. Good discussion point.",
       guided:
         'A home router connects every device in the house to the internet. Its public IP is the one address the rest of the internet sees for the whole household, shared by every device inside. Each row is one device on the home network: its name, its MAC address (a hardware ID for its network chip) and when it connected and disconnected. Connected means the device was joined to the network, not that someone was using it the whole time.',
     },
@@ -214,8 +214,8 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
       app: 'photos',
       title: 'Photo A: gaming setup',
       summary:
-        'Photo Riley sent to his friend Kai as "proof" he was home. Taken 8:01 pm. GPS data removed.',
-      source: "Riley's message to Kai Mendes, provided voluntarily by Kai",
+        'Photo Riley sent to his friend Theo as "proof" he was home. Taken 8:01 pm. GPS data removed.',
+      source: "Riley's message to Theo Mendes, provided voluntarily by Theo",
       src: photoGaming,
       fileName: 'chatterbox_img_0814_2002.jpg',
       alt: 'A dim bedroom gaming setup at night: a monitor showing a racing game, a keyboard with coloured lights, headphones on a stand, and a dark window. No people are visible.',
@@ -276,7 +276,7 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
       source: 'Top End Weather Service observations',
       fields: [
         { label: 'Date', value: 'Friday 14 August 2026' },
-        { label: '6:00 pm', value: '27 °C, clear, light north-easterly' },
+        { label: '6:00 pm', value: '27 °C, clear, light south-easterly (dry season)' },
         { label: '9:00 pm', value: '24 °C, clear' },
         { label: 'Rainfall', value: '0 mm' },
         { label: 'Sunset', value: '6:47 pm' },
@@ -343,7 +343,8 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
     {
       id: 'q2-at-home',
       kind: 'verdict',
-      prompt: 'Does the evidence prove Riley was at home in Palmerston all evening?',
+      prompt:
+        'How well does the evidence support Riley’s alibi that he was at home in Palmerston all evening?',
       claim: 'Riley was at home in Palmerston all evening',
       acceptedVerdicts: ['possible'],
       keyEvidenceIds: ['router-log-okafor', 'photo-gaming-setup'],
@@ -352,7 +353,7 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
         'For each piece of evidence, ask what it shows and what it does not show about where Riley was.',
       hints: {
         correct:
-          "Well reasoned. Riley's laptop was online at home and Photo A was taken at 8:01 pm, which fits his alibi but doesn't prove it. A device is not a person: Sam was home too, and Photo A has no GPS.",
+          "Well reasoned. Riley's laptop was online at home and Photo A was taken at 8:01 pm, which fits his alibi but doesn't prove it. A device is not a person: Sam's phone was online at home too, so Sam was probably there and could have used the laptop, and Photo A has no GPS.",
         verdict:
           'Think about the difference between evidence that fits a claim and evidence that proves it. Does anything here show who was using the laptop, or where Photo A was taken?',
         byVerdict: {
@@ -372,17 +373,19 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
         },
       },
       modelAnswer:
-        "Possible, but not proven. The router log shows RILEY-LAPTOP online at home from 6:58 pm to 11:20 pm, and Photo A was taken at 8:01 pm. That fits the alibi. But a device is not a person: Sam was home all evening and could have used the laptop or the account, and Photo A has no GPS data, so we can't tell where it was taken.",
+        "Possible, but not proven. The router log shows RILEY-LAPTOP online at home from 6:58 pm to 11:20 pm, and Photo A was taken at 8:01 pm. That fits the alibi. But a device is not a person: SAM-PHONE was online at home all evening, so Sam was probably there and could have used the laptop or the account. Photo A has no GPS data, so we can't tell where it was taken, and Riley's phone (which took it) never joined the home wi-fi.",
       limitationExamples: [
         'There is no evidence of who was using RILEY-LAPTOP.',
         'Photo A has no GPS data, so it cannot show where it was taken.',
-        'Sam was home and could have used the laptop or the StreamCloud account.',
+        'Sam’s phone was online at home, so Sam could have used the laptop or the StreamCloud account.',
+        'Riley’s phone, which took Photo A, never joined the home wi-fi, so nothing places the phone at home.',
       ],
     },
     {
       id: 'q3-photo-identity',
       kind: 'verdict',
-      prompt: 'Does Photo B identify Riley as the person near the display?',
+      prompt:
+        'When the witness photo (Photo B) arrives, does it identify Riley as the person near the display?',
       claim: 'Photo B shows Riley near the display',
       acceptedVerdicts: ['cant-tell'],
       keyEvidenceIds: ['photo-foyer-witness'],
@@ -487,7 +490,7 @@ You have two warrants for this case. Use them wisely: a magistrate will only gra
         id: 'warrant-router',
         title: 'Okafor home router logs',
         scope:
-          "Connection logs from the router at the Okafor home for Friday 14 August 2026, 5:00 pm to midnight, including the router's public IP address.",
+          "Connection logs from the router at the Okafor home for devices connected between 5:00 pm and midnight on Friday 14 August 2026, including the router's public IP address.",
         targets: ['router-log-okafor'],
         proportionate: true,
         outcome:

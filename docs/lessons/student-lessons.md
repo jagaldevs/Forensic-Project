@@ -117,7 +117,7 @@ scientists correct for them before comparing data.
 1. Starter: two clocks, one 30 minutes ahead, one a few seconds off. Which error can you fix?
 2. Training Academy: complete _Timestamps & Time Zones_.
 3. Open **Where was Jamie?** Jamie is safe. Your job: work out why the search went to the
-   wrong beach.
+   wrong place.
 4. Use Messages, Social Feed, CCTV and the Map. Watch for new evidence arriving.
 5. Open the **Timeline**. If two events seem impossible together, check every device's clock
    before deciding someone is wrong.

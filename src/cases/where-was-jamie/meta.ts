@@ -5,7 +5,7 @@ export const meta: CaseFile['meta'] = {
   id: 'where-was-jamie',
   title: 'Where was Jamie?',
   tagline:
-    'Jamie is safe. But on the night, the search went to the wrong beach. Rebuild the timeline and find out why.',
+    'Jamie is safe. But on the night, the search went to the wrong place. Rebuild the timeline and find out why.',
   yearLevel: 8,
   order: 2,
   estimatedMinutes: 40,

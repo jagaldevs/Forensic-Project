@@ -3,17 +3,18 @@
  * A missing-person timeline with a happy ending. Everything here is fictional.
  *
  * Teacher summary of what really happened (Darwin time, ACST):
- *  16:41 Jamie arrives at the Waterfront Wave Lagoon with friends.
+ *  16:41 Jamie is "omw" to the Waterfront Wave Lagoon to meet friends.
  *  18:00 Cousin Ari photographs them (Ari's phone is still on Brisbane time, so it says 18:30).
  *  18:05 Lagoon gate camera: Jamie leaves.
  *  18:52 Jamie photographs the sunset at Cullen Bay marina.
  *  19:02 Cullen Bay boardwalk camera (its clock is 2 min fast, so it shows 19:04).
  *  19:12 Jamie asks Sasha to come over; phone on 3%.
- *  19:20 Jamie posts a CROPPED sunset photo; a friend comments "mindil??".
+ *  19:20 Jamie posts a CROPPED sunset photo; Mia (not in the group chat) comments "mindil??".
  *  19:24 Bus card taps on at Cullen Bay, Route 4 towards Parap.
  *  19:34 Phone's last network connection, to a tower sector that reaches from Parap back along
  *        the bus route (Jamie is roughly halfway there). Battery dies.
- *  20:05 Parent's messages stop being delivered. Search goes to Mindil Beach.
+ *  20:05 Parent's messages are no longer delivered.
+ *  20:45 Casey reports Jamie missing. The search goes to Mindil Beach.
  *  21:40 Jamie found safe at Sasha's home in Parap.
  */
 import { local } from '../../brand/local';
@@ -37,20 +38,20 @@ export default defineCase({
       'Jamie Ellison, 14, did not come home on Saturday evening and could not be contacted. Jamie was found safe at 9:40 pm.',
     location: 'Darwin Waterfront, Cullen Bay and Parap',
     date: day,
-    windowStart: '17:30',
-    windowEnd: '21:00',
+    windowStart: '18:00',
+    windowEnd: '21:45',
   },
 
   briefing: {
     from: { name: 'Detective Sergeant Leah Tran', role: 'Digital Evidence Unit' },
     subject: 'Case 26-0822: Where was Jamie? (review)',
-    message: `Agent, ${local.scienceTeacher} tells me her Year 8 class at ${local.school} has been training as digital investigators, so I have asked for your help with a review. In this story, Jamie’s friends Kit, Elliot and Sasha are ${local.schoolShort} students.
+    message: `Agent, ${local.scienceTeacher} tells me her Year 8 class at ${local.school} has been training as digital investigators, so I have asked for your help with a review. In this story, Jamie’s friends Kit, Elliot and Sasha, and their classmate Mia, are ${local.schoolShort} students.
 
 First, the good news: Jamie is safe. Jamie was found at 9:40 pm on Saturday at a friend's house in Parap, tired, hungry and with a flat phone. Nobody was hurt and nobody is in trouble.
 
-But it took us two hours to find Jamie, and our search team spent most of that time at Mindil Beach, which was the wrong place. I want to know why the evidence pointed us there, and what it could have told us if we had read it properly.
+But after Casey called us at 8:45 pm, it took nearly an hour to find Jamie, and our search team spent most of that time at Mindil Beach, which was the wrong place. I want to know why the evidence pointed us there, and what it could have told us if we had read it properly.
 
-Jamie's parent, Casey, has given consent for us to look at Jamie's messages and photos from Jamie's cloud backup. Anything belonging to other people needs their consent or a warrant.
+Jamie's parent, Casey, has given consent for us to look at Jamie's messages and photos from Jamie's cloud backup. Anything else, such as other people's data or records kept by companies, needs consent or a warrant.
 
 Some of the evidence seems to contradict itself. Before you decide someone is wrong, check how each device keeps time. The Timeline app will help.`,
     questionIds: ['q1-ari-photo', 'q2-mindil-post', 'q3-reach-parap', 'q4-search-plan'],
@@ -91,6 +92,13 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
       age: 14,
       role: `Jamie's friend (${local.schoolShort} student)`,
       summary: 'Was at the lagoon and left at about 6 pm.',
+    },
+    {
+      id: 'mia-costa',
+      name: 'Mia Costa',
+      age: 14,
+      role: `Classmate (${local.schoolShort} student)`,
+      summary: 'Not at the lagoon and not in the group chat. Commented on Jamie’s post.',
     },
     {
       id: 'sasha-morales',
@@ -172,12 +180,12 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
         'Jamie was due home by 8 pm, had a green backpack and a Nimbus N6 phone in a green case.',
       source: 'Statement to police, 8:45 pm',
       fields: [
-        { label: 'Last saw Jamie', value: 'About 2:30 pm, leaving home in Nightcliff' },
+        { label: 'Last saw Jamie', value: 'About 4:15 pm, leaving home in Nightcliff' },
         { label: 'Plan', value: 'Wave Lagoon at the Waterfront with Kit and Elliot, home by 8 pm' },
         { label: 'Wearing', value: 'Black shorts, white T-shirt, green backpack' },
         { label: "Jamie's phone", value: 'Nimbus N6 in a green case' },
       ],
-      body: 'At about 8:30 I saw Jamie\'s post of a sunset, and Kit had commented "mindil??", so I told police Jamie was probably at Mindil Beach.',
+      body: 'At about 8:30 I saw Jamie\'s post of a sunset, and Mia had commented "mindil??", so I told police Jamie was probably at Mindil Beach.',
       teacherNote:
         'Explains why the search went to Mindil: an assumption from a cropped photo and a friend’s guess in a comment. Also gives the phone model and backpack colour students need to rule out the distractor.',
     },
@@ -419,7 +427,7 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
       guided:
         'This is the original file saved by the phone’s camera, before any app changed it. Copies shared in apps are often cropped or resized and can lose their metadata, but the original keeps it. OffsetTimeOriginal +09:30 means the camera’s clock was 9 hours 30 minutes ahead of UTC. GPS gives the latitude and longitude the phone recorded when the photo was taken.',
       teacherNote:
-        'Original file: GPS and the sign both say Cullen Bay. Taken 28 minutes before it was posted.',
+        'Original file: GPS and the sign both say Cullen Bay. Taken about 27 minutes before it was posted.',
     },
     {
       id: 'post-jamie',
@@ -427,7 +435,7 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
       app: 'social',
       title: "Jamie's sunset post",
       summary:
-        'Jamie posted a cropped sunset photo at 7:20 pm: “best view in darwin”. A friend commented “mindil??”.',
+        'Jamie posted a cropped sunset photo at 7:20 pm: “best view in darwin”. A classmate commented “mindil??”.',
       source: "Jamie's PicPost account (accessed with Casey's consent)",
       platform: 'PicPost',
       author: 'Jamie Ellison',
@@ -437,7 +445,7 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
       image: { src: sunsetCropped, alt: 'A sunset over calm water. No landmarks are visible.' },
       originalEvidenceId: 'photo-jamie-original',
       comments: [
-        { author: 'Kit Lam', at: at('19:22:00'), body: 'mindil?? so jealous 😭' },
+        { author: 'Mia Costa', at: at('19:22:00'), body: 'mindil?? so jealous 😭' },
         { author: 'Elliot Barker', at: at('19:25:00'), body: '🔥🔥' },
       ],
       timeline: [
@@ -446,7 +454,7 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
       guided:
         'The posted time is when the post was uploaded; a photo can be taken some time before it is posted. Social apps often crop photos (cut them down), which hides whatever was outside the frame, and they usually remove the photo’s metadata. Comments are written by other people and are not part of the photo.',
       teacherNote:
-        'Posted time is not taken time. The crop removes the marina sign, and Kit’s comment is a guess that nobody corrected.',
+        'Posted time is not taken time. The crop removes the marina sign, and Mia’s comment is a guess that nobody corrected (Mia was not in the group chat, so didn’t know Jamie had said Cullen Bay).',
     },
     {
       id: 'post-kit',
@@ -633,7 +641,7 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
         'Look closely at the posted image itself. What can you actually see in it that tells you where it was taken?',
       hints: {
         correct:
-          'Well done. The post was cropped, so it hid the Cullen Bay Marina sign, and the original file’s GPS says Cullen Bay. Kit’s “mindil??” was just a guess. And the post went up at 7:20 pm, 28 minutes after the photo was taken.',
+          'Well done. The post was cropped, so it hid the Cullen Bay Marina sign, and the original file’s GPS says Cullen Bay. Mia’s “mindil??” was just a guess. And the post went up at 7:20 pm, about 27 minutes after the photo was taken.',
         verdict:
           'What does the posted image actually show? Is there a fuller version of it somewhere, and what does its metadata say?',
         byVerdict: {
@@ -702,16 +710,16 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
         'Using your Timeline, explain where the search should have started and why the evidence pointed to Mindil Beach instead. What data was needed, and how could police get it fairly?',
       guidance: [
         'Summarise Jamie’s evening as a short timeline (use the Timeline app).',
-        'Explain the two things that misled people: the cropped post and the time zone mix-up.',
+        'Explain what pointed people to Mindil (the cropped post and a guess in a comment), and what made the evidence seem to contradict itself (the time zone mix-up).',
         'Say which data helped most, and whether it needed consent or a warrant, and why.',
       ],
       modelAnswer:
-        'Jamie left the lagoon at 6:05 pm, watched the sunset at Cullen Bay (photo 6:52 pm), arranged to go to Sasha’s at 7:12 pm, caught a bus towards Parap at 7:24 pm, and the phone last connected at about 7:34 pm, in the Parap sector on the way there. The search should have started in Parap. People were misled by a cropped photo plus a friend’s guess (“mindil??”), and by Ari’s photo appearing to put Jamie at the lagoon later than they really were. Jamie’s own messages and photos could be checked with a parent’s consent; the bus and phone network records needed narrow, time-limited warrants. Reading all of Jamie’s friends’ messages would have been disproportionate.',
+        'Jamie left the lagoon at 6:05 pm, watched the sunset at Cullen Bay (photo 6:52 pm), arranged to go to Sasha’s at 7:12 pm, caught a bus towards Parap at 7:24 pm, and the phone last connected at about 7:34 pm, in the Parap sector on the way there. The search should have started in Parap. People were pointed to Mindil by a cropped photo plus a classmate’s guess (“mindil??”). Ari’s photo, on Brisbane time, also seemed to put Jamie at the lagoon later than Jamie really was, which made the evidence look contradictory. Jamie’s own messages and photos could be checked with a parent’s consent; the bus and phone network records needed narrow, time-limited warrants. Reading all of Jamie’s friends’ messages would have been disproportionate.',
       keyPoints: [
         'An accurate timeline ending near Parap around 7:30 to 8 pm',
-        'The cropped post and Kit’s comment led to Mindil',
-        'Ari’s phone on AEST made a false contradiction',
-        'Consent covered Jamie’s data; other people’s data needed narrow warrants',
+        'The cropped post and Mia’s guess in a comment led to Mindil',
+        'Ari’s phone on AEST made a false contradiction, not the Mindil search',
+        'Consent covered Jamie’s messages and photos; records kept by companies (bus card, phone network) needed narrow warrants',
         'Broad requests (all friends’ messages) are disproportionate',
       ],
     },
@@ -775,7 +783,7 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
         'A step is possible if the time available is at least the fastest estimate. Remember the estimates are rough.',
       ],
       modelAnswer:
-        'Lagoon gate to the Cullen Bay boardwalk is about 3.3 km by road, an estimated 36 to 44 minutes on foot; Jamie left the gate at 18:05 and took the sunset photo at Cullen Bay at 18:52 (47 minutes), so it fits. The boardwalk CCTV (about 19:02 once corrected) and the bus tap-on at Cullen Bay (19:24) are in the same area. Cullen Bay to Mindil Beach is an estimated 56 to 68 minutes each way on foot, but only 32 minutes passed between the photo and the tap-on, so a walk to Mindil and back was not possible (and Mindil is even further from the lagoon, about 91 minutes or more on foot).The estimates are approximate and only test whether a route is possible, not that it happened.',
+        'Lagoon gate to the Cullen Bay boardwalk is about 3.3 km by road, an estimated 36 to 44 minutes on foot; Jamie left the gate at 18:05 and took the sunset photo at Cullen Bay at 18:52 (47 minutes), so it fits. The boardwalk CCTV (about 19:02 once corrected) and the bus tap-on at Cullen Bay (19:24) are in the same area. Cullen Bay to Mindil Beach is an estimated 56 to 68 minutes each way on foot, but only 32 minutes passed between the photo and the tap-on, so a walk to Mindil and back was not possible (and Mindil is even further from the lagoon, about 91 minutes or more on foot). The estimates are approximate and only test whether a route is possible, not that it happened.',
     },
   ],
 
@@ -805,11 +813,11 @@ Some of the evidence seems to contradict itself. Before you decide someone is wr
       {
         id: 'warrant-friends',
         title: 'All of Jamie’s friends’ messages',
-        scope: 'Every message sent by Kit, Elliot, Sasha and Ari over the past month.',
+        scope: 'Every message sent by Kit, Elliot and Sasha over the past month.',
         targets: ['friends-messages'],
         proportionate: false,
         outcome:
-          'Refused. That covers four young people and a whole month of private conversations. Most of it has nothing to do with Saturday evening. Ask the friends directly, or request something narrow and specific. Your warrant has not been used.',
+          'Refused. That covers three young people and a whole month of private conversations. Most of it has nothing to do with Saturday evening. Ask the friends directly, or request something narrow and specific. Your warrant has not been used.',
       },
     ],
   },
