@@ -6,6 +6,7 @@ import { collectedEvidence, isLocked } from '../engine/availability';
 import { accessWording } from '../engine/accessWording';
 import { hashCheck, type HashCheck } from '../engine/hash';
 import { buildReport, nudgeNote, reportToText, type ReportData } from '../engine/report';
+import type { Evidence } from '../engine/types';
 import { playSound } from '../lib/sound';
 import { useNav } from '../stores/navStore';
 import { useCaseProgress, useProgress } from '../stores/progressStore';
@@ -389,6 +390,7 @@ function QuestionSection({
                     <strong>{e.item.title}</strong>
                     <span className={r.hash}>SHA-256 {hashes[e.item.id]?.slice(0, 16) ?? '…'}</span>
                   </span>
+                  {imageOf(e.item) && <img className={r.thumb} src={imageOf(e.item)} alt="" />}
                 </li>
               ))}
             </ul>
@@ -483,4 +485,11 @@ function Finalise({
       </Button>
     </div>
   );
+}
+
+/** The picture an evidence item shows, for a small thumbnail beside it in the report. */
+function imageOf(item: Evidence): string | undefined {
+  if (item.type === 'photo' || item.type === 'cctvStill') return item.src;
+  if (item.type === 'socialPost') return item.image?.src;
+  return undefined;
 }

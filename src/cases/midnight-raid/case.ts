@@ -82,9 +82,7 @@ On Thursday morning, Cabin 4’s snack box was found raided on the verandah: tor
 
 The problem is that Kai Thornton is being blamed. Leo heard the cabin door in the night, and Zara saw “midnight snack ideas” in the search history on Kai’s phone when the phones came back. Kai says: “That wasn’t me.” The cabin is upset, and I want to get this right.
 
-Kai and Kai’s parent, Jo Thornton, have agreed to share the history on Kai’s phone and Kai’s StrideBand log from camp night. We also have the centre’s own records: the phone box sheet, the verandah light and the wildlife camera on the track. Anything else belongs to someone else, so you will need to ask their permission, and ask only for what you need.
-
-For every piece of evidence, ask yourself three things. What does it show? What does it not show? What further evidence would help decide between explanations?`,
+Kai and Kai’s parent, Jo Thornton, have agreed to share the history on Kai’s phone and Kai’s StrideBand log from camp night. We also have the centre’s own records: the phone box sheet, the verandah light and the wildlife camera on the track. Anything else belongs to someone else, so you will need to ask their permission, and ask only for what you need.`,
     questionIds: ['q1-snack-search', 'q2-band', 'q3-animal', 'q4-fair-requests'],
   },
 

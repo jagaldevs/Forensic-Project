@@ -164,9 +164,23 @@
   gap: var(--space-2);
 }
 
-.evidence li > span:last-child {
+.evidence li > span:nth-child(2) {
   display: flex;
+  flex: 1;
   flex-direction: column;
+}
+
+.evidence li {
+  break-inside: avoid;
+}
+
+/* A small copy of the evidence picture, so the printed report shows what was judged. */
+.thumb {
+  flex: none;
+  width: 96px;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
 }
 
 .hash {
