@@ -27,7 +27,8 @@ A running list for the end-of-project review. Newest additions at the bottom of 
       load.
 - [ ] Check that no fictional student name in the cases matches a real student in the class
       (Morgan Lee, Priya Nair, Tom Baxter, Jamie Ellison, Kit Lam, Elliot Barker, Sasha Morales,
-      Riley and Sam Okafor, Kai and Finn Thornton, Ruby Halloran, Leo Marsh, Zara Quinn). The
+      Mia Costa, Riley and Sam Okafor, Theo Mendes, Kai and Finn Thornton, Ruby Halloran, Leo
+      Marsh, Zara Quinn). The
       school and Mrs Staggs now appear by name (she has agreed).
 - [ ] Play The Midnight Raid (new practice case, lesson 6) and read its story, questions and
       model answers (`src/cases/midnight-raid/`).
@@ -56,6 +57,22 @@ A running list for the end-of-project review. Newest additions at the bottom of 
 - [ ] **The Midnight Raid doesn't practise Email or Cloud Drive.** Students still meet those
       apps first in the assessment, but its email question no longer needs headers, and the
       Drive's zone label works like the clock corrections from Where was Jamie?.
+
+- [ ] **Phase 7 review fixes (22 Oct 2026).** Agreed with you: assessment Q3 (Morgan at school?)
+      now accepts Not supported or Can't tell; the "mindil??" comment in Where was Jamie? comes
+      from Mia Costa, a classmate outside the group chat; the Training Academy is a banner above
+      the cases. Also changed without asking (wording and consistency): Waterfront hints no
+      longer state "Sam was home" as fact, its Q2 asks how well the evidence supports the alibi,
+      and Riley's friend is now Theo Mendes (Kai is in The Midnight Raid); Jamie's briefing says
+      nearly an hour, not two; the assessment no longer mentions email headers in its learning
+      intentions and has neutral Guided notes on every document. Full list in the git log.
+- [ ] **Left as is, for you to judge:** in the assessment, the school's own laptop log is
+      "obtained under warrant" (the case uses warrants throughout; a school could simply read its
+      own logs); the Deep dive "intake procedure" challenge points gently at the open folder
+      behind Q4; the fake email's "reply to me directly rather than your coordinator" is a little
+      clumsy on purpose. Invented names Lumen, Lumo and LearnHub are also used by real companies
+      in other fields; DoorSense and Kitchen Basics were renamed because they matched real
+      products.
 
 ## Deferred features
 
