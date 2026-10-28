@@ -15,8 +15,8 @@ import s from './shared.module.css';
 export function EvidenceHeader({ item, children }: { item: Evidence; children?: ReactNode }) {
   const teacherMode = useSettings((st) => st.teacherMode);
   const { progress } = useCaseState();
-  // Teachers see Guided notes too, so they know what Guided students are told.
-  const showGuided = !!item.guided && (supportLevelOf(progress) === 'guided' || teacherMode);
+  // Follows the chosen level in teacher mode too, so a teacher can preview each level.
+  const showGuided = !!item.guided && supportLevelOf(progress) === 'guided';
   return (
     <div className={s.evHeader}>
       <div className={s.evTitleRow}>

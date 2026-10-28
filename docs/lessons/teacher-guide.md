@@ -64,7 +64,9 @@ the gallery walk in lesson 5. It is the practice for search histories and fitnes
 - [ ] Open the link on a student laptop, a Chromebook and an iPad. Check it loads and the dock fits.
 - [ ] Play The Waterfront Alibi yourself with teacher mode on: on the case list, press **Teacher**
       and enter the teacher code. A Teacher icon appears in the dock of every case: the Teacher
-      Panel has the answer key, clue notes, drop controls and a presenter view.
+      Panel has the answer key, clue notes, drop controls and a presenter view. To see what each
+      support level gives students, switch level from the top bar: Guided adds "What this
+      means" notes and nudges, Deep dive adds a Deep dive tab in Judgements.
 - [ ] Decide how students keep their progress. It is saved **in the browser on that device**.
       If devices are shared or wiped, students copy their **progress code** (top bar → Back up
       progress) into their notes at the end of every lesson, and paste it back next time.

@@ -56,6 +56,19 @@ test('Deep dive: challenges get their own tab, and answers are saved', async () 
   });
 });
 
+test('teacher mode previews the chosen level, keeping teacher notes', () => {
+  useSettings.getState().setTeacherMode(true);
+  const { unmount } = inCase(<EvidenceHeader item={login} />, 'standard');
+  expect(screen.queryByRole('complementary', { name: 'What this means' })).toBeNull();
+  expect(screen.getByRole('complementary', { name: 'Teacher note' })).toBeTruthy();
+  unmount();
+  const judgements = inCase(<JudgementsApp params={{ q: q1.id }} />, 'standard');
+  expect(screen.queryByRole('tab', { name: /Deep dive/ })).toBeNull();
+  judgements.unmount();
+  inCase(<JudgementsApp params={{ q: q1.id }} />, 'deep');
+  expect(screen.getByRole('tab', { name: /Deep dive/ })).toBeTruthy();
+});
+
 test('every case offers Deep dive challenges and some Guided notes', async () => {
   const modules = import.meta.glob<{ default: typeof waterfront }>('../../cases/*/case.ts', {
     eager: true,

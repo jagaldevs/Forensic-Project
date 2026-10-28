@@ -39,10 +39,10 @@ const DEEP_TAB = 'deep-dive';
 /** For each case question: verdict, attached evidence, explanation and a limitation. */
 export default function JudgementsApp({ params }: AppProps) {
   const { c, progress } = useCaseState();
-  const teacherMode = useSettings((st) => st.teacherMode);
   const extensions = c.extensions ?? [];
-  // Deep dive tasks get their own tab (teachers always see it).
-  const showDeep = extensions.length > 0 && (supportLevelOf(progress) === 'deep' || teacherMode);
+  // Deep dive tasks get their own tab, at the Deep dive level only (in teacher mode too, so a
+  // teacher can preview each level).
+  const showDeep = extensions.length > 0 && supportLevelOf(progress) === 'deep';
   const deep = showDeep && params.q === DEEP_TAB;
   const current = c.questions.find((q) => q.id === params.q) ?? c.questions[0]!;
   const selectedTab = deep ? DEEP_TAB : current.id;
