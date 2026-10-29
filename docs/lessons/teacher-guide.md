@@ -135,8 +135,10 @@ and that this limits the conclusions we can draw.
 
 **Curriculum:** VC2S8I05, VC2S8I06, VC2S8I07.
 
-**You need:** the lab link; student sheet 2. On your own device: teacher mode on, The Waterfront
-Alibi open, so you can see the Teacher Panel.
+**You need:** the lab link; student sheet 2; the one-page Waterfront checklist
+([waterfront-checklist.md](waterfront-checklist.md)) for students who want step-by-step
+guidance (or everyone, if the class found the open-ended start hard). On your own device:
+teacher mode on, The Waterfront Alibi open, so you can see the Teacher Panel.
 
 | Time  | What happens                                                                                                                                                                                                                                                                                                                                                                                                               |
 | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

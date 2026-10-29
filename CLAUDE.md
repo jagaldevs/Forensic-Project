@@ -70,7 +70,7 @@ docs/writing-a-case.md (incl. maps and images), docs/writing-a-mission.md, docs/
 (evidence image style, palette, 24 KB budget), docs/accessibility.md (audit + keyboard map),
 docs/TODO.md (running list of open items for the end-of-project review),
 docs/teacher-brief.md (one page for science teachers), docs/lessons/ (teacher guide: 7 × 60 min
-lessons + rubric; student sheets), docs/word/ (Word copies, built by `npm run docs:word` from
+lessons + rubric; student sheets; one-page Waterfront checklist), docs/word/ (Word copies, built by `npm run docs:word` from
 scripts/build-word-docs.mjs; rebuild after editing those Markdown files)
 scripts/generate-icons.mjs   app icons cropped from the crest in the logo (npm run icons; dev dep jpeg-js)
 scripts/prepare-photo.mjs    shrink a supplied JPEG and strip EXIF/GPS (npm run photo -- in.jpg out.jpg)

@@ -94,6 +94,11 @@ A running list for the end-of-project review. Newest additions at the bottom of 
       plates or private homes): `npm run photo -- in.jpg src/.../assets/name.jpg`, then point the
       case or mission at the new file. The posted crop of the Cullen Bay photo must show no
       landmarks.
+- [ ] **Waterfront checklist (29 Oct 2026).** After the first class found the open start of The
+      Waterfront Alibi hard: a one-page paper checklist (`docs/lessons/waterfront-checklist.md`,
+      Word copy in `docs/word/`), eight steps with what to check at each, plus a verdict table.
+      Some checks lead students towards Q1 on purpose. Decide whether other cases need one, and
+      whether it should also live in the app.
 - [ ] **Printed reports.** Reports now show small thumbnails of attached photos and CCTV. Checked
       on screen; print one to PDF to confirm the layout on paper.
 

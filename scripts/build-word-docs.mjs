@@ -5,6 +5,7 @@
  *   docs/teacher-brief.md            → docs/word/teacher-brief.docx
  *   docs/lessons/teacher-guide.md    → docs/word/teacher-guide.docx
  *   docs/lessons/student-lessons.md  → docs/word/student-lessons.docx
+ *   docs/lessons/waterfront-checklist.md → docs/word/waterfront-checklist.docx
  *
  * Handles the Markdown these documents use: headings, paragraphs, bold/italic/code/links, bullet,
  * numbered and checkbox lists, tables, and "---" (a page break between lessons).
@@ -49,6 +50,15 @@ const docs = [
   },
   { src: 'docs/lessons/teacher-guide.md', out: 'teacher-guide.docx', title: 'Teacher guide' },
   { src: 'docs/lessons/student-lessons.md', out: 'student-lessons.docx', title: 'Student sheets' },
+  // Printed for lesson 2; must fit one page, like the brief.
+  {
+    src: 'docs/lessons/waterfront-checklist.md',
+    out: 'waterfront-checklist.docx',
+    title: 'Waterfront checklist',
+    size: 20,
+    margin: 850,
+    after: 40,
+  },
 ];
 
 // A4, 2 cm margins by default. Sizes in DXA (1/1440 inch) and half-points.
@@ -134,9 +144,14 @@ function blocks(tokens, opts, level = 0) {
           const lead = item.task ? [new TextRun({ text: item.checked ? '☑ ' : '☐ ' })] : [];
           out.push(
             new Paragraph({
-              numbering: t.ordered
-                ? { reference: 'numbers', level, instance }
-                : { reference: 'bullets', level },
+              // A checkbox is its own marker, so task items get no bullet.
+              ...(item.task
+                ? { indent: { left: 360 * (level + 1), hanging: 280 } }
+                : {
+                    numbering: t.ordered
+                      ? { reference: 'numbers', level, instance }
+                      : { reference: 'bullets', level },
+                  }),
               children: [...lead, ...runs(first?.tokens ?? [first])],
             }),
           );
@@ -209,7 +224,7 @@ function table(t) {
   });
 }
 
-async function build({ src, out, title, size = 21, margin = 1134 }) {
+async function build({ src, out, title, size = 21, margin = 1134, after = 100 }) {
   listInstance = 0;
   textWidth = PAGE.width - 2 * margin;
   const tokens = marked.lexer(readFileSync(join(root, src), 'utf8'));
@@ -233,7 +248,7 @@ async function build({ src, out, title, size = 21, margin = 1134 }) {
     creator: 'HRS Digital Forensics Lab',
     title,
     styles: {
-      default: { document: { run: { font: FONT, size }, paragraph: { spacing: { after: 100 } } } },
+      default: { document: { run: { font: FONT, size }, paragraph: { spacing: { after } } } },
       paragraphStyles: [
         {
           id: 'Heading1',
@@ -331,4 +346,6 @@ async function build({ src, out, title, size = 21, margin = 1134 }) {
   console.log(`docs/word/${out}`);
 }
 
-for (const d of docs) await build(d);
+// Optional names build only those documents, e.g. `npm run docs:word -- waterfront-checklist`.
+const only = process.argv.slice(2);
+for (const d of docs) if (!only.length || only.some((n) => d.out.startsWith(n))) await build(d);
